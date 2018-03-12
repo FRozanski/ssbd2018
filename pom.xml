@@ -10,7 +10,10 @@
     <name>ssbd01</name>
 
     <developers>
-        
+        <developer>
+            <name>Agata Kania</name>
+            <id>agkan</id>
+        </developer>
     </developers>
 
     <properties>

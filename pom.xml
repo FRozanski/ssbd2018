@@ -4,12 +4,16 @@
 
     <groupId>pl.lodz.p.it.ssbd2018</groupId>
     <artifactId>ssbd01</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
     <packaging>war</packaging>
 
     <name>ssbd01</name>
 
     <developers>
+        <developer>
+            <name>Piotr Biernacki</name>
+            <id>piotrekbie</id>
+        </developer>
         <developer>
             <name>Agata Kania</name>
             <id>agkan</id>

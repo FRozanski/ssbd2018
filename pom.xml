@@ -10,7 +10,10 @@
     <name>ssbd01</name>
 
     <developers>
-        
+        <developer>
+            <name>Piotr Biernacki</name>
+            <id>piotrekbie</id>
+        </developer>
     </developers>
 
     <properties>

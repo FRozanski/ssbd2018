@@ -18,6 +18,10 @@
             <name>Agata Kania</name>
             <id>agkan</id>
         </developer>
+        <developer>
+            <name>Michal Malec</name>
+            <id>michalmalec</id>
+        </developer>
     </developers>
 
     <properties>

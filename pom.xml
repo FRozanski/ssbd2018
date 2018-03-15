@@ -18,6 +18,10 @@
             <name>Agata Kania</name>
             <id>agkan</id>
         </developer>
+        <developer>
+            <name>Dominik Lange</name>
+            <id>dlange</id>
+        </developer>
     </developers>
 
     <properties>

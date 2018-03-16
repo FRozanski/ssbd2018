@@ -18,6 +18,10 @@
             <name>Agata Kania</name>
             <id>agkan</id>
         </developer>
+        <developer>
+            <name>Filip Rozanski</name>
+            <id>fifi</id>
+        </developer>
     </developers>
 
     <properties>

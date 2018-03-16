@@ -26,6 +26,10 @@
             <name>Michal Malec</name>
             <id>michalmalec</id>
         </developer>
+        <developer>
+            <name>Dominik Lange</name>
+            <id>dlange</id>
+        </developer>
     </developers>
 
     <properties>

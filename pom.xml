@@ -22,6 +22,10 @@
             <name>Filip Rozanski</name>
             <id>fifi</id>
         </developer>
+        <developer>
+            <name>Michal Malec</name>
+            <id>michalmalec</id>
+        </developer>
     </developers>
 
     <properties>

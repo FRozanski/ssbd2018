@@ -16,7 +16,8 @@ pipeline {
         script {
           withSonarQubeEnv('Sonar') {
             sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar ' +
-            '-Dsonar.java.libraries=.'
+            '-Dsonar.java.libraries=. ' +
+            '-Dsonar.branch = ${BRANCH_NAME}'
           }
         }
         

@@ -10,6 +10,20 @@
         </session-timeout>
     </session-config>
     
+    <!-- definicja ról uwzględnianych w kontroli dostępu -->
+    <security-role>
+        <description/>
+        <role-name>USER</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>MANAGER</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    
     <!-- kontrola dostepu do zasobow administratora-->
     <security-constraint>
         <display-name>AdminConstraint</display-name>
@@ -78,6 +92,7 @@
         </user-data-constraint>
     </security-constraint>
     
+    <!-- definicja metody logowania, odwołanie do stron z formularzem logowania i komunikatem błędu -->
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>ssbd01realm</realm-name>
@@ -86,4 +101,6 @@
             <form-error-page>/login/error.html</form-error-page>
         </form-login-config>
     </login-config>
+    
+    
 </web-app>

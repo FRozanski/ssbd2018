@@ -2,3 +2,7 @@ label.required-label:after {
     content: " *";
     color: red;
 }
+
+input {
+    display: block;
+}

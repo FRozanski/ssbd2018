@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="pl.lodz.p.it.ssbd2018_ssbd01_war_0.0.3PU" transaction-type="JTA">
+  <persistence-unit name="ssbd01mokPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/ssbd01mokDS</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccountAlevel</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.ManagerData</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.PersonalData</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>

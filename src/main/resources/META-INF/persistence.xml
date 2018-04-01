@@ -15,4 +15,14 @@
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
+  <persistence-unit name="ssbd01mozPU" transaction-type="JTA">
+    <jta-data-source>java:app/jdbc/ssbd01mozDS</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
+  <persistence-unit name="ssbd01mopPU" transaction-type="JTA">
+    <jta-data-source>java:app/jdbc/ssbd01mopDS</jta-data-source>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties/>
+  </persistence-unit>
 </persistence>

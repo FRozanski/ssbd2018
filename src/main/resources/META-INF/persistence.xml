@@ -15,14 +15,25 @@
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
-  <persistence-unit name="ssbd01mozPU" transaction-type="JTA">
-    <jta-data-source>java:app/jdbc/ssbd01mozDS</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
-  </persistence-unit>
   <persistence-unit name="ssbd01mopPU" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/ssbd01mopDS</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <properties/>
+  </persistence-unit>
+  <persistence-unit name="ssbd01mozPU" transaction-type="JTA">
+    <jta-data-source>java:app/jdbc/ssbd01mozDS</jta-data-source>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Complaint</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ComplaintStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties/>
   </persistence-unit>
 </persistence>

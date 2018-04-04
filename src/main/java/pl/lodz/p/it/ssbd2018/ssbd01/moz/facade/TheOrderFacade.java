@@ -8,14 +8,14 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.facade;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder;
 
 /**
  *
  * @author java
  */
 @Stateless
-public class Order1Facade extends AbstractFacade<Order1> {
+public class TheOrderFacade extends AbstractFacade<TheOrder> {
 
     @PersistenceContext(unitName = "ssbd01mozPU")
     private EntityManager em;
@@ -25,8 +25,8 @@ public class Order1Facade extends AbstractFacade<Order1> {
         return em;
     }
 
-    public Order1Facade() {
-        super(Order1.class);
+    public TheOrderFacade() {
+        super(TheOrder.class);
     }
     
 }

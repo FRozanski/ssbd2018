@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Complaint;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder;
 
 /**
  *
@@ -48,9 +48,9 @@ public class UserData implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
     private Collection<Complaint> complaintCollection1;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerId")
-    private Collection<Order1> order1Collection;
+    private Collection<TheOrder> TheOrderCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
-    private Collection<Order1> order1Collection1;
+    private Collection<TheOrder> TheOrderCollection1;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -160,21 +160,21 @@ public class UserData implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<TheOrder> getTheOrderCollection() {
+        return TheOrderCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setTheOrderCollection(Collection<TheOrder> TheOrderCollection) {
+        this.TheOrderCollection = TheOrderCollection;
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection1() {
-        return order1Collection1;
+    public Collection<TheOrder> getTheOrderCollection1() {
+        return TheOrderCollection1;
     }
 
-    public void setOrder1Collection1(Collection<Order1> order1Collection1) {
-        this.order1Collection1 = order1Collection1;
+    public void setTheOrderCollection1(Collection<TheOrder> TheOrderCollection1) {
+        this.TheOrderCollection1 = TheOrderCollection1;
     }
 
     @XmlTransient

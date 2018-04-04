@@ -58,7 +58,7 @@ public class ShippingMethod implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingId")
-    private Collection<Order1> order1Collection;
+    private Collection<TheOrder> TheOrderCollection;
 
     public ShippingMethod() {
     }
@@ -107,12 +107,12 @@ public class ShippingMethod implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+    public Collection<TheOrder> getTheOrderCollection() {
+        return TheOrderCollection;
     }
 
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+    public void setTheOrderCollection(Collection<TheOrder> TheOrderCollection) {
+        this.TheOrderCollection = TheOrderCollection;
     }
 
     @Override

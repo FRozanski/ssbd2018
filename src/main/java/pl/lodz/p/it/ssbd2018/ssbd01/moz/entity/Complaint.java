@@ -71,7 +71,7 @@ public class Complaint implements Serializable {
     private ComplaintStatus statusId;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Order1 orderId;
+    private TheOrder orderId;
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private UserData buyerId;
@@ -151,11 +151,11 @@ public class Complaint implements Serializable {
         this.statusId = statusId;
     }
 
-    public Order1 getOrderId() {
+    public TheOrder getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Order1 orderId) {
+    public void setOrderId(TheOrder orderId) {
         this.orderId = orderId;
     }
 

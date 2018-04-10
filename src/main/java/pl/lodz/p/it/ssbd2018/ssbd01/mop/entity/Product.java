@@ -19,11 +19,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account;
 
 /**
  *
- * @author java
+ * @author fifi
  */
 @Entity
 @Table(name = "product")
@@ -72,15 +72,15 @@ public class Product implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Account ownerId;
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Category categoryId;
     @JoinColumn(name = "unit_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unit unitId;
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private UserData ownerId;
 
     public Product() {
     }
@@ -155,6 +155,14 @@ public class Product implements Serializable {
         this.version = version;
     }
 
+    public Account getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Account ownerId) {
+        this.ownerId = ownerId;
+    }
+
     public Category getCategoryId() {
         return categoryId;
     }
@@ -169,14 +177,6 @@ public class Product implements Serializable {
 
     public void setUnitId(Unit unitId) {
         this.unitId = unitId;
-    }
-
-    public UserData getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(UserData ownerId) {
-        this.ownerId = ownerId;
     }
 
     @Override

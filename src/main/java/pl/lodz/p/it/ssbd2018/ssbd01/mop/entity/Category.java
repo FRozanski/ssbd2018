@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java
+ * @author fifi
  */
 @Entity
 @Table(name = "category")
@@ -32,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
     , @NamedQuery(name = "Category.findById", query = "SELECT c FROM Category c WHERE c.id = :id")
     , @NamedQuery(name = "Category.findByCategoryName", query = "SELECT c FROM Category c WHERE c.categoryName = :categoryName")
+    , @NamedQuery(name = "Category.findByActive", query = "SELECT c FROM Category c WHERE c.active = :active")
     , @NamedQuery(name = "Category.findByVersion", query = "SELECT c FROM Category c WHERE c.version = :version")})
 public class Category implements Serializable {
 
@@ -48,6 +49,10 @@ public class Category implements Serializable {
     private String categoryName;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "active")
+    private boolean active;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
@@ -60,9 +65,10 @@ public class Category implements Serializable {
         this.id = id;
     }
 
-    public Category(Long id, String categoryName, long version) {
+    public Category(Long id, String categoryName, boolean active, long version) {
         this.id = id;
         this.categoryName = categoryName;
+        this.active = active;
         this.version = version;
     }
 
@@ -80,6 +86,14 @@ public class Category implements Serializable {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public long getVersion() {

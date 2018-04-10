@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java
+ * @author fifi
  */
 @Entity
 @Table(name = "order_status")
@@ -51,7 +51,7 @@ public class OrderStatus implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
-    private Collection<TheOrder> TheOrderCollection;
+    private Collection<Order1> order1Collection;
 
     public OrderStatus() {
     }
@@ -91,12 +91,12 @@ public class OrderStatus implements Serializable {
     }
 
     @XmlTransient
-    public Collection<TheOrder> getTheOrderCollection() {
-        return TheOrderCollection;
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
     }
 
-    public void setTheOrderCollection(Collection<TheOrder> TheOrderCollection) {
-        this.TheOrderCollection = TheOrderCollection;
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
     }
 
     @Override

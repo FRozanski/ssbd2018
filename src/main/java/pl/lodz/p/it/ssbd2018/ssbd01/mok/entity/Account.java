@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -15,12 +16,13 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1;
 
 /**
  *
@@ -36,8 +38,20 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
     , @NamedQuery(name = "Account.findByConfirm", query = "SELECT a FROM Account a WHERE a.confirm = :confirm")
     , @NamedQuery(name = "Account.findByActive", query = "SELECT a FROM Account a WHERE a.active = :active")
+    , @NamedQuery(name = "Account.findByUserDataId", query = "SELECT a FROM Account a WHERE a.userDataId = :userDataId")
+    , @NamedQuery(name = "Account.findByNumberOfProducts", query = "SELECT a FROM Account a WHERE a.numberOfProducts = :numberOfProducts")
+    , @NamedQuery(name = "Account.findByNumberOfOrders", query = "SELECT a FROM Account a WHERE a.numberOfOrders = :numberOfOrders")
+    , @NamedQuery(name = "Account.findByNumberOfLogins", query = "SELECT a FROM Account a WHERE a.numberOfLogins = :numberOfLogins")
     , @NamedQuery(name = "Account.findByVersion", query = "SELECT a FROM Account a WHERE a.version = :version")})
 public class Account implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerId")
+    private Collection<Order1> order1Collection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
+    private Collection<Order1> order1Collection1;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerId")
+    private Collection<Product> productCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,12 +77,24 @@ public class Account implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
+    @Column(name = "user_data_id")
+    private BigInteger userDataId;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "number_of_products")
+    private long numberOfProducts;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "number_of_orders")
+    private long numberOfOrders;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "number_of_logins")
+    private long numberOfLogins;
     @Basic(optional = false)
     @NotNull
     @Column(name = "version")
     private long version;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "account")
-    private PersonalData personalData;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAccount")
     private Collection<AccountAlevel> accountAlevelCollection;
 
@@ -79,12 +105,15 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(Long id, String login, String password, boolean confirm, boolean active, long version) {
+    public Account(Long id, String login, String password, boolean confirm, boolean active, long numberOfProducts, long numberOfOrders, long numberOfLogins, long version) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.confirm = confirm;
         this.active = active;
+        this.numberOfProducts = numberOfProducts;
+        this.numberOfOrders = numberOfOrders;
+        this.numberOfLogins = numberOfLogins;
         this.version = version;
     }
 
@@ -128,20 +157,44 @@ public class Account implements Serializable {
         this.active = active;
     }
 
+    public BigInteger getUserDataId() {
+        return userDataId;
+    }
+
+    public void setUserDataId(BigInteger userDataId) {
+        this.userDataId = userDataId;
+    }
+
+    public long getNumberOfProducts() {
+        return numberOfProducts;
+    }
+
+    public void setNumberOfProducts(long numberOfProducts) {
+        this.numberOfProducts = numberOfProducts;
+    }
+
+    public long getNumberOfOrders() {
+        return numberOfOrders;
+    }
+
+    public void setNumberOfOrders(long numberOfOrders) {
+        this.numberOfOrders = numberOfOrders;
+    }
+
+    public long getNumberOfLogins() {
+        return numberOfLogins;
+    }
+
+    public void setNumberOfLogins(long numberOfLogins) {
+        this.numberOfLogins = numberOfLogins;
+    }
+
     public long getVersion() {
         return version;
     }
 
     public void setVersion(long version) {
         this.version = version;
-    }
-
-    public PersonalData getPersonalData() {
-        return personalData;
-    }
-
-    public void setPersonalData(PersonalData personalData) {
-        this.personalData = personalData;
     }
 
     @XmlTransient
@@ -176,6 +229,33 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
+    }
+
+    @XmlTransient
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
+    }
+
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
+    }
+
+    @XmlTransient
+    public Collection<Order1> getOrder1Collection1() {
+        return order1Collection1;
+    }
+
+    public void setOrder1Collection1(Collection<Order1> order1Collection1) {
+        this.order1Collection1 = order1Collection1;
     }
     
 }

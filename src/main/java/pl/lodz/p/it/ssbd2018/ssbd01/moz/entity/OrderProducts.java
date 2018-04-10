@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author java
+ * @author fifi
  */
 @Entity
 @Table(name = "order_products")
@@ -68,7 +68,7 @@ public class OrderProducts implements Serializable {
     private long version;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TheOrder orderId;
+    private Order1 orderId;
 
     public OrderProducts() {
     }
@@ -134,11 +134,11 @@ public class OrderProducts implements Serializable {
         this.version = version;
     }
 
-    public TheOrder getOrderId() {
+    public Order1 getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(TheOrder orderId) {
+    public void setOrderId(Order1 orderId) {
         this.orderId = orderId;
     }
 

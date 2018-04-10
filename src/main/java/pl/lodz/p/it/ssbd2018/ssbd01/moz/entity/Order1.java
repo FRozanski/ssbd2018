@@ -25,25 +25,25 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account;
 
 /**
  *
- * @author java
+ * @author fifi
  */
 @Entity
 @Table(name = "order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TheOrder.findAll", query = "SELECT o FROM TheOrder o")
-    , @NamedQuery(name = "TheOrder.findById", query = "SELECT o FROM TheOrder o WHERE o.id = :id")
-    , @NamedQuery(name = "TheOrder.findByOrderPlacedDate", query = "SELECT o FROM TheOrder o WHERE o.orderPlacedDate = :orderPlacedDate")
-    , @NamedQuery(name = "TheOrder.findByTotalPrice", query = "SELECT o FROM TheOrder o WHERE o.totalPrice = :totalPrice")
-    , @NamedQuery(name = "TheOrder.findByOrderNumber", query = "SELECT o FROM TheOrder o WHERE o.orderNumber = :orderNumber")
-    , @NamedQuery(name = "TheOrder.findByIsPaid", query = "SELECT o FROM TheOrder o WHERE o.isPaid = :isPaid")
-    , @NamedQuery(name = "TheOrder.findByIsClosed", query = "SELECT o FROM TheOrder o WHERE o.isClosed = :isClosed")
-    , @NamedQuery(name = "TheOrder.findByVersion", query = "SELECT o FROM TheOrder o WHERE o.version = :version")})
-public class TheOrder implements Serializable {
+    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
+    , @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id")
+    , @NamedQuery(name = "Order1.findByOrderPlacedDate", query = "SELECT o FROM Order1 o WHERE o.orderPlacedDate = :orderPlacedDate")
+    , @NamedQuery(name = "Order1.findByTotalPrice", query = "SELECT o FROM Order1 o WHERE o.totalPrice = :totalPrice")
+    , @NamedQuery(name = "Order1.findByOrderNumber", query = "SELECT o FROM Order1 o WHERE o.orderNumber = :orderNumber")
+    , @NamedQuery(name = "Order1.findByIsPaid", query = "SELECT o FROM Order1 o WHERE o.isPaid = :isPaid")
+    , @NamedQuery(name = "Order1.findByIsClosed", query = "SELECT o FROM Order1 o WHERE o.isClosed = :isClosed")
+    , @NamedQuery(name = "Order1.findByVersion", query = "SELECT o FROM Order1 o WHERE o.version = :version")})
+public class Order1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -79,29 +79,27 @@ public class TheOrder implements Serializable {
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private Collection<OrderProducts> orderProductsCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
-    private Collection<Complaint> complaintCollection;
+    @JoinColumn(name = "buyer_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Account buyerId;
+    @JoinColumn(name = "seller_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Account sellerId;
+    @JoinColumn(name = "shipping_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private OrderShipping shippingId;
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private OrderStatus statusId;
-    @JoinColumn(name = "shipping_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private ShippingMethod shippingId;
-    @JoinColumn(name = "buyer_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private UserData buyerId;
-    @JoinColumn(name = "seller_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private UserData sellerId;
 
-    public TheOrder() {
+    public Order1() {
     }
 
-    public TheOrder(Long id) {
+    public Order1(Long id) {
         this.id = id;
     }
 
-    public TheOrder(Long id, Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
+    public Order1(Long id, Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
         this.id = id;
         this.orderPlacedDate = orderPlacedDate;
         this.totalPrice = totalPrice;
@@ -176,13 +174,28 @@ public class TheOrder implements Serializable {
         this.orderProductsCollection = orderProductsCollection;
     }
 
-    @XmlTransient
-    public Collection<Complaint> getComplaintCollection() {
-        return complaintCollection;
+    public Account getBuyerId() {
+        return buyerId;
     }
 
-    public void setComplaintCollection(Collection<Complaint> complaintCollection) {
-        this.complaintCollection = complaintCollection;
+    public void setBuyerId(Account buyerId) {
+        this.buyerId = buyerId;
+    }
+
+    public Account getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(Account sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public OrderShipping getShippingId() {
+        return shippingId;
+    }
+
+    public void setShippingId(OrderShipping shippingId) {
+        this.shippingId = shippingId;
     }
 
     public OrderStatus getStatusId() {
@@ -191,30 +204,6 @@ public class TheOrder implements Serializable {
 
     public void setStatusId(OrderStatus statusId) {
         this.statusId = statusId;
-    }
-
-    public ShippingMethod getShippingId() {
-        return shippingId;
-    }
-
-    public void setShippingId(ShippingMethod shippingId) {
-        this.shippingId = shippingId;
-    }
-
-    public UserData getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(UserData buyerId) {
-        this.buyerId = buyerId;
-    }
-
-    public UserData getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(UserData sellerId) {
-        this.sellerId = sellerId;
     }
 
     @Override
@@ -227,10 +216,10 @@ public class TheOrder implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TheOrder)) {
+        if (!(object instanceof Order1)) {
             return false;
         }
-        TheOrder other = (TheOrder) object;
+        Order1 other = (Order1) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -239,7 +228,7 @@ public class TheOrder implements Serializable {
 
     @Override
     public String toString() {
-        return "pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder[ id=" + id + " ]";
+        return "pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1[ id=" + id + " ]";
     }
     
 }

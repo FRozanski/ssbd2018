@@ -7,7 +7,6 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,10 +41,6 @@ public class AccountAlevel implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "accountAlevel")
-    private ManagerData managerData;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "accountAlevel")
-    private UserData userData;
     @JoinColumn(name = "id_alevel", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private AccessLevel idAlevel;
@@ -80,22 +74,6 @@ public class AccountAlevel implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
-    }
-
-    public ManagerData getManagerData() {
-        return managerData;
-    }
-
-    public void setManagerData(ManagerData managerData) {
-        this.managerData = managerData;
-    }
-
-    public UserData getUserData() {
-        return userData;
-    }
-
-    public void setUserData(UserData userData) {
-        this.userData = userData;
     }
 
     public AccessLevel getIdAlevel() {

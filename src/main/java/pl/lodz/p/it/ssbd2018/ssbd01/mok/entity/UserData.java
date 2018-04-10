@@ -6,25 +6,19 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.entity;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.math.BigInteger;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Complaint;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder;
 
 /**
  *
@@ -36,21 +30,13 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder;
 @NamedQueries({
     @NamedQuery(name = "UserData.findAll", query = "SELECT u FROM UserData u")
     , @NamedQuery(name = "UserData.findById", query = "SELECT u FROM UserData u WHERE u.id = :id")
-    , @NamedQuery(name = "UserData.findByNip", query = "SELECT u FROM UserData u WHERE u.nip = :nip")
+    , @NamedQuery(name = "UserData.findByName", query = "SELECT u FROM UserData u WHERE u.name = :name")
+    , @NamedQuery(name = "UserData.findBySurname", query = "SELECT u FROM UserData u WHERE u.surname = :surname")
+    , @NamedQuery(name = "UserData.findByEmail", query = "SELECT u FROM UserData u WHERE u.email = :email")
+    , @NamedQuery(name = "UserData.findByPhone", query = "SELECT u FROM UserData u WHERE u.phone = :phone")
+    , @NamedQuery(name = "UserData.findByAddressId", query = "SELECT u FROM UserData u WHERE u.addressId = :addressId")
     , @NamedQuery(name = "UserData.findByVersion", query = "SELECT u FROM UserData u WHERE u.version = :version")})
 public class UserData implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerId")
-    private Collection<Product> productCollection;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerId")
-    private Collection<Complaint> complaintCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
-    private Collection<Complaint> complaintCollection1;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerId")
-    private Collection<TheOrder> TheOrderCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
-    private Collection<TheOrder> TheOrderCollection1;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -60,16 +46,35 @@ public class UserData implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "nip")
-    private String nip;
+    @Size(min = 1, max = 32)
+    @Column(name = "name")
+    private String name;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 32)
+    @Column(name = "surname")
+    private String surname;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 64)
+    @Column(name = "email")
+    private String email;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 18)
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "address_id")
+    private BigInteger addressId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private AccountAlevel accountAlevel;
+    private Address address;
 
     public UserData() {
     }
@@ -78,9 +83,12 @@ public class UserData implements Serializable {
         this.id = id;
     }
 
-    public UserData(Long id, String nip, long version) {
+    public UserData(Long id, String name, String surname, String email, String phone, long version) {
         this.id = id;
-        this.nip = nip;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.phone = phone;
         this.version = version;
     }
 
@@ -92,12 +100,44 @@ public class UserData implements Serializable {
         this.id = id;
     }
 
-    public String getNip() {
-        return nip;
+    public String getName() {
+        return name;
     }
 
-    public void setNip(String nip) {
-        this.nip = nip;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public BigInteger getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(BigInteger addressId) {
+        this.addressId = addressId;
     }
 
     public long getVersion() {
@@ -108,12 +148,12 @@ public class UserData implements Serializable {
         this.version = version;
     }
 
-    public AccountAlevel getAccountAlevel() {
-        return accountAlevel;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setAccountAlevel(AccountAlevel accountAlevel) {
-        this.accountAlevel = accountAlevel;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     @Override
@@ -139,51 +179,6 @@ public class UserData implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Complaint> getComplaintCollection() {
-        return complaintCollection;
-    }
-
-    public void setComplaintCollection(Collection<Complaint> complaintCollection) {
-        this.complaintCollection = complaintCollection;
-    }
-
-    @XmlTransient
-    public Collection<Complaint> getComplaintCollection1() {
-        return complaintCollection1;
-    }
-
-    public void setComplaintCollection1(Collection<Complaint> complaintCollection1) {
-        this.complaintCollection1 = complaintCollection1;
-    }
-
-    @XmlTransient
-    public Collection<TheOrder> getTheOrderCollection() {
-        return TheOrderCollection;
-    }
-
-    public void setTheOrderCollection(Collection<TheOrder> TheOrderCollection) {
-        this.TheOrderCollection = TheOrderCollection;
-    }
-
-    @XmlTransient
-    public Collection<TheOrder> getTheOrderCollection1() {
-        return TheOrderCollection1;
-    }
-
-    public void setTheOrderCollection1(Collection<TheOrder> TheOrderCollection1) {
-        this.TheOrderCollection1 = TheOrderCollection1;
-    }
-
-    @XmlTransient
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
     }
     
 }

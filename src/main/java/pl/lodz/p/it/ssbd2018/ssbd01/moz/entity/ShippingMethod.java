@@ -7,24 +7,20 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author java
+ * @author fifi
  */
 @Entity
 @Table(name = "shipping_method")
@@ -34,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "ShippingMethod.findById", query = "SELECT s FROM ShippingMethod s WHERE s.id = :id")
     , @NamedQuery(name = "ShippingMethod.findByName", query = "SELECT s FROM ShippingMethod s WHERE s.name = :name")
     , @NamedQuery(name = "ShippingMethod.findByPrice", query = "SELECT s FROM ShippingMethod s WHERE s.price = :price")
+    , @NamedQuery(name = "ShippingMethod.findByActive", query = "SELECT s FROM ShippingMethod s WHERE s.active = :active")
     , @NamedQuery(name = "ShippingMethod.findByVersion", query = "SELECT s FROM ShippingMethod s WHERE s.version = :version")})
 public class ShippingMethod implements Serializable {
 
@@ -55,10 +52,12 @@ public class ShippingMethod implements Serializable {
     private BigDecimal price;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "active")
+    private boolean active;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingId")
-    private Collection<TheOrder> TheOrderCollection;
 
     public ShippingMethod() {
     }
@@ -67,10 +66,11 @@ public class ShippingMethod implements Serializable {
         this.id = id;
     }
 
-    public ShippingMethod(Long id, String name, BigDecimal price, long version) {
+    public ShippingMethod(Long id, String name, BigDecimal price, boolean active, long version) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.active = active;
         this.version = version;
     }
 
@@ -98,21 +98,20 @@ public class ShippingMethod implements Serializable {
         this.price = price;
     }
 
+    public boolean getActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public long getVersion() {
         return version;
     }
 
     public void setVersion(long version) {
         this.version = version;
-    }
-
-    @XmlTransient
-    public Collection<TheOrder> getTheOrderCollection() {
-        return TheOrderCollection;
-    }
-
-    public void setTheOrderCollection(Collection<TheOrder> TheOrderCollection) {
-        this.TheOrderCollection = TheOrderCollection;
     }
 
     @Override

@@ -11,11 +11,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -36,7 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name="ID_ORDERSTATUS_SEQUENCE" ,sequenceName = "order_status_id_seq")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDERSTATUS_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -48,10 +54,11 @@ public class OrderStatus implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
-    private Collection<Order1> order1Collection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
+    //private Collection<Order1> order1Collection;
 
     public OrderStatus() {
     }
@@ -90,14 +97,14 @@ public class OrderStatus implements Serializable {
         this.version = version;
     }
 
-    @XmlTransient
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
-    }
-
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
-    }
+//    @XmlTransient
+//    public Collection<Order1> getOrder1Collection() {
+//        return order1Collection;
+//    }
+//
+//    public void setOrder1Collection(Collection<Order1> order1Collection) {
+//        this.order1Collection = order1Collection;
+//    }
 
     @Override
     public int hashCode() {

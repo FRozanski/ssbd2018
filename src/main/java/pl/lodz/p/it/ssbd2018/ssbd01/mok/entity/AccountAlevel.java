@@ -9,12 +9,16 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,13 +36,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AccountAlevel implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name="ID_ACCOUNTALEVEL_SEQUENCE" ,sequenceName = "account_alevel_id_seq")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNTALEVEL_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
     private Long id;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "id_alevel", referencedColumnName = "id")

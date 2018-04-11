@@ -8,14 +8,19 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,7 +44,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserData implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name="ID_USERDATA_SEQUENCE" ,sequenceName = "user_data_id_seq")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_USERDATA_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -70,10 +77,11 @@ public class UserData implements Serializable {
     private BigInteger addressId;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
-    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
-    @OneToOne(optional = false)
+    @JoinColumn(name = "id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.PERSIST , optional = false)
     private Address address;
 
     public UserData() {

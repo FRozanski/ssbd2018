@@ -13,15 +13,19 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -46,7 +50,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account;
 public class Order1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name="ID_ORDER_SEQUENCE" ,sequenceName = "order_id_seq")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDER_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -75,9 +81,10 @@ public class Order1 implements Serializable {
     private boolean isClosed;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    @OneToMany(mappedBy = "orderId")
     private Collection<OrderProducts> orderProductsCollection;
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

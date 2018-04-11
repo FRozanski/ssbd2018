@@ -96,7 +96,7 @@ public class OrderShipping implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shippingId")
+    @OneToMany(mappedBy = "shippingId")
     private Collection<Order1> order1Collection;
 
     public OrderShipping() {

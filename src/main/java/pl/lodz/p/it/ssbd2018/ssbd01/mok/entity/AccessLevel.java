@@ -11,11 +11,15 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,7 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class AccessLevel implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name="ID_ACCESSLEVEL_SEQUENCE" ,sequenceName = "access_level_id_seq")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCESSLEVEL_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -53,10 +59,11 @@ public class AccessLevel implements Serializable {
     private boolean active;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlevel")
-    private Collection<AccountAlevel> accountAlevelCollection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlevel")
+    //private Collection<AccountAlevel> accountAlevelCollection;
 
     public AccessLevel() {
     }
@@ -104,14 +111,14 @@ public class AccessLevel implements Serializable {
         this.version = version;
     }
 
-    @XmlTransient
-    public Collection<AccountAlevel> getAccountAlevelCollection() {
-        return accountAlevelCollection;
-    }
-
-    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
-        this.accountAlevelCollection = accountAlevelCollection;
-    }
+//    @XmlTransient
+//    public Collection<AccountAlevel> getAccountAlevelCollection() {
+//        return accountAlevelCollection;
+//    }
+//
+//    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
+//        this.accountAlevelCollection = accountAlevelCollection;
+//    }
 
     @Override
     public int hashCode() {

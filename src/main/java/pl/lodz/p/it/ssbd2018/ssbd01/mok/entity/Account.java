@@ -12,11 +12,17 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,18 +49,12 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1;
     , @NamedQuery(name = "Account.findByNumberOfOrders", query = "SELECT a FROM Account a WHERE a.numberOfOrders = :numberOfOrders")
     , @NamedQuery(name = "Account.findByNumberOfLogins", query = "SELECT a FROM Account a WHERE a.numberOfLogins = :numberOfLogins")
     , @NamedQuery(name = "Account.findByVersion", query = "SELECT a FROM Account a WHERE a.version = :version")})
-public class Account implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buyerId")
-    private Collection<Order1> order1Collection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerId")
-    private Collection<Order1> order1Collection1;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ownerId")
-    private Collection<Product> productCollection;
+public class Account implements Serializable {    
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq")
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNT_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -93,10 +93,17 @@ public class Account implements Serializable {
     private long numberOfLogins;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAccount")
-    private Collection<AccountAlevel> accountAlevelCollection;
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idAccount")
+    //private Collection<AccountAlevel> accountAlevelCollection;
+    @OneToMany(mappedBy = "buyerId")
+    private Collection<Order1> ordersAsBuyer;
+    @OneToMany(mappedBy = "sellerId")
+    private Collection<Order1> ordersAsSeller;
+    @OneToMany(mappedBy = "ownerId")
+    private Collection<Product> productCollection;
 
     public Account() {
     }
@@ -197,14 +204,14 @@ public class Account implements Serializable {
         this.version = version;
     }
 
-    @XmlTransient
-    public Collection<AccountAlevel> getAccountAlevelCollection() {
-        return accountAlevelCollection;
-    }
-
-    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
-        this.accountAlevelCollection = accountAlevelCollection;
-    }
+//    @XmlTransient
+//    public Collection<AccountAlevel> getAccountAlevelCollection() {
+//        return accountAlevelCollection;
+//    }
+//
+//    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
+//        this.accountAlevelCollection = accountAlevelCollection;
+//    }
 
     @Override
     public int hashCode() {
@@ -242,20 +249,20 @@ public class Account implements Serializable {
 
     @XmlTransient
     public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
+        return ordersAsBuyer;
     }
 
     public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
+        this.ordersAsBuyer = order1Collection;
     }
 
     @XmlTransient
     public Collection<Order1> getOrder1Collection1() {
-        return order1Collection1;
+        return ordersAsSeller;
     }
 
     public void setOrder1Collection1(Collection<Order1> order1Collection1) {
-        this.order1Collection1 = order1Collection1;
+        this.ordersAsSeller = order1Collection1;
     }
     
 }

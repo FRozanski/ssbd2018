@@ -83,11 +83,6 @@ public class Address implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    //@OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
-    //private UserData userData;
-
-    public Address() {
-    }
 
     public Address(Long id) {
         this.id = id;
@@ -105,10 +100,6 @@ public class Address implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getStreet() {
@@ -158,22 +149,6 @@ public class Address implements Serializable {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-//    public UserData getUserData() {
-//        return userData;
-//    }
-//
-//    public void setUserData(UserData userData) {
-//        this.userData = userData;
-//    }
 
     @Override
     public int hashCode() {

@@ -99,9 +99,6 @@ public class OrderShipping implements Serializable {
     @OneToMany(mappedBy = "shippingId")
     private Collection<Order1> order1Collection;
 
-    public OrderShipping() {
-    }
-
     public OrderShipping(Long id) {
         this.id = id;
     }
@@ -121,10 +118,6 @@ public class OrderShipping implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getShippingMethodName() {
@@ -197,14 +190,6 @@ public class OrderShipping implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     @XmlTransient

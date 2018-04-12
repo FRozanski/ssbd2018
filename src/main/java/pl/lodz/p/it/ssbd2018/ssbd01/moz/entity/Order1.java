@@ -99,9 +99,6 @@ public class Order1 implements Serializable {
     @ManyToOne(optional = false)
     private OrderStatus statusId;
 
-    public Order1() {
-    }
-
     public Order1(Long id) {
         this.id = id;
     }
@@ -118,10 +115,6 @@ public class Order1 implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Date getOrderPlacedDate() {
@@ -162,14 +155,6 @@ public class Order1 implements Serializable {
 
     public void setIsClosed(boolean isClosed) {
         this.isClosed = isClosed;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     @XmlTransient

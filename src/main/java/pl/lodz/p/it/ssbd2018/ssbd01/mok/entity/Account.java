@@ -96,17 +96,12 @@ public class Account implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idAccount")
-    //private Collection<AccountAlevel> accountAlevelCollection;
     @OneToMany(mappedBy = "buyerId")
     private Collection<Order1> ordersAsBuyer;
     @OneToMany(mappedBy = "sellerId")
     private Collection<Order1> ordersAsSeller;
     @OneToMany(mappedBy = "ownerId")
     private Collection<Product> productCollection;
-
-    public Account() {
-    }
 
     public Account(Long id) {
         this.id = id;
@@ -128,16 +123,8 @@ public class Account implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getLogin() {
         return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {
@@ -195,49 +182,7 @@ public class Account implements Serializable {
     public void setNumberOfLogins(long numberOfLogins) {
         this.numberOfLogins = numberOfLogins;
     }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-//    @XmlTransient
-//    public Collection<AccountAlevel> getAccountAlevelCollection() {
-//        return accountAlevelCollection;
-//    }
-//
-//    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
-//        this.accountAlevelCollection = accountAlevelCollection;
-//    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Account)) {
-            return false;
-        }
-        Account other = (Account) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account[ id=" + id + " ]";
-    }
-
+    
     @XmlTransient
     public Collection<Product> getProductCollection() {
         return productCollection;
@@ -265,4 +210,28 @@ public class Account implements Serializable {
         this.ordersAsSeller = order1Collection1;
     }
     
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Account)) {
+            return false;
+        }
+        Account other = (Account) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account[ id=" + id + " ]";
+    }        
 }

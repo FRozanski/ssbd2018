@@ -81,11 +81,8 @@ public class UserData implements Serializable {
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.PERSIST , optional = false)
+    @OneToOne(cascade = CascadeType.PERSIST ,optional = false)
     private Address address;
-
-    public UserData() {
-    }
 
     public UserData(Long id) {
         this.id = id;
@@ -102,10 +99,6 @@ public class UserData implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -146,14 +139,6 @@ public class UserData implements Serializable {
 
     public void setAddressId(BigInteger addressId) {
         this.addressId = addressId;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     public Address getAddress() {

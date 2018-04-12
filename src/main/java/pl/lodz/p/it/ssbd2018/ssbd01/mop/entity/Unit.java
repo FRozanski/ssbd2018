@@ -57,11 +57,6 @@ public class Unit implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "unitId")
-    //private Collection<Product> productCollection;
-
-    public Unit() {
-    }
 
     public Unit(Long id) {
         this.id = id;
@@ -77,34 +72,9 @@ public class Unit implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getUnitName() {
         return unitName;
     }
-
-    public void setUnitName(String unitName) {
-        this.unitName = unitName;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-//    @XmlTransient
-//    public Collection<Product> getProductCollection() {
-//        return productCollection;
-//    }
-//
-//    public void setProductCollection(Collection<Product> productCollection) {
-//        this.productCollection = productCollection;
-//    }
 
     @Override
     public int hashCode() {

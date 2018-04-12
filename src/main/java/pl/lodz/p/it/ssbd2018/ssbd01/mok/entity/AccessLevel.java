@@ -62,11 +62,6 @@ public class AccessLevel implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlevel")
-    //private Collection<AccountAlevel> accountAlevelCollection;
-
-    public AccessLevel() {
-    }
 
     public AccessLevel(Long id) {
         this.id = id;
@@ -81,10 +76,6 @@ public class AccessLevel implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getLevel() {
@@ -102,23 +93,6 @@ public class AccessLevel implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-//    @XmlTransient
-//    public Collection<AccountAlevel> getAccountAlevelCollection() {
-//        return accountAlevelCollection;
-//    }
-//
-//    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
-//        this.accountAlevelCollection = accountAlevelCollection;
-//    }
 
     @Override
     public int hashCode() {

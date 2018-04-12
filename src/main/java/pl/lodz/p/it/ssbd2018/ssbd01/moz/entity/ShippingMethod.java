@@ -66,9 +66,6 @@ public class ShippingMethod implements Serializable {
     @Column(name = "version")
     private long version;
 
-    public ShippingMethod() {
-    }
-
     public ShippingMethod(Long id) {
         this.id = id;
     }
@@ -83,10 +80,6 @@ public class ShippingMethod implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -111,14 +104,6 @@ public class ShippingMethod implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     @Override

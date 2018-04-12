@@ -57,11 +57,6 @@ public class OrderStatus implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
-    //private Collection<Order1> order1Collection;
-
-    public OrderStatus() {
-    }
 
     public OrderStatus(Long id) {
         this.id = id;
@@ -77,10 +72,6 @@ public class OrderStatus implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }
@@ -88,23 +79,6 @@ public class OrderStatus implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-//    @XmlTransient
-//    public Collection<Order1> getOrder1Collection() {
-//        return order1Collection;
-//    }
-//
-//    public void setOrder1Collection(Collection<Order1> order1Collection) {
-//        this.order1Collection = order1Collection;
-//    }
 
     @Override
     public int hashCode() {

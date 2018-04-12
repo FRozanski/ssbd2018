@@ -89,9 +89,6 @@ public class Product implements Serializable {
     @ManyToOne(optional = false)
     private Unit unitId;
 
-    public Product() {
-    }
-
     public Product(Long id) {
         this.id = id;
     }
@@ -108,10 +105,6 @@ public class Product implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -152,14 +145,6 @@ public class Product implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     public Account getOwnerId() {

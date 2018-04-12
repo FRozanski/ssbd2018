@@ -62,11 +62,6 @@ public class Category implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
-    //private Collection<Product> productCollection;
-
-    public Category() {
-    }
 
     public Category(Long id) {
         this.id = id;
@@ -81,10 +76,6 @@ public class Category implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCategoryName() {
@@ -102,23 +93,6 @@ public class Category implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-//    @XmlTransient
-//    public Collection<Product> getProductCollection() {
-//        return productCollection;
-//    }
-//
-//    public void setProductCollection(Collection<Product> productCollection) {
-//        this.productCollection = productCollection;
-//    }
 
     @Override
     public int hashCode() {

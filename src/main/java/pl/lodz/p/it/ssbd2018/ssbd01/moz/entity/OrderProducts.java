@@ -77,9 +77,6 @@ public class OrderProducts implements Serializable {
     @ManyToOne(optional = false)
     private Order1 orderId;
 
-    public OrderProducts() {
-    }
-
     public OrderProducts(Long id) {
         this.id = id;
     }
@@ -95,10 +92,6 @@ public class OrderProducts implements Serializable {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getProductName() {
@@ -131,14 +124,6 @@ public class OrderProducts implements Serializable {
 
     public void setProductValue(BigDecimal productValue) {
         this.productValue = productValue;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     public Order1 getOrderId() {

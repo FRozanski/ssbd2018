@@ -17,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product;
 @Stateless
 public class ProductFacade extends AbstractFacade<Product> implements ProductFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mopPU")
+    @PersistenceContext(unitName = "ssbd01mopDS")
     private EntityManager em;
 
     @Override

@@ -15,9 +15,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Address;
  * @author fifi
  */
 @Stateless
-public class AddressFacade extends AbstractFacade<Address> {
+public class AddressFacade extends AbstractFacade<Address> implements AddressFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mokPU")
+    @PersistenceContext(unitName = "ssbd01mokDS")
     private EntityManager em;
 
     @Override

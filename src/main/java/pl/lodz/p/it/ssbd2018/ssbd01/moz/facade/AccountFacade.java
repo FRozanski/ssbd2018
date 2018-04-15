@@ -17,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account;
 @Stateless
 public class AccountFacade extends AbstractFacade<Account> implements AccountFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mokPU")
+    @PersistenceContext(unitName = "ssbd01mokDS")
     private EntityManager em;
 
     @Override

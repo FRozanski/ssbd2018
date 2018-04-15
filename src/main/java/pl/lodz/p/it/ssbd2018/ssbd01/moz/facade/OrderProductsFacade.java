@@ -17,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts;
 @Stateless
 public class OrderProductsFacade extends AbstractFacade<OrderProducts> implements OrderProductsFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mozPU")
+    @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;
 
     @Override

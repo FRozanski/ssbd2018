@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="ssbd01mokPU" transaction-type="JTA">
-    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+  <persistence-unit name="ssbd01mokDS" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/ssbd01mokDS</jta-data-source>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccountAlevel</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.ManagerData</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.PersonalData</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Address</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
@@ -15,25 +13,29 @@
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>
-  <persistence-unit name="ssbd01mopPU" transaction-type="JTA">
+  <persistence-unit name="ssbd01mopDS" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/ssbd01mopDS</jta-data-source>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
-    <properties/>
+    <properties>
+      <property name="eclipselink.logging.level" value="FINE"/>
+    </properties>
   </persistence-unit>
-  <persistence-unit name="ssbd01mozPU" transaction-type="JTA">
+  <persistence-unit name="ssbd01mozDS" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/ssbd01mozDS</jta-data-source>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Complaint</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ComplaintStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.TheOrder</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
-    <properties/>
+    <properties>
+      <property name="eclipselink.logging.level" value="FINE"/>
+    </properties>
   </persistence-unit>
 </persistence>

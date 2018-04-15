@@ -17,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping;
 @Stateless
 public class OrderShippingFacade extends AbstractFacade<OrderShipping> implements OrderShippingFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mokPU")
+    @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;
 
     @Override

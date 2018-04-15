@@ -81,7 +81,7 @@ public class UserData implements Serializable {
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.PERSIST ,optional = false)
+    @OneToOne(optional = false)
     private Address address;
 
     public UserData(Long id) {

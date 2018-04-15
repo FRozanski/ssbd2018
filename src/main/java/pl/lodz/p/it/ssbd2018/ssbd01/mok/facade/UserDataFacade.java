@@ -15,9 +15,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData;
  * @author fifi
  */
 @Stateless
-public class UserDataFacade extends AbstractFacade<UserData> {
+public class UserDataFacade extends AbstractFacade<UserData> implements UserDataFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mokPU")
+    @PersistenceContext(unitName = "ssbd01mokDS")
     private EntityManager em;
 
     @Override

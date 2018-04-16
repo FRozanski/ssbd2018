@@ -7,6 +7,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.entity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -97,11 +98,11 @@ public class Account implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(mappedBy = "buyerId")
-    private Collection<Order1> ordersAsBuyer;
+    private Collection<Order1> ordersAsBuyer = new ArrayList<>();
     @OneToMany(mappedBy = "sellerId")
-    private Collection<Order1> ordersAsSeller;
+    private Collection<Order1> ordersAsSeller = new ArrayList<>();
     @OneToMany(mappedBy = "ownerId")
-    private Collection<Product> productCollection;
+    private Collection<Product> productCollection = new ArrayList<>();
 
     public Account(Long id) {
         this.id = id;

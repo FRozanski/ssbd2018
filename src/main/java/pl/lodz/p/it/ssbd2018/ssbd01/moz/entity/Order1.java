@@ -7,6 +7,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -85,7 +86,7 @@ public class Order1 implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(mappedBy = "orderId")
-    private Collection<OrderProducts> orderProductsCollection;
+    private Collection<OrderProducts> orderProductsCollection = new ArrayList<>();
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account buyerId;

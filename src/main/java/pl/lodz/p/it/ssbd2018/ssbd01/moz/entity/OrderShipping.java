@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -97,7 +98,7 @@ public class OrderShipping implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(mappedBy = "shippingId")
-    private Collection<Order1> order1Collection;
+    private Collection<Order1> order1Collection = new ArrayList<>();
 
     public OrderShipping(Long id) {
         this.id = id;

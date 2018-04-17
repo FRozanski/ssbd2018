@@ -42,6 +42,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Address.findByVersion", query = "SELECT a FROM Address a WHERE a.version = :version")})
 public class Address implements Serializable {
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "address")
+    private UserData userData;
+
     private static final long serialVersionUID = 1L;
     @SequenceGenerator(name="ID_ADDRESS_SEQUENCE" ,sequenceName = "address_id_seq")
     @Id
@@ -83,7 +86,10 @@ public class Address implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-
+    
+    public Address(){
+    }
+    
     public Address(Long id) {
         this.id = id;
     }
@@ -173,6 +179,14 @@ public class Address implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Address[ id=" + id + " ]";
+    }
+
+    public UserData getUserData() {
+        return userData;
+    }
+
+    public void setUserData(UserData userData) {
+        this.userData = userData;
     }
     
 }

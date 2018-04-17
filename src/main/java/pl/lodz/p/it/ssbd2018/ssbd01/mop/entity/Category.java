@@ -62,7 +62,10 @@ public class Category implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-
+    
+    public Category(){        
+    }
+    
     public Category(Long id) {
         this.id = id;
     }

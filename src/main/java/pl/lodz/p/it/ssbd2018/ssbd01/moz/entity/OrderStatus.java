@@ -57,7 +57,10 @@ public class OrderStatus implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-
+    
+    public OrderStatus(){        
+    }
+    
     public OrderStatus(Long id) {
         this.id = id;
     }

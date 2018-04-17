@@ -88,7 +88,10 @@ public class Product implements Serializable {
     @JoinColumn(name = "unit_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Unit unitId;
-
+    
+    public Product(){        
+    }
+    
     public Product(Long id) {
         this.id = id;
     }

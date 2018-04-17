@@ -99,7 +99,10 @@ public class Order1 implements Serializable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private OrderStatus statusId;
-
+    
+    public Order1(){        
+    }
+    
     public Order1(Long id) {
         this.id = id;
     }

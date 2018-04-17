@@ -103,7 +103,10 @@ public class Account implements Serializable {
     private Collection<Order1> ordersAsSeller = new ArrayList<>();
     @OneToMany(mappedBy = "ownerId")
     private Collection<Product> productCollection = new ArrayList<>();
-
+    
+    public Account(){
+    }
+    
     public Account(Long id) {
         this.id = id;
     }

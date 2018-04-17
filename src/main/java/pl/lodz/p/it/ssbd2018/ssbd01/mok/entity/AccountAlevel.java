@@ -54,7 +54,10 @@ public class AccountAlevel implements Serializable {
     @JoinColumn(name = "id_account", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account idAccount;
-
+    
+    public AccountAlevel(){
+    }
+    
     public AccountAlevel(Long id) {
         this.id = id;
     }

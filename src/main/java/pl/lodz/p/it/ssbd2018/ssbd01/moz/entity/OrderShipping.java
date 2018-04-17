@@ -99,7 +99,10 @@ public class OrderShipping implements Serializable {
     private long version;
     @OneToMany(mappedBy = "shippingId")
     private Collection<Order1> order1Collection = new ArrayList<>();
-
+    
+    public OrderShipping(){        
+    }
+    
     public OrderShipping(Long id) {
         this.id = id;
     }

@@ -65,7 +65,10 @@ public class ShippingMethod implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-
+    
+    public ShippingMethod(){        
+    }
+    
     public ShippingMethod(Long id) {
         this.id = id;
     }

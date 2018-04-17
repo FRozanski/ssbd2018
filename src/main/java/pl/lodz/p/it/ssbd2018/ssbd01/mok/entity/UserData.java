@@ -6,9 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "UserData.findBySurname", query = "SELECT u FROM UserData u WHERE u.surname = :surname")
     , @NamedQuery(name = "UserData.findByEmail", query = "SELECT u FROM UserData u WHERE u.email = :email")
     , @NamedQuery(name = "UserData.findByPhone", query = "SELECT u FROM UserData u WHERE u.phone = :phone")
-    , @NamedQuery(name = "UserData.findByAddressId", query = "SELECT u FROM UserData u WHERE u.addressId = :addressId")
     , @NamedQuery(name = "UserData.findByVersion", query = "SELECT u FROM UserData u WHERE u.version = :version")})
 public class UserData implements Serializable {
 
@@ -73,16 +70,17 @@ public class UserData implements Serializable {
     @Size(min = 1, max = 18)
     @Column(name = "phone")
     private String phone;
-    @Column(name = "address_id")
-    private BigInteger addressId;
     @Basic(optional = false)
     @NotNull
     @Version
     @Column(name = "version")
     private long version;
-    @JoinColumn(name = "id", referencedColumnName = "id")
-    @OneToOne(cascade = CascadeType.PERSIST, optional = false)
+    @JoinColumn(name = "id", referencedColumnName = "id", insertable = false, updatable = false)
+    @OneToOne(optional = false)
     private Address address;
+
+    public UserData() {
+    }
 
     public UserData(Long id) {
         this.id = id;
@@ -131,14 +129,6 @@ public class UserData implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public BigInteger getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(BigInteger addressId) {
-        this.addressId = addressId;
     }
 
     public Address getAddress() {

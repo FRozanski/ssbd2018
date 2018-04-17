@@ -57,7 +57,10 @@ public class Unit implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-
+    
+    public Unit(){        
+    }
+    
     public Unit(Long id) {
         this.id = id;
     }

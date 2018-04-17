@@ -7,10 +7,18 @@
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccountAlevel</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Address</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.canonicalmodel.suffix" value="mok"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="ssbd01mopDS" transaction-type="JTA">
@@ -19,10 +27,16 @@
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.canonicalmodel.suffix" value="mop"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="ssbd01mozDS" transaction-type="JTA">
@@ -32,10 +46,15 @@
     <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
+    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.logging.level" value="FINE"/>
+      <property name="eclipselink.canonicalmodel.suffix" value="moz"/>
     </properties>
   </persistence-unit>
 </persistence>

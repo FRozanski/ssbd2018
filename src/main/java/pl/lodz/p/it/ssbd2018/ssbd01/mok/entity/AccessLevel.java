@@ -62,7 +62,10 @@ public class AccessLevel implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-
+    
+    public AccessLevel(){
+    }
+    
     public AccessLevel(Long id) {
         this.id = id;
     }

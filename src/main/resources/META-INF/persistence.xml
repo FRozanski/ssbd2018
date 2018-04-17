@@ -5,8 +5,6 @@
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccountAlevel</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Address</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.UserData</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
     <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>

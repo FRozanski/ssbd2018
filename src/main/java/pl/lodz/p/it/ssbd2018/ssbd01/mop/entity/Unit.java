@@ -39,10 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Unit.findByVersion", query = "SELECT u FROM Unit u WHERE u.version = :version")})
 public class Unit implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_UNIT_SEQUENCE" ,sequenceName = "unit_id_seq")
+    private static final long serialVersionUID = 1L; 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_UNIT_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")

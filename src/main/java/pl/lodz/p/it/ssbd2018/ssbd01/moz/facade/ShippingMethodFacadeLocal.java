@@ -20,8 +20,6 @@ public interface ShippingMethodFacadeLocal {
 
     void edit(ShippingMethod shippingMethod);
 
-    void remove(ShippingMethod shippingMethod);
-
     ShippingMethod find(Object id);
 
     List<ShippingMethod> findAll();

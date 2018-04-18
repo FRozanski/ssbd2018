@@ -20,8 +20,6 @@ public interface AccountFacadeLocal {
 
     void edit(Account account);
 
-    void remove(Account account);
-
     Account find(Object id);
 
     List<Account> findAll();

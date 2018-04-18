@@ -20,8 +20,6 @@ public interface CategoryFacadeLocal {
 
     void edit(Category category);
 
-    void remove(Category category);
-
     Category find(Object id);
 
     List<Category> findAll();

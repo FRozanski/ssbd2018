@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1;
  * @author fifi
  */
 @Stateless
-public class Order1Facade extends AbstractFacade<Order1> implements Order1FacadeLocal {
+public class Order1Facade extends AbstractFacadeCreateUpdate<Order1> implements Order1FacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;

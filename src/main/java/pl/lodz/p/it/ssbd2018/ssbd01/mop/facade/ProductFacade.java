@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product;
  * @author fifi
  */
 @Stateless
-public class ProductFacade extends AbstractFacade<Product> implements ProductFacadeLocal {
+public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implements ProductFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mopDS")
     private EntityManager em;

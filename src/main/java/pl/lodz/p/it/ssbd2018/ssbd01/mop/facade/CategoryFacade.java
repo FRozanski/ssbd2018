@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category;
  * @author fifi
  */
 @Stateless
-public class CategoryFacade extends AbstractFacade<Category> implements CategoryFacadeLocal {
+public class CategoryFacade extends AbstractFacadeCreateUpdate<Category> implements CategoryFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mopDS")
     private EntityManager em;

@@ -40,9 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class OrderStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ORDERSTATUS_SEQUENCE" ,sequenceName = "order_status_id_seq")
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDERSTATUS_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")

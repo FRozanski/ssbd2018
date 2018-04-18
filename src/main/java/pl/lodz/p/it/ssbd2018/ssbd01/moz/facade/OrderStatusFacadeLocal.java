@@ -16,12 +16,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus;
 @Local
 public interface OrderStatusFacadeLocal {
 
-    void create(OrderStatus orderStatus);
-
-    void edit(OrderStatus orderStatus);
-
-    void remove(OrderStatus orderStatus);
-
     OrderStatus find(Object id);
 
     List<OrderStatus> findAll();

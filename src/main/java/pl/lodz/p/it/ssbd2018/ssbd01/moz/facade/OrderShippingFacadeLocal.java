@@ -20,8 +20,6 @@ public interface OrderShippingFacadeLocal {
 
     void edit(OrderShipping orderShipping);
 
-    void remove(OrderShipping orderShipping);
-
     OrderShipping find(Object id);
 
     List<OrderShipping> findAll();

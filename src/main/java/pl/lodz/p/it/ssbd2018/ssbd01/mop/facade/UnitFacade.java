@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit;
  * @author fifi
  */
 @Stateless
-public class UnitFacade extends AbstractFacade<Unit> implements UnitFacadeLocal {
+public class UnitFacade extends AbstractFacadeBase<Unit> implements UnitFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mopDS")
     private EntityManager em;
@@ -27,6 +27,5 @@ public class UnitFacade extends AbstractFacade<Unit> implements UnitFacadeLocal 
 
     public UnitFacade() {
         super(Unit.class);
-    }
-    
+    }    
 }

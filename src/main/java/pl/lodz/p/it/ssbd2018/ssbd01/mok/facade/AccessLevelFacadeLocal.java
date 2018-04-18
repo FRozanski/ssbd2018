@@ -20,8 +20,6 @@ public interface AccessLevelFacadeLocal {
 
     void edit(AccessLevel accessLevel);
 
-    void remove(AccessLevel accessLevel);
-
     AccessLevel find(Object id);
 
     List<AccessLevel> findAll();

@@ -24,7 +24,11 @@ public class AccountAlevelFacade extends AbstractFacade<AccountAlevel> implement
     protected EntityManager getEntityManager() {
         return em;
     }
-
+    
+    public void remove(AccountAlevel entity) {
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }
+    
     public AccountAlevelFacade() {
         super(AccountAlevel.class);
     }

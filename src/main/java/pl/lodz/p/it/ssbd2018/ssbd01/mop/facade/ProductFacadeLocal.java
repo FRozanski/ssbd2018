@@ -20,8 +20,6 @@ public interface ProductFacadeLocal {
 
     void edit(Product product);
 
-    void remove(Product product);
-
     Product find(Object id);
 
     List<Product> findAll();

@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod;
  * @author fifi
  */
 @Stateless
-public class ShippingMethodFacade extends AbstractFacade<ShippingMethod> implements ShippingMethodFacadeLocal {
+public class ShippingMethodFacade extends AbstractFacadeCreateUpdate<ShippingMethod> implements ShippingMethodFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;

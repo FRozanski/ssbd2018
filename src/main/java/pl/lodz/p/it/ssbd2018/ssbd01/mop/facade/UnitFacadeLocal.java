@@ -16,18 +16,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit;
 @Local
 public interface UnitFacadeLocal {
 
-    void create(Unit unit);
-
-    void edit(Unit unit);
-
-    void remove(Unit unit);
-
     Unit find(Object id);
 
     List<Unit> findAll();
 
     List<Unit> findRange(int[] range);
 
-    int count();
-    
+    int count();    
 }

@@ -16,10 +16,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel;
 @Local
 public interface AccessLevelFacadeLocal {
 
-    void create(AccessLevel accessLevel);
-
-    void edit(AccessLevel accessLevel);
-
     AccessLevel find(Object id);
 
     List<AccessLevel> findAll();

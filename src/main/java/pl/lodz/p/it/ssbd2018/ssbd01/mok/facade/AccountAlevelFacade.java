@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccountAlevel;
  * @author fifi
  */
 @Stateless
-public class AccountAlevelFacade extends AbstractFacade<AccountAlevel> implements AccountAlevelFacadeLocal {
+public class AccountAlevelFacade extends AbstractFacadeCreateUpdate<AccountAlevel> implements AccountAlevelFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mokDS")
     private EntityManager em;

@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel;
  * @author fifi
  */
 @Stateless
-public class AccessLevelFacade extends AbstractFacade<AccessLevel> implements AccessLevelFacadeLocal {
+public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implements AccessLevelFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mokDS")
     private EntityManager em;

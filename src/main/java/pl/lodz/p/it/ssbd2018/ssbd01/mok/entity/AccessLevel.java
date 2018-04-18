@@ -40,10 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "AccessLevel.findByVersion", query = "SELECT a FROM AccessLevel a WHERE a.version = :version")})
 public class AccessLevel implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ACCESSLEVEL_SEQUENCE" ,sequenceName = "access_level_id_seq")
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCESSLEVEL_SEQUENCE")
+    private static final long serialVersionUID = 1L;    
+    @Id    
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")

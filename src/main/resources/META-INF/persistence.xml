@@ -2,16 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ssbd01mokDS" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/ssbd01mokDS</jta-data-source>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccountAlevel</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.AccountAlevel</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.AccessLevel</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Account</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Unit</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Category</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Product</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Order1</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderShipping</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderProducts</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
@@ -22,14 +22,14 @@
   <persistence-unit name="ssbd01mopDS" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>java:app/jdbc/ssbd01mopDS</jta-data-source>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Account</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Unit</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Category</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Product</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Order1</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderShipping</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderProducts</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
@@ -39,15 +39,15 @@
   </persistence-unit>
   <persistence-unit name="ssbd01mozDS" transaction-type="JTA">
     <jta-data-source>java:app/jdbc/ssbd01mozDS</jta-data-source>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderProducts</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderShipping</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.OrderStatus</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Category</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product</class>
-    <class>pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Unit</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Account</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Unit</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Category</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Product</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderStatus</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.Order1</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.ShippingMethod</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderShipping</class>
+    <class>pl.lodz.p.it.ssbd2018.entities.OrderProducts</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>

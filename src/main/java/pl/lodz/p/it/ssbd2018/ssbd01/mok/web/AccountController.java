@@ -13,20 +13,20 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 public class AccountController implements Serializable{
     
     @EJB
-    private MOKEndpointLocal mOKEndpointLocal;
+    private MOKEndpointLocal mokEndpointLocal;
     
     private Account account;
 
     List<Account> pullAllAccounts() {
-        return mOKEndpointLocal.pullAllAccounts();
+        return mokEndpointLocal.pullAllAccounts();
     }
 
     void pullAccountToEdit(Account account) {
-        this.account = mOKEndpointLocal.pullAccountToEdit(account);
+        this.account = mokEndpointLocal.pullAccountToEdit(account);
     }
 
     void saveAccountAfterEdit(Account account) {
-        mOKEndpointLocal.saveAccountAfterEdit(account);
+        mokEndpointLocal.saveAccountAfterEdit(account);
     }
     
 }

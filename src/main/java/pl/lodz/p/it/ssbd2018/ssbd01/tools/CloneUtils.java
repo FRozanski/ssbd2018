@@ -30,7 +30,7 @@ public class CloneUtils {
         } finally {
             try {
                 out.close();
-            } catch (IOException ex) {
+            } catch (IOException | NullPointerException ex) {
                 Logger.getLogger(CloneUtils.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

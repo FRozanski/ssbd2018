@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title>Lista kont</title>
+</h:head>
+<h:body>
+    Lista kont
+    <br />
+    <h:dataTable id="accountList" var="account" value="#{listAccountBean.accounts}">
+
+        <h:column id="login">
+            <f:facet name="header">Login</f:facet>
+            <h:outputText value="#{account.login}" />
+        </h:column>
+
+        <h:column id="number-of-products">
+            <f:facet name="header">Liczba produktów</f:facet>
+            <h:outputText value="#{account.numberOfProducts}" />
+        </h:column>
+
+        <h:column id="number-of-orders">
+            <f:facet name="header">Liczba zamówień</f:facet>
+            <h:outputText value="#{account.numberOfOrders}" />
+        </h:column>
+
+        <h:column id="number-of-logins">
+            <f:facet name="header">Liczba zalogowań</f:facet>
+            <h:outputText value="#{account.numberOfLogins}" />
+        </h:column>
+
+        <h:column id="stan">
+            <f:facet name="header">Stan</f:facet>
+            <h:panelGrid columns="2">
+                <h:selectBooleanCheckbox id="confirm" value="#{account.confirm}" disabled="true" />
+                <h:outputLabel for="confirm" value="confirm" />
+                <h:selectBooleanCheckbox id="active" value="#{account.active}" disabled="true" />
+                <h:outputLabel for="active" value="active" />
+            </h:panelGrid>
+        </h:column>
+    </h:dataTable>
+
+</h:body>
+
+</html>

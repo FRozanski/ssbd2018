@@ -3,6 +3,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 
@@ -10,10 +11,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
  *
  * @author agkan
  */
+@SessionScoped
 public class AccountController implements Serializable{
     
     @EJB
-    private MOKEndpointLocal mokEndpointLocal;
+    private transient MOKEndpointLocal mokEndpointLocal;
     
     private Account account;
 

@@ -1,13 +1,17 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
  *
  * @author agkan
  */
+@Named
+@RequestScoped
 public class ListAccountBean {
 
     public ListAccountBean() {
@@ -17,15 +21,15 @@ public class ListAccountBean {
     private AccountController accountController;
     
     public List<Account> getAccounts() {
-        return accountController.listAllAccounts();
+        return accountController.pullAllAccounts();
     }
     
     public String editAccount(Account account) {
-        accountController.getAccountToEdit(account);
+        accountController.pullAccountToEdit(account);
         return "list-edit";
     }
     
     public void saveAccount(Account account) {
-        accountController.saveAccount(account);
+        accountController.saveAccountAfterEdit(account);
     }
 }

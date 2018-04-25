@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 
 /**
  *
@@ -16,16 +17,16 @@ public class AccountController implements Serializable{
     
     private Account account;
 
-    List<Account> listAllAccounts() {
-        return mOKEndpointLocal.getAllAccounts; //TODO: czy tak metoda sie nazywa
+    List<Account> pullAllAccounts() {
+        return mOKEndpointLocal.pullAllAccounts();
     }
 
-    void getAccountToEdit(Account account) {
-        this.account = mOKEndpointLocal.getAccountToEdit(account); //TODO: czy tak metoda sie nazywa
+    void pullAccountToEdit(Account account) {
+        this.account = mOKEndpointLocal.pullAccountToEdit(account);
     }
 
-    void saveAccount(Account account) {
-        mOKEndpointLocal.saveAllAccounts(); //TODO: czy tak metoda sie nazywa
+    void saveAccountAfterEdit(Account account) {
+        mOKEndpointLocal.saveAccountAfterEdit(account);
     }
     
 }

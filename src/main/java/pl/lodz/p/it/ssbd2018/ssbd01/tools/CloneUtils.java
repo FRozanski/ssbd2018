@@ -16,23 +16,16 @@ import java.util.logging.Logger;
 public class CloneUtils {
     
     public static Object deepCloneThroughSerialization(Serializable source) {
-        ObjectOutputStream out = null;
-        try {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            out = new ObjectOutputStream(bos);
+        try ( ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream out = new ObjectOutputStream(bos) ) {
             out.writeObject(source);
             //De-serialization of object
             ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
             ObjectInputStream in = new ObjectInputStream(bis);
             return in.readObject();
         } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(CloneUtils.class.getName()).log(Level.SEVERE, null, ex);
             throw new IllegalArgumentException("Unrecoverable error of object entity serialization", ex);
-        } finally {
-            try {
-                out.close();
-            } catch (IOException ex) {
-                Logger.getLogger(CloneUtils.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
     }
 }

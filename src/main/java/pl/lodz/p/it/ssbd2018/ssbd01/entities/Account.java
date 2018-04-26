@@ -46,7 +46,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
     , @NamedQuery(name = "Account.findByConfirm", query = "SELECT a FROM Account a WHERE a.confirm = :confirm")
     , @NamedQuery(name = "Account.findByActive", query = "SELECT a FROM Account a WHERE a.active = :active")
-    , @NamedQuery(name = "Account.findByUserDataId", query = "SELECT a FROM Account a WHERE a.userDataId = :userDataId")
     , @NamedQuery(name = "Account.findByNumberOfProducts", query = "SELECT a FROM Account a WHERE a.numberOfProducts = :numberOfProducts")
     , @NamedQuery(name = "Account.findByNumberOfOrders", query = "SELECT a FROM Account a WHERE a.numberOfOrders = :numberOfOrders")
     , @NamedQuery(name = "Account.findByNumberOfLogins", query = "SELECT a FROM Account a WHERE a.numberOfLogins = :numberOfLogins")
@@ -79,8 +78,6 @@ public class Account implements Serializable {
     @NotNull
     @Column(name = "active")
     private boolean active;
-    @Column(name = "user_data_id")
-    private BigInteger userDataId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "number_of_products")
@@ -206,14 +203,6 @@ public class Account implements Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public BigInteger getUserDataId() {
-        return userDataId;
-    }
-
-    public void setUserDataId(BigInteger userDataId) {
-        this.userDataId = userDataId;
     }
 
     public long getNumberOfProducts() {

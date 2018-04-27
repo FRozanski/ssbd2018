@@ -1,8 +1,11 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
 
 import java.util.List;
+import javax.annotation.security.PermitAll;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
@@ -15,6 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
  *
  * @author piotrek
  */
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateful
 public class MOKEndpoint implements MOKEndpointLocal {
     
@@ -41,6 +45,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
+    @PermitAll
     public void registerAccount(Account account) {
         account.setActive(true);
         account.setConfirm(false);

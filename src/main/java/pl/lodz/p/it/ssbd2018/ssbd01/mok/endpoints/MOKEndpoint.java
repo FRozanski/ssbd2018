@@ -43,7 +43,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @Override
     public void registerAccount(Account account) {
         account.setActive(true);
-        account.setConfirm(true);
+        account.setConfirm(false);
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);        
     }
@@ -81,5 +81,11 @@ public class MOKEndpoint implements MOKEndpointLocal {
         }
         if (accountAlevel != null)
             accountAlevelFacade.remove(accountAlevel);
+    }
+
+    @Override
+    public void confirmAccount(Account account) {
+        account.setConfirm(true);
+        accountFacade.edit(account);
     }
 }

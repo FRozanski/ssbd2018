@@ -20,6 +20,8 @@ public interface MOKEndpointLocal {
     
     void registerAccount(Account account);
     
+    void confirmAccount(Account account);
+    
     void lockAccount(Account account);
     
     void unlockAccount(Account account);

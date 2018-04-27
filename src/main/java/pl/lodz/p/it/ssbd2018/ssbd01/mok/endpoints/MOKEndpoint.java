@@ -2,6 +2,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
 
 import java.util.List;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
@@ -29,17 +30,20 @@ public class MOKEndpoint implements MOKEndpointLocal {
     private AccountAlevelFacadeLocal accountAlevelFacade;
 
     @Override
+    @RolesAllowed("pullAllAccounts")
     public List<Account> pullAllAccounts() {
         return accountFacade.findAll();
     }
 
     @Override
+    @RolesAllowed("pullAccountToEdit")
     public Account pullAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
+    @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) {
         accountFacade.edit(account);
     }
@@ -54,18 +58,21 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
+    @RolesAllowed("lockAccount")
     public void lockAccount(Account account) {
         account.setActive(false);
         accountFacade.edit(account);
     }
 
     @Override
+    @RolesAllowed("unlockAccount")
     public void unlockAccount(Account account) {
         account.setActive(true);
         accountFacade.edit(account);
     }
 
     @Override
+    @RolesAllowed("addAccessLevelToAccount")
     public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) {
         AccountAlevel accountAlevel = new AccountAlevel();
         accountAlevel.setIdAlevel(accessLevel);
@@ -74,6 +81,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
+    @RolesAllowed("dismissAccessLevelFromAccount")
     public void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account) {
         List<AccountAlevel> accountAlevels = accountAlevelFacade.findAll();
         AccountAlevel accountAlevel = null;
@@ -89,6 +97,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
+    @RolesAllowed("confirmAccount")
     public void confirmAccount(Account account) {
         account.setConfirm(true);
         accountFacade.edit(account);

@@ -28,10 +28,6 @@
       <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>registerAccount</role-name>
-      <group-name>admin</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
       <role-name>confirmAccount</role-name>
       <group-name>admin</group-name>
   </security-role-mapping>

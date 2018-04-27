@@ -6,24 +6,17 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,8 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "AccessLevel.findByVersion", query = "SELECT a FROM AccessLevel a WHERE a.version = :version")})
 public class AccessLevel implements Serializable {
 
-    private static final long serialVersionUID = 1L;    
-    @Id    
+    private static final long serialVersionUID = 1L;
+    @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
@@ -60,10 +53,10 @@ public class AccessLevel implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    
-    public AccessLevel(){
+
+    public AccessLevel() {
     }
-    
+
     public AccessLevel(Long id) {
         this.id = id;
     }
@@ -119,5 +112,5 @@ public class AccessLevel implements Serializable {
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel[ id=" + id + " ]";
     }
-    
+
 }

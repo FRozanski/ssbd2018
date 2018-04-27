@@ -48,10 +48,10 @@ public class AccountAlevel implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
-    @JoinColumn(name = "id_alevel", referencedColumnName = "id")
+    @JoinColumn(name = "id_alevel", referencedColumnName = "id", updatable = false)
     @ManyToOne(optional = false)
     private AccessLevel idAlevel;
-    @JoinColumn(name = "id_account", referencedColumnName = "id")
+    @JoinColumn(name = "id_account", referencedColumnName = "id", updatable = false)
     @ManyToOne(optional = false)
     private Account idAccount;
     

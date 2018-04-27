@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.facades;
+package pl.lodz.p.it.ssbd2018.ssbd01.moz.facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderShipping;
+import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
  *
  * @author fifi
  */
 @Stateless
-public class UnitFacade extends AbstractFacadeBase<Unit> implements UnitFacadeLocal {
+public class OrderShippingFacade extends AbstractFacadeCreateUpdate<OrderShipping> implements OrderShippingFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mopDS")
+    @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;
 
     @Override
@@ -25,7 +26,8 @@ public class UnitFacade extends AbstractFacadeBase<Unit> implements UnitFacadeLo
         return em;
     }
 
-    public UnitFacade() {
-        super(Unit.class);
-    }    
+    public OrderShippingFacade() {
+        super(OrderShipping.class);
+    }
+    
 }

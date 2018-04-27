@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.facades;
+package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
  *
  * @author fifi
  */
 @Stateless
-public class Order1Facade extends AbstractFacadeCreateUpdate<Order1> implements Order1FacadeLocal {
+public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implements ProductFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mozDS")
+    @PersistenceContext(unitName = "ssbd01mopDS")
     private EntityManager em;
 
     @Override
@@ -25,8 +26,8 @@ public class Order1Facade extends AbstractFacadeCreateUpdate<Order1> implements 
         return em;
     }
 
-    public Order1Facade() {
-        super(Order1.class);
+    public ProductFacade() {
+        super(Product.class);
     }
     
 }

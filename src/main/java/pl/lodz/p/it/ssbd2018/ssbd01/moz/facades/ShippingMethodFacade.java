@@ -3,21 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.facades;
+package pl.lodz.p.it.ssbd2018.ssbd01.moz.facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
  *
  * @author fifi
  */
 @Stateless
-public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implements AccessLevelFacadeLocal {
+public class ShippingMethodFacade extends AbstractFacadeCreateUpdate<ShippingMethod> implements ShippingMethodFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mokDS")
+    @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;
 
     @Override
@@ -25,8 +26,8 @@ public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implement
         return em;
     }
 
-    public AccessLevelFacade() {
-        super(AccessLevel.class);
+    public ShippingMethodFacade() {
+        super(ShippingMethod.class);
     }
     
 }

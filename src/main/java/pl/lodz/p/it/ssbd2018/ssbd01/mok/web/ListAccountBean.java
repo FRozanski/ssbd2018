@@ -32,4 +32,16 @@ public class ListAccountBean {
     public void saveAccount(Account account) {
         accountController.saveAccountAfterEdit(account);
     }
+    
+    public void lockAccount(Account account) {
+        accountController.lockAccount(account);
+    }
+    
+    public void unlockAccount(Account account) {
+        accountController.unlockAccount(account);
+    }
+    
+    public void confirmAccount(Account account) {
+        accountController.confirmAccount(account);
+    }
 }

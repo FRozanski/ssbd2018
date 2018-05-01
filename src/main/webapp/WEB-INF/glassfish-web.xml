@@ -14,13 +14,18 @@
     <group-name>admin</group-name>
   </security-role-mapping>
   
+  
   <security-role-mapping>
-      <role-name>pullAllAccounts</role-name>
+      <role-name>getAllAccounts</role-name>
       <group-name>admin</group-name>
       <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>pullAccountToEdit</role-name>
+      <role-name>getAllAccessLevels</role-name>
+      <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+      <role-name>getAccountToEdit</role-name>
       <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>

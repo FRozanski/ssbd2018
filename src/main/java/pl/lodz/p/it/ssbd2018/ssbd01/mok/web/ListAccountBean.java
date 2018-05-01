@@ -21,11 +21,11 @@ public class ListAccountBean {
     private AccountController accountController;
     
     public List<Account> getAccounts() {
-        return accountController.pullAllAccounts();
+        return accountController.getAllAccounts();
     }
     
     public String editAccount(Account account) {
-        accountController.pullAccountToEdit(account);
+        accountController.getAccountToEdit(account);
         return "list-edit";
     }
     

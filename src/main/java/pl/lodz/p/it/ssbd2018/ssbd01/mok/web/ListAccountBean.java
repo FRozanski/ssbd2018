@@ -4,6 +4,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
@@ -21,11 +22,15 @@ public class ListAccountBean {
     private AccountController accountController;
     
     public List<Account> getAccounts() {
-        return accountController.pullAllAccounts();
+        return accountController.getAllAccounts();
+    }
+    
+    public List<AccessLevel> getAllAccessLevels() {
+        return accountController.getAllAccessLevels();
     }
     
     public String editAccount(Account account) {
-        accountController.pullAccountToEdit(account);
+        accountController.getAccountToEdit(account);
         return "list-edit";
     }
     

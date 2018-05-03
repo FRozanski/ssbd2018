@@ -12,9 +12,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 @Local
 public interface MOKEndpointLocal {
     
-    List<Account> pullAllAccounts();
+    List<Account> getAllAccounts();
     
-    Account pullAccountToEdit(Account account);
+    List<AccessLevel> getAllAccessLevels();
+    
+    Account getAccountToEdit(Account account);
     
     void saveAccountAfterEdit(Account account); 
     

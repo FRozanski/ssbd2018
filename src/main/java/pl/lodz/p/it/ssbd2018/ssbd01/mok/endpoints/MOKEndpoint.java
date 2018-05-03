@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
@@ -23,21 +24,32 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 @Stateful
 public class MOKEndpoint implements MOKEndpointLocal {
     
+    private static final int STARTING_NUMBER=0;
+    
     @EJB
     private AccountFacadeLocal accountFacade;
+    
+    @EJB
+    private AccessLevelFacadeLocal accessLevelFacade;
     
     @EJB
     private AccountAlevelFacadeLocal accountAlevelFacade;
 
     @Override
-    @RolesAllowed("pullAllAccounts")
-    public List<Account> pullAllAccounts() {
+    @RolesAllowed("getAllAccounts")
+    public List<Account> getAllAccounts() {
         return accountFacade.findAll();
+    }
+    
+    @Override
+    @RolesAllowed("getAllAccessLevels")
+    public List<AccessLevel> getAllAccessLevels() {
+        return accessLevelFacade.findAll();
     }
 
     @Override
-    @RolesAllowed("pullAccountToEdit")
-    public Account pullAccountToEdit(Account account) {
+    @RolesAllowed("getAccountToEdit")
+    public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
@@ -53,6 +65,9 @@ public class MOKEndpoint implements MOKEndpointLocal {
     public void registerAccount(Account account) {
         account.setActive(true);
         account.setConfirm(false);
+        account.setNumberOfProducts(STARTING_NUMBER);
+        account.setNumberOfOrders(STARTING_NUMBER);
+        account.setNumberOfLogins(STARTING_NUMBER);
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);        
     }

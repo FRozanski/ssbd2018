@@ -50,7 +50,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Account implements Serializable {    
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq")
+    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=7)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNT_SEQUENCE")
     @Basic(optional = false)
@@ -158,8 +158,7 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(Long id, String login, String password, boolean confirm, boolean active, long numberOfProducts, long numberOfOrders, long numberOfLogins, long version) {
-        this.id = id;
+    public Account(String login, String password, boolean confirm, boolean active, long numberOfProducts, long numberOfOrders, long numberOfLogins, long version) {
         this.login = login;
         this.password = password;
         this.confirm = confirm;

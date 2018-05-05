@@ -14,6 +14,26 @@
                 <h:inputText value="#{createAccountBean.password}" id="password"></h:inputText>
                 <h:outputLabel for="email">Adres e-mail: </h:outputLabel>
                 <h:inputText value="#{createAccountBean.email}" id="email"></h:inputText>
+                
+                <h:outputLabel for="email">Adres imie: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.firstname}" id="firstname"></h:inputText>
+                <h:outputLabel for="email">Adres nazwisko: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.lastname}" id="lastname"></h:inputText>
+                <h:outputLabel for="email">Adres telefon: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.phone}" id="phone"></h:inputText>
+                <h:outputLabel for="email">Adres ulica: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.street}" id="street"></h:inputText>
+                <h:outputLabel for="email">Adres numer domu: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.streetNumber}" id="streetNumber"></h:inputText>
+                <h:outputLabel for="email">Adres numer mieszkania: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.flatNumber}" id="flatNumber"></h:inputText>
+                <h:outputLabel for="email">Adres kod pocztowy: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.postalCode}" id="postalCode"></h:inputText>
+                <h:outputLabel for="email">Adres miasto: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.city}" id="city"></h:inputText>
+                <h:outputLabel for="email">Adres kraj: </h:outputLabel>
+                <h:inputText value="#{createAccountBean.country}" id="country"></h:inputText>
+                
                 <h:commandButton value="Zatwierdź" action="#{createAccountBean.registerAccount()}"></h:commandButton>
             </h:panelGrid>
         </h:form>

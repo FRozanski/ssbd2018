@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,7 +52,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Account implements Serializable {    
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=7)
+    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=1, initialValue=9)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNT_SEQUENCE")
     @Basic(optional = false)
@@ -100,6 +102,13 @@ public class Account implements Serializable {
     private Collection<Product> productCollection = new ArrayList<>();
     
     //secondary table UserData
+    @Basic(optional = false)
+    @NotNull
+    @Version
+    @Column(name = "version", table = "user_data")
+    @JoinColumns( {
+      @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
+    private long versionUserData;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)
@@ -158,17 +167,6 @@ public class Account implements Serializable {
         this.id = id;
     }
 
-    public Account(String login, String password, boolean confirm, boolean active, long numberOfProducts, long numberOfOrders, long numberOfLogins, long version) {
-        this.login = login;
-        this.password = password;
-        this.confirm = confirm;
-        this.active = active;
-        this.numberOfProducts = numberOfProducts;
-        this.numberOfOrders = numberOfOrders;
-        this.numberOfLogins = numberOfLogins;
-        this.version = version;
-    }
-
     public Long getId() {
         return id;
     }
@@ -179,6 +177,14 @@ public class Account implements Serializable {
     
     public void setLogin(String login) {
         this.login = login;
+    }
+    
+    public long getVersion() {
+        return version;
+    }
+    
+    public void setVersion(long version) {
+        this.version = version;
     }
 
     public String getPassword() {

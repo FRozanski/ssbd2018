@@ -174,14 +174,6 @@ public class Account implements Serializable {
     public void setLogin(String login) {
         this.login = login;
     }
-    
-    public long getVersion() {
-        return version;
-    }
-    
-    public void setVersion(long version) {
-        this.version = version;
-    }
 
     public String getPassword() {
         return password;

@@ -25,7 +25,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 public class MOKEndpoint implements MOKEndpointLocal {
     
     private static final int STARTING_NUMBER = 0;
-    private static final int DEFAULT_VERSION = 1;
     private static final String DEFAULT_ACCESS_LEVEL = "user";
     
     @EJB
@@ -70,14 +69,12 @@ public class MOKEndpoint implements MOKEndpointLocal {
         account.setNumberOfProducts(STARTING_NUMBER);
         account.setNumberOfOrders(STARTING_NUMBER);
         account.setNumberOfLogins(STARTING_NUMBER);
-        account.setVersion(DEFAULT_VERSION);
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
         
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
-        level.setVersion(DEFAULT_VERSION);
         accountAlevelFacade.create(level);   
     }
 

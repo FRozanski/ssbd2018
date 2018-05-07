@@ -79,13 +79,8 @@ public class OrderProducts implements Serializable {
     
     public OrderProducts(){        
     }
-    
-    public OrderProducts(Long id) {
-        this.id = id;
-    }
 
-    public OrderProducts(Long id, String productName, BigDecimal productQty, String productUnitName, BigDecimal productValue, long version) {
-        this.id = id;
+    public OrderProducts(String productName, BigDecimal productQty, String productUnitName, BigDecimal productValue, long version) {
         this.productName = productName;
         this.productQty = productQty;
         this.productUnitName = productUnitName;

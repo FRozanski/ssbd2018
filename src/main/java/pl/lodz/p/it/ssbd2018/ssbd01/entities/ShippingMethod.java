@@ -68,13 +68,8 @@ public class ShippingMethod implements Serializable {
     
     public ShippingMethod(){        
     }
-    
-    public ShippingMethod(Long id) {
-        this.id = id;
-    }
 
-    public ShippingMethod(Long id, String name, BigDecimal price, boolean active, long version) {
-        this.id = id;
+    public ShippingMethod(String name, BigDecimal price, boolean active, long version) {
         this.name = name;
         this.price = price;
         this.active = active;

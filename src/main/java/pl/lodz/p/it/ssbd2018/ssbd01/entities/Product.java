@@ -90,13 +90,8 @@ public class Product implements Serializable {
     
     public Product(){        
     }
-    
-    public Product(Long id) {
-        this.id = id;
-    }
 
-    public Product(Long id, String name, String description, BigDecimal price, BigDecimal qty, boolean active, long version) {
-        this.id = id;
+    public Product(String name, String description, BigDecimal price, BigDecimal qty, boolean active, long version) {        
         this.name = name;
         this.description = description;
         this.price = price;

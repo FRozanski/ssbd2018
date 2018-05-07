@@ -100,12 +100,8 @@ public class Order1 implements Serializable {
     
     public Order1(){        
     }
-    
-    public Order1(Long id) {
-        this.id = id;
-    }
 
-    public Order1(Long id, Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
+    public Order1(Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
         this.id = id;
         this.orderPlacedDate = orderPlacedDate;
         this.totalPrice = totalPrice;

@@ -57,12 +57,7 @@ public class AccessLevel implements Serializable {
     public AccessLevel() {
     }
 
-    public AccessLevel(Long id) {
-        this.id = id;
-    }
-
-    public AccessLevel(Long id, String level, boolean active, long version) {
-        this.id = id;
+    public AccessLevel(String level, boolean active, long version) {
         this.level = level;
         this.active = active;
         this.version = version;

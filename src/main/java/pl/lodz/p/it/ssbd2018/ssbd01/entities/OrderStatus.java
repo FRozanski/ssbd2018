@@ -51,13 +51,8 @@ public class OrderStatus implements Serializable {
     
     public OrderStatus(){        
     }
-    
-    public OrderStatus(Long id) {
-        this.id = id;
-    }
 
-    public OrderStatus(Long id, String name, long version) {
-        this.id = id;
+    public OrderStatus(String name, long version) {        
         this.name = name;
         this.version = version;
     }

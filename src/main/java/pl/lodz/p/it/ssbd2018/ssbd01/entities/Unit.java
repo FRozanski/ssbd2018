@@ -51,13 +51,8 @@ public class Unit implements Serializable {
     
     public Unit(){        
     }
-    
-    public Unit(Long id) {
-        this.id = id;
-    }
 
-    public Unit(Long id, String unitName, long version) {
-        this.id = id;
+    public Unit(String unitName, long version) {
         this.unitName = unitName;
         this.version = version;
     }

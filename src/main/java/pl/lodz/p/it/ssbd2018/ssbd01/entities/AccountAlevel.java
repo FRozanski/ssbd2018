@@ -58,10 +58,6 @@ public class AccountAlevel implements Serializable {
     
     public AccountAlevel(){
     }
-
-    public Long getId() {
-        return id;
-    }
     
     public long getVersion() {
         return version;

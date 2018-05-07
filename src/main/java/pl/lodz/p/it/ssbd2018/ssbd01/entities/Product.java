@@ -77,7 +77,7 @@ public class Product implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account ownerId;

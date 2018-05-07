@@ -82,7 +82,7 @@ public class Order1 implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @OneToMany(mappedBy = "orderId")
     private Collection<OrderProducts> orderProductsCollection = new ArrayList<>();
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")

@@ -57,7 +57,7 @@ public class Category implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     
     public Category(){        
     }

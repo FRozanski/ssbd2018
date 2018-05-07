@@ -47,7 +47,7 @@ public class Unit implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     
     public Unit(){        
     }

@@ -97,7 +97,7 @@ public class OrderShipping implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @OneToMany(mappedBy = "shippingId")
     private Collection<Order1> order1Collection = new ArrayList<>();
     

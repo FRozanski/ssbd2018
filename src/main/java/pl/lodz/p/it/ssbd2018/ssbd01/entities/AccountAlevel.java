@@ -47,7 +47,7 @@ public class AccountAlevel implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
 
     @JoinColumn(name = "id_alevel", referencedColumnName = "id", updatable = false)
     @ManyToOne(optional = false)

@@ -93,7 +93,7 @@ public class Account implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @OneToMany(mappedBy = "buyerId")
     private Collection<Order1> ordersAsBuyer = new ArrayList<>();
     @OneToMany(mappedBy = "sellerId")

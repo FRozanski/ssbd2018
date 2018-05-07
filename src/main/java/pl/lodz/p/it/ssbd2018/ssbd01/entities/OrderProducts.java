@@ -72,7 +72,7 @@ public class OrderProducts implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Order1 orderId;

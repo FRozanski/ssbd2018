@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OrderProducts implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ORDERPRODUCTS_SEQUENCE" ,sequenceName = "order_products_id_seq")
+    @SequenceGenerator(name="ID_ORDERPRODUCTS_SEQUENCE" ,sequenceName = "order_products_id_seq", allocationSize=1, initialValue=1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDERPRODUCTS_SEQUENCE")
     @Basic(optional = false)

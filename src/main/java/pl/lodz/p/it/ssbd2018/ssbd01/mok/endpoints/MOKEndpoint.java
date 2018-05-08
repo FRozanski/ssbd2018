@@ -10,9 +10,11 @@ import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.VeryficationToken;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.VeryficationTokenFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 
@@ -35,6 +37,9 @@ public class MOKEndpoint implements MOKEndpointLocal {
     
     @EJB
     private AccountAlevelFacadeLocal accountAlevelFacade;
+    
+    @EJB
+    private VeryficationTokenFacadeLocal veryficationTokenFacade;
 
     @Override
     @RolesAllowed("getAllAccounts")
@@ -118,9 +123,14 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("confirmAccount")
     public void confirmAccount(Account account) {
         account.setConfirm(true);
         accountFacade.edit(account);
+    }
+
+    @Override
+    @RolesAllowed("createVeryficationToken")
+    public void createVeryficationToken(VeryficationToken veryficationToken) {
+        veryficationTokenFacade.create(veryficationToken);
     }
 }

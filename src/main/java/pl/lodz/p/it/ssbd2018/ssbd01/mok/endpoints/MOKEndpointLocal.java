@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.VeryficationToken;
 
 /**
  *
@@ -31,4 +32,6 @@ public interface MOKEndpointLocal {
     void addAccessLevelToAccount(AccessLevel accessLevel, Account account);
     
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
+
+    void createVeryficationToken(VeryficationToken veryficationToken);
 }

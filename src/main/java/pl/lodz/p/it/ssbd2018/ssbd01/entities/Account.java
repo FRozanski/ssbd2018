@@ -6,9 +6,11 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
-import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +24,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
+import javax.persistence.SecondaryTables;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,7 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "account")
-@SecondaryTable(name="user_data", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
+@SecondaryTables({
+    @SecondaryTable(name="user_data", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id")),
+    @SecondaryTable(name="veryfication_token", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_account", referencedColumnName="id"))
+})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
@@ -51,6 +59,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByVersion", query = "SELECT a FROM Account a WHERE a.version = :version")})
 public class Account implements Serializable {    
 
+    private static final int STARTING_NUMBER = 0;
     private static final long serialVersionUID = 1L;
     @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=1, initialValue=9)
     @Id
@@ -160,7 +169,32 @@ public class Account implements Serializable {
     @Column(name = "country", table = "user_data")
     private String country;
     
-    public Account(){
+    //secondary table veryfication_token
+    @Basic(optional = false)
+    @NotNull
+    @Version
+    @Column(name = "version", table = "veryfication_token")
+    @JoinColumns( {
+      @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
+    private long versionVerificationToken;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 32)
+    @Column(name = "token", table = "veryfication_token")
+    private String token = "tuWygenerowacToken";
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "expiry_date", table = "veryfication_token")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date expiryDate = Date.from(LocalDateTime.now().atZone(ZoneId.of("Poland")).toInstant());
+    
+    public Account() {
+        this.version = 0;
+        this.active = true;
+        this.confirm = false;
+        this.numberOfLogins = STARTING_NUMBER;
+        this.numberOfOrders = STARTING_NUMBER;
+        this.numberOfProducts = STARTING_NUMBER;
     }
 
     public Long getId() {
@@ -329,6 +363,14 @@ public class Account implements Serializable {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+    
+    public String getToken() {
+        return token;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
     }
     
     @Override

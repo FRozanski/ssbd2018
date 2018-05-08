@@ -24,7 +24,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 @Stateful
 public class MOKEndpoint implements MOKEndpointLocal {
     
-    private static final int STARTING_NUMBER = 0;
     private static final String DEFAULT_ACCESS_LEVEL = "user";
     
     @EJB
@@ -64,11 +63,6 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @Override
     @PermitAll
     public void registerAccount(Account account) {
-        account.setActive(true);
-        account.setConfirm(false);
-        account.setNumberOfProducts(STARTING_NUMBER);
-        account.setNumberOfOrders(STARTING_NUMBER);
-        account.setNumberOfLogins(STARTING_NUMBER);
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
         

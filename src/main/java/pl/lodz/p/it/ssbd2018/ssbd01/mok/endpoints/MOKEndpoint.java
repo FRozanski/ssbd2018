@@ -133,4 +133,15 @@ public class MOKEndpoint implements MOKEndpointLocal {
     public void createVeryficationToken(VeryficationToken veryficationToken) {
         veryficationTokenFacade.create(veryficationToken);
     }
+
+    @Override
+    public VeryficationToken getVeryficationToken(String token) {
+        VeryficationToken veryficationToken = veryficationTokenFacade.find(token);
+        return (VeryficationToken) CloneUtils.deepCloneThroughSerialization(veryficationToken);
+    }
+
+    @Override
+    public void removeVeryficationToken(VeryficationToken veryficationToken) {
+        veryficationTokenFacade.remove(veryficationToken);
+    }
 }

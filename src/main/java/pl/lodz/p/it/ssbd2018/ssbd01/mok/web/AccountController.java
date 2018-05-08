@@ -81,5 +81,13 @@ public class AccountController implements Serializable{
     void createVeryficationToken(VeryficationToken veryficationToken) {
         mokEndpointLocal.createVeryficationToken(veryficationToken);
     }
+
+    VeryficationToken getVeryficationToken(String token) {
+        return mokEndpointLocal.getVeryficationToken(token);
+    }
+
+    void removeVeryficationToken(VeryficationToken veryficationToken) {
+        mokEndpointLocal.removeVeryficationToken(veryficationToken);
+    }
     
 }

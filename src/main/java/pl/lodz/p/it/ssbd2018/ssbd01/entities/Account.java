@@ -102,7 +102,7 @@ public class Account implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version = 0;
+    private long version;
     @OneToMany(mappedBy = "buyerId")
     private Collection<Order1> ordersAsBuyer = new ArrayList<>();
     @OneToMany(mappedBy = "sellerId")
@@ -181,12 +181,12 @@ public class Account implements Serializable {
     @NotNull
     @Size(min = 1, max = 32)
     @Column(name = "token", table = "veryfication_token")
-    private String token = "tuWygenerowacToken";
+    private String token;
     @Basic(optional = false)
     @NotNull
     @Column(name = "expiry_date", table = "veryfication_token")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date expiryDate = Date.from(LocalDateTime.now().atZone(ZoneId.of("Poland")).toInstant());
+    private Date expiryDate;
     
     public Account() {
         this.version = 0;
@@ -195,6 +195,8 @@ public class Account implements Serializable {
         this.numberOfLogins = STARTING_NUMBER;
         this.numberOfOrders = STARTING_NUMBER;
         this.numberOfProducts = STARTING_NUMBER;
+        this.expiryDate = Date.from(LocalDateTime.now().atZone(ZoneId.of("Poland")).toInstant());
+        this.token = "tuWygenerowacToken";
     }
 
     public Long getId() {

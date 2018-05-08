@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_PRODUCT_SEQUENCE" ,sequenceName = "product_id_seq")
+    @SequenceGenerator(name="ID_PRODUCT_SEQUENCE" ,sequenceName = "product_id_seq", allocationSize=1, initialValue=1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_PRODUCT_SEQUENCE")
     @Basic(optional = false)
@@ -77,7 +77,7 @@ public class Product implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @JoinColumn(name = "owner_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Account ownerId;
@@ -90,13 +90,8 @@ public class Product implements Serializable {
     
     public Product(){        
     }
-    
-    public Product(Long id) {
-        this.id = id;
-    }
 
-    public Product(Long id, String name, String description, BigDecimal price, BigDecimal qty, boolean active, long version) {
-        this.id = id;
+    public Product(String name, String description, BigDecimal price, BigDecimal qty, boolean active, long version) {        
         this.name = name;
         this.description = description;
         this.price = price;

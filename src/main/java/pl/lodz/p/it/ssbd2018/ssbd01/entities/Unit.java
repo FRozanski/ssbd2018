@@ -47,17 +47,12 @@ public class Unit implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     
     public Unit(){        
     }
-    
-    public Unit(Long id) {
-        this.id = id;
-    }
 
-    public Unit(Long id, String unitName, long version) {
-        this.id = id;
+    public Unit(String unitName, long version) {
         this.unitName = unitName;
         this.version = version;
     }

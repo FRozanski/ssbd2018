@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ShippingMethod implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_SHIPPINGMETHOD_SEQUENCE" ,sequenceName = "shipping_method_id_seq")
+    @SequenceGenerator(name="ID_SHIPPINGMETHOD_SEQUENCE" ,sequenceName = "shipping_method_id_seq", allocationSize=1, initialValue=1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_SHIPPINGMETHOD_SEQUENCE")
     @Basic(optional = false)
@@ -64,17 +64,12 @@ public class ShippingMethod implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     
     public ShippingMethod(){        
     }
-    
-    public ShippingMethod(Long id) {
-        this.id = id;
-    }
 
-    public ShippingMethod(Long id, String name, BigDecimal price, boolean active, long version) {
-        this.id = id;
+    public ShippingMethod(String name, BigDecimal price, boolean active, long version) {
         this.name = name;
         this.price = price;
         this.active = active;

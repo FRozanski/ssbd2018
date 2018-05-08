@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Order1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ORDER_SEQUENCE" ,sequenceName = "order_id_seq")
+    @SequenceGenerator(name="ID_ORDER_SEQUENCE" ,sequenceName = "order_id_seq", allocationSize=1, initialValue=1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDER_SEQUENCE")
     @Basic(optional = false)
@@ -82,7 +82,7 @@ public class Order1 implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @OneToMany(mappedBy = "orderId")
     private Collection<OrderProducts> orderProductsCollection = new ArrayList<>();
     @JoinColumn(name = "buyer_id", referencedColumnName = "id")
@@ -100,12 +100,8 @@ public class Order1 implements Serializable {
     
     public Order1(){        
     }
-    
-    public Order1(Long id) {
-        this.id = id;
-    }
 
-    public Order1(Long id, Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
+    public Order1(Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
         this.id = id;
         this.orderPlacedDate = orderPlacedDate;
         this.totalPrice = totalPrice;

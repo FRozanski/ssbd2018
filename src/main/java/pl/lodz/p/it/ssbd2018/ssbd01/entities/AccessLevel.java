@@ -52,17 +52,12 @@ public class AccessLevel implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
 
     public AccessLevel() {
     }
 
-    public AccessLevel(Long id) {
-        this.id = id;
-    }
-
-    public AccessLevel(Long id, String level, boolean active, long version) {
-        this.id = id;
+    public AccessLevel(String level, boolean active, long version) {
         this.level = level;
         this.active = active;
         this.version = version;

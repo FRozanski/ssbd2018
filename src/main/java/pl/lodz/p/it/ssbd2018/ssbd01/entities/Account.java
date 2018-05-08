@@ -15,6 +15,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,7 +52,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Account implements Serializable {    
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq")
+    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=1, initialValue=9)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNT_SEQUENCE")
     @Basic(optional = false)
@@ -91,7 +93,7 @@ public class Account implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @OneToMany(mappedBy = "buyerId")
     private Collection<Order1> ordersAsBuyer = new ArrayList<>();
     @OneToMany(mappedBy = "sellerId")
@@ -100,6 +102,13 @@ public class Account implements Serializable {
     private Collection<Product> productCollection = new ArrayList<>();
     
     //secondary table UserData
+    @Basic(optional = false)
+    @NotNull
+    @Version
+    @Column(name = "version", table = "user_data")
+    @JoinColumns( {
+      @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
+    private long versionUserData;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 32)
@@ -152,22 +161,6 @@ public class Account implements Serializable {
     private String country;
     
     public Account(){
-    }
-    
-    public Account(Long id) {
-        this.id = id;
-    }
-
-    public Account(Long id, String login, String password, boolean confirm, boolean active, long numberOfProducts, long numberOfOrders, long numberOfLogins, long version) {
-        this.id = id;
-        this.login = login;
-        this.password = password;
-        this.confirm = confirm;
-        this.active = active;
-        this.numberOfProducts = numberOfProducts;
-        this.numberOfOrders = numberOfOrders;
-        this.numberOfLogins = numberOfLogins;
-        this.version = version;
     }
 
     public Long getId() {

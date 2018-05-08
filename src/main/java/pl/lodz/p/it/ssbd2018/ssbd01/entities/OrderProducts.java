@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class OrderProducts implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ORDERPRODUCTS_SEQUENCE" ,sequenceName = "order_products_id_seq")
+    @SequenceGenerator(name="ID_ORDERPRODUCTS_SEQUENCE" ,sequenceName = "order_products_id_seq", allocationSize=1, initialValue=1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDERPRODUCTS_SEQUENCE")
     @Basic(optional = false)
@@ -72,20 +72,15 @@ public class OrderProducts implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Order1 orderId;
     
     public OrderProducts(){        
     }
-    
-    public OrderProducts(Long id) {
-        this.id = id;
-    }
 
-    public OrderProducts(Long id, String productName, BigDecimal productQty, String productUnitName, BigDecimal productValue, long version) {
-        this.id = id;
+    public OrderProducts(String productName, BigDecimal productQty, String productUnitName, BigDecimal productValue, long version) {
         this.productName = productName;
         this.productQty = productQty;
         this.productUnitName = productUnitName;

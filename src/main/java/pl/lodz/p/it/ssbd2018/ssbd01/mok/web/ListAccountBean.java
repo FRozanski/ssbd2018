@@ -1,6 +1,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
 import java.util.List;
+import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;

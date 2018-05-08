@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AccountAlevel implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ACCOUNTALEVEL_SEQUENCE" ,sequenceName = "account_alevel_id_seq")
+    @SequenceGenerator(name="ID_ACCOUNTALEVEL_SEQUENCE" ,sequenceName = "account_alevel_id_seq", allocationSize=1, initialValue=10)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNTALEVEL_SEQUENCE")
     @Basic(optional = false)
@@ -47,7 +47,8 @@ public class AccountAlevel implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
+
     @JoinColumn(name = "id_alevel", referencedColumnName = "id", updatable = false)
     @ManyToOne(optional = false)
     private AccessLevel idAlevel;
@@ -56,15 +57,6 @@ public class AccountAlevel implements Serializable {
     private Account idAccount;
     
     public AccountAlevel(){
-    }
-    
-    public AccountAlevel(Long id) {
-        this.id = id;
-    }
-
-    public AccountAlevel(Long id, long version) {
-        this.id = id;
-        this.version = version;
     }
 
     public Long getId() {

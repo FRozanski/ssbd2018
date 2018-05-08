@@ -5,17 +5,19 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
-import javax.faces.bean.ManagedBean;
+import java.util.List;
+import javax.annotation.ManagedBean;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
+import javax.inject.Inject;
+import javax.inject.Named;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
  *
  * @author fifi
  */
-@ManagedBean
+@Named
 @RequestScoped
 public class EditAccountBean {
 

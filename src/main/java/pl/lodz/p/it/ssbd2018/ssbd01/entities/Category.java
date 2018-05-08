@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_CATEGORY_SEQUENCE" ,sequenceName = "category_id_seq")
+    @SequenceGenerator(name="ID_CATEGORY_SEQUENCE" ,sequenceName = "category_id_seq", allocationSize=1, initialValue=1)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_CATEGORY_SEQUENCE")
     @Basic(optional = false)
@@ -57,17 +57,12 @@ public class Category implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     
     public Category(){        
     }
-    
-    public Category(Long id) {
-        this.id = id;
-    }
 
-    public Category(Long id, String categoryName, boolean active, long version) {
-        this.id = id;
+    public Category(String categoryName, boolean active, long version) {
         this.categoryName = categoryName;
         this.active = active;
         this.version = version;

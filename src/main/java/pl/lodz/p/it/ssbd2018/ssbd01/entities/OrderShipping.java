@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -94,20 +95,16 @@ public class OrderShipping implements Serializable {
     private String country;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     @OneToMany(mappedBy = "shippingId")
     private Collection<Order1> order1Collection = new ArrayList<>();
     
     public OrderShipping(){        
     }
-    
-    public OrderShipping(Long id) {
-        this.id = id;
-    }
 
-    public OrderShipping(Long id, String shippingMethodName, String name, String surname, String street, String streetNumber, String postalCode, String city, String country, long version) {
-        this.id = id;
+    public OrderShipping(String shippingMethodName, String name, String surname, String street, String streetNumber, String postalCode, String city, String country, long version) {
         this.shippingMethodName = shippingMethodName;
         this.name = name;
         this.surname = surname;

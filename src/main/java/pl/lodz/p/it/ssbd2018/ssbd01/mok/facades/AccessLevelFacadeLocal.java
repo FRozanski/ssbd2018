@@ -19,6 +19,8 @@ public interface AccessLevelFacadeLocal {
     AccessLevel find(Object id);
 
     List<AccessLevel> findAll();
+    
+    List<AccessLevel> findByLevel(String level);
 
     List<AccessLevel> findRange(int[] range);
 

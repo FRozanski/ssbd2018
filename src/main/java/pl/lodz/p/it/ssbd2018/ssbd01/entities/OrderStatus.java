@@ -47,17 +47,12 @@ public class OrderStatus implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version;
+    private long version = 0;
     
     public OrderStatus(){        
     }
-    
-    public OrderStatus(Long id) {
-        this.id = id;
-    }
 
-    public OrderStatus(Long id, String name, long version) {
-        this.id = id;
+    public OrderStatus(String name, long version) {        
         this.name = name;
         this.version = version;
     }

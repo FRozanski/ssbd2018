@@ -29,7 +29,6 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mok.web.TokenBean.class);
     }
     
 }

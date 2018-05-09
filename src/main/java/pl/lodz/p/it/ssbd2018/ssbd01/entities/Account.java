@@ -6,11 +6,14 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -195,8 +198,8 @@ public class Account implements Serializable {
         this.numberOfLogins = STARTING_NUMBER;
         this.numberOfOrders = STARTING_NUMBER;
         this.numberOfProducts = STARTING_NUMBER;
-        this.expiryDate = Date.from(LocalDateTime.now().atZone(ZoneId.of("Poland")).toInstant());
-        this.token = "tuWygenerowacToken";
+        this.expiryDate = generateExpiryDate();
+        this.token = UUID.randomUUID().toString().replace("-", "");
     }
 
     public Long getId() {
@@ -399,4 +402,14 @@ public class Account implements Serializable {
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account[ id=" + id + " ]";
     }        
+
+    private Date generateExpiryDate() {
+        int minutesInHour = 60;
+        int hoursInDay = 24;
+        int expiryTimeInMinutes = minutesInHour * hoursInDay;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Timestamp(calendar.getTime().getTime()));
+        calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
+        return new Date(calendar.getTime().getTime());
+    }
 }

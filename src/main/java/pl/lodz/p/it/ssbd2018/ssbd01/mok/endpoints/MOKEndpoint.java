@@ -10,7 +10,6 @@ import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.VeryficationToken;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
@@ -119,9 +118,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    public VeryficationToken getVeryficationToken(String token) {
-//        VeryficationToken veryficationToken = veryficationTokenFacade.find(token);
-//        return (VeryficationToken) CloneUtils.deepCloneThroughSerialization(veryficationToken);
-        return null;
+    public String getVeryficationToken(Account account) {
+        return accountFacade.find(account.getId()).getToken();
     }
 }

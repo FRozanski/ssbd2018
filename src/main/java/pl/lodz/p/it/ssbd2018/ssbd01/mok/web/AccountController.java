@@ -7,7 +7,6 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.VeryficationToken;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 
 /**
@@ -78,7 +77,7 @@ public class AccountController implements Serializable{
         mokEndpointLocal.dismissAccessLevelFromAccount(accessLevel, account);
     }
 
-    VeryficationToken getVeryficationToken(String token) {
-        return mokEndpointLocal.getVeryficationToken(token);
+    String getToken(Account account) {
+        return mokEndpointLocal.getVeryficationToken(account);
     }    
 }

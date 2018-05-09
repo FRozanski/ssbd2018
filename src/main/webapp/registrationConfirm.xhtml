@@ -17,7 +17,7 @@ and open the template in the editor.
                     <f:param name="token" value="{param['token']}"></f:param>
                 </h:commandButton>-->
                 <h:commandButton value="Potwierdź" action="#{createAccountBean.confirmRegistration}">
-                    <!--<f:param name="token" value="{param['token']}"></f:param>-->
+                    <f:param name="token" value="#{param['token']}"></f:param>
                 </h:commandButton>
                 <h:outputText value="#{createAccountBean.confirmationMessage}"></h:outputText>
            </h:panelGrid>

@@ -6,17 +6,21 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-    <head>
+    <h:head>
         <title>Potwierdzenie rejestracji</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-<!--        <h:commandButton value="Potwierdź" action="{createAccountBean.confirmRegistration}">
-            <f:param name="token" value="{param['token']}"></f:param>
-        </h:commandButton>-->
-        <h:commandButton value="Potwierdź" action="#{createAccountBean.confirmRegistration}">
-            <f:param name="token" value="#{param['token']}"></f:param>
-        </h:commandButton>
-        <h:outputText value="#{createAccountBean.confirmationMessage}"></h:outputText>
-    </body>
+    </h:head>
+    <h:body>
+        <h:form>
+           <h:panelGrid columns="1">
+        <!--        <h:commandButton value="Potwierdź" action="{createAccountBean.confirmRegistration}">
+                    <f:param name="token" value="{param['token']}"></f:param>
+                </h:commandButton>-->
+                <h:commandButton value="Potwierdź" action="#{createAccountBean.confirmRegistration}">
+                    <!--<f:param name="token" value="{param['token']}"></f:param>-->
+                </h:commandButton>
+                <h:outputText value="#{createAccountBean.confirmationMessage}"></h:outputText>
+           </h:panelGrid>
+        </h:form>
+    </h:body>
 </html>

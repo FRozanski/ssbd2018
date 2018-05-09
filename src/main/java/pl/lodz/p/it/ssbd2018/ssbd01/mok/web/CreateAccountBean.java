@@ -71,10 +71,12 @@ public class CreateAccountBean {
     }
     
     public void confirmRegistration() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
-        String token = params.get("token");
-        Account account = accountController.getAccountByToken(token);
+//        FacesContext fc = FacesContext.getCurrentInstance();
+//        Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+//        String token = params.get("token");
+        confirmationMessage = "token = ";
+//        confirmationMessage += token;
+//        Account account = accountController.getAccountByToken(token);
 //        if (account == null) {
 //            confirmationMessage = "Invalid Token";
 //            return;
@@ -95,7 +97,7 @@ public class CreateAccountBean {
 //            return;
 ////            return "bad-account";
 //        }
-        accountController.confirmAccount(account);
+//        accountController.confirmAccount(account);
     }
 
     public String getConfirmationMessage() {

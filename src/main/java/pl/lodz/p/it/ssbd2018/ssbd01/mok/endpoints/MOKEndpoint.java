@@ -14,7 +14,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.VeryficationToken;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.VeryficationTokenFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 
@@ -26,7 +25,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 @Stateful
 public class MOKEndpoint implements MOKEndpointLocal {
     
-    private static final int STARTING_NUMBER = 0;
     private static final String DEFAULT_ACCESS_LEVEL = "user";
     
     @EJB
@@ -38,9 +36,6 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @EJB
     private AccountAlevelFacadeLocal accountAlevelFacade;
     
-    @EJB
-    private VeryficationTokenFacadeLocal veryficationTokenFacade;
-
     @Override
     @RolesAllowed("getAllAccounts")
     public List<Account> getAllAccounts() {
@@ -69,11 +64,6 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @Override
     @PermitAll
     public void registerAccount(Account account) {
-        account.setActive(true);
-        account.setConfirm(false);
-        account.setNumberOfProducts(STARTING_NUMBER);
-        account.setNumberOfOrders(STARTING_NUMBER);
-        account.setNumberOfLogins(STARTING_NUMBER);
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
         
@@ -129,19 +119,9 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("createVeryficationToken")
-    public void createVeryficationToken(VeryficationToken veryficationToken) {
-        veryficationTokenFacade.create(veryficationToken);
-    }
-
-    @Override
     public VeryficationToken getVeryficationToken(String token) {
-        VeryficationToken veryficationToken = veryficationTokenFacade.find(token);
-        return (VeryficationToken) CloneUtils.deepCloneThroughSerialization(veryficationToken);
-    }
-
-    @Override
-    public void removeVeryficationToken(VeryficationToken veryficationToken) {
-        veryficationTokenFacade.remove(veryficationToken);
+//        VeryficationToken veryficationToken = veryficationTokenFacade.find(token);
+//        return (VeryficationToken) CloneUtils.deepCloneThroughSerialization(veryficationToken);
+        return null;
     }
 }

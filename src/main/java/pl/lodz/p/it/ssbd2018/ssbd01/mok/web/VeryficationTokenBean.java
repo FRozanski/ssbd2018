@@ -30,8 +30,7 @@ public class VeryficationTokenBean {
     private String confirmationMessage;
     
     public String createVeryficationLink(Account idAccount) {
-        VeryficationToken veryficationToken = createVeryficationToken(idAccount);
-        String token = veryficationToken.getToken();
+        String token = ""; //veryficationToken.getToken();
         return "/regitrationConfirm.html?token=" + token; //TODO
     }
     
@@ -66,19 +65,9 @@ public class VeryficationTokenBean {
             //TODO return "redirect:/badUser.html"
         }
         accountController.confirmAccount(account);
-        accountController.removeVeryficationToken(veryficationToken);
         
         //TODO: return "redirect:/login.html
         return null;
-    }
-    
-    private VeryficationToken createVeryficationToken(Account idAccount) {
-        VeryficationToken veryficationToken = new VeryficationToken();
-        veryficationToken.setToken(generateToken());
-        veryficationToken.setExpiryDate(generateExpiryDate());
-        veryficationToken.setIdAccount(idAccount);
-        accountController.createVeryficationToken(veryficationToken);
-        return veryficationToken;
     }
 
     private String generateToken() {

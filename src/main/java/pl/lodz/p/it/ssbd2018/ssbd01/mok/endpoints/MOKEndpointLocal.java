@@ -33,9 +33,5 @@ public interface MOKEndpointLocal {
     
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
 
-    void createVeryficationToken(VeryficationToken veryficationToken);
-
     public VeryficationToken getVeryficationToken(String token);
-
-    public void removeVeryficationToken(VeryficationToken veryficationToken);
 }

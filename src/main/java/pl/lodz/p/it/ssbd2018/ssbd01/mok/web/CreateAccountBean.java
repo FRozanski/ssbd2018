@@ -5,15 +5,9 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
@@ -36,18 +30,8 @@ public class CreateAccountBean {
     private String postalCode;
     private String city;
     private String country;
-    private String token;
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
     
     private String veryficationLink = "";
-    private String confirmationMessage = "";
     
     public CreateAccountBean() {
     }
@@ -75,36 +59,9 @@ public class CreateAccountBean {
     
     public void createVeryficationLink() {
         Account account = accountController.getAccountByLogin(login);
-        String token = account.getToken();
-        veryficationLink = "/registrationConfirm.xhtml?token=" + token;
+        String veryficationToken = account.getToken();
+        veryficationLink = "/registrationConfirm.xhtml?token=" + veryficationToken;
     }
-    
-    public void confirmRegistration() {
-        Account account = accountController.getAccountByToken(token);
-        if (account == null) {
-            confirmationMessage = "Invalid Token";
-            return;
-        }
-        
-        Calendar calendar = Calendar.getInstance();
-        Date expiryDate = account.getExpiryDate();
-        if (expiryDate != null) {
-            long timeDiff = expiryDate.getTime() - calendar.getTime().getTime();
-            if (timeDiff <= 0) {
-                confirmationMessage = "Token Expired";
-                return;
-            }
-        } else {
-            confirmationMessage = "Invalid Token";
-            return;
-        }
-        accountController.confirmAccount(account);
-        confirmationMessage = "Activated account";
-    }
-
-    public String getConfirmationMessage() {
-        return confirmationMessage;
-    } 
 
     public String getLogin() {
         return login;
@@ -200,9 +157,9 @@ public class CreateAccountBean {
 
     public void setCountry(String country) {
         this.country = country;
-    }
+    } 
 
     public String getVeryficationLink() {
         return veryficationLink;
-    }   
+    }  
 }

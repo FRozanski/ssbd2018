@@ -12,12 +12,12 @@ and open the template in the editor.
     </h:head>
     <h:body>
         <f:metadata>
-            <f:viewParam name="token" value="#{createAccountBean.token}" />
+            <f:viewParam name="token" value="#{veryficationTokenBean.token}" />
         </f:metadata>
         <h:form>
-            <h:outputText value="#{createAccountBean.token}"></h:outputText>
-            <h:commandButton value="Potwierdź" action="#{createAccountBean.confirmRegistration}"></h:commandButton>
-            <h:outputText value="#{createAccountBean.confirmationMessage}"></h:outputText>
+            <h:outputText value="#{veryficationTokenBean.token}"></h:outputText>
+            <h:commandButton value="Potwierdź" action="#{veryficationTokenBean.confirmRegistration}"></h:commandButton>
+            <h:outputText value="#{veryficationTokenBean.confirmationMessage}"></h:outputText>
         </h:form>
     </h:body>
 </html>

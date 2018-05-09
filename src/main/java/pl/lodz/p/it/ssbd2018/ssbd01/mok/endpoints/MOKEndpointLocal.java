@@ -33,4 +33,8 @@ public interface MOKEndpointLocal {
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
 
     public String getVeryficationToken(Account account);
+
+    public Account getAccountByLogin(String login);
+    
+    public Account getAccountByToken(String token);
 }

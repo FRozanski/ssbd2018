@@ -121,4 +121,14 @@ public class MOKEndpoint implements MOKEndpointLocal {
     public String getVeryficationToken(Account account) {
         return accountFacade.find(account.getId()).getToken();
     }
+
+    @Override
+    public Account getAccountByLogin(String login) {
+        return accountFacade.findByLogin(login);
+    }
+
+    @Override
+    public Account getAccountByToken(String token) {
+        return accountFacade.findByToken(token);
+    }
 }

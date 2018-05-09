@@ -35,6 +35,9 @@
                 <h:inputText value="#{createAccountBean.country}" id="country"></h:inputText>
                 
                 <h:commandButton value="Zatwierdź" action="#{createAccountBean.registerAccount()}"></h:commandButton>
+                <h:commandButton value="Wygeneruj link" action="#{createAccountBean.createVeryficationLink()}"></h:commandButton>
+                
+                <h:outputText value="#{createAccountBean.veryficationLink}"></h:outputText>
             </h:panelGrid>
         </h:form>
     </h:body>

@@ -80,4 +80,12 @@ public class AccountController implements Serializable{
     String getToken(Account account) {
         return mokEndpointLocal.getVeryficationToken(account);
     }    
+
+    Account getAccountByLogin(String login) {
+        return mokEndpointLocal.getAccountByLogin(login);
+    }
+    
+    Account getAccountByToken(String token) {
+        return mokEndpointLocal.getAccountByToken(token);
+    }
 }

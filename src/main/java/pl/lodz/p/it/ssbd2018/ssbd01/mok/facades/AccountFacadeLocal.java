@@ -21,6 +21,10 @@ public interface AccountFacadeLocal {
     void edit(Account account);
 
     Account find(Object id);
+    
+    Account findByToken(String token);
+    
+    Account findByLogin(String login);
 
     List<Account> findAll();
 

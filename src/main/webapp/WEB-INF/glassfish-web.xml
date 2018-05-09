@@ -13,50 +13,45 @@
     <role-name>ADMIN</role-name>
     <group-name>admin</group-name>
   </security-role-mapping>
-  
-  
   <security-role-mapping>
-      <role-name>getAllAccounts</role-name>
-      <group-name>admin</group-name>
-      <group-name>manager</group-name>
+    <role-name>getAllAccounts</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>getAllAccessLevels</role-name>
-      <group-name>admin</group-name>
+    <role-name>getAllAccessLevels</role-name>
+    <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>getAccountToEdit</role-name>
-      <group-name>admin</group-name>
+    <role-name>getAccountToEdit</role-name>
+    <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>saveAccountAfterEdit</role-name>
-      <group-name>admin</group-name>
+    <role-name>saveAccountAfterEdit</role-name>
+    <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>confirmAccount</role-name>
-      <group-name>admin</group-name>
+    <role-name>confirmAccount</role-name>
+    <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>lockAccount</role-name>
-      <group-name>admin</group-name>
-      <group-name>manager</group-name>
+    <role-name>lockAccount</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>unlockAccount</role-name>
-      <group-name>admin</group-name>
-      <group-name>manager</group-name>
+    <role-name>unlockAccount</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>addAccessLevelToAccount</role-name>
-      <group-name>admin</group-name>
+    <role-name>addAccessLevelToAccount</role-name>
+    <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-      <role-name>dismissAccessLevelFromAccount</role-name>
-      <group-name>admin</group-name>
+    <role-name>dismissAccessLevelFromAccount</role-name>
+    <group-name>admin</group-name>
   </security-role-mapping>
-  
-  
-  
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

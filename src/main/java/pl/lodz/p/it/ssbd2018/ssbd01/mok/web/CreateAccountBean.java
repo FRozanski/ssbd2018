@@ -33,6 +33,8 @@ public class CreateAccountBean {
     private String city;
     private String country;
     
+    private String veryficationLink = "";
+    
     public CreateAccountBean() {
     }
     
@@ -55,6 +57,12 @@ public class CreateAccountBean {
         newAccount.setCity(city);
         newAccount.setCountry(country);
         accountController.registerAccount(newAccount);
+    }
+    
+    public void createVeryficationLink() {
+        Account account = accountController.getAccountByLogin(login);
+        String token = account.getToken();
+        veryficationLink = "/regitrationConfirm.xhtml?token=" + token;
     }
 
     public String getLogin() {
@@ -152,5 +160,8 @@ public class CreateAccountBean {
     public void setCountry(String country) {
         this.country = country;
     }
-    
+
+    public String getVeryficationLink() {
+        return veryficationLink;
+    }   
 }

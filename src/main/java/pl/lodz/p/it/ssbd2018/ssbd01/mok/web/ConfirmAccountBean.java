@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
  */
 @Named
 @RequestScoped
-public class VeryficationTokenBean {
+public class ConfirmAccountBean {
     
     private String token;
     private String confirmationMessage = "";    
@@ -26,7 +26,7 @@ public class VeryficationTokenBean {
     @Inject
     private AccountController accountController;
     
-    public void confirmRegistration() {
+    public void confirmAccount() {
         Account account = accountController.getAccountByToken(token);
         if (account == null) {
             confirmationMessage = "Invalid Token";

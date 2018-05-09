@@ -36,6 +36,15 @@ public class CreateAccountBean {
     private String postalCode;
     private String city;
     private String country;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
     
     private String veryficationLink = "";
     private String confirmationMessage = "";
@@ -71,33 +80,26 @@ public class CreateAccountBean {
     }
     
     public void confirmRegistration() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
-        String token = params.get("token");
-        confirmationMessage = "token = ";
-        confirmationMessage += token;
-//        Account account = accountController.getAccountByToken(token);
-//        if (account == null) {
-//            confirmationMessage = "Invalid Token";
-//            return;
-////            return "bad-account";
-//        }
-//        
-//        Calendar calendar = Calendar.getInstance();
-//        Date expiryDate = account.getExpiryDate();
-//        if (expiryDate != null) {
-//            long timeDiff = expiryDate.getTime() - calendar.getTime().getTime();
-//            if (timeDiff <= 0) {
-//                confirmationMessage = "Token Expired";
-//                return;
-////                return "bad-account";
-//            }
-//        } else {
-//            confirmationMessage = "Invalid Token";
-//            return;
-////            return "bad-account";
-//        }
-//        accountController.confirmAccount(account);
+        Account account = accountController.getAccountByToken(token);
+        if (account == null) {
+            confirmationMessage = "Invalid Token";
+            return;
+        }
+        
+        Calendar calendar = Calendar.getInstance();
+        Date expiryDate = account.getExpiryDate();
+        if (expiryDate != null) {
+            long timeDiff = expiryDate.getTime() - calendar.getTime().getTime();
+            if (timeDiff <= 0) {
+                confirmationMessage = "Token Expired";
+                return;
+            }
+        } else {
+            confirmationMessage = "Invalid Token";
+            return;
+        }
+        accountController.confirmAccount(account);
+        confirmationMessage = "Activated account";
     }
 
     public String getConfirmationMessage() {

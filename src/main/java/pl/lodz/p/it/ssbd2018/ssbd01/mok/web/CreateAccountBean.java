@@ -5,9 +5,15 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Map;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
@@ -32,6 +38,7 @@ public class CreateAccountBean {
     private String country;
     
     private String veryficationLink = "";
+    private String confirmationMessage = "";
     
     public CreateAccountBean() {
     }
@@ -60,8 +67,40 @@ public class CreateAccountBean {
     public void createVeryficationLink() {
         Account account = accountController.getAccountByLogin(login);
         String token = account.getToken();
-        veryficationLink = "/regitrationConfirm.xhtml?token=" + token;
+        veryficationLink = "/registrationConfirm.xhtml?token=" + token;
     }
+    
+    public void confirmRegistration() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String,String> params = fc.getExternalContext().getRequestParameterMap();
+        String token = params.get("token");
+        Account account = accountController.getAccountByToken(token);
+//        if (account == null) {
+//            confirmationMessage = "Invalid Token";
+//            return;
+////            return "bad-account";
+//        }
+//        
+//        Calendar calendar = Calendar.getInstance();
+//        Date expiryDate = account.getExpiryDate();
+//        if (expiryDate != null) {
+//            long timeDiff = expiryDate.getTime() - calendar.getTime().getTime();
+//            if (timeDiff <= 0) {
+//                confirmationMessage = "Token Expired";
+//                return;
+////                return "bad-account";
+//            }
+//        } else {
+//            confirmationMessage = "Invalid Token";
+//            return;
+////            return "bad-account";
+//        }
+        accountController.confirmAccount(account);
+    }
+
+    public String getConfirmationMessage() {
+        return confirmationMessage;
+    } 
 
     public String getLogin() {
         return login;

@@ -14,9 +14,9 @@ and open the template in the editor.
 <!--        <h:commandButton value="Potwierdź" action="{createAccountBean.confirmRegistration}">
             <f:param name="token" value="{param['token']}"></f:param>
         </h:commandButton>-->
-        <h:commandButton value="Potwierdź" action="#{createAccountBean.confirmRegistration}">
-            <f:param name="token" value="#{param['token']}"></f:param>
-        </h:commandButton>
-        <h:outputText value="#{createAccountBean.confirmationMessage}"></h:outputText>
+        <f:metadata>
+            <f:viewParam name="token" value="#{createAccountBean.token}" />
+        </f:metadata>
+        <h:outputText value="#{createAccountBean.token}"></h:outputText>
     </body>
 </html>

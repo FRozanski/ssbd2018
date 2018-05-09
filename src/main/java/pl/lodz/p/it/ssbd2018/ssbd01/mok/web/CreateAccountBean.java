@@ -36,6 +36,15 @@ public class CreateAccountBean {
     private String postalCode;
     private String city;
     private String country;
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
     
     private String veryficationLink = "";
     private String confirmationMessage = "";

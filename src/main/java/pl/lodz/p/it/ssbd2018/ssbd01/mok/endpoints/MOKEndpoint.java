@@ -15,6 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
 
 /**
  *
@@ -35,6 +36,8 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @EJB
     private AccountAlevelFacadeLocal accountAlevelFacade;
     
+    private SendMailUtils mailSender = new SendMailUtils();
+
     @Override
     @RolesAllowed("getAllAccounts")
     public List<Account> getAllAccounts() {
@@ -69,7 +72,9 @@ public class MOKEndpoint implements MOKEndpointLocal {
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
-        accountAlevelFacade.create(level);   
+        accountAlevelFacade.create(level);
+        
+        mailSender.sendEmail("mich.malec@gmail.com", "http://www.starbucks.pl/");
     }
 
     @Override

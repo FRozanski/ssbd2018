@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions;
 
+import java.util.ResourceBundle;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ActionListener;
@@ -15,6 +16,8 @@ import javax.faces.event.ActionListener;
  */
 public class ActionListenerImpl implements ActionListener{
 
+    protected ResourceBundle bundle = ResourceBundle.getBundle("ExceptionMessages");
+    
     @Override
     public void processAction(ActionEvent event) throws AbortProcessingException {
         

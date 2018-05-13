@@ -21,8 +21,8 @@ import javax.faces.event.ActionListener;
  */
 public class ExceptionActionListener extends ActionListenerImpl implements ActionListener{
 
-    private String errorOccured = "Wystąpił wyjątek";
-    private String outCome = "naviToErrorPage";
+    private final String errorOccured = bundle.getString("ErrorOccured");
+    private final String outCome = "naviToErrorPage";
     
     @Override
     public void processAction(ActionEvent event) throws AbortProcessingException {
@@ -37,6 +37,5 @@ public class ExceptionActionListener extends ActionListenerImpl implements Actio
             navigationHandler.handleNavigation(facesContext, null, outCome);
             facesContext.renderResponse();
         }
-    }
-    
+    }    
 }

@@ -7,8 +7,6 @@ package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -41,6 +39,7 @@ import javax.xml.bind.annotation.XmlTransient;
 /**
  *
  * @author fifi
+ * @author agkan
  */
 @Entity
 @Table(name = "account")
@@ -191,6 +190,13 @@ public class Account implements Serializable {
     @Column(name = "expiry_date", table = "veryfication_token")
     @Temporal(TemporalType.TIMESTAMP)
     private Date expiryDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "used", table = "veryfication_token")
+    private boolean used;
+    @Column(name = "confirmation_date", table = "veryfication_token")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date confirmationDate;
     
     public Account() {
         this.version = 0;
@@ -378,6 +384,22 @@ public class Account implements Serializable {
     public Date getExpiryDate() {
         return expiryDate;
     }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    public Date getConfirmationDate() {
+        return confirmationDate;
+    }
+
+    public void setConfirmationDate(Date confirmationDate) {
+        this.confirmationDate = confirmationDate;
+    }    
     
     @Override
     public int hashCode() {

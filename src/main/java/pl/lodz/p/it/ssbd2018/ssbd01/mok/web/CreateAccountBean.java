@@ -5,14 +5,22 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
  *
  * @author fifi
+ * @author agkan
  */
 @Named
 @RequestScoped
@@ -55,12 +63,19 @@ public class CreateAccountBean {
         newAccount.setCity(city);
         newAccount.setCountry(country);
         accountController.registerAccount(newAccount);
+        
+        createVeryficationLink(login);
     }
     
-    public void createVeryficationLink() {
-        Account account = accountController.getAccountByLogin(login);
-        String veryficationToken = account.getToken();
-        veryficationLink = "/registrationConfirm.xhtml?token=" + veryficationToken;
+    private void createVeryficationLink(String login) {
+        try {
+            Account account = accountController.getAccountByLogin(login);
+            String veryficationToken = account.getToken();
+            String baseAppUrl = getBaseURL(FacesContext.getCurrentInstance().getExternalContext());
+            veryficationLink = baseAppUrl + "/registrationConfirm.xhtml?token=" + veryficationToken;
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(CreateAccountBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String getLogin() {
@@ -162,4 +177,15 @@ public class CreateAccountBean {
     public String getVeryficationLink() {
         return veryficationLink;
     }  
+
+    private String getBaseURL(ExternalContext externalContext) throws MalformedURLException {
+        return getBaseURL((HttpServletRequest) externalContext.getRequest());
+    }
+    
+    private String getBaseURL(final HttpServletRequest request) throws MalformedURLException{
+        return new URL(request.getScheme(),
+                request.getServerName(),
+                request.getServerPort(),
+                request.getContextPath()).toString();
+    }
 }

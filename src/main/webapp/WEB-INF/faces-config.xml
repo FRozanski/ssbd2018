@@ -3,6 +3,12 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <action-listener>
+            pl.lodz.p.it.ssbd2018.ssbd01.exceptions.ExceptionActionListener
+        </action-listener>
+    </application>
+    
     <navigation-rule>
         <from-view-id>/lista.xhtml</from-view-id>
         <navigation-case>

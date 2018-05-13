@@ -73,8 +73,6 @@ public class MOKEndpoint implements MOKEndpointLocal {
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
         accountAlevelFacade.create(level);
-        
-        mailSender.sendEmail("mich.malec@gmail.com", "http://www.starbucks.pl/");
     }
 
     @Override
@@ -114,6 +112,11 @@ public class MOKEndpoint implements MOKEndpointLocal {
         }
         if (accountAlevel != null)
             accountAlevelFacade.remove(accountAlevel);
+    }
+
+    @Override
+    public void sendMailWithVeryficationLink(String mail, String veryficationLink) {        
+        mailSender.sendEmail(mail, veryficationLink);
     }
 
     @Override

@@ -37,4 +37,6 @@ public interface MOKEndpointLocal {
     public Account getAccountByLogin(String login);
     
     public Account getAccountByToken(String token);
+
+    public void sendMailWithVeryficationLink(String mail, String veryficationLink);
 }

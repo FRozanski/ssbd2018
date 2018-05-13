@@ -39,8 +39,6 @@ public class CreateAccountBean {
     private String city;
     private String country;
     
-    private String veryficationLink = "";
-    
     public CreateAccountBean() {
     }
     
@@ -63,11 +61,11 @@ public class CreateAccountBean {
         newAccount.setCity(city);
         newAccount.setCountry(country);
         accountController.registerAccount(newAccount);
-        
-        createVeryficationLink(login);
+        accountController.sendMailWithVeryficationLink(email, createVeryficationLink(login));
     }
     
-    private void createVeryficationLink(String login) {
+    private String createVeryficationLink(String login) {
+        String veryficationLink = "";
         try {
             Account account = accountController.getAccountByLogin(login);
             String veryficationToken = account.getToken();
@@ -76,6 +74,7 @@ public class CreateAccountBean {
         } catch (MalformedURLException ex) {
             Logger.getLogger(CreateAccountBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return veryficationLink;
     }
 
     public String getLogin() {
@@ -172,10 +171,6 @@ public class CreateAccountBean {
 
     public void setCountry(String country) {
         this.country = country;
-    } 
-
-    public String getVeryficationLink() {
-        return veryficationLink;
     }  
 
     private String getBaseURL(ExternalContext externalContext) throws MalformedURLException {

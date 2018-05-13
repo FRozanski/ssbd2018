@@ -56,6 +56,10 @@ public class AccountController implements Serializable{
         newAccount.setCountry(a.getCountry());
         mokEndpointLocal.registerAccount(newAccount);   
     }
+
+    void sendMailWithVeryficationLink(String email, String veryficationLink) {
+        mokEndpointLocal.sendMailWithVeryficationLink(email, veryficationLink);
+    }
     
     public void confirmAccount(Account account) {
         mokEndpointLocal.confirmAccount(account);

@@ -1,5 +1,8 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -121,8 +124,16 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    public void confirmAccount(Account account) {
+    public void confirmAccount(Account account) {        
         account.setConfirm(true);
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Timestamp(calendar.getTime().getTime()));
+        Date confirmationDate = new Date(calendar.getTime().getTime());
+        
+        account.setConfirmationDate(confirmationDate);
+        account.setUsed(true);
+        
         accountFacade.edit(account);
     }
 

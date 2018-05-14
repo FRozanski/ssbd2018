@@ -5,8 +5,6 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -27,6 +25,7 @@ public class ConfirmAccountBean {
     
     private String token;
     private String confirmationMessage = "";   
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("AccountMessages");
     
     @Inject
     private AccountController accountController;
@@ -35,13 +34,10 @@ public class ConfirmAccountBean {
         try {
             Account account = accountController.getAccountByToken(token);
             accountController.confirmAccount(account);
-            confirmationMessage = "Activated account";
+            confirmationMessage = BUNDLE.getString("ActivatedAccount");
         } catch(AppBaseException ex) {
             Logger.getLogger(ListAccountBean.class.getName()).log(Level.SEVERE, null, ex);
-            //nie ma takiego tokena
-//            ResourceBundle bundle = ResourceBundle.getBundle("AccountMessages");
-//            confirmationMessage = bundle.getString("InvalidToken");
-            confirmationMessage = "Niepoprawny token";
+            confirmationMessage = BUNDLE.getString("InvalidToken");
         }
     }
 

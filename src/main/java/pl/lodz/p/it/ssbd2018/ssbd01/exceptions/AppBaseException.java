@@ -6,7 +6,7 @@ import javax.ejb.ApplicationException;
  *
  * @author agkan
  */
-@ApplicationException(rollback = true)
+@ApplicationException(inherited = true, rollback = true)
 public class AppBaseException extends Exception{
 
     public AppBaseException(String message) {

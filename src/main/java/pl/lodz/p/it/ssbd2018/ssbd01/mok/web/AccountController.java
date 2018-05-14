@@ -7,6 +7,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 
 /**
@@ -89,7 +90,7 @@ public class AccountController implements Serializable{
         return mokEndpointLocal.getAccountByLogin(login);
     }
     
-    Account getAccountByToken(String token) {
+    Account getAccountByToken(String token) throws AppBaseException{
         return mokEndpointLocal.getAccountByToken(token);
     }
 }

@@ -7,9 +7,13 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
@@ -33,9 +37,18 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     }
 
     @Override
-    public Account findByToken(String token) {
-        TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByToken", Account.class).setParameter("token", token);
-        return typedQuery.getSingleResult();
+    public Account findByToken(String token) throws AppBaseException{
+        Account account  = null;
+        try {
+            TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByToken", Account.class).setParameter("token", token);
+            account = typedQuery.getSingleResult();            
+            em.flush();
+        } catch(OptimisticLockException oe) {
+            throw AccountException.createAccountExceptionWithOptimisticLock(oe, account);
+        } catch(PersistenceException pe) {
+            throw AccountException.createAccountExceptionWithDbConstraint(pe, account);
+        }
+        return account;
     }
 
     @Override

@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
@@ -136,7 +137,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    public Account getAccountByToken(String token) {
+    public Account getAccountByToken(String token) throws AppBaseException{
         return accountFacade.findByToken(token);
     }
 }

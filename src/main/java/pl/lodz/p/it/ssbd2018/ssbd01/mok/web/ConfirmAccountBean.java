@@ -9,6 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -32,19 +34,10 @@ public class ConfirmAccountBean {
     public void confirmAccount() {
         try {
             Account account = accountController.getAccountByToken(token);
-
-            Calendar calendar = Calendar.getInstance();
-            Date expiryDate = account.getExpiryDate();
-            if (expiryDate != null) {
-                long timeDiff = expiryDate.getTime() - calendar.getTime().getTime();
-                if (timeDiff <= 0) {
-                    confirmationMessage = "Token Expired";
-                    return;
-                }
-            } 
             accountController.confirmAccount(account);
             confirmationMessage = "Activated account";
         } catch(AppBaseException ex) {
+            Logger.getLogger(ListAccountBean.class.getName()).log(Level.SEVERE, null, ex);
             //nie ma takiego tokena
 //            ResourceBundle bundle = ResourceBundle.getBundle("AccountMessages");
 //            confirmationMessage = bundle.getString("InvalidToken");

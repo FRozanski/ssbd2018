@@ -23,7 +23,7 @@ public interface MOKEndpointLocal {
     
     void registerAccount(Account account);
     
-    void confirmAccount(Account account);
+    void confirmAccount(Account account) throws AppBaseException;
     
     void lockAccount(Account account);
     

@@ -62,7 +62,7 @@ public class AccountController implements Serializable{
         mokEndpointLocal.sendMailWithVeryficationLink(email, veryficationLink);
     }
     
-    public void confirmAccount(Account account) {
+    public void confirmAccount(Account account) throws AppBaseException {
         mokEndpointLocal.confirmAccount(account);
     }
     

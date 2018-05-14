@@ -6,12 +6,12 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AccountService {
 
-  readonly uri: string = "https://studapp.it.p.lodz.pl:8401/ssbd01-02326615179242781552.2.0";
+  readonly uri: string = "/ssbd01-06146406291034321158.2.0/webresources";
 
   constructor(private httpClient: HttpClient) { }
 
   getAllAcounts() : Observable<Account[]> {
-    return this.httpClient.get<Account[]>(this.uri + '/webresources/account');
+    return this.httpClient.get<Account[]>(this.uri + '/account');
   }
 
 }

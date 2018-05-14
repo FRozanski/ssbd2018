@@ -39,7 +39,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     private SendMailUtils mailSender = new SendMailUtils();
 
     @Override
-//    @RolesAllowed("getAllAccounts")
+    @RolesAllowed("getAllAccounts")
     public List<Account> getAllAccounts() {
         return accountFacade.findAll();
     }

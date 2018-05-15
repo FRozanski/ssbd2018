@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AccountService {
 
-  readonly uri: string = "/ssbd01-06146406291034321158.2.0/webresources";
+  readonly uri: string = "/ssbd01/webresources";
 
   constructor(private httpClient: HttpClient) { }
 

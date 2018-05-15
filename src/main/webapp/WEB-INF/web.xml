@@ -10,6 +10,11 @@
         </session-timeout>
     </session-config>
     
+    <error-page>
+        <exception-type>pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException</exception-type>
+        <location>/exception.xhtml</location>
+    </error-page>
+    
     <!-- definicja ról uwzględnianych w kontroli dostępu -->
     <security-role>
         <description/>

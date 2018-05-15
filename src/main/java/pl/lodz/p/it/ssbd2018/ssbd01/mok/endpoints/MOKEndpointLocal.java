@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -22,7 +23,7 @@ public interface MOKEndpointLocal {
     
     void registerAccount(Account account);
     
-    void confirmAccount(Account account);
+    void confirmAccount(Account account) throws AppBaseException;
     
     void lockAccount(Account account);
     
@@ -36,5 +37,7 @@ public interface MOKEndpointLocal {
 
     public Account getAccountByLogin(String login);
     
-    public Account getAccountByToken(String token);
+    public Account getAccountByToken(String token) throws AppBaseException;
+
+    public void sendMailWithVeryficationLink(String mail, String veryficationLink);
 }

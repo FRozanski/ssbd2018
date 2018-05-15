@@ -1,5 +1,8 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
 
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -7,9 +10,13 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
@@ -20,6 +27,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
 /**
  *
  * @author piotrek
+ * @author agkan
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateful
@@ -73,8 +81,6 @@ public class MOKEndpoint implements MOKEndpointLocal {
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
         accountAlevelFacade.create(level);
-        
-        mailSender.sendEmail("mich.malec@gmail.com", "http://www.starbucks.pl/");
     }
 
     @Override
@@ -117,9 +123,30 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    public void confirmAccount(Account account) {
-        account.setConfirm(true);
-        accountFacade.edit(account);
+    public void sendMailWithVeryficationLink(String mail, String veryficationLink) {        
+        mailSender.sendEmail(mail, veryficationLink);
+    }
+
+    @Override
+    public void confirmAccount(Account account) throws AppBaseException{   
+        try {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(new Timestamp(calendar.getTime().getTime()));
+            Date confirmationDate = new Date(calendar.getTime().getTime());
+            long timeDiff = account.getExpiryDate().getTime() - confirmationDate.getTime();
+            
+            if (account.getConfirm() == true || account.getConfirmationDate() != null || timeDiff <= 0 || account.isUsed() == true)
+                throw new PersistenceException();
+            
+            account.setConfirm(true);
+            account.setConfirmationDate(confirmationDate);
+            account.setUsed(true);
+            accountFacade.edit(account);
+        } catch(OptimisticLockException oe) {
+            throw AccountException.createAccountExceptionWithOptimisticLock(oe, account);
+        } catch(PersistenceException pe) {
+            throw AccountException.createAccountExceptionWithDbConstraint(pe, account);
+        }
     }
 
     @Override
@@ -133,7 +160,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    public Account getAccountByToken(String token) {
+    public Account getAccountByToken(String token) throws AppBaseException{
         return accountFacade.findByToken(token);
     }
 }

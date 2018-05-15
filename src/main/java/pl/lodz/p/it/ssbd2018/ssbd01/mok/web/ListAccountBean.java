@@ -1,12 +1,15 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.web;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.ManagedBean;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -48,6 +51,10 @@ public class ListAccountBean {
     }
     
     public void confirmAccount(Account account) {
-        accountController.confirmAccount(account);
+        try {
+            accountController.confirmAccount(account);
+        } catch (AppBaseException ex) {
+            Logger.getLogger(ListAccountBean.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

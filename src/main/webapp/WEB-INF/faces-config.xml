@@ -3,12 +3,24 @@
               xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+<!--    <application>
+        <action-listener>
+            pl.lodz.p.it.ssbd2018.ssbd01.exceptions.ExceptionActionListener
+        </action-listener>
+    </application>-->
+    
     <navigation-rule>
         <from-view-id>/lista.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>list-edit</from-outcome>
             <to-view-id>/edit.xhtml</to-view-id>
             <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>        
+        <navigation-case>
+            <from-outcome>naviToErrorPage</from-outcome>
+            <to-view-id>/exception.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

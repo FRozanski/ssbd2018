@@ -20,8 +20,8 @@ public class AccountDto implements Serializable{
     private long numberOfProducts;
     private long numberOfOrders;
     private long numberOfLogins;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String surname;
     private String email;
     private String phone;
     private String street;
@@ -36,13 +36,13 @@ public class AccountDto implements Serializable{
         
     }
 
-    public AccountDto(String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String firstName, String lastName, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
+    public AccountDto(String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String name, String surname, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
         this.login = login;
         this.numberOfProducts = numberOfProducts;
         this.numberOfOrders = numberOfOrders;
         this.numberOfLogins = numberOfLogins;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.street = street;
@@ -86,21 +86,21 @@ public class AccountDto implements Serializable{
         this.numberOfLogins = numberOfLogins;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }    
 
     public String getEmail() {
         return email;

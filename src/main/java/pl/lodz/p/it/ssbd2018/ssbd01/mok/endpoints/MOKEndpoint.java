@@ -59,7 +59,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountToEdit")
+//    @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);

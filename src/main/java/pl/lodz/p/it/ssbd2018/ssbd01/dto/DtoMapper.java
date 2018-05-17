@@ -35,10 +35,24 @@ public class DtoMapper {
         );
     }
 
+    // TODO: sensowniej zimplementować tę metodę
     public static Account mapAccountDto(AccountDto accountDto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Account account = new Account();
+        account.setLogin(accountDto.getLogin());
+        account.setNumberOfProducts(accountDto.getNumberOfProducts());
+        account.setNumberOfLogins(accountDto.getNumberOfLogins());
+        account.setNumberOfOrders(accountDto.getNumberOfOrders());
+        account.setName(accountDto.getName());
+        account.setSurname(accountDto.getSurname());
+        account.setEmail(accountDto.getEmail());
+        account.setPhone(accountDto.getPhone());
+        account.setStreet(accountDto.getStreet());
+        account.setStreetNumber(accountDto.getStreetNumber());
+        account.setFlatNumber(accountDto.getFlatNumber());
+        account.setPostalCode(accountDto.getPostalCode());
+        account.setCity(accountDto.getCity());
+        account.setCountry(accountDto.getCountry());
+        account.setConfirm(accountDto.isConfirm());   
+        return account;
     }
-    
-    
-    
 }

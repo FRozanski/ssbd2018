@@ -56,7 +56,8 @@ public class AccountWebService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountToEdit(@PathParam("accountId") String accountId) {        
         try {
-            AccountDto accountDto = DtoMapper.mapAccount(mokEndpointLocal.getAccountById(Integer.valueOf(accountId)));    
+            Account accountToEdit = mokEndpointLocal.getAccountToEdit(mokEndpointLocal.getAccountById(Integer.valueOf(accountId)));
+            AccountDto accountDto = DtoMapper.mapAccount(accountToEdit);    
             return Response.ok(accountDto).build();                
         } catch(NumberFormatException ex) {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);

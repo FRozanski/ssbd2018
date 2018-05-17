@@ -52,6 +52,10 @@
     <role-name>dismissAccessLevelFromAccount</role-name>
     <group-name>admin</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAccountById</role-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

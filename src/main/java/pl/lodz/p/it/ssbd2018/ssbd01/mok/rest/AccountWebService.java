@@ -8,8 +8,11 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -27,14 +30,14 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 public class AccountWebService {
   
     @EJB
-    MOKEndpointLocal mOKEndpointLocal;
+    MOKEndpointLocal mokEndpointLocal;
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHello() {
         List<AccountDto> accounts = new ArrayList<AccountDto>();
         
-        for(Account account: mOKEndpointLocal.getAllAccounts()) 
+        for(Account account: mokEndpointLocal.getAllAccounts()) 
         {
             accounts.add(DtoMapper.mapAccount(account));
         }
@@ -42,4 +45,11 @@ public class AccountWebService {
         return Response.ok(accounts).build();
     }
     
+    @GET
+    @Path("{accountId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAccountToEdit(@PathParam("accountId") String accountId) {        
+        AccountDto accountDto = DtoMapper.mapAccount(mokEndpointLocal.getAccountById(Integer.valueOf(accountId)));        
+        return Response.ok(accountDto).build();
+    }
 }

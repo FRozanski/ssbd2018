@@ -47,7 +47,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     private SendMailUtils mailSender = new SendMailUtils();
 
     @Override
-    @RolesAllowed("getAllAccounts")
+//    @RolesAllowed("getAllAccounts")
     public List<Account> getAllAccounts() {
         return accountFacade.findAll();
     }
@@ -162,5 +162,12 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @Override
     public Account getAccountByToken(String token) throws AppBaseException{
         return accountFacade.findByToken(token);
+    }
+
+    @Override
+//    @RolesAllowed("getAccountById")
+    public Account getAccountById(long id) {
+        Account tmpAccount = accountFacade.find(id);        
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 }

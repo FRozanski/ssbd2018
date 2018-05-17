@@ -71,6 +71,13 @@
       <mat-cell *matCellDef="let element"> {{element.streetNumber}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="edit">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.EDIT' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)='onEditClick(element)'>{{'ACCOUNT.EDIT'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

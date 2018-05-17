@@ -14,7 +14,7 @@ export class AccountListComponent implements OnInit {
   displayedColumns = [
     'city', 'confirm', 'country', 'email', 'firstName', 
     'lastName', 'login', 'numberOfLogins', 'numberOfOrders', 
-    'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber'
+    'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber', 'edit'
   ];
   dataSource;
 
@@ -26,6 +26,10 @@ export class AccountListComponent implements OnInit {
     }, ()=> {
       window.location.href = "/" + DeployPrefix + "/login/login.html";
     });
+  }
+
+  onEditClick(account: AccountData) {
+    throw new Error("onEditClick(..) is not implemented yet.")
   }
 
  

@@ -5,11 +5,15 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Dominik
  */
-public class AccountDto {
+@XmlRootElement
+public class AccountDto implements Serializable{
     
     // nie ma tu wszystkich pól, klasa utworzona dla testu
     private String login;
@@ -27,6 +31,10 @@ public class AccountDto {
     private String city;
     private String country;
     private boolean confirm;
+    
+    public AccountDto() {
+        
+    }
 
     public AccountDto(String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String firstName, String lastName, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
         this.login = login;

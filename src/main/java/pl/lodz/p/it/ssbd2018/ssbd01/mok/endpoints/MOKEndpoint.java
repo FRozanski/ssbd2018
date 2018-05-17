@@ -66,7 +66,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("saveAccountAfterEdit")
+//    @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) {
         accountFacade.edit(account);
     }

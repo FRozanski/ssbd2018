@@ -5,8 +5,13 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -24,6 +29,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 /**
  *
  * @author dlange
+ * @author agkan
  */
 
 @Path("account")
@@ -51,5 +57,19 @@ public class AccountWebService {
     public Response getAccountToEdit(@PathParam("accountId") String accountId) {        
         AccountDto accountDto = DtoMapper.mapAccount(mokEndpointLocal.getAccountById(Integer.valueOf(accountId)));        
         return Response.ok(accountDto).build();
+    }    
+    
+    @PUT
+    @Path("{accountId}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response updateAccount(@PathParam("accountId") String accountId, String accountDto) {
+        ObjectMapper mapper = new ObjectMapper();
+        AccountDto account = null;
+        try {
+            account = mapper.readValue(accountDto, AccountDto.class);
+        } catch (IOException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Response.ok(account).build();
     }
 }

@@ -55,21 +55,28 @@ public class AccountWebService {
     @Path("{accountId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountToEdit(@PathParam("accountId") String accountId) {        
-        AccountDto accountDto = DtoMapper.mapAccount(mokEndpointLocal.getAccountById(Integer.valueOf(accountId)));        
-        return Response.ok(accountDto).build();
+        try {
+            AccountDto accountDto = DtoMapper.mapAccount(mokEndpointLocal.getAccountById(Integer.valueOf(accountId)));    
+            return Response.ok(accountDto).build();                
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();
+        }
     }    
     
     @PUT
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)
-    public Response updateAccount(@PathParam("accountId") String accountId, String accountDto) {
+    public Response updateAccount(@PathParam("accountId") String accountId, String textPlain) {
         ObjectMapper mapper = new ObjectMapper();
-        AccountDto account = null;
         try {
-            account = mapper.readValue(accountDto, AccountDto.class);
-        } catch (IOException ex) {
+            AccountDto accountDto = mapper.readValue(textPlain, AccountDto.class);
+            Account account = DtoMapper.mapAccountDto(accountDto);
+            mokEndpointLocal.saveAccountAfterEdit(account);
+            return Response.ok(accountDto).build();
+        } catch (IOException ex) {            
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();
         }
-        return Response.ok(account).build();
     }
 }

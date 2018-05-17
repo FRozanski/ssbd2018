@@ -34,6 +34,10 @@ public class DtoMapper {
                 
         );
     }
+
+    public static Account mapAccountDto(AccountDto accountDto) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     

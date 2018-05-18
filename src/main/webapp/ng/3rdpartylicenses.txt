@@ -114,11 +114,7 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-<<<<<<< HEAD
-@angular/core@5.0.0
-=======
 @angular/core@5.2.10
->>>>>>> feature/SSBD201801-211-utworzenie-widoku-listy-kont-w-angularze
 MIT
 MIT
 
@@ -126,25 +122,6 @@ MIT
 MIT
 MIT
 
-<<<<<<< HEAD
-@ngx-translate/http-loader@3.0.1
-MIT
-MIT
-
-@angular/common@5.0.0
-MIT
-MIT
-
-@angular/platform-browser@5.0.0
-MIT
-MIT
-
-@angular/router@5.0.0
-MIT
-MIT
-
-@angular/platform-browser-dynamic@5.0.0
-=======
 hammerjs@2.0.8
 MIT
 The MIT License (MIT)
@@ -244,6 +221,5 @@ MIT
 MIT
 
 @angular/platform-browser-dynamic@5.2.10
->>>>>>> feature/SSBD201801-211-utworzenie-widoku-listy-kont-w-angularze
 MIT
 MIT

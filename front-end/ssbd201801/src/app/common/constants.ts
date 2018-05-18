@@ -1,1 +1,1 @@
-export const DeployPrefix: string = 'ssbd01';
+export const DeployPrefix: string = 'michal';

@@ -1,13 +1,16 @@
-package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.OptimisticLockException;
@@ -31,10 +34,12 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
  * @author agkan
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-@Stateful
-public class MOKEndpoint implements MOKEndpointLocal {
+@Stateless
+public class AccountManager implements AccountManagerLocal {
     
     private static final String DEFAULT_ACCESS_LEVEL = "user";
+    private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
+    private static final String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
     
     @EJB
     private AccountFacadeLocal accountFacade;
@@ -77,13 +82,16 @@ public class MOKEndpoint implements MOKEndpointLocal {
     public void registerAccount(Account account, ServletContext servletContext) {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
+        loger.log(Level.INFO, "Account Created.");
         
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
         accountAlevelFacade.create(level);
+        loger.log(Level.INFO, "Access level added to account.");
         
         this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
+        loger.log(Level.INFO, "E-mail with activation token sent.");
     }
 
     @Override
@@ -131,6 +139,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
+    @PermitAll
     public void confirmAccount(Account account) throws AppBaseException{   
         try {
             Calendar calendar = Calendar.getInstance();
@@ -168,10 +177,9 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
     
      private String createVeryficationLink(Account account, ServletContext servletContext) {
-        String veryficationLink = "http://studapp.it.p.lodz.pl:8001";
         String veryficationToken = account.getToken();
-        String baseAppUrl = veryficationLink + servletContext.getContextPath();
-        veryficationLink = baseAppUrl + "/registrationConfirm.xhtml?token=" + veryficationToken;
+        String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
+        veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
         return veryficationLink;
     }
     

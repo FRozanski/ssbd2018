@@ -1,4 +1,4 @@
-package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -12,7 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
  * @author piotrek
  */
 @Local
-public interface MOKEndpointLocal {
+public interface AccountManagerLocal {
     
     List<Account> getAllAccounts();
     

@@ -22,13 +22,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccessLevelDto;
-import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountAlevelDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 
 /**
  *
@@ -80,21 +78,7 @@ public class AccountWebService {
             return Response.noContent().build();
         }
     }
-//    
-//    @GET
-//    @Path("{accountId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getAccountAlevel(@PathParam("accountId") String accountId, @QueryParam("alevelId") String alevelId) {
-//        try {
-//            AccountAlevel accountAlevel = mOKEndpointLocal.getAccountAlevel(Long.valueOf(accountId), Long.valueOf(alevelId));
-//            AccountAlevelDto accountAlevelDto = DtoMapper.mapAccountAlevel(accountAlevel);
-//            return Response.ok(accountAlevelDto).build();            
-//        } catch(NumberFormatException ex) {
-//            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
-//            return Response.noContent().build();
-//        }
-//    }
-//    
+    
     @POST
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)
@@ -112,12 +96,9 @@ public class AccountWebService {
             Account account = mOKEndpointLocal.getAccountById(accountDto.getId());
             mOKEndpointLocal.addAccessLevelToAccount(accessLevel, account);
             return Response.accepted().build();
-        } catch(NumberFormatException ex) {
+        } catch(NumberFormatException | IOException ex) {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
             return Response.noContent().build();            
-        } catch (IOException ex) {
-            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
-            return Response.noContent().build();
         }
     }
 }

@@ -165,10 +165,5 @@ public class AccountDto {
     public void setConfirm(boolean confirm) {
         this.confirm = confirm;
     }
-    
-    
-    
-    
-    
-    
 }
+

@@ -8,6 +8,8 @@ import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AccountService } from './common/account.service';
+import { MatTableModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
+
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,10 +28,13 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    AccountListComponent,
-    MainPageComponent
+    MainPageComponent,
+    AccountListComponent
   ],
   imports: [
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
@@ -41,7 +46,9 @@ const appRoutes: Routes = [
       }
     })
   ],
-  providers: [AccountService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    AccountService
+  ]
 })
 export class AppModule { }

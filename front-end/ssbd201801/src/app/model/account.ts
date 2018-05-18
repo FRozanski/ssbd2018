@@ -1,4 +1,4 @@
-export interface Account {
+export interface AccountData {
     city: string,
     confirm: boolean,
     country: string,

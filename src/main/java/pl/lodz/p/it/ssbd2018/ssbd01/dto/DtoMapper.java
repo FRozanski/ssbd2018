@@ -37,4 +37,8 @@ public class DtoMapper {
     
     
     
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> feature/SSBD201801-211-utworzenie-widoku-listy-kont-w-angularze

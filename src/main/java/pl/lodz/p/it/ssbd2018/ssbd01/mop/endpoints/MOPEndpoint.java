@@ -11,6 +11,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -21,75 +23,45 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateful
-public class MOPEndpoint implements MOKEndpointLocal{
+public class MOPEndpoint implements MOPEndpointLocal{
 
     @Override
-    public List<Account> getAllAccounts() {
+    public void addProductByAccount(Account account, Product product) {
         throw new NotImplementedException();
     }
 
     @Override
-    public List<AccessLevel> getAllAccessLevels() {
+    public void deleteProductByAccount(Account account, Product product) {
         throw new NotImplementedException();
     }
 
     @Override
-    public Account getAccountToEdit(Account account) {
+    public void updateProduct(Product product) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void saveAccountAfterEdit(Account account) {
+    public void setProductState(Product product, boolean active) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void registerAccount(Account account) {
+    public List<Product> getAllProducts() {
         throw new NotImplementedException();
     }
 
     @Override
-    public void confirmAccount(Account account) throws AppBaseException {
+    public List<Product> getAllProductsContainName(String name) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void lockAccount(Account account) {
+    public Product getProductFromAccountByName(Account account, String name) {
         throw new NotImplementedException();
     }
 
     @Override
-    public void unlockAccount(Account account) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public String getVeryficationToken(Account account) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Account getAccountByLogin(String login) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public Account getAccountByToken(String token) throws AppBaseException {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public void sendMailWithVeryficationLink(String mail, String veryficationLink) {
+    public void setProductCategory(Product product, Category category) {
         throw new NotImplementedException();
     }
 

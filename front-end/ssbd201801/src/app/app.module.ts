@@ -11,7 +11,7 @@ import { AccountService } from './common/account.service';
 import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatCardModule } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -41,6 +41,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,

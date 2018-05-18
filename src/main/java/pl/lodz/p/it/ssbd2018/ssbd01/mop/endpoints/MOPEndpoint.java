@@ -6,15 +6,12 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.endpoints;
 
 import java.util.List;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -22,7 +19,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * @author fifi
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-@Stateful
+@Stateless
 public class MOPEndpoint implements MOPEndpointLocal{
 
     @Override

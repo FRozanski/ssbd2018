@@ -8,7 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.endpoints;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
@@ -23,7 +23,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * @author fifi
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-@Stateful
+@Stateless
 public class MOZEndpoint implements MOZEndpointLocal{
 
     @Override

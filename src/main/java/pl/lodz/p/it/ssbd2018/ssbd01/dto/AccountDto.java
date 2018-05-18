@@ -6,7 +6,11 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 import javax.xml.bind.annotation.XmlRootElement;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 
 /**
  *
@@ -32,12 +36,25 @@ public class AccountDto implements Serializable{
     private String city;
     private String country;
     private boolean confirm;
+    private boolean active;
+    private Collection<Order1> order1Collection;
+    private Collection<Order1> order1Collection1;
+    private Collection<Product> productCollection;
+    private String token;
+    private Date expiryDate;
+    private boolean used;
+    private long version = 0;
     
     public AccountDto() {
         
     }
 
-    public AccountDto(Long id, String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String name, String surname, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
+    public AccountDto(Long id, String login, long numberOfProducts, long numberOfOrders, 
+            long numberOfLogins, String name, String surname, String email, String phone, 
+            String street, String streetNumber, String flatNumber, String postalCode, 
+            String city, String country) {///boolean confirm, boolean active, 
+//            Collection<Order1> order1Collection, Collection<Order1> order1Collection1, 
+//            Collection<Product> productCollection, String token, Date expiryDate, boolean used) {
         this.id = id;
         this.login = login;
         this.numberOfProducts = numberOfProducts;
@@ -54,6 +71,13 @@ public class AccountDto implements Serializable{
         this.city = city;
         this.country = country;
         this.confirm = confirm;
+        this.active = active;
+        this.order1Collection = order1Collection;
+        this.order1Collection1 = order1Collection1;
+        this.productCollection = productCollection;
+        this.token = token;
+        this.expiryDate = expiryDate;
+        this.used = used;
     }
 
     public Long getId() {
@@ -62,7 +86,7 @@ public class AccountDto implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
-    }    
+    }
 
     public String getLogin() {
         return login;
@@ -110,7 +134,7 @@ public class AccountDto implements Serializable{
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }    
+    }
 
     public String getEmail() {
         return email;
@@ -183,10 +207,70 @@ public class AccountDto implements Serializable{
     public void setConfirm(boolean confirm) {
         this.confirm = confirm;
     }
-    
-    
-    
-    
-    
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public Collection<Order1> getOrder1Collection() {
+        return order1Collection;
+    }
+
+    public void setOrder1Collection(Collection<Order1> order1Collection) {
+        this.order1Collection = order1Collection;
+    }
+
+    public Collection<Order1> getOrder1Collection1() {
+        return order1Collection1;
+    }
+
+    public void setOrder1Collection1(Collection<Order1> order1Collection1) {
+        this.order1Collection1 = order1Collection1;
+    }
+
+    public Collection<Product> getProductCollection() {
+        return productCollection;
+    }
+
+    public void setProductCollection(Collection<Product> productCollection) {
+        this.productCollection = productCollection;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Date getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
     
 }

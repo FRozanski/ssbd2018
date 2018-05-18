@@ -59,14 +59,14 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountToEdit")
+//    @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
-    @RolesAllowed("saveAccountAfterEdit")
+//    @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) {
         accountFacade.edit(account);
     }
@@ -165,7 +165,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountById")
+//    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);

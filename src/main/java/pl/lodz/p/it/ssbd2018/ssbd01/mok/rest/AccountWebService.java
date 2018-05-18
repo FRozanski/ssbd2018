@@ -16,6 +16,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -58,7 +59,7 @@ public class AccountWebService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountToEdit(@PathParam("accountId") String accountId) {        
         try {
-            Account accountToEdit = mOKEndpointLocal.getAccountToEdit(mOKEndpointLocal.getAccountById(Integer.valueOf(accountId)));
+            Account accountToEdit = mOKEndpointLocal.getAccountById(Long.valueOf(accountId));
             AccountDto accountDto = DtoMapper.mapAccount(accountToEdit);    
             return Response.ok(accountDto).build();                
         } catch(NumberFormatException ex) {
@@ -66,6 +67,23 @@ public class AccountWebService {
             return Response.noContent().build();
         }
     }  
+    
+    @PUT
+    @Path("{accountId}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response updateAccount(@PathParam("accountId") String accountId, String textPlain) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            AccountDto accountDto = mapper.readValue(textPlain, AccountDto.class);
+            Account accountToEdit = mOKEndpointLocal.getAccountById(Long.valueOf(accountId));
+            Account account = DtoMapper.mapAccountDto(accountDto, accountToEdit);
+            mOKEndpointLocal.saveAccountAfterEdit(account);
+            return Response.ok(accountDto).build();
+        } catch (IOException ex) {            
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();
+        }
+    }
     
     @GET
     @Path("accessLevel/{accessLevelId}")

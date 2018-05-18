@@ -9,16 +9,22 @@ import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.DELETE;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
@@ -53,5 +59,21 @@ public class AccountWebService {
     public Response registerAccount(Account newAccount, @Context ServletContext servletContext) {
         accountManagerLocal.registerAccount(newAccount, servletContext);
         return Response.ok().build();
-    }  
+    }
+    
+    @DELETE
+    @Path("{accountId}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response deleteAccountAlevel(@PathParam("accountId") String accountId, 
+            @QueryParam("alevelId") String alevelId) {
+        try {
+            AccessLevel accessLevel = accountManagerLocal.getAccessLevelById(Long.valueOf(alevelId));
+            Account account = accountManagerLocal.getAccountById(Long.valueOf(accountId));
+            accountManagerLocal.dismissAccessLevelFromAccount(accessLevel, account);
+            return Response.accepted().build();
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
+    }
 }

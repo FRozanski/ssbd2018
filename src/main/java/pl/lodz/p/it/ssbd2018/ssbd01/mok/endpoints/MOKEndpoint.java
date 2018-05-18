@@ -59,7 +59,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountToEdit")
+//    @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
@@ -98,7 +98,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     }
 
     @Override
-    @RolesAllowed("addAccessLevelToAccount")
+//    @RolesAllowed("addAccessLevelToAccount")
     public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) {
         AccountAlevel accountAlevel = new AccountAlevel();
         accountAlevel.setIdAlevel(accessLevel);
@@ -162,5 +162,25 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @Override
     public Account getAccountByToken(String token) throws AppBaseException{
         return accountFacade.findByToken(token);
+    }
+
+    @Override
+//    @RolesAllowed("getAccountById")
+    public Account getAccountById(long id) {
+        Account tmpAccount = accountFacade.find(id);        
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+    }
+
+    @Override
+//    @RolesAllowed("getAccountAlevel")
+    public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel) {
+        AccountAlevel accountAlevel = accountAlevelFacade.findByAccountAndAccessLevel(idAccount, idAccessLevel);
+        return (AccountAlevel) CloneUtils.deepCloneThroughSerialization(accountAlevel);
+    }
+
+    @Override
+    public AccessLevel getAccessLevelById(Long idAccessLevel) {
+        AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
+        return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
     }
 }

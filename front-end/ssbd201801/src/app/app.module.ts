@@ -41,7 +41,5 @@ const appRoutes: Routes = [
       }
     })
   ],
-  providers: [AccountService],
-  bootstrap: [AppComponent]
 })
 export class AppModule { }

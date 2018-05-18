@@ -92,5 +92,6 @@ public class MOPEndpoint implements MOKEndpointLocal{
     public void sendMailWithVeryficationLink(String mail, String veryficationLink) {
         throw new NotImplementedException();
     }
+
     
 }

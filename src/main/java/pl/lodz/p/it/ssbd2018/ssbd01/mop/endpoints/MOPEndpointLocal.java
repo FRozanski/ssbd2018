@@ -20,32 +20,21 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 @Local
 public interface MOPEndpointLocal {
     
-    List<Product> getAllProducts();
+    void addProductByAccount(Account account, Product product);                                     
     
-    List<Product> getAllProductsByAccount(Account account);
+    void deleteProductByAccount(Account account, Product product);                                  
     
-    List<Product> getAllProductsByCategory(Category category);
+    void updateProduct(Product product);                                                            
     
-    List<Product> getAllProductsFromAccountByCategory(Account account, Category category);
+    void setProductState(Product product, boolean active);                                          
+            
+    List<Product> getAllProducts();                                                                 
     
-    List<Product> getAllProductsByUnit(Unit unit);
+    List<Product> getAllProductsContainName(String name);                                           
+                
+    Product getProductFromAccountByName(Account account, String name);                              
     
-    List<Product> getAllProductsFromAccountByUnit(Account account, Unit unit);
-    
-    List<Product> getAllProductsByActive(boolean active);
-    
-    List<Product> getAllProductsFromAccountByActive(Account account, boolean active);
-    
-    Product getProductToEdit(Product product);
-    
-    void updateProduct(Product product);
-    
-    void setProductState(Product product, boolean state);   
-    
-    void addProductByAccount(Account account, Product product);
-    
-    void deleteProductByAccount(Account account, Product product);
-    
-    void setCategoryToProduct(Product product, Category category);
-       
+    void setProductCategory(Product product, Category category);                                    
+            
+           
 }

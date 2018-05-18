@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -22,6 +23,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccessLevelDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
@@ -50,6 +52,49 @@ public class AccountWebService {
         }
          
         return Response.ok(accounts).build();
+    }
+    
+    @GET
+    @Path("{accountId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAccountToEdit(@PathParam("accountId") String accountId) {        
+        try {
+            Account accountToEdit = accountManagerLocal.getAccountToEdit(accountManagerLocal.getAccountById(Integer.valueOf(accountId)));
+            AccountDto accountDto = DtoMapper.mapAccount(accountToEdit);    
+            return Response.ok(accountDto).build();                
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();
+        }
+    }  
+    
+    @GET
+    @Path("accessLevel/{accessLevelId}")
+    public Response getAccessLevel(@PathParam("accessLevelId") String accessLevelId) {
+        try {
+            AccessLevel accessLevel = accountManagerLocal.getAccessLevelById(Long.valueOf(accessLevelId));
+            AccessLevelDto accessLevelDto = DtoMapper.mapAccessLevel(accessLevel);
+            return Response.ok(accessLevelDto).build();
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();
+        }
+    }
+    
+    @POST
+    @Path("{accountId}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response createAccountAlevel(@PathParam("accountId") String accountId, 
+            @QueryParam("alevelId") String alevelId) {
+        try {
+            AccessLevel accessLevel = accountManagerLocal.getAccessLevelById(Long.valueOf(alevelId));
+            Account account = accountManagerLocal.getAccountById(Long.valueOf(accountId));
+            accountManagerLocal.addAccessLevelToAccount(accessLevel, account);
+            return Response.accepted().build();
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
     }
     
     @POST

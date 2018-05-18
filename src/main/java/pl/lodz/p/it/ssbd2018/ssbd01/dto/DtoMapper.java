@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
 
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
@@ -34,4 +35,8 @@ public class DtoMapper {
                 account.getConfirm()     
         );
     }  
+
+    public static AccessLevelDto mapAccessLevel(AccessLevel accessLevel) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

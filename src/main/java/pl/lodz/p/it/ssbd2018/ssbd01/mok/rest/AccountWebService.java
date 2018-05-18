@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -84,11 +85,26 @@ public class AccountWebService {
     @Consumes(MediaType.TEXT_PLAIN)
     public Response createAccountAlevel(@PathParam("accountId") String accountId, 
             @QueryParam("alevelId") String alevelId) {
-        ObjectMapper mapper = new ObjectMapper();
         try {
             AccessLevel accessLevel = mOKEndpointLocal.getAccessLevelById(Long.valueOf(alevelId));
             Account account = mOKEndpointLocal.getAccountById(Long.valueOf(accountId));
             mOKEndpointLocal.addAccessLevelToAccount(accessLevel, account);
+            return Response.accepted().build();
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
+    }
+    
+    @DELETE
+    @Path("{accountId}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response deleteAccountAlevel(@PathParam("accountId") String accountId, 
+            @QueryParam("alevelId") String alevelId) {
+        try {
+            AccessLevel accessLevel = mOKEndpointLocal.getAccessLevelById(Long.valueOf(alevelId));
+            Account account = mOKEndpointLocal.getAccountById(Long.valueOf(accountId));
+            mOKEndpointLocal.dismissAccessLevelFromAccount(accessLevel, account);
             return Response.accepted().build();
         } catch(NumberFormatException ex) {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);

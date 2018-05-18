@@ -1,0 +1,23 @@
+{
+    "HOME" : {
+        "TITLE" : "TITLE"
+    },
+    "ACCOUNT" : {
+        "CITY" : "CITY",
+        "CONFIRMED" : "CONFIRMED",
+        "COUNTRY" : "COUNTRY",
+        "EMAIL" : "EMAIL",
+        "NAME" : "NAME",
+        "SURNAME" : "SURNAME",
+        "LOGIN" : "LOGIN",
+        "NUM_OF_LOGINS" : "NUM_OF_LOGINS",
+        "NUM_OF_ORDERS" : "NUM_OF_ORDERS",
+        "NUM_OF_PRODUCTS" : "NUM_OF_PRODUCTS",
+        "PHONE" : "PHONE",
+        "POSTAL_CODE" : "POSTAL_CODE",
+        "STREET" : "STREET",
+        "STREET_NUMBER" : "STREET_NUMBER",
+        "EDIT" : "EDIT",
+        "EDIT_BTN" : "EDIT_BTN"
+    }
+}

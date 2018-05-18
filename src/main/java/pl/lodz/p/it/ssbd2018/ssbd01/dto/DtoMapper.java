@@ -30,11 +30,7 @@ public class DtoMapper {
                 account.getPostalCode(),
                 account.getCity(),
                 account.getCountry(),
-                account.getConfirm()
-                
+                account.getConfirm()     
         );
-    }
-    
-    
-    
+    }  
 }

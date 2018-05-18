@@ -1,0 +1,24 @@
+{
+    "HOME" : {
+        "TITLE" : "Strona główna"
+    },
+    "ACCOUNT" : {
+        "CITY" : "Miasto",
+        "CONFIRMED" : "Potwierdzone",
+        "COUNTRY" : "Kraj",
+        "EMAIL" : "E-mail",
+        "NAME" : "Imię",
+        "SURNAME" : "Nazwisko",
+        "LOGIN" : "Login",
+        "NUM_OF_LOGINS" : "Liczba logowań",
+        "NUM_OF_ORDERS" : "Liczba zamówień",
+        "NUM_OF_PRODUCTS" : "Liczba produktów",
+        "PHONE" : "Telefon",
+        "POSTAL_CODE" : "Kod pocztowy",
+        "STREET" : "Ulica",
+        "STREET_NUMBER" : "Numer domu",
+        "EDIT" : "Edycja",
+        "EDIT_BTN" : "Edytuj"
+
+    }
+}

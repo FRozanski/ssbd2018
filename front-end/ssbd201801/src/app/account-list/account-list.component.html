@@ -1,0 +1,34 @@
+Account list:
+
+<ul>
+  <li>
+    Login,
+    Imię,
+    Nazwisko,
+    Miasto,
+    E-mail
+    Ulica,
+    Numer domu,
+    Kod pocztowy,
+    Telefon,
+    Liczba logowań,
+    Liczba zamówień,
+    Liczba produktów,
+    Czy potwierdzony?
+  </li>
+  <li *ngFor='let account of accounts'>
+    {{ account.login }}, 
+    {{ account.firstName }},
+    {{ account.lastName }},
+    {{ account.city }},
+    {{ account.email }}
+    {{ account.street }},
+    {{ account.streetNumber }},
+    {{ account.postalCode }},
+    {{ account.phone }},
+    {{ account.numberOfLogins }},
+    {{ account.numberOfOrders }},
+    {{ account.numberOfProducts }},
+    {{ account.confirm }},
+  </li>
+</ul>

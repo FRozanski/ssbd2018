@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.moz.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.moz.managers;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,7 +21,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
  * @author fifi
  */
 @Local
-public interface MOZEndpointLocal {    
+public interface OrderManagerLocal {    
     
     void makeOrder(OrderProducts orderProducts);
     

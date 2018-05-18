@@ -10,19 +10,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Dominik
+ * @author dlange
  */
-@XmlRootElement
-public class AccountDto implements Serializable{
+public class AccountDto {
     
     // nie ma tu wszystkich pól, klasa utworzona dla testu
-    private Long id;
     private String login;
     private long numberOfProducts;
     private long numberOfOrders;
     private long numberOfLogins;
-    private String name;
-    private String surname;
+    private String firstName;
+    private String lastName;
     private String email;
     private String phone;
     private String street;
@@ -32,19 +30,14 @@ public class AccountDto implements Serializable{
     private String city;
     private String country;
     private boolean confirm;
-    
-    public AccountDto() {
-        
-    }
 
-    public AccountDto(Long id, String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String name, String surname, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
-        this.id = id;
+    public AccountDto(String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String firstName, String lastName, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
         this.login = login;
         this.numberOfProducts = numberOfProducts;
         this.numberOfOrders = numberOfOrders;
         this.numberOfLogins = numberOfLogins;
-        this.name = name;
-        this.surname = surname;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
         this.phone = phone;
         this.street = street;
@@ -55,14 +48,6 @@ public class AccountDto implements Serializable{
         this.country = country;
         this.confirm = confirm;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }    
 
     public String getLogin() {
         return login;
@@ -96,21 +81,21 @@ public class AccountDto implements Serializable{
         this.numberOfLogins = numberOfLogins;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public String getEmail() {
         return email;
@@ -183,10 +168,6 @@ public class AccountDto implements Serializable{
     public void setConfirm(boolean confirm) {
         this.confirm = confirm;
     }
-    
-    
-    
-    
-    
-    
 }
+
+

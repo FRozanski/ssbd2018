@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.mop.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
 import java.util.List;
 import javax.ejb.Local;
@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
  * @author fifi
  */
 @Local
-public interface MOPEndpointLocal {
+public interface ProductManagerLocal {
     
     void addProductByAccount(Account account, Product product);                                     
     

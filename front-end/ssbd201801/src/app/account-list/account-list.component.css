@@ -11,3 +11,14 @@
     max-height: 500px;
   }
   
+  mat-cell {
+    text-align: center;
+  }
+
+  mat-header-cell {
+    text-align: center;
+  }
+
+  .button-cell {
+    flex: 1.5;
+  }

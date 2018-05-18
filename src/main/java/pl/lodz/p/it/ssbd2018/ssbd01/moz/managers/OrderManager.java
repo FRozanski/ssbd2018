@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.moz.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.moz.managers;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,7 +24,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
-public class MOZEndpoint implements MOZEndpointLocal{
+public class OrderManager implements OrderManagerLocal{
 
     @Override
     public void makeOrder(OrderProducts orderProducts) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.mop.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
 import java.util.List;
 import javax.ejb.Stateless;
@@ -20,7 +20,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
-public class MOPEndpoint implements MOPEndpointLocal{
+public class ProductManager implements ProductManagerLocal{
 
     @Override
     public void addProductByAccount(Account account, Product product) {

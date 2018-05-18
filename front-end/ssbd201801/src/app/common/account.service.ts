@@ -12,31 +12,33 @@ export class AccountService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllAccounts() : Observable<Account[]> {
-    return this.httpClient.get<Account[]>(this.uri + '/account');
-  }
-
-  // getAllAccounts() : Observable<AccountData[]> {
-
-  //   let a: AccountData =  {
-  //     city: "abc",
-  //     confirm: true,
-  //     country: "abc",
-  //     email: "abc",
-  //     firstName: "abc",
-  //     lastName: "abc",
-  //     login: "abc",
-  //     numberOfLogins: 1,
-  //     numberOfOrders: 1,
-  //     numberOfProducts: 1,
-  //     phone: "abc",
-  //     postalCode: "abc",
-  //     street: "abc",
-  //     streetNumber: "abc"
-  //   };
-
-  //   return Observable.of([
-  //     a
-  //   ])
+  // getAllAccounts() : Observable<Account[]> {
+  //   return this.httpClient.get<Account[]>(this.uri + '/account');
   // }
+
+  getAllAccounts() : Observable<AccountData[]> {
+
+    let a: AccountData =  {
+      city: "abc",
+      confirm: true,
+      country: "abc",
+      email: "abc",
+      firstName: "abc",
+      lastName: "abc",
+      login: "abc",
+      numberOfLogins: 1,
+      numberOfOrders: 1,
+      numberOfProducts: 1,
+      phone: "abc",
+      postalCode: "abc",
+      street: "abc",
+      streetNumber: "abc"
+    };
+
+    console.log(JSON.stringify(a));
+
+    return Observable.of([
+      a
+    ])
+  }
 }

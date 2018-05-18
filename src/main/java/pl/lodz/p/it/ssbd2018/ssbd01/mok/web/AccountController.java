@@ -55,7 +55,7 @@ public class AccountController implements Serializable{
         newAccount.setPostalCode(a.getPostalCode());
         newAccount.setCity(a.getCity());
         newAccount.setCountry(a.getCountry());
-        mokEndpointLocal.registerAccount(newAccount);   
+//        mokEndpointLocal.registerAccount(newAccount);   
     }
 
     void sendMailWithVeryficationLink(String email, String veryficationLink) {

@@ -2,6 +2,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
 
 import java.util.List;
 import javax.ejb.Local;
+import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
@@ -21,7 +22,7 @@ public interface MOKEndpointLocal {
     
     void saveAccountAfterEdit(Account account); 
     
-    void registerAccount(Account account);
+    void registerAccount(Account account, ServletContext servletContext);
     
     void confirmAccount(Account account) throws AppBaseException;
     

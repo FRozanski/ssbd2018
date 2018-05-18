@@ -206,6 +206,7 @@ public class Account implements Serializable {
         this.numberOfOrders = STARTING_NUMBER;
         this.numberOfProducts = STARTING_NUMBER;
         this.expiryDate = generateExpiryDate();
+        this.used=false;
         this.token = UUID.randomUUID().toString().replace("-", "");
     }
 

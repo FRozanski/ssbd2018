@@ -1,17 +1,25 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceException;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
@@ -20,6 +28,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.web.CreateAccountBean;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
@@ -44,7 +53,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
     @EJB
     private AccountAlevelFacadeLocal accountAlevelFacade;
     
-    private SendMailUtils mailSender = new SendMailUtils();
+    private final SendMailUtils mailSender = new SendMailUtils();
 
     @Override
     @RolesAllowed("getAllAccounts")
@@ -73,7 +82,7 @@ public class MOKEndpoint implements MOKEndpointLocal {
 
     @Override
     @PermitAll
-    public void registerAccount(Account account) {
+    public void registerAccount(Account account, ServletContext servletContext) {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
         
@@ -81,6 +90,8 @@ public class MOKEndpoint implements MOKEndpointLocal {
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
         accountAlevelFacade.create(level);
+        
+        this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
     }
 
     @Override
@@ -163,4 +174,14 @@ public class MOKEndpoint implements MOKEndpointLocal {
     public Account getAccountByToken(String token) throws AppBaseException{
         return accountFacade.findByToken(token);
     }
+    
+     private String createVeryficationLink(Account account, ServletContext servletContext) {
+        String veryficationLink = "http://studapp.it.p.lodz.pl:8001";
+        String veryficationToken = account.getToken();
+        String baseAppUrl = veryficationLink + servletContext.getContextPath();
+        veryficationLink = baseAppUrl + "/registrationConfirm.xhtml?token=" + veryficationToken;
+        return veryficationLink;
+    }
+    
+    
 }

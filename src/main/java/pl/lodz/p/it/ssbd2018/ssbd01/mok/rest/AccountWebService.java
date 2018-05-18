@@ -83,20 +83,14 @@ public class AccountWebService {
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)
     public Response createAccountAlevel(@PathParam("accountId") String accountId, 
-            @QueryParam("alevelId") String alevelId, 
-            String plainText) {
+            @QueryParam("alevelId") String alevelId) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            String[] splittedTexts = plainText.split(";");
-            String accountText = splittedTexts[0];
-            String accessLevelText = splittedTexts[1];
-            AccountDto accountDto = mapper.readValue(accountText, AccountDto.class);
-            AccessLevelDto accessLevelDto = mapper.readValue(accessLevelText, AccessLevelDto.class);
-            AccessLevel accessLevel = mOKEndpointLocal.getAccessLevelById(accessLevelDto.getId());
-            Account account = mOKEndpointLocal.getAccountById(accountDto.getId());
+            AccessLevel accessLevel = mOKEndpointLocal.getAccessLevelById(Long.valueOf(alevelId));
+            Account account = mOKEndpointLocal.getAccountById(Long.valueOf(accountId));
             mOKEndpointLocal.addAccessLevelToAccount(accessLevel, account);
             return Response.accepted().build();
-        } catch(NumberFormatException | IOException ex) {
+        } catch(NumberFormatException ex) {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
             return Response.noContent().build();            
         }

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
@@ -34,10 +35,16 @@ public interface MOKEndpointLocal {
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
 
     public String getVeryficationToken(Account account);
+    
+    public Account getAccountById(long id);
 
     public Account getAccountByLogin(String login);
     
     public Account getAccountByToken(String token) throws AppBaseException;
 
     public void sendMailWithVeryficationLink(String mail, String veryficationLink);
+
+    public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
+
+    public AccessLevel getAccessLevelById(Long idAccessLevel);
 }

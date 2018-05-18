@@ -163,4 +163,25 @@ public class MOKEndpoint implements MOKEndpointLocal {
     public Account getAccountByToken(String token) throws AppBaseException{
         return accountFacade.findByToken(token);
     }
+
+    @Override
+    @RolesAllowed("getAccountById")
+    public Account getAccountById(long id) {
+        Account tmpAccount = accountFacade.find(id);        
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+    }
+
+    @Override
+    @RolesAllowed("getAccountAlevel")
+    public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel) {
+        AccountAlevel accountAlevel = accountAlevelFacade.findByAccountAndAccessLevel(idAccount, idAccessLevel);
+        return (AccountAlevel) CloneUtils.deepCloneThroughSerialization(accountAlevel);
+    }
+
+    @Override
+    @RolesAllowed("getAccessLevelById")
+    public AccessLevel getAccessLevelById(Long idAccessLevel) {
+        AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
+        return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
+    }
 }

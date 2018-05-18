@@ -33,40 +33,32 @@ public class DtoMapper {
                 account.getFlatNumber(),
                 account.getPostalCode(),
                 account.getCity(),
-                account.getCountry()//,
-//                account.getConfirm(),
-//                account.getActive(),
-//                account.getOrder1Collection(),
-//                account.getOrder1Collection1(),
-//                account.getProductCollection(),
-//                account.getToken(),
-//                account.getExpiryDate(),
-//                account.isUsed()                
+                account.getCountry(),
+                account.getConfirm(),
+                account.getActive(),
+                account.isUsed()                
         );
     }
     
     public static Account mapAccountDto(AccountDto accountDto, Account accountToEdit) {
         Account account = (Account) CloneUtils.deepCloneThroughSerialization(accountToEdit);
-//        account.setLogin(accountDto.getLogin());
-//        account.setNumberOfProducts(accountDto.getNumberOfProducts());
-//        account.setNumberOfOrders(accountDto.getNumberOfOrders());
-//        account.setNumberOfLogins(accountDto.getNumberOfLogins());
-//        account.setName(accountDto.getName());
-//        account.setSurname(accountDto.getSurname());
-//        account.setEmail(accountDto.getEmail());
-//        account.setPhone(accountDto.getPhone());
-//        account.setStreet(accountDto.getStreet());
-//        account.setStreetNumber(accountDto.getStreetNumber());
-//        account.setFlatNumber(accountDto.getFlatNumber());
-//        account.setPostalCode(accountDto.getPostalCode());
-//        account.setCity(accountDto.getCity());
+        account.setLogin(accountDto.getLogin());
+        account.setNumberOfProducts(accountDto.getNumberOfProducts());
+        account.setNumberOfOrders(accountDto.getNumberOfOrders());
+        account.setNumberOfLogins(accountDto.getNumberOfLogins());
+        account.setName(accountDto.getName());
+        account.setSurname(accountDto.getSurname());
+        account.setEmail(accountDto.getEmail());
+        account.setPhone(accountDto.getPhone());
+        account.setStreet(accountDto.getStreet());
+        account.setStreetNumber(accountDto.getStreetNumber());
+        account.setFlatNumber(accountDto.getFlatNumber());
+        account.setPostalCode(accountDto.getPostalCode());
+        account.setCity(accountDto.getCity());
         account.setCountry(accountDto.getCountry());
-//        account.setConfirm(accountDto.isConfirm());   
-//        account.setActive(accountDto.isActive());
-//        account.setOrder1Collection(accountDto.getOrder1Collection());
-//        account.setOrder1Collection1(accountDto.getOrder1Collection1());
-//        account.setProductCollection(accountDto.getProductCollection());
-//        account.setUsed(accountDto.isUsed());
+        account.setConfirm(accountDto.isConfirm());   
+        account.setActive(accountDto.isActive());
+        account.setUsed(accountDto.isUsed());
         return account;
     }
     

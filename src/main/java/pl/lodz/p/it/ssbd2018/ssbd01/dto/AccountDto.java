@@ -37,11 +37,6 @@ public class AccountDto implements Serializable{
     private String country;
     private boolean confirm;
     private boolean active;
-    private Collection<Order1> order1Collection;
-    private Collection<Order1> order1Collection1;
-    private Collection<Product> productCollection;
-    private String token;
-    private Date expiryDate;
     private boolean used;
     private long version = 0;
     
@@ -52,9 +47,7 @@ public class AccountDto implements Serializable{
     public AccountDto(Long id, String login, long numberOfProducts, long numberOfOrders, 
             long numberOfLogins, String name, String surname, String email, String phone, 
             String street, String streetNumber, String flatNumber, String postalCode, 
-            String city, String country) {///boolean confirm, boolean active, 
-//            Collection<Order1> order1Collection, Collection<Order1> order1Collection1, 
-//            Collection<Product> productCollection, String token, Date expiryDate, boolean used) {
+            String city, String country, boolean confirm, boolean active, boolean used) {
         this.id = id;
         this.login = login;
         this.numberOfProducts = numberOfProducts;
@@ -72,11 +65,6 @@ public class AccountDto implements Serializable{
         this.country = country;
         this.confirm = confirm;
         this.active = active;
-        this.order1Collection = order1Collection;
-        this.order1Collection1 = order1Collection1;
-        this.productCollection = productCollection;
-        this.token = token;
-        this.expiryDate = expiryDate;
         this.used = used;
     }
 
@@ -214,46 +202,6 @@ public class AccountDto implements Serializable{
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    public Collection<Order1> getOrder1Collection() {
-        return order1Collection;
-    }
-
-    public void setOrder1Collection(Collection<Order1> order1Collection) {
-        this.order1Collection = order1Collection;
-    }
-
-    public Collection<Order1> getOrder1Collection1() {
-        return order1Collection1;
-    }
-
-    public void setOrder1Collection1(Collection<Order1> order1Collection1) {
-        this.order1Collection1 = order1Collection1;
-    }
-
-    public Collection<Product> getProductCollection() {
-        return productCollection;
-    }
-
-    public void setProductCollection(Collection<Product> productCollection) {
-        this.productCollection = productCollection;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Date getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(Date expiryDate) {
-        this.expiryDate = expiryDate;
     }
 
     public boolean isUsed() {

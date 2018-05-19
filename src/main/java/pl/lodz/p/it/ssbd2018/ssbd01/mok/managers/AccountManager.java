@@ -75,8 +75,8 @@ public class AccountManager implements AccountManagerLocal {
     public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) {
         Account tmpAccount = accountFacade.find((account.getId()));
         String passHash = tmpAccount.getPassword();
-        if (passHash == HashUtils.sha256(oldPass)) {
-            if (newPassOne.length() > 8) {
+        if (passHash.contentEquals(HashUtils.sha256(oldPass))) {
+            if (newPassOne.length() >= 8) {
                 if (newPassOne.contentEquals(newPassTwo)) {
                     try {
                         tmpAccount.setPassword(HashUtils.sha256(newPassOne));

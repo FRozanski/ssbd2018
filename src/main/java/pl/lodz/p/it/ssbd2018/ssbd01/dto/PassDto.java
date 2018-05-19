@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
 /**
@@ -11,19 +6,22 @@ package pl.lodz.p.it.ssbd2018.ssbd01.dto;
  */
 public class PassDto {
     
-    private long accountId;
+    private String accountId;
     private String oldPass;
     private String newPassOne;
     private String newPassTwo;
     
-    public PassDto(long accountId, String oldPass, String newPassOne, String newPassTwo) {
+    public PassDto() {
+    }
+    
+    public PassDto(String accountId, String oldPass, String newPassOne, String newPassTwo) {
         this.accountId = accountId;
         this.oldPass = oldPass;
         this.newPassOne = newPassOne;
         this.newPassTwo = newPassTwo;
     }
     
-    public long getAccountId() {
+    public String getAccountId() {
         return accountId;
     }
 
@@ -39,7 +37,7 @@ public class PassDto {
         return newPassTwo;
     }
 
-    public void setAccountId(long accountId) {
+    public void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 

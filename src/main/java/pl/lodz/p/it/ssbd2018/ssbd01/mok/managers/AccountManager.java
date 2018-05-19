@@ -64,14 +64,14 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-//    @RolesAllowed("getAccountToEdit")
+    @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
-//    @RolesAllowed("saveAccountAfterEdit")
+    @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) {
         accountFacade.edit(account);
     }
@@ -175,7 +175,7 @@ public class AccountManager implements AccountManagerLocal {
         return accountFacade.findByToken(token);
     }
     
-     private String createVeryficationLink(Account account, ServletContext servletContext) {
+    private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
         veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
@@ -183,7 +183,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-//    @RolesAllowed("getAccountById")
+    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);

@@ -71,7 +71,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("changeYourPassword")
+    @RolesAllowed("changeOthersPassword")
     public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) {
         Account tmpAccount = accountFacade.find((account.getId()));
         String passHash = tmpAccount.getPassword();

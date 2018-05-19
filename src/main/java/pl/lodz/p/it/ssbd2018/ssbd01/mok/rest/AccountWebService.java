@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -26,9 +27,11 @@ import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccessLevelDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.PassDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -103,6 +106,20 @@ public class AccountWebService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response registerAccount(Account newAccount, @Context ServletContext servletContext) {
         accountManagerLocal.registerAccount(newAccount, servletContext);
+        return Response.ok().build();
+    }
+    
+    @PUT
+    @Path("changePassword")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changePassword(PassDto passObj) {
+        try{
+        Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+        accountManagerLocal.changeYourPassword(account, passObj.getOldPass(), passObj.getNewPassOne(), passObj.getNewPassTwo());
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
         return Response.ok().build();
     }
     

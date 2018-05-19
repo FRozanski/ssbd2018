@@ -16,6 +16,9 @@
         "PHONE" : "Telefon",
         "POSTAL_CODE" : "Kod pocztowy",
         "STREET" : "Ulica",
-        "STREET_NUMBER" : "Numer domu"
+        "STREET_NUMBER" : "Numer domu",
+        "EDIT" : "Edycja",
+        "EDIT_BTN" : "Edytuj"
+
     }
 }

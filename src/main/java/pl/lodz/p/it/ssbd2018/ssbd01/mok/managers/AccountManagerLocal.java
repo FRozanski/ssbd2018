@@ -1,7 +1,8 @@
-package pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 
 import java.util.List;
 import javax.ejb.Local;
+import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
@@ -12,7 +13,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
  * @author piotrek
  */
 @Local
-public interface MOKEndpointLocal {
+public interface AccountManagerLocal {
     
     List<Account> getAllAccounts();
     
@@ -22,7 +23,7 @@ public interface MOKEndpointLocal {
     
     void saveAccountAfterEdit(Account account); 
     
-    void registerAccount(Account account);
+    void registerAccount(Account account, ServletContext servletContext);
     
     void confirmAccount(Account account) throws AppBaseException;
     
@@ -37,13 +38,13 @@ public interface MOKEndpointLocal {
     public String getVeryficationToken(Account account);
     
     public Account getAccountById(long id);
-
+    
     public Account getAccountByLogin(String login);
     
     public Account getAccountByToken(String token) throws AppBaseException;
 
     public void sendMailWithVeryficationLink(String mail, String veryficationLink);
-
+    
     public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
 
     public AccessLevel getAccessLevelById(Long idAccessLevel);

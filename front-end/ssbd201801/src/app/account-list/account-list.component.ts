@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from '../common/account.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { DeployPrefix } from '../common/constants';
+import { AccountData } from '../model/account';
 
 @Component({
   selector: 'app-account-list',
@@ -8,16 +12,27 @@ import { AccountService } from '../common/account.service';
 })
 export class AccountListComponent implements OnInit {
 
-  accounts: Account[] = [];
+  displayedColumns = [
+    'city', 'confirm', 'country', 'email', 'firstName',
+    'lastName', 'login', 'numberOfLogins', 'numberOfOrders',
+    'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber', 'edit'
+  ];
+  dataSource;
 
-  constructor(private accountService: AccountService) { }
+  constructor (private accountService: AccountService) { }
 
   ngOnInit() {
-
-    // todo: use async pipe.
-    this.accountService.getAllAcounts().subscribe((data: Account[]) => {
-      this.accounts = data;
-    })
+    this.accountService.getAllAccounts().subscribe((data)=> {
+      this.dataSource = data;
+    }, ()=> {
+      window.location.href = "/" + DeployPrefix + "/login/login.html";
+    });
   }
+
+  onEditClick(account: AccountData) {
+    throw new Error("onEditClick(..) is not implemented yet.")
+  }
+
+
 
 }

@@ -36,7 +36,7 @@ public class ConfirmAccountBean {
             accountController.confirmAccount(account);
             confirmationMessage = BUNDLE.getString("ActivatedAccount");
         } catch(AppBaseException ex) {
-            Logger.getLogger(ListAccountBean.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(ListAccountBean.class.getName()).log(Level.SEVERE, null, ex);
             confirmationMessage = BUNDLE.getString("InvalidToken");
         }
     }

@@ -16,6 +16,8 @@
         "PHONE" : "PHONE",
         "POSTAL_CODE" : "POSTAL_CODE",
         "STREET" : "STREET",
-        "STREET_NUMBER" : "STREET_NUMBER"
+        "STREET_NUMBER" : "STREET_NUMBER",
+        "EDIT" : "EDIT",
+        "EDIT_BTN" : "EDIT_BTN"
     }
 }

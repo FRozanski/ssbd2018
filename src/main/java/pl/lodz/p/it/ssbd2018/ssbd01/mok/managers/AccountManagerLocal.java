@@ -27,9 +27,9 @@ public interface AccountManagerLocal {
     
     void confirmAccount(Account account) throws AppBaseException;
     
-    void lockAccount(Account account);
+    void lockAccount(long accountId);
     
-    void unlockAccount(Account account);
+    void unlockAccount(long accountId);
     
     void addAccessLevelToAccount(AccessLevel accessLevel, Account account);
     

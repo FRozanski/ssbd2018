@@ -5,7 +5,6 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -16,7 +15,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.GET;
+import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -29,6 +30,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 
 /**
  *
@@ -104,6 +106,50 @@ public class AccountWebService {
     public Response registerAccount(Account newAccount, @Context ServletContext servletContext) {
         accountManagerLocal.registerAccount(newAccount, servletContext);
         return Response.ok().build();
+    }
+    
+    @POST
+    @Path("lockAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lockAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.lockAccount(accountId);
+        //FIXME - dodac podzial na wyjatki
+        } catch (NotAuthorizedException na) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (RuntimeException re) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", "lock_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } 
+        return Response.ok().build(); 
+    }
+    
+    @POST
+    @Path("unlockAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unlockAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.unlockAccount(accountId);
+        //FIXME - dodac podzial na wyjatki
+        } catch (NotAuthorizedException na) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (RuntimeException re) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", "unlock_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        return Response.ok().build(); 
     }
     
     @DELETE

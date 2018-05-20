@@ -48,4 +48,6 @@ public interface AccountManagerLocal {
     public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
 
     public AccessLevel getAccessLevelById(Long idAccessLevel);
+    
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo);
 }

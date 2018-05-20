@@ -94,12 +94,22 @@ public class AccountWebService {
     
     @PUT
     @Path("myAccount")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateMyAccount(AccountDto accountDto) {
-        Account accountToEdit = accountManagerLocal.getMyAccountById(accountDto.getId());
-        Account account = DtoMapper.mapAccountDto(accountDto, accountToEdit);
-        accountManagerLocal.saveMyAccountAfterEdit(account);
-        return Response.ok(accountDto).build();
+    @Consumes(MediaType.TEXT_PLAIN)
+    public Response updateMyAccount(String textPlain) {
+            ObjectMapper mapper = new ObjectMapper();
+        try {
+            AccountDto accountDto = mapper.readValue(textPlain, AccountDto.class);
+            Account accountToEdit = accountManagerLocal.getMyAccountById(accountDto.getId());
+            Account account = DtoMapper.mapAccountDto(accountDto, accountToEdit);
+            accountManagerLocal.saveMyAccountAfterEdit(account);
+            return Response.ok(accountDto).build();
+        } catch (IOException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();     
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
     }
     
     @GET

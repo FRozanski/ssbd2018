@@ -247,7 +247,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-//    @RolesAllowed("getAccountById")
+    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
@@ -265,5 +265,18 @@ public class AccountManager implements AccountManagerLocal {
     public AccessLevel getAccessLevelById(Long idAccessLevel) {
         AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
         return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
+    }
+
+    @Override
+    @RolesAllowed("getMyAccountById")
+    public Account getMyAccountById(long id) {
+        Account tmpAccount = accountFacade.find(id);
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+    }
+
+    @Override
+    @RolesAllowed("saveMyAccountAfterEdit")
+    public void saveMyAccountAfterEdit(Account myAccount) {
+        accountFacade.edit(myAccount);
     }
 }

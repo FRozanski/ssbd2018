@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.EJBAccessException;
-import javax.ejb.SessionContext;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -50,9 +48,6 @@ public class AccountWebService {
     @EJB
     AccountManagerLocal accountManagerLocal;
     
-//    @Resource
-//    SessionContext context;
-    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getHello() {
@@ -80,16 +75,6 @@ public class AccountWebService {
         }
     }
     
-    @GET
-    @Path("current")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCurrentlyLoggedAccount() {
-        String login = "admin";//context.getCallerPrincipal().getName();
-        Account account = accountManagerLocal.getAccountByLogin(login);
-        AccountDto accountDto = DtoMapper.mapAccount(account);    
-        return Response.ok(accountDto).build();  
-    }
-    
     @PUT
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)
@@ -105,6 +90,16 @@ public class AccountWebService {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
             return Response.noContent().build();
         }
+    }
+    
+    @PUT
+    @Path("myAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateMyAccount(AccountDto accountDto) {
+        Account accountToEdit = accountManagerLocal.getMyAccountById(accountDto.getId());
+        Account account = DtoMapper.mapAccountDto(accountDto, accountToEdit);
+        accountManagerLocal.saveMyAccountAfterEdit(account);
+        return Response.ok(accountDto).build();
     }
     
     @GET

@@ -140,16 +140,33 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     @RolesAllowed("lockAccount")
-    public void lockAccount(Account account) {
-        account.setActive(false);
-        accountFacade.edit(account);
+    public void lockAccount(long accountId) throws AccountException{
+        try {
+            Account account = accountFacade.find(accountId);
+            account.setActive(false);
+            accountFacade.edit(account);
+        //FIXME - dodac podzial na wyjatki
+        } catch (NullPointerException npe) {
+            throw new AccountException("lock_error");
+        } catch (OptimisticLockException oe) {
+            throw new AccountException("lock_error");
+        }
     }
 
     @Override
     @RolesAllowed("unlockAccount")
-    public void unlockAccount(Account account) {
-        account.setActive(true);
-        accountFacade.edit(account);
+    public void unlockAccount(long accountId) throws AccountException {
+        try { 
+            Account account = accountFacade.find(accountId);
+            account.setActive(true);
+            accountFacade.edit(account);
+        //FIXME - dodac podzial na wyjatki
+        } catch (NullPointerException npe) {
+            throw new AccountException("unlock_error");
+        } catch (OptimisticLockException oe) {
+            throw new AccountException("unlock_error");
+        }
+        
     }
 
     @Override

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.ejb.EJBAccessException;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -32,7 +33,8 @@ import pl.lodz.p.it.ssbd2018.ssbd01.dto.PassDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 
 /**
  *
@@ -154,6 +156,50 @@ public class AccountWebService {
             return Response.noContent().build();            
         }
         return Response.ok().build();
+    }
+    
+    @POST
+    @Path("lockAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lockAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.lockAccount(accountId);
+        //FIXME - dodac podzial na wyjatki
+        } catch (EJBAccessException ae) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AccountException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        return Response.ok().build(); 
+    }
+    
+    @POST
+    @Path("unlockAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unlockAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.unlockAccount(accountId);
+        //FIXME - dodac podzial na wyjatki
+        } catch (EJBAccessException ae) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AccountException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } 
+        return Response.ok().build(); 
     }
     
     @DELETE

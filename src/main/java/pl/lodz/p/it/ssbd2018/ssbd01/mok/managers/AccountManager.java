@@ -183,7 +183,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountById")
+//    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);        
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);

@@ -142,6 +142,20 @@ public class AccountWebService {
         return Response.ok().build();
     }
     
+    @PUT
+    @Path("changeOthersPassword")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changeOthersPassword(PassDto passObj) {
+        try{
+        Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+        accountManagerLocal.changeOthersPassword(account, passObj.getNewPassOne(), passObj.getNewPassTwo());
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
+        return Response.ok().build();
+    }
+    
     @DELETE
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)

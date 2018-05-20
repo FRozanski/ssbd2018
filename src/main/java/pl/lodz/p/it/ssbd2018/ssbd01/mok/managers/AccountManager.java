@@ -94,7 +94,27 @@ public class AccountManager implements AccountManagerLocal {
             throw new IllegalArgumentException("Niepoprawne stare hasło");
         }
     }
-
+    
+    @Override
+    @RolesAllowed("changeOthersPassword")
+    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) {
+        Account tmpAccount = accountFacade.find((account.getId()));
+        if (newPassOne.length() > 8) {
+            if (newPassOne.contentEquals(newPassTwo)) {
+                try {
+                    tmpAccount.setPassword(HashUtils.sha256(newPassOne));
+                    accountFacade.edit(tmpAccount);
+                } catch (IllegalArgumentException ae) {
+                    throw new IllegalArgumentException("Coś się zepsuło.", ae);
+                }
+            } else {
+                throw new IllegalArgumentException("Nowe hasła nie są zgodne.");
+            }
+        } else {
+            throw new IllegalArgumentException("Nowe hasło jest za krótkie. Powinno posiadać conajmniej 8 znaków");
+        }
+    }
+    
     @Override
     @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) {

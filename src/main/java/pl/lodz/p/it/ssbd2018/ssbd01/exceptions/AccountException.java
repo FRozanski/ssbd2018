@@ -17,7 +17,7 @@ public class AccountException extends AppBaseException {
         super(message, cause);
     }
 
-    private AccountException(String message) {
+    public AccountException(String message) {
         super(message);
     }
     

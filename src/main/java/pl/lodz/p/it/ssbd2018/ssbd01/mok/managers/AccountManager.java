@@ -35,20 +35,20 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class AccountManager implements AccountManagerLocal {
-    
+
     private static final String DEFAULT_ACCESS_LEVEL = "user";
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
     private static final String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
-    
+
     @EJB
     private AccountFacadeLocal accountFacade;
-    
+
     @EJB
     private AccessLevelFacadeLocal accessLevelFacade;
-    
+
     @EJB
     private AccountAlevelFacadeLocal accountAlevelFacade;
-    
+
     private final SendMailUtils mailSender = new SendMailUtils();
 
     @Override
@@ -56,7 +56,7 @@ public class AccountManager implements AccountManagerLocal {
     public List<Account> getAllAccounts() {
         return accountFacade.findAll();
     }
-    
+
     @Override
     @RolesAllowed("getAllAccessLevels")
     public List<AccessLevel> getAllAccessLevels() {
@@ -66,10 +66,55 @@ public class AccountManager implements AccountManagerLocal {
     @Override
     @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
-        Account tmpAccount = accountFacade.find(account.getId());        
+        Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
+    @Override
+    @RolesAllowed("changeYourPassword")
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) {
+        Account tmpAccount = accountFacade.find((account.getId()));
+        String passHash = tmpAccount.getPassword();
+        if (passHash.contentEquals(HashUtils.sha256(oldPass))) {
+            if (newPassOne.length() >= 8) {
+                if (newPassOne.contentEquals(newPassTwo)) {
+                    try {
+                        tmpAccount.setPassword(HashUtils.sha256(newPassOne));
+                        accountFacade.edit(tmpAccount);
+                    } catch (IllegalArgumentException ae) {
+                        throw new IllegalArgumentException("Coś się zepsuło.", ae);
+                    }
+                } else {
+                    throw new IllegalArgumentException("Nowe hasła nie są zgodne.");
+                }
+            } else {
+                throw new IllegalArgumentException("Nowe hasło jest za krótkie. Powinno posiadać conajmniej 8 znaków");
+            }
+        } else {
+            throw new IllegalArgumentException("Niepoprawne stare hasło");
+        }
+    }
+    
+    @Override
+    @RolesAllowed("changeOthersPassword")
+    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) {
+        Account tmpAccount = accountFacade.find((account.getId()));
+        if (newPassOne.length() > 8) {
+            if (newPassOne.contentEquals(newPassTwo)) {
+                try {
+                    tmpAccount.setPassword(HashUtils.sha256(newPassOne));
+                    accountFacade.edit(tmpAccount);
+                } catch (IllegalArgumentException ae) {
+                    throw new IllegalArgumentException("Coś się zepsuło.", ae);
+                }
+            } else {
+                throw new IllegalArgumentException("Nowe hasła nie są zgodne.");
+            }
+        } else {
+            throw new IllegalArgumentException("Nowe hasło jest za krótkie. Powinno posiadać conajmniej 8 znaków");
+        }
+    }
+    
     @Override
     @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) {
@@ -82,29 +127,46 @@ public class AccountManager implements AccountManagerLocal {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
         loger.log(Level.INFO, "Account Created.");
-        
+
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
         accountAlevelFacade.create(level);
         loger.log(Level.INFO, "Access level added to account.");
-        
+
         this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
         loger.log(Level.INFO, "E-mail with activation token sent.");
     }
 
     @Override
     @RolesAllowed("lockAccount")
-    public void lockAccount(Account account) {
-        account.setActive(false);
-        accountFacade.edit(account);
+    public void lockAccount(long accountId) throws AccountException{
+        try {
+            Account account = accountFacade.find(accountId);
+            account.setActive(false);
+            accountFacade.edit(account);
+        //FIXME - dodac podzial na wyjatki
+        } catch (NullPointerException npe) {
+            throw new AccountException("lock_error");
+        } catch (OptimisticLockException oe) {
+            throw new AccountException("lock_error");
+        }
     }
 
     @Override
     @RolesAllowed("unlockAccount")
-    public void unlockAccount(Account account) {
-        account.setActive(true);
-        accountFacade.edit(account);
+    public void unlockAccount(long accountId) throws AccountException {
+        try { 
+            Account account = accountFacade.find(accountId);
+            account.setActive(true);
+            accountFacade.edit(account);
+        //FIXME - dodac podzial na wyjatki
+        } catch (NullPointerException npe) {
+            throw new AccountException("unlock_error");
+        } catch (OptimisticLockException oe) {
+            throw new AccountException("unlock_error");
+        }
+        
     }
 
     @Override
@@ -122,40 +184,42 @@ public class AccountManager implements AccountManagerLocal {
         List<AccountAlevel> accountAlevels = accountAlevelFacade.findAll();
         AccountAlevel accountAlevel = null;
         for (AccountAlevel aal : accountAlevels) {
-            if (aal.getIdAccount().equals(account) 
+            if (aal.getIdAccount().equals(account)
                     && aal.getIdAlevel().equals(accessLevel)) {
                 accountAlevel = aal;
                 break;
             }
         }
-        if (accountAlevel != null)
+        if (accountAlevel != null) {
             accountAlevelFacade.remove(accountAlevel);
+        }
     }
 
     @Override
-    public void sendMailWithVeryficationLink(String mail, String veryficationLink) {        
+    public void sendMailWithVeryficationLink(String mail, String veryficationLink) {
         mailSender.sendEmail(mail, veryficationLink);
     }
 
     @Override
     @PermitAll
-    public void confirmAccount(Account account) throws AppBaseException{   
+    public void confirmAccount(Account account) throws AppBaseException {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(new Timestamp(calendar.getTime().getTime()));
             Date confirmationDate = new Date(calendar.getTime().getTime());
             long timeDiff = account.getExpiryDate().getTime() - confirmationDate.getTime();
-            
-            if (account.getConfirm() == true || account.getConfirmationDate() != null || timeDiff <= 0 || account.isUsed() == true)
+
+            if (account.getConfirm() == true || account.getConfirmationDate() != null || timeDiff <= 0 || account.isUsed() == true) {
                 throw new PersistenceException();
-            
+            }
+
             account.setConfirm(true);
             account.setConfirmationDate(confirmationDate);
             account.setUsed(true);
             accountFacade.edit(account);
-        } catch(OptimisticLockException oe) {
+        } catch (OptimisticLockException oe) {
             throw AccountException.createAccountExceptionWithOptimisticLock(oe, account);
-        } catch(PersistenceException pe) {
+        } catch (PersistenceException pe) {
             throw AccountException.createAccountExceptionWithDbConstraint(pe, account);
         }
     }
@@ -171,10 +235,10 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    public Account getAccountByToken(String token) throws AppBaseException{
+    public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }
-    
+
     private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
@@ -185,7 +249,7 @@ public class AccountManager implements AccountManagerLocal {
     @Override
 //    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
-        Account tmpAccount = accountFacade.find(id);        
+        Account tmpAccount = accountFacade.find(id);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
@@ -201,5 +265,5 @@ public class AccountManager implements AccountManagerLocal {
     public AccessLevel getAccessLevelById(Long idAccessLevel) {
         AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
         return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
-    }    
+    }
 }

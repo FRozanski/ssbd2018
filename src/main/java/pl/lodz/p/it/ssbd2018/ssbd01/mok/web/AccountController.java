@@ -66,13 +66,6 @@ public class AccountController implements Serializable{
         mokEndpointLocal.confirmAccount(account);
     }
     
-    public void lockAccount(Account account) {
-        mokEndpointLocal.lockAccount(account);
-    }
-
-    public void unlockAccount(Account account) {
-        mokEndpointLocal.unlockAccount(account);
-    }
     
     public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) {
         mokEndpointLocal.addAccessLevelToAccount(accessLevel, account);

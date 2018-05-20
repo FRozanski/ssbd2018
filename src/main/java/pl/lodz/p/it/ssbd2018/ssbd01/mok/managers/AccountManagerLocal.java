@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
@@ -27,9 +28,9 @@ public interface AccountManagerLocal {
     
     void confirmAccount(Account account) throws AppBaseException;
     
-    void lockAccount(Account account);
+    void lockAccount(long accountId) throws AccountException;
     
-    void unlockAccount(Account account);
+    void unlockAccount(long accountId) throws AccountException;
     
     void addAccessLevelToAccount(AccessLevel accessLevel, Account account);
     
@@ -48,4 +49,8 @@ public interface AccountManagerLocal {
     public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
 
     public AccessLevel getAccessLevelById(Long idAccessLevel);
+    
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo);
+    
+    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo);
 }

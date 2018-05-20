@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
+import javax.ejb.EJBAccessException;
 import javax.ejb.SessionContext;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
@@ -30,9 +31,12 @@ import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccessLevelDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.PassDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 
 /**
  *
@@ -141,6 +145,78 @@ public class AccountWebService {
         return Response.ok().build();
     }
     
+    @PUT
+    @Path("changePassword")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changePassword(PassDto passObj) {
+        try{
+        Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+        accountManagerLocal.changeYourPassword(account, passObj.getOldPass(), passObj.getNewPassOne(), passObj.getNewPassTwo());
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
+        return Response.ok().build();
+    }
+    
+    @PUT
+    @Path("changeOthersPassword")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response changeOthersPassword(PassDto passObj) {
+        try{
+        Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+        accountManagerLocal.changeOthersPassword(account, passObj.getNewPassOne(), passObj.getNewPassTwo());
+        } catch(NumberFormatException ex) {
+            Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
+            return Response.noContent().build();            
+        }
+        return Response.ok().build();
+    }
+    
+    @POST
+    @Path("lockAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response lockAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.lockAccount(accountId);
+        //FIXME - dodac podzial na wyjatki
+        } catch (EJBAccessException ae) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AccountException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        return Response.ok().build(); 
+    }
+    
+    @POST
+    @Path("unlockAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response unlockAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.unlockAccount(accountId);
+        //FIXME - dodac podzial na wyjatki
+        } catch (EJBAccessException ae) {
+            return Response.status(Response.Status.UNAUTHORIZED)
+                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AccountException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", e.getMessage()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } 
+        return Response.ok().build(); 
+    }
+    
     @DELETE
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)
@@ -155,5 +231,5 @@ public class AccountWebService {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
             return Response.noContent().build();            
         }
-    }    
+    }
 }

@@ -6,8 +6,8 @@ import javax.ejb.ApplicationException;
  *
  * @author agkan
  */
-@ApplicationException(inherited = true, rollback = true)
-public class AppBaseException extends Exception{
+@ApplicationException(rollback = true)
+public abstract class AppBaseException extends Exception{
 
     public AppBaseException(String message) {
         super(message);
@@ -15,5 +15,9 @@ public class AppBaseException extends Exception{
 
     public AppBaseException(String message, Throwable cause) {
         super(message, cause);
-    }    
+    }
+
+    public String getCode() {
+        return "app.exception";
+    }
 }

@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
@@ -44,9 +44,9 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
             account = typedQuery.getSingleResult();            
             em.flush();
         } catch(OptimisticLockException oe) {
-            throw AccountException.createAccountExceptionWithOptimisticLock(oe, account);
+
         } catch(PersistenceException pe) {
-            throw AccountException.createAccountExceptionWithDbConstraint(pe, account);
+
         }
         return account;
     }

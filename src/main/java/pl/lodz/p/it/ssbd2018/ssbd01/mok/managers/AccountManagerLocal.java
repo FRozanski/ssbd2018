@@ -6,7 +6,7 @@ import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**

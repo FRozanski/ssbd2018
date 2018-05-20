@@ -33,7 +33,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.dto.PassDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 
 /**

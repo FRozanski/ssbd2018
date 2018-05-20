@@ -18,7 +18,7 @@ import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
@@ -218,9 +218,9 @@ public class AccountManager implements AccountManagerLocal {
             account.setUsed(true);
             accountFacade.edit(account);
         } catch (OptimisticLockException oe) {
-            throw AccountException.createAccountExceptionWithOptimisticLock(oe, account);
+
         } catch (PersistenceException pe) {
-            throw AccountException.createAccountExceptionWithDbConstraint(pe, account);
+
         }
     }
 

@@ -29,8 +29,9 @@ public class SendMailUtils {
     private String password = "fajniebedziejaksieuda";
     private String protocol = "SMTPS";
     private boolean debug = true;
-
-    public void sendEmail(String to, String activationLink) {
+    
+    private Session initializeEmailSettings() {    
+        
         Properties props = new Properties();
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", port);
@@ -51,8 +52,13 @@ public class SendMailUtils {
 
         Session session = Session.getInstance(props, authenticator);
         session.setDebug(debug);
+        
+        return session;
+    }
 
-        MimeMessage message = new MimeMessage(session);
+    public void sendVerificationEmail(String to, String activationLink) {
+        
+        MimeMessage message = new MimeMessage(initializeEmailSettings());
         try {
             message.setFrom(new InternetAddress(from));
             InternetAddress[] address = {new InternetAddress(to)};
@@ -68,5 +74,43 @@ public class SendMailUtils {
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    public void sendMailAfterActivation(String to) {
+        
+     MimeMessage message = new MimeMessage(initializeEmailSettings());
+        try {
+            message.setFrom(new InternetAddress(from));
+            InternetAddress[] address = {new InternetAddress(to)};
+            message.setRecipients(Message.RecipientType.TO, address);
+            message.setSubject("Welcome at Co-oper Service");
+            message.setSentDate(new Date());
+            message.setText("Witaj w gronie kooperantów!!! \n\n"
+                    + "Twoje konto jest już aktywne! Zapraszamy do korzystania z serwisu. \\n\\n" 
+                    + "Pozdrawiamy! \n"
+                    + "KOOPERANT TEAM :D");
+            Transport.send(message);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }   
+    }
+    
+    public void sendMailAfterAccountLock(String to) {
+        
+     MimeMessage message = new MimeMessage(initializeEmailSettings());
+        try {
+            message.setFrom(new InternetAddress(from));
+            InternetAddress[] address = {new InternetAddress(to)};
+            message.setRecipients(Message.RecipientType.TO, address);
+            message.setSubject("Welcome at Co-oper Service");
+            message.setSentDate(new Date());
+            message.setText("Witaj w gronie kooperantów!!! \n\n"
+                    + "Twoje konto zostało zablokowane. \\n\\n" 
+                    + "Pozdrawiamy! \n"
+                    + "KOOPERANT TEAM :D");
+            Transport.send(message);
+        } catch (MessagingException ex) {
+            ex.printStackTrace();
+        }   
     }
 }

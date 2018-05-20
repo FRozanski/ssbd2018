@@ -29,5 +29,7 @@ public interface AccountAlevelFacadeLocal {
     List<AccountAlevel> findRange(int[] range);
 
     int count();
+
+    AccountAlevel findByAccountAndAccessLevel(Long idAccount, Long idAccessLevel);
     
 }

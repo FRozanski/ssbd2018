@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 
 /**
  *
@@ -20,7 +20,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.endpoints.MOKEndpointLocal;
 public class AccountController implements Serializable{
     
     @EJB
-    private transient MOKEndpointLocal mokEndpointLocal;
+    private transient AccountManagerLocal mokEndpointLocal;
     
     private Account account;
     private Account newAccount;
@@ -55,7 +55,7 @@ public class AccountController implements Serializable{
         newAccount.setPostalCode(a.getPostalCode());
         newAccount.setCity(a.getCity());
         newAccount.setCountry(a.getCountry());
-        mokEndpointLocal.registerAccount(newAccount);   
+//        mokEndpointLocal.registerAccount(newAccount);   
     }
 
     void sendMailWithVeryficationLink(String email, String veryficationLink) {
@@ -66,13 +66,6 @@ public class AccountController implements Serializable{
         mokEndpointLocal.confirmAccount(account);
     }
     
-    public void lockAccount(Account account) {
-        mokEndpointLocal.lockAccount(account);
-    }
-
-    public void unlockAccount(Account account) {
-        mokEndpointLocal.unlockAccount(account);
-    }
     
     public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) {
         mokEndpointLocal.addAccessLevelToAccount(accessLevel, account);

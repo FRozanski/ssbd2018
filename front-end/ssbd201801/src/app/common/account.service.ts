@@ -32,5 +32,4 @@ export class AccountService {
 
     return Observable.of(response);
   }
-
 }

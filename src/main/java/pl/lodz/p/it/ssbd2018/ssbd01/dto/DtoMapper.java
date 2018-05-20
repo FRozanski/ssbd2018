@@ -6,20 +6,24 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
 
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 
 /**
  *
  * @author dlange
+ * @author agkan
  */
 public class DtoMapper {
     
     public static AccountDto mapAccount(Account account) {
         return new AccountDto(
+                account.getId(),
                 account.getLogin(), 
                 account.getNumberOfProducts(),
-                account.getNumberOfLogins(),
                 account.getNumberOfOrders(),
+                account.getNumberOfLogins(),
                 account.getName(),
                 account.getSurname(),
                 account.getEmail(),
@@ -30,11 +34,39 @@ public class DtoMapper {
                 account.getPostalCode(),
                 account.getCity(),
                 account.getCountry(),
-                account.getConfirm()
-                
+                account.getConfirm(),
+                account.getActive(),
+                account.isUsed()                
         );
     }
     
+    public static Account mapAccountDto(AccountDto accountDto, Account accountToEdit) {
+        Account account = (Account) CloneUtils.deepCloneThroughSerialization(accountToEdit);
+        account.setLogin(accountDto.getLogin());
+        account.setNumberOfProducts(accountDto.getNumberOfProducts());
+        account.setNumberOfOrders(accountDto.getNumberOfOrders());
+        account.setNumberOfLogins(accountDto.getNumberOfLogins());
+        account.setName(accountDto.getName());
+        account.setSurname(accountDto.getSurname());
+        account.setEmail(accountDto.getEmail());
+        account.setPhone(accountDto.getPhone());
+        account.setStreet(accountDto.getStreet());
+        account.setStreetNumber(accountDto.getStreetNumber());
+        account.setFlatNumber(accountDto.getFlatNumber());
+        account.setPostalCode(accountDto.getPostalCode());
+        account.setCity(accountDto.getCity());
+        account.setCountry(accountDto.getCountry());
+        account.setConfirm(accountDto.isConfirm());   
+        account.setActive(accountDto.isActive());
+        account.setUsed(accountDto.isUsed());
+        return account;
+    }
     
-    
+    public static AccessLevelDto mapAccessLevel(AccessLevel accessLevel) {
+        return new AccessLevelDto(
+                accessLevel.getId(),
+                accessLevel.getLevel(),
+                accessLevel.getActive()
+        );
+    }
 }

@@ -27,6 +27,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '', redirectTo: 'main', pathMatch: 'full' }
 ];
+
 @NgModule({
   declarations: [
     AppComponent,

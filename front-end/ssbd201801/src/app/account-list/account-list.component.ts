@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -12,8 +13,8 @@ import { AccountData } from '../model/account-data';
 export class AccountListComponent implements OnInit {
 
   displayedColumns = [
-    'city', 'confirm', 'country', 'email', 'firstName', 
-    'lastName', 'login', 'numberOfLogins', 'numberOfOrders', 
+    'city', 'confirm', 'country', 'email', 'firstName',
+    'lastName', 'login', 'numberOfLogins', 'numberOfOrders',
     'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber', 'edit'
   ];
   dataSource;
@@ -32,6 +33,6 @@ export class AccountListComponent implements OnInit {
     throw new Error("onEditClick(..) is not implemented yet.")
   }
 
- 
+
 
 }

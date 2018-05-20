@@ -5,19 +5,28 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
+import javax.xml.bind.annotation.XmlRootElement;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+
 /**
  *
  * @author Dominik
  */
-public class AccountDto {
+@XmlRootElement
+public class AccountDto implements Serializable{
     
     // nie ma tu wszystkich pól, klasa utworzona dla testu
+    private Long id;
     private String login;
     private long numberOfProducts;
     private long numberOfOrders;
     private long numberOfLogins;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String surname;
     private String email;
     private String phone;
     private String street;
@@ -27,14 +36,25 @@ public class AccountDto {
     private String city;
     private String country;
     private boolean confirm;
+    private boolean active;
+    private boolean used;
+    private long version = 0;
+    
+    public AccountDto() {
+        
+    }
 
-    public AccountDto(String login, long numberOfProducts, long numberOfOrders, long numberOfLogins, String firstName, String lastName, String email, String phone, String street, String streetNumber, String flatNumber, String postalCode, String city, String country, boolean confirm) {
+    public AccountDto(Long id, String login, long numberOfProducts, long numberOfOrders, 
+            long numberOfLogins, String name, String surname, String email, String phone, 
+            String street, String streetNumber, String flatNumber, String postalCode, 
+            String city, String country, boolean confirm, boolean active, boolean used) {
+        this.id = id;
         this.login = login;
         this.numberOfProducts = numberOfProducts;
         this.numberOfOrders = numberOfOrders;
         this.numberOfLogins = numberOfLogins;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.phone = phone;
         this.street = street;
@@ -44,6 +64,16 @@ public class AccountDto {
         this.city = city;
         this.country = country;
         this.confirm = confirm;
+        this.active = active;
+        this.used = used;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getLogin() {
@@ -78,20 +108,20 @@ public class AccountDto {
         this.numberOfLogins = numberOfLogins;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getEmail() {
@@ -165,10 +195,30 @@ public class AccountDto {
     public void setConfirm(boolean confirm) {
         this.confirm = confirm;
     }
-    
-    
-    
-    
-    
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
     
 }

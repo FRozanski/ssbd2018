@@ -175,7 +175,7 @@ public class AccountManager implements AccountManagerLocal {
         return accountFacade.findByToken(token);
     }
     
-     private String createVeryficationLink(Account account, ServletContext servletContext) {
+    private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
         veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;

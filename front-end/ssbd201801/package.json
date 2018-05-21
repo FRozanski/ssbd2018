@@ -4,8 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "ng serve -o",
+    "build" : "ng build --prod --base-href ./",
+    "prod-build": "ng build --prod --base-href ./ --env=prod",
+    "dev-build": "ng build --prod --base-href ./ --env=dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

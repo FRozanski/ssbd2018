@@ -18,7 +18,21 @@
         "STREET" : "Ulica",
         "STREET_NUMBER" : "Numer domu",
         "EDIT" : "Edycja",
-        "EDIT_BTN" : "Edytuj"
-
-    }
+        "EDIT_BTN" : "Edytuj",
+        "PASSWORD" : "Hasło",
+        "REPLY_PASSWORD" : "Powtórz hasło",
+        "FLAT_NUMBER": "Numer mieszkania"
+    },
+    "FORM" : {
+        "FIELD_REQUIRED" : "To pole jest wymagane.",
+        "SUBMIT" : "Wyślij",
+        "RETURN" : "Powrót"
+    },
+    "REGISTER" : {
+        "BASIC_DATA" : "Dane podstawowe",
+        "ADDRESS_DATA" : "Dane adresowe"
+    },
+    "password_length_error" : "Podane hasło jest za krótkie!",
+    "password_different_error" : "Podane hasła są różne!"
+    
 }

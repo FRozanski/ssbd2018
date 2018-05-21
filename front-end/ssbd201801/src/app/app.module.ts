@@ -8,8 +8,11 @@ import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AccountService } from './common/account.service';
-import { MatTableModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
-
+import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatCardModule } from '@angular/material';
+import { RegisterComponent } from './register/register.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -20,21 +23,28 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', component: MainPageComponent },
   { path: 'accounts', component: AccountListComponent },
-  { path: '', redirectTo: 'main', pathMatch: 'full' }
+  { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: 'main' }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    AccountListComponent
+    AccountListComponent,
+    RegisterComponent
   ],
   imports: [
     MatTableModule,
     MatCheckboxModule,
+    MatInputModule,
     MatButtonModule,
+    MatCardModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
@@ -48,7 +58,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   providers: [
-    AccountService
+    AccountService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ]
 })
 export class AppModule { }

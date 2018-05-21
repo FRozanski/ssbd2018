@@ -1,10 +1,6 @@
 <form [formGroup]='form'>
-  <mat-card class='errors-card' *ngIf='formValidationMessages.length !== 0'>
-
-    <ng-container *ngFor='let error of formValidationMessages'>
-      <p>{{ error }} </p>
-    </ng-container>
-
+  <mat-card class='errors-card' *ngIf='formValidationMessage !== "" ' >
+      <p>{{ formValidationMessage }} </p>
   </mat-card>
 
   <mat-card>

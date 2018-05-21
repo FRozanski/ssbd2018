@@ -2,9 +2,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DeployPrefix } from '../common/constants';
 import { AccountData } from '../model/account-data';
-
+import { environment } from '../../environments/environment'
 @Component({
   selector: 'app-account-list',
   templateUrl: './account-list.component.html',
@@ -25,7 +24,7 @@ export class AccountListComponent implements OnInit {
     this.accountService.getAllAccounts().subscribe((data)=> {
       this.dataSource = data;
     }, ()=> {
-      window.location.href = "/" + DeployPrefix + "/login/login.html";
+      window.location.href = environment.apiUrl + "/login/login.html";
     });
   }
 

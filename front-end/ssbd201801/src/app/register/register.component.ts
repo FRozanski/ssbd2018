@@ -33,9 +33,13 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
 
-      this.accountService.registerAccount(account).subscribe((response: HttpResponse<any>) => {
+      this.accountService.registerAccount(account).subscribe((response: AccountData) => {
+        // temp
+        console.log("registered account", response);
+        
+      }, (error) => {
         // translation should be here
-        this.formValidationMessages = response.body.errors;
+        this.formValidationMessages = error.body; 
       })
 
     }

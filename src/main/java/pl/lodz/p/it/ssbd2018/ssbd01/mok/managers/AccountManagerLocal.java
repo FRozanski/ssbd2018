@@ -53,4 +53,8 @@ public interface AccountManagerLocal {
     public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo);
     
     public void changeOthersPassword(Account account, String newPassOne, String newPassTwo);
+
+    public Account getMyAccountById(long id);
+
+    public void saveMyAccountAfterEdit(Account myAccount);
 }

@@ -62,6 +62,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByToken", query = "SELECT a FROM Account a WHERE a.token = :token")})
 public class Account implements Serializable {    
 
+    @OneToMany(mappedBy = "idAccount")
+    private Collection<ArchivalPassword> archivalPasswordCollection;
+
     private static final int STARTING_NUMBER = 0;
     private static final long serialVersionUID = 1L;
     @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=1, initialValue=9)
@@ -435,5 +438,14 @@ public class Account implements Serializable {
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));
         calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(calendar.getTime().getTime());
+    }
+
+    @XmlTransient
+    public Collection<ArchivalPassword> getArchivalPasswordCollection() {
+        return archivalPasswordCollection;
+    }
+
+    public void setArchivalPasswordCollection(Collection<ArchivalPassword> archivalPasswordCollection) {
+        this.archivalPasswordCollection = archivalPasswordCollection;
     }
 }

@@ -21,27 +21,24 @@ export class RegisterComponent implements OnInit {
 
   formValidationMessage: string = "";
 
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService) { }
+  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
     this.initializeForm();
   }
 
   sendForm() {   
-
     this.wasFormSent = true;
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
-
-      this.accountService.registerAccount(account).subscribe(null, 
+      this.accountService.registerAccount(account).subscribe(() => {
+        this.router.navigate(['/main']);
+      }, 
         (errorResponse) => {
-          console.log("Getting translation for key: ", errorResponse.error.message);
           this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
-      })
-
+      });
     }
-
   }
 
   onReturnClick() {

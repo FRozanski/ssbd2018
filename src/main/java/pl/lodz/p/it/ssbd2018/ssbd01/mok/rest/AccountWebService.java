@@ -126,7 +126,7 @@ public class AccountWebService {
     }
 
     @GET
-    @Path("myRole")
+    @Path("myRoles")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMyRole(@Context HttpServletRequest servletRequest) {
         List<String> levels = new ArrayList<>();
@@ -138,8 +138,7 @@ public class AccountWebService {
             levels.add("USER");
         } if (servletRequest.isUserInRole("VIRTUAL")) {
             levels.add("VIRTUAL");
-        }
-        if (levels.isEmpty()) {
+        } if (levels.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT)
                     .type(MediaType.APPLICATION_JSON)
                     .build();

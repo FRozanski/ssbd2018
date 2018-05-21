@@ -145,6 +145,8 @@ public class AccountManager implements AccountManagerLocal {
             Account account = accountFacade.find(accountId);
             account.setActive(false);
             accountFacade.edit(account);
+            
+            mailSender.sendMailAfterAccountLock(account.getEmail());
         //FIXME - dodac podzial na wyjatki
         } catch (NullPointerException npe) {
             throw new AccountException("lock_error");
@@ -197,7 +199,7 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     public void sendMailWithVeryficationLink(String mail, String veryficationLink) {
-        mailSender.sendEmail(mail, veryficationLink);
+        mailSender.sendVerificationEmail(mail, veryficationLink);
     }
 
     @Override
@@ -217,6 +219,8 @@ public class AccountManager implements AccountManagerLocal {
             account.setConfirmationDate(confirmationDate);
             account.setUsed(true);
             accountFacade.edit(account);
+            
+            mailSender.sendMailAfterActivation(account.getEmail());
         } catch (OptimisticLockException oe) {
 
         } catch (PersistenceException pe) {

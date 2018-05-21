@@ -7,7 +7,7 @@
     "start": "ng serve -o",
     "build" : "ng build --prod --base-href ./",
     "prod-build": "ng build --prod --base-href ./ --env=prod",
-    "dev-build": "ng build --base-href ./ --env=dev",
+    "dev-build": "ng build --prod --base-href ./ --env=dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

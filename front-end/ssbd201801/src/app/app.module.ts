@@ -12,6 +12,7 @@ import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, Mat
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -22,10 +23,11 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 const appRoutes: Routes = [
+  { path: '', redirectTo: 'main', pathMatch: 'full' },
   { path: 'main', component: MainPageComponent },
   { path: 'accounts', component: AccountListComponent },
   { path: 'register', component: RegisterComponent },
-  { path: '', redirectTo: 'main', pathMatch: 'full' }
+  { path: '**', redirectTo: 'main' }
 ];
 
 @NgModule({
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
   ],
   bootstrap: [AppComponent],
   providers: [
-    AccountService
+    AccountService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ]
 })
 export class AppModule { }

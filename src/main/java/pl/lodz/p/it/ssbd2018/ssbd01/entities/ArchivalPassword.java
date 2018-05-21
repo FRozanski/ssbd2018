@@ -84,10 +84,6 @@ public class ArchivalPassword implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getPassword() {
         return password;
     }

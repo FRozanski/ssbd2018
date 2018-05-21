@@ -47,7 +47,7 @@ public class ArchivalPassword implements Serializable {
     @Column(name = "id")
     @SequenceGenerator(name="ID_ARCHIVALPASSWORD_SEQUENCE" ,sequenceName = "archival_password_id_seq", allocationSize=1, initialValue=1)
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNT_SEQUENCE")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ARCHIVALPASSWORD_SEQUENCE")
     private Long id;
     @Basic(optional = false)
     @NotNull

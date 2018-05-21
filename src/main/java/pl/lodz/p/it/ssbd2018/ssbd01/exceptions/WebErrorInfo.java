@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonPropertyOrder({ "code", "message" })
 public class WebErrorInfo {
-     private String code;
+    private String code;
 
     private String message;
     

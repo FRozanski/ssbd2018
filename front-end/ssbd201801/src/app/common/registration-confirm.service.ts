@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {TokenData} from '../model/token-data';
 import {Observable} from 'rxjs/Observable';
+import {AccountData} from '../model/account-data';
 
 @Injectable()
 export class RegistrationConfirmService {
@@ -11,9 +11,9 @@ export class RegistrationConfirmService {
 
   constructor(private httpClient: HttpClient) { }
 
-  confirmAccount(token: string): Observable<TokenData[]> {
+  confirmAccount(token: string): Observable<AccountData> {
     const params = new HttpParams()
       .set('token', token);
-    return this.httpClient.get<TokenData[]>(this.uri, {params});
+    return this.httpClient.get<AccountData>(this.uri, {params});
   }
 }

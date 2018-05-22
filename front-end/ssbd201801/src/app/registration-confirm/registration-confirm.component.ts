@@ -20,7 +20,7 @@ export class RegistrationConfirmComponent implements OnInit {
     this.route.queryParams
       .filter(params => params.token)
       .subscribe(params => this.token = params.token);
-    // this.registrationConfirmService.confirmAccount(this.token);
+    this.registrationConfirmService.confirmAccount(this.token).subscribe();
   }
 
 }

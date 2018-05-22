@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
   { path: 'main', component: MainPageComponent },
   { path: 'accounts', component: AccountListComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'changePassword', component: ChangePasswordComponent },
   { path: '**', redirectTo: 'main' }
 ];
 
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     MainPageComponent,
     AccountListComponent,
     RegisterComponent,
-    SidenavComponent
+    SidenavComponent,
+    ChangePasswordComponent
   ],
   imports: [
     MatTableModule,

@@ -35,7 +35,13 @@
         "BASIC_DATA" : "Dane podstawowe",
         "ADDRESS_DATA" : "Dane adresowe"
     },
+    "PASSWORD" : {
+        "CHANGE_PASSWORD" : "Zmień hasło",
+        "OLD_PASSWORD" : "Stare hasło",
+        "NEW_PASSWORD" : "Nowe hasło",
+        "CONFIRM_NEW_PASSWORD" : "Potwierdź nowe hasło"
+    },
     "password_length_error" : "Podane hasło jest za krótkie!",
     "password_different_error" : "Podane hasła są różne!"
-    
+
 }

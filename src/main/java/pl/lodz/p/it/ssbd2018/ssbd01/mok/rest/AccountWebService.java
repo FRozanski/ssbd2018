@@ -251,7 +251,8 @@ public class AccountWebService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response changePassword(PassDto passObj) {
         try {
-            Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+//            Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+            Account account = accountManagerLocal.getAccountByLogin(passObj.getLogin());
             accountManagerLocal.changeYourPassword(account, passObj.getOldPass(), passObj.getNewPassOne(), passObj.getNewPassTwo());
         } catch (NumberFormatException ex) {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);
@@ -265,7 +266,8 @@ public class AccountWebService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response changeOthersPassword(PassDto passObj) {
         try {
-            Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+//            Account account = accountManagerLocal.getAccountById(Long.valueOf(passObj.getAccountId()));
+            Account account = accountManagerLocal.getAccountByLogin(passObj.getLogin());
             accountManagerLocal.changeOthersPassword(account, passObj.getNewPassOne(), passObj.getNewPassTwo());
         } catch (NumberFormatException ex) {
             Logger.getLogger(AccountWebService.class.getName()).log(Level.SEVERE, null, ex);

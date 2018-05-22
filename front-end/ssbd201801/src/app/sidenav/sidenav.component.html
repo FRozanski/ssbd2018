@@ -27,6 +27,11 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/changePassword' *ngIf='hasRole("USER")'>Zmień hasło</button>
+      <!--<button mat-button >Zmień hasło</button>-->
+    </p>
+
+    <p>
       <button mat-button>Wyloguj</button>
     </p>
   </mat-sidenav>

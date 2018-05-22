@@ -24,7 +24,8 @@
         "EDIT_BTN" : "Edytuj",
         "PASSWORD" : "Hasło",
         "REPLY_PASSWORD" : "Powtórz hasło",
-        "FLAT_NUMBER": "Numer mieszkania"
+        "FLAT_NUMBER": "Numer mieszkania",
+        "CHANGE_OF_PASSWORD": "Zmiana hasła"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",

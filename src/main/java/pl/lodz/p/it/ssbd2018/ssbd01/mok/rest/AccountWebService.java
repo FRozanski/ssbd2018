@@ -105,7 +105,7 @@ public class AccountWebService {
             return Response.noContent().build();
         }
     }
-    
+
     @GET
     @Path("myLogin")
     @Produces(MediaType.APPLICATION_JSON)
@@ -132,19 +132,61 @@ public class AccountWebService {
         List<String> levels = new ArrayList<>();
         if (servletRequest.isUserInRole("ADMIN")) {
             levels.add("ADMIN");
-        } if (servletRequest.isUserInRole("MANAGER")) {
+        }
+        if (servletRequest.isUserInRole("MANAGER")) {
             levels.add("MANAGER");
-        } if (servletRequest.isUserInRole("USER")) {
+        }
+        if (servletRequest.isUserInRole("USER")) {
             levels.add("USER");
-        } if (servletRequest.isUserInRole("VIRTUAL")) {
+        }
+        if (servletRequest.isUserInRole("VIRTUAL")) {
             levels.add("VIRTUAL");
-        } if (levels.isEmpty()) {
+        }
+        if (levels.isEmpty()) {
             return Response.status(Response.Status.NO_CONTENT)
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         } else {
             JSONObject json = new JSONObject();
             json.put("roles", levels);
+
+            return Response.status(Response.Status.OK)
+                    .entity(json)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("myIdentity")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMyIdentity(@Context HttpServletRequest servletRequest) {
+        List<String> levels = new ArrayList<>();
+        if (servletRequest.getUserPrincipal() == null) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (servletRequest.isUserInRole("ADMIN")) {
+            levels.add("ADMIN");
+        }
+        if (servletRequest.isUserInRole("MANAGER")) {
+            levels.add("MANAGER");
+        }
+        if (servletRequest.isUserInRole("USER")) {
+            levels.add("USER");
+        }
+        if (servletRequest.isUserInRole("VIRTUAL")) {
+            levels.add("VIRTUAL");
+        }
+        if (levels.isEmpty()) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } else {
+            JSONObject json = new JSONObject();
+            json.put("roles", levels);
+            json.put("login", servletRequest.getUserPrincipal().getName());
 
             return Response.status(Response.Status.OK)
                     .entity(json)

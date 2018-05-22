@@ -15,7 +15,12 @@ export class AuthGuard implements CanActivate {
      }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        return this.authUtil.hasRole(route.data.expectedRoute, this.identity);
+        let b =  this.authUtil.hasRole(route.data.expectedRoute, this.identity);
+        
+        console.log("Can user enter? ", b);
+        
+
+        return b;
     }
 
 }

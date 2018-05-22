@@ -21,8 +21,8 @@ export class AuthUtilService {
     }
 
     public isGuest(identity: AccountData) : boolean {
-        if (identity) return true;
-        if (identity.roles) return true;
+        if (!identity) return true;
+        if (!identity.roles) return true;
         if (identity.roles.length === 0) return true;
         else return false; 
     }
@@ -30,9 +30,14 @@ export class AuthUtilService {
     public hasRole(role: string, identity: AccountData): boolean {  
         let hasRole: boolean = false;
     
+        let isGuest = this.isGuest(identity);
+
+        if(isGuest) return isGuest;
+
         if(identity && identity.roles) {
           hasRole = identity.roles.indexOf(role) !== -1;
         }
+
     
         return hasRole;
       }

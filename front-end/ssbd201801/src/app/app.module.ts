@@ -91,7 +91,8 @@ const appRoutes: Routes = [
   providers: [
     AccountService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
-    AuthUtilService
+    AuthUtilService,
+    AuthGuard
   ]
 })
 export class AppModule { }

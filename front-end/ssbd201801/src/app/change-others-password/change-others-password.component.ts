@@ -19,11 +19,12 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   formValidationMessage = '';
 
-  userIdentity: AccountData = {};
+  othersLogin = '';
 
   constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
+    this.accountService.currentLogin.subscribe(login => this.othersLogin = login);
     this.initializeForm();
   }
 
@@ -32,7 +33,7 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
     if (this.form.valid) {
       const account: AccountData = <AccountData>this.form.value;
-      account.login = this.userIdentity.login;
+      account.login = this.othersLogin;
       this.accountService.changeOthersPassword(account).subscribe(() => {
           this.router.navigate(['/main']);
         },
@@ -52,9 +53,6 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      oldPass: new FormControl('', [
-        Validators.required
-      ]),
       newPassOne: new FormControl('', [
         Validators.required
       ]),

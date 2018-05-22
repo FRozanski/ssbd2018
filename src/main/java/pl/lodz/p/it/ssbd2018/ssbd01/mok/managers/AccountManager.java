@@ -252,6 +252,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
+    @PermitAll
     public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }

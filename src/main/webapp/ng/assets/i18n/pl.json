@@ -33,9 +33,11 @@
     },
     "REGISTER" : {
         "BASIC_DATA" : "Dane podstawowe",
-        "ADDRESS_DATA" : "Dane adresowe"
+        "ADDRESS_DATA" : "Dane adresowe",
+        "ACCOUNT_CONFIRMED": "Pomyślnie aktywowano konto.",
+        "ACCOUNT_NOT_CONFIRMED": "Nie udało się aktywować konta."
     },
     "password_length_error" : "Podane hasło jest za krótkie!",
     "password_different_error" : "Podane hasła są różne!"
-    
+
 }

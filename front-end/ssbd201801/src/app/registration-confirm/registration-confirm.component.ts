@@ -11,8 +11,7 @@ import {AccountData} from '../model/account-data';
 })
 export class RegistrationConfirmComponent implements OnInit {
   token: string;
-  accountToConfirm: AccountData = {};
-  isConfirm = 'nie działa';
+  isConfirm = false;
 
   constructor (
     private registrationConfirmService: RegistrationConfirmService,
@@ -26,12 +25,11 @@ export class RegistrationConfirmComponent implements OnInit {
 
     this.registrationConfirmService.confirmAccount(this.token)
       .subscribe((data: AccountData) => {
-        this.accountToConfirm = data;
-        this.isConfirm = this.accountToConfirm.login;
+        // this.accountToConfirm = data;
+        this.isConfirm = data.confirm;
       }, () => {
-        this.isConfirm = 'no nie';
+        this.isConfirm = false;
       });
-
   }
 
 }

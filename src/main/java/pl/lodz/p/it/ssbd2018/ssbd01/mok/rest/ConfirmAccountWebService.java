@@ -18,6 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 
 /**
  *
@@ -34,8 +35,9 @@ public class ConfirmAccountWebService {
     public Response confirmAccount(@QueryParam("token") String token) {
         try {
             Account account = accountManagerLocal.getAccountByToken(token); //@PermitAll ?
-            accountManagerLocal.confirmAccount(account); 
-            AccountDto accountDto = DtoMapper.mapAccount(account);
+            Account accountToConfirm = (Account) CloneUtils.deepCloneThroughSerialization(account);
+            accountManagerLocal.confirmAccount(accountToConfirm); 
+            AccountDto accountDto = DtoMapper.mapAccount(accountToConfirm);
             return Response.ok(accountDto).build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)

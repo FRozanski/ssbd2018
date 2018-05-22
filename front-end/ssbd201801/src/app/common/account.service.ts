@@ -30,7 +30,7 @@ export class AccountService {
   }
 
   getCurrentUserIdentity(): Observable<AccountData> {
-    return this.httpClient.get<AccountData>(environment.apiUrl + "/myIdentityUser");
+    return this.httpClient.get<AccountData>(this.uri + "/myIdentity");
   }
 
 

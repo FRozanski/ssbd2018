@@ -1,7 +1,9 @@
 {
     "HOME" : {
         "TITLE" : "Strona główna",
-        "WELCOME" : "Witaj"
+        "WELCOME" : "Witaj",
+        "USER_ROLES" : "Poziomy dostępu użytkownika",
+        "ACTIVATE_ACCOUNT" : "Musisz aktywować konto!"
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",

@@ -1,10 +1,6 @@
 <form [formGroup]='form'>
-  <mat-card class='errors-card' *ngIf='formValidationMessages.length !== 0'>
-
-    <ng-container *ngFor='let error of formValidationMessages'>
-      <p>{{ error }} </p>
-    </ng-container>
-
+  <mat-card class='errors-card' *ngIf='formValidationMessage !== "" ' >
+      <p>{{ formValidationMessage }} </p>
   </mat-card>
 
   <mat-card>
@@ -12,28 +8,28 @@
     <mat-card-content>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.LOGIN' | translate" formControlName='login'>
+        <input matInput [placeholder]="'ACCOUNT.LOGIN' | translate" formControlName='login' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('login')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput type="password" [placeholder]="'ACCOUNT.PASSWORD' | translate" formControlName='password'>
+        <input matInput type="password" [placeholder]="'ACCOUNT.PASSWORD' | translate" formControlName='password' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('password')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput type="password" [placeholder]="'ACCOUNT.REPLY_PASSWORD' | translate" formControlName='password2'>
+        <input matInput type="password" [placeholder]="'ACCOUNT.REPLY_PASSWORD' | translate" formControlName='password2' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('password2')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.EMAIL' | translate" formControlName='email'>
+        <input matInput [placeholder]="'ACCOUNT.EMAIL' | translate" formControlName='email' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('email')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
@@ -47,63 +43,63 @@
     <mat-card-content>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.NAME' | translate" formControlName='name'>
+        <input matInput [placeholder]="'ACCOUNT.NAME' | translate" formControlName='name' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('name')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.SURNAME' | translate" formControlName='surname'>
+        <input matInput [placeholder]="'ACCOUNT.SURNAME' | translate" formControlName='surname' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('surname')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.PHONE' | translate" formControlName='phone'>
+        <input matInput [placeholder]="'ACCOUNT.PHONE' | translate" formControlName='phone' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('phone')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.STREET' | translate" formControlName='street'>
+        <input matInput [placeholder]="'ACCOUNT.STREET' | translate" formControlName='street' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('street')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.STREET_NUMBER' | translate" formControlName='streetNumber'>
+        <input matInput [placeholder]="'ACCOUNT.STREET_NUMBER' | translate" formControlName='streetNumber' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('streetNumber')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.FLAT_NUMBER' | translate" formControlName='flatNumber'>
+        <input matInput [placeholder]="'ACCOUNT.FLAT_NUMBER' | translate" formControlName='flatNumber' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('flatNumber')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.POSTAL_CODE' | translate" formControlName='postalCode'>
+        <input matInput [placeholder]="'ACCOUNT.POSTAL_CODE' | translate" formControlName='postalCode' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('postalCode')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.CITY' | translate" formControlName='city'>
+        <input matInput [placeholder]="'ACCOUNT.CITY' | translate" formControlName='city' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('city')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.NAME' | translate" formControlName='country'>
+        <input matInput [placeholder]="'ACCOUNT.COUNTRY' | translate" formControlName='country' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('country')">
         {{ "FORM.FIELD_REQUIRED" | translate }}

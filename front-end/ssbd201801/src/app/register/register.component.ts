@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AccountService } from '../common/account.service';
 import { AccountData } from '../model/account-data';
@@ -19,27 +19,26 @@ export class RegisterComponent implements OnInit {
 
   wasFormSent: boolean = false;
 
-  formValidationMessages: string[] = [];
+  formValidationMessage: string = "";
 
-  constructor(private accountService: AccountService, private location: Location) { }
+  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
     this.initializeForm();
   }
 
-  sendForm() {
+  sendForm() {   
     this.wasFormSent = true;
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
-
-      this.accountService.registerAccount(account).subscribe((response: HttpResponse<any>) => {
-        // translation should be here
-        this.formValidationMessages = response.body.errors;
-      })
-
+      this.accountService.registerAccount(account).subscribe(() => {
+        this.router.navigate(['/main']);
+      }, 
+        (errorResponse) => {
+          this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+      });
     }
-
   }
 
   onReturnClick() {

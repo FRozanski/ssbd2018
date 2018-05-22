@@ -13,7 +13,6 @@ mat-card.errors-card {
 
 div.buttons {
     display: flex;
-    padding-top: 10px;
     width: 100%;
     justify-content: flex-end;
     
@@ -21,4 +20,8 @@ div.buttons {
 
 button {
     display: block;
+}
+
+mat-card {
+    margin-bottom: 30px;
 }

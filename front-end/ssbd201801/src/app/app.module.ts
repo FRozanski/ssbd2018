@@ -15,7 +15,7 @@ import {
   MatInputModule,
   MatCardModule,
   MatSidenavModule,
-  MatSortModule
+  MatSortModule, MatPaginatorModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -55,6 +55,7 @@ const appRoutes: Routes = [
     MatCardModule,
     MatSidenavModule,
     MatSortModule,
+    MatPaginatorModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),

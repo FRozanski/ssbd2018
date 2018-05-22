@@ -1,73 +1,73 @@
 <div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.CITY' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CITY' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="confirm">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.CONFIRMED' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CONFIRMED' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="country">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.COUNTRY' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.COUNTRY' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.country}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.EMAIL' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.EMAIL' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.NAME' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NAME' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.SURNAME' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.SURNAME' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="login">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.LOGIN' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LOGIN' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.login}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="numberOfLogins">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.NUM_OF_LOGINS' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_LOGINS' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.numberOfLogins}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="numberOfOrders">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.NUM_OF_ORDERS' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_ORDERS' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.numberOfOrders}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="numberOfProducts">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.NUM_OF_PRODUCTS' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_PRODUCTS' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.numberOfProducts}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="phone">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.PHONE' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.PHONE' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="postalCode">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.POSTAL_CODE' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.POSTAL_CODE' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.postalCode}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="street">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.STREET' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.STREET' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="streetNumber">
-      <mat-header-cell *matHeaderCellDef> {{ 'ACCOUNT.STREET_NUMBER' | translate }} </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.STREET_NUMBER' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.streetNumber}} </mat-cell>
     </ng-container>
 

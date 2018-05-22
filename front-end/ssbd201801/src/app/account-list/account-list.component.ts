@@ -1,9 +1,10 @@
 
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountData } from '../model/account-data';
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment';
+import {MatTableDataSource, MatSort} from '@angular/material';
 @Component({
   selector: 'app-account-list',
   templateUrl: './account-list.component.html',
@@ -20,18 +21,19 @@ export class AccountListComponent implements OnInit {
 
   constructor (private accountService: AccountService) { }
 
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit() {
-    this.accountService.getAllAccounts().subscribe((data)=> {
-      this.dataSource = data;
-    }, ()=> {
-      window.location.href = environment.apiUrl + "/login/login.html";
+    this.accountService.getAllAccounts().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    }, () => {
+      window.location.href = environment.apiUrl + '/login/login.html';
     });
+    this.dataSource.sort = this.sort;
   }
 
   onEditClick(account: AccountData) {
-    throw new Error("onEditClick(..) is not implemented yet.")
+    throw new Error('onEditClick(..) is not implemented yet.');
   }
-
-
 
 }

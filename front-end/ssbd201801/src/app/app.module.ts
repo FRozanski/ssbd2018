@@ -8,7 +8,15 @@ import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AccountService } from './common/account.service';
-import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatCardModule, MatSidenavModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatCheckboxModule,
+  MatButtonModule,
+  MatInputModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatSortModule
+} from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -46,6 +54,7 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatSidenavModule,
+    MatSortModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),

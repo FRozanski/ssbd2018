@@ -3,7 +3,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DeployPrefix } from '../common/constants';
-import { AccountData } from '../model/account';
+import { AccountData } from '../model/account-data';
 
 @Component({
   selector: 'app-account-list',

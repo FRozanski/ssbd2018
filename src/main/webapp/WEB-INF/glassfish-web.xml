@@ -14,6 +14,10 @@
     <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>VIRTUAL</role-name>
+    <group-name>virtual</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>getAllAccounts</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
@@ -73,18 +77,6 @@
   <security-role-mapping>
     <role-name>changeOthersPassword</role-name>
     <group-name>admin</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
-    <role-name>getMyAccountById</role-name>
-    <group-name>admin</group-name>
-    <group-name>manager</group-name>
-    <group-name>user</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
-    <role-name>saveMyAccountAfterEdit</role-name>
-    <group-name>admin</group-name>
-    <group-name>manager</group-name>
-    <group-name>user</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>

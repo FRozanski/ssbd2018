@@ -122,7 +122,7 @@ public class Account implements Serializable {
     @Version
     @Column(name = "version", table = "user_data")
     @JoinColumns( {
-      @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
+    @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
     private long versionUserData;
     @Basic(optional = false)
     @NotNull

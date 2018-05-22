@@ -24,7 +24,7 @@ public interface AccountManagerLocal {
     
     void saveAccountAfterEdit(Account account); 
     
-    void registerAccount(Account account, ServletContext servletContext);
+    void registerAccount(Account account, ServletContext servletContext) throws AppBaseException;
     
     void confirmAccount(Account account) throws AppBaseException;
     
@@ -32,7 +32,7 @@ public interface AccountManagerLocal {
     
     void unlockAccount(long accountId) throws AccountException;
     
-    void addAccessLevelToAccount(AccessLevel accessLevel, Account account);
+    void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException;
     
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
 
@@ -50,9 +50,9 @@ public interface AccountManagerLocal {
 
     public AccessLevel getAccessLevelById(Long idAccessLevel);
     
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo);
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException;
     
-    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo);
+    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException;
 
     public Account getMyAccountById(long id);
 

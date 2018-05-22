@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderShipping;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderShipping;
 @Local
 public interface OrderShippingFacadeLocal {
 
-    void create(OrderShipping orderShipping);
+    void create(OrderShipping orderShipping) throws AppBaseException;
 
     void edit(OrderShipping orderShipping);
 

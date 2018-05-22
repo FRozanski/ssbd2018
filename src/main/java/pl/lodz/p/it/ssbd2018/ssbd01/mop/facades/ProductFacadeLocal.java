@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 @Local
 public interface ProductFacadeLocal {
 
-    void create(Product product);
+    void create(Product product) throws AppBaseException;
 
     void edit(Product product);
 

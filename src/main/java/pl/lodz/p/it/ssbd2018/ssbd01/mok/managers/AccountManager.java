@@ -34,7 +34,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
  * @author piotrek
  * @author agkan
  */
-@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+@TransactionAttribute(TransactionAttributeType.MANDATORY)
 @Stateless
 public class AccountManager implements AccountManagerLocal {
 
@@ -77,7 +77,7 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     @RolesAllowed("changeYourPassword")
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) {
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException{
         Account tmpAccount = accountFacade.find((account.getId()));
         String passHash = tmpAccount.getPassword();
         if (passHash.contentEquals(HashUtils.sha256(oldPass))) {
@@ -104,7 +104,7 @@ public class AccountManager implements AccountManagerLocal {
     
     @Override
     @RolesAllowed("changeOthersPassword")
-    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) {
+    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException {
         Account tmpAccount = accountFacade.find((account.getId()));
         if (newPassOne.length() > 8) {
             if (newPassOne.contentEquals(newPassTwo)) {
@@ -132,23 +132,23 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     @PermitAll
-    public void registerAccount(Account account, ServletContext servletContext) {
+    public void registerAccount(Account account, ServletContext servletContext) throws AppBaseException {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
-        loger.log(Level.INFO, "Account Created.");
-
-        AccountAlevel level = new AccountAlevel();
-        level.setIdAccount(account);
-        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
-        accountAlevelFacade.create(level);
-        loger.log(Level.INFO, "Access level added to account.");
-        
-        ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-        archivalPasswordFacadeLocal.create(archivalPassword);
-        loger.log(Level.INFO, "ArchivalPassword saved for account.");
-        
-        this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
-        loger.log(Level.INFO, "E-mail with activation token sent.");
+//        loger.log(Level.INFO, "Account Created.");
+//
+//        AccountAlevel level = new AccountAlevel();
+//        level.setIdAccount(account);
+//        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
+//        accountAlevelFacade.create(level);
+//        loger.log(Level.INFO, "Access level added to account.");
+//        
+//        ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
+//        archivalPasswordFacadeLocal.create(archivalPassword);
+//        loger.log(Level.INFO, "ArchivalPassword saved for account.");
+//        
+//        this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
+//        loger.log(Level.INFO, "E-mail with activation token sent.");
     }
 
     @Override
@@ -186,7 +186,7 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     @RolesAllowed("addAccessLevelToAccount")
-    public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) {
+    public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException {
         AccountAlevel accountAlevel = new AccountAlevel();
         accountAlevel.setIdAlevel(accessLevel);
         accountAlevel.setIdAccount(account);

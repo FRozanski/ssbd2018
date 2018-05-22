@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 @Local
 public interface AccountAlevelFacadeLocal {
 
-    void create(AccountAlevel accountAlevel);
+    void create(AccountAlevel accountAlevel) throws AppBaseException;
 
     void edit(AccountAlevel accountAlevel);
 

@@ -1,6 +1,7 @@
 {
     "HOME" : {
-        "TITLE" : "Strona główna"
+        "TITLE" : "Strona główna",
+        "WELCOME" : "Witaj"
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",

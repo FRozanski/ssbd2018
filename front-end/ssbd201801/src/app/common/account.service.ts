@@ -9,14 +9,6 @@ import { AccountData } from '../model/account-data';
 @Injectable()
 export class AccountService {
 
-
-  public Roles: any = {
-    Admin: "ADMIN",
-    Manager: "MANAGER",
-    User: "USER",
-    Virtual: "VIRTUAL"
-  }
-
   readonly uri: string = environment.apiUrl + "/webresources/account";
 
   constructor(private httpClient: HttpClient) { }
@@ -32,8 +24,5 @@ export class AccountService {
   getCurrentUserIdentity(): Observable<AccountData> {
     return this.httpClient.get<AccountData>(this.uri + "/myIdentity");
   }
-
-
-
 
 }

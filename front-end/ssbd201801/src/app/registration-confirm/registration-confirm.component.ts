@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
+import {RegistrationConfirmService} from '../common/registration-confirm.service';
 
 @Component({
   selector: 'app-registration-confirm',
@@ -11,7 +12,7 @@ export class RegistrationConfirmComponent implements OnInit {
   token: string;
 
   constructor (
-    // private registrationConfirmService: RegistrationConfirmService,
+    private registrationConfirmService: RegistrationConfirmService,
     private route: ActivatedRoute
   ) { }
 

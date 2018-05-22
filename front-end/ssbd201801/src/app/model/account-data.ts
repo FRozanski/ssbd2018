@@ -15,5 +15,6 @@ export interface AccountData {
     numberOfProducts?: number,
     password?: string;
     password2?: string;
+    roles?: string[];
 
 }

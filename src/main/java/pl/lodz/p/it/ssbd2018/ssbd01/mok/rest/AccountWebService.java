@@ -7,25 +7,25 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
-import javax.servlet.ServletContext;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.DELETE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBAccessException;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import org.json.simple.JSONObject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.simple.JSONArray;
@@ -35,14 +35,15 @@ import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.NewAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.PassDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 
 /**
  *
  * @author dlange
+ * @author agkan
  */
 @Path("account")
 public class AccountWebService {
@@ -75,7 +76,6 @@ public class AccountWebService {
             return Response.noContent().build();
         }
     }
-
     @PUT
     @Path("{accountId}")
     @Consumes(MediaType.TEXT_PLAIN)
@@ -92,7 +92,6 @@ public class AccountWebService {
             return Response.noContent().build();
         }
     }
-
     @GET
     @Path("accessLevel/{accessLevelId}")
     public Response getAccessLevel(@PathParam("accessLevelId") String accessLevelId) {
@@ -289,8 +288,8 @@ public class AccountWebService {
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         } catch (AccountException e) {
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity(new WebErrorInfo("401", "unauthorized_error"))
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("404", e.getMessage()))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }

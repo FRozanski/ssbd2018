@@ -8,11 +8,12 @@ import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AccountService } from './common/account.service';
-import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatCardModule } from '@angular/material';
+import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatCardModule, MatSidenavModule } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     AppComponent,
     MainPageComponent,
     AccountListComponent,
-    RegisterComponent
+    RegisterComponent,
+    SidenavComponent
   ],
   imports: [
     MatTableModule,
@@ -43,6 +45,7 @@ const appRoutes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),

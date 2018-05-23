@@ -16,6 +16,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthUtilService } from './common/auth-util.service';
 import { AuthGuard } from './common/user-guard';
+import { AccountEditComponent } from './account-edit/account-edit.component';
+import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -54,6 +56,15 @@ const appRoutes: Routes = [
       }
   },
   {
+    path: 'accountEdit/:id',
+    canActivate: [AuthGuard],
+    component: AccountEditComponent,
+    data: 
+    {
+      expectedRole: "ADMIN"
+    }
+  },
+  {
     path: '**',
     redirectTo: 'main'
   }
@@ -65,7 +76,9 @@ const appRoutes: Routes = [
     MainPageComponent,
     AccountListComponent,
     RegisterComponent,
-    SidenavComponent
+    SidenavComponent,
+    AccountEditComponent,
+    OwnAccountEditComponent
   ],
   imports: [
     MatTableModule,

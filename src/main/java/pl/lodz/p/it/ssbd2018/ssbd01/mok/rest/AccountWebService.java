@@ -53,7 +53,7 @@ public class AccountWebService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getHello() {
+    public Response getAllAccounts() {
         List<AccountDto> accounts = new ArrayList<>();
 
         for (Account account : accountManagerLocal.getAllAccounts()) {

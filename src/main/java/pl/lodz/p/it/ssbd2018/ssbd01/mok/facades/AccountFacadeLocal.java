@@ -17,9 +17,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 @Local
 public interface AccountFacadeLocal {
 
-    void create(Account account);
+    void create(Account account) throws AppBaseException;
 
-    void edit(Account account);
+    void edit(Account account) throws AppBaseException;
 
     Account find(Object id);
     

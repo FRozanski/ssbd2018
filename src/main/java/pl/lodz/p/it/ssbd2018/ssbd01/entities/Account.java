@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Random;
 import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -32,9 +33,12 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.*;
 
 /**
  *
@@ -44,8 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "account")
 @SecondaryTables({
-    @SecondaryTable(name="user_data", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id")),
-    @SecondaryTable(name="veryfication_token", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_account", referencedColumnName="id"))
+    @SecondaryTable(name = "user_data", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id"))
+    ,
+    @SecondaryTable(name = "veryfication_token", pkJoinColumns = @PrimaryKeyJoinColumn(name = "id_account", referencedColumnName = "id"))
 })
 @XmlRootElement
 @NamedQueries({
@@ -60,14 +65,17 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByNumberOfLogins", query = "SELECT a FROM Account a WHERE a.numberOfLogins = :numberOfLogins")
     , @NamedQuery(name = "Account.findByVersion", query = "SELECT a FROM Account a WHERE a.version = :version")
     , @NamedQuery(name = "Account.findByToken", query = "SELECT a FROM Account a WHERE a.token = :token")})
-public class Account implements Serializable {    
+public class Account implements Serializable {
 
     @OneToMany(mappedBy = "idAccount")
     private Collection<ArchivalPassword> archivalPasswordCollection;
+    
+    @OneToMany(mappedBy = "idAccount")
+    private Collection<AccountAlevel> accessLevelCollection;
 
     private static final int STARTING_NUMBER = 0;
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ACCOUNT_SEQUENCE" ,sequenceName = "account_id_seq", allocationSize=1, initialValue=9)
+    @SequenceGenerator(name = "ID_ACCOUNT_SEQUENCE", sequenceName = "account_id_seq", allocationSize = 1, initialValue = 9)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ACCOUNT_SEQUENCE")
     @Basic(optional = false)
@@ -76,7 +84,7 @@ public class Account implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
+    @Size(min = 1, max = 32, message = LOGIN_LENGTH_ERROR)
     @Column(name = "login", updatable = false)
     private String login;
     @Basic(optional = false)
@@ -108,80 +116,82 @@ public class Account implements Serializable {
     @NotNull
     @Version
     @Column(name = "version")
-    private long version = 0;
+    private long version;
     @OneToMany(mappedBy = "buyerId")
     private Collection<Order1> ordersAsBuyer = new ArrayList<>();
     @OneToMany(mappedBy = "sellerId")
     private Collection<Order1> ordersAsSeller = new ArrayList<>();
     @OneToMany(mappedBy = "ownerId")
     private Collection<Product> productCollection = new ArrayList<>();
-    
+
     //secondary table UserData
     @Basic(optional = false)
     @NotNull
     @Version
     @Column(name = "version", table = "user_data")
-    @JoinColumns( {
-      @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
+    @JoinColumns({
+        @JoinColumn(name = "version", referencedColumnName = "version", table = "account")})
     private long versionUserData;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
+    @Size(min = 1, max = 32, message = NAME_LENGTH_ERROR)
     @Column(name = "name", table = "user_data")
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
+    @Size(min = 1, max = 32, message = SURNAME_LENGTH_ERROR)
     @Column(name = "surname", table = "user_data")
     private String surname;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = EMAIL_PATTERN_EXCEPTION)
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 64)
+    @Size(min = 1, max = 64, message = EMAIL_LENGTH_ERROR)
     @Column(name = "email", table = "user_data")
     private String email;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Pattern(regexp = "\\d+", message = PHONE_PATTERN_ERROR)
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 18)
+    @Size(min = 1, max = 18, message = PHONE_LENGTH_ERROR)
     @Column(name = "phone", table = "user_data")
     private String phone;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 60, message = STREET_LENGTH_ERROR)
     @Column(name = "street", table = "user_data")
     private String street;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Pattern(regexp = "\\d+", message = STREET_NUMBER_PATTERN_ERROR)
+    @Size(min = 1, max = 10, message = STREET_NUMBER_LENGTH_ERROR)
     @Column(name = "street_number", table = "user_data")
     private String streetNumber;
-    @Size(max = 10)
+    @Pattern(regexp = "\\d+", message = FLAT_NUMBER_PATTERN_ERROR)
+    @Size(max = 10, message = FLAT_NUMBER_LENGTH_ERROR)
     @Column(name = "flat_number", table = "user_data")
     private String flatNumber;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 1, max = 10, message = POSTAL_CODE_LENGTH_ERROR)
     @Column(name = "postal_code", table = "user_data")
     private String postalCode;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 60, message = CITY_LENGTH_ERROR)
     @Column(name = "city", table = "user_data")
     private String city;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
+    @Size(min = 1, max = 60, message = COUNTRY_LENGTH_ERROR)
     @Column(name = "country", table = "user_data")
     private String country;
-    
+
     //secondary table veryfication_token
     @Basic(optional = false)
     @NotNull
     @Version
     @Column(name = "version", table = "veryfication_token")
-    @JoinColumns( {
-      @JoinColumn(name = "version", referencedColumnName = "version", table = "account") })
+    @JoinColumns({
+        @JoinColumn(name = "version", referencedColumnName = "version", table = "account")})
     private long versionVerificationToken;
     @Basic(optional = false)
     @NotNull
@@ -200,7 +210,7 @@ public class Account implements Serializable {
     @Column(name = "confirmation_date", table = "veryfication_token")
     @Temporal(TemporalType.TIMESTAMP)
     private Date confirmationDate;
-    
+
     public Account() {
         this.version = 0;
         this.active = true;
@@ -209,7 +219,7 @@ public class Account implements Serializable {
         this.numberOfOrders = STARTING_NUMBER;
         this.numberOfProducts = STARTING_NUMBER;
         this.expiryDate = generateExpiryDate();
-        this.used=false;
+        this.used = false;
         this.token = UUID.randomUUID().toString().replace("-", "");
     }
 
@@ -220,7 +230,7 @@ public class Account implements Serializable {
     public String getLogin() {
         return login;
     }
-    
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -272,7 +282,7 @@ public class Account implements Serializable {
     public void setNumberOfLogins(long numberOfLogins) {
         this.numberOfLogins = numberOfLogins;
     }
-    
+
     @XmlTransient
     public Collection<Product> getProductCollection() {
         return productCollection;
@@ -299,7 +309,7 @@ public class Account implements Serializable {
     public void setOrder1Collection1(Collection<Order1> order1Collection1) {
         this.ordersAsSeller = order1Collection1;
     }
-    
+
     //secondary table UserData
     public String getName() {
         return name;
@@ -380,7 +390,7 @@ public class Account implements Serializable {
     public void setCountry(String country) {
         this.country = country;
     }
-    
+
     public String getToken() {
         return token;
     }
@@ -403,8 +413,8 @@ public class Account implements Serializable {
 
     public void setConfirmationDate(Date confirmationDate) {
         this.confirmationDate = confirmationDate;
-    }    
-    
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -428,7 +438,7 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.Account[ id=" + id + " ]";
-    }        
+    }
 
     private Date generateExpiryDate() {
         int minutesInHour = 60;
@@ -439,6 +449,11 @@ public class Account implements Serializable {
         calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(calendar.getTime().getTime());
     }
+    
+    @XmlTransient
+    public Collection<AccountAlevel> getAccessLevelCollection() {
+        return accessLevelCollection;
+    }
 
     @XmlTransient
     public Collection<ArchivalPassword> getArchivalPasswordCollection() {
@@ -447,5 +462,24 @@ public class Account implements Serializable {
 
     public void setArchivalPasswordCollection(Collection<ArchivalPassword> archivalPasswordCollection) {
         this.archivalPasswordCollection = archivalPasswordCollection;
+    }
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     * @throws pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException
+     */
+    public void setVersion(long version) throws AccountOptimisticException {
+        if (this.version != version) {
+            throw new AccountOptimisticException("account_optimistic_lock_exception");
+        } else {
+            this.version = new Random().nextLong();
+        }
     }
 }

@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse, HttpRequest } from '@angular/common/http';
 import { environment } from '../../environments/environment'
-import 'rxjs/add/observable/of';
-import 'rxjs/add/observable/throw';
 import { AccountData } from '../model/account-data';
 import { post } from 'selenium-webdriver/http';
 import { AuthUtilService } from './auth-util.service';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class AccountService {
@@ -15,16 +16,24 @@ export class AccountService {
 
   constructor(private httpClient: HttpClient, private authUtilService: AuthUtilService) { }
 
+  private loginSource = new BehaviorSubject<string>('default login');
+
+  currentLogin = this.loginSource.asObservable();
+
   getAllAccounts(): Observable<AccountData[]> {
     return this.httpClient.get<AccountData[]>(this.uri);
   }
 
-  registerAccount(account: AccountData): Observable<AccountData>{
-    return this.httpClient.post<AccountData>(this.uri + '/registerAccount', account)
+  registerAccount(account: AccountData): Observable<AccountData> {
+    return this.httpClient.post<AccountData>(this.uri + '/registerAccount', account);
   }
 
   getCurrentUserIdentity(): Observable<AccountData> {
-    return this.httpClient.get<AccountData>(this.uri + "/myIdentity");
+    return this.httpClient.get<AccountData>(this.uri + '/myAccountToEdit');
+  }
+
+  changePassword(account: AccountData): Observable<AccountData> {
+    return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
   }
 
   editAccount(id: number, account: AccountData): Observable<any> {
@@ -43,4 +52,11 @@ export class AccountService {
     return this.httpClient.get<AccountData>(this.uri + "/myAccountToEdit");
   }
 
+  changeOthersPassword(account: AccountData): Observable<AccountData> {
+    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
+  }
+
+  passLogin(login: string) {
+    this.loginSource.next(login);
+  }
 }

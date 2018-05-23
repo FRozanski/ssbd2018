@@ -15,25 +15,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class AccessLevelDto implements Serializable {
     
-    private Long id;
+    private String id;
     private String level;
-    private boolean active;
-
-    public AccessLevelDto(Long id, String level, boolean active) {
-        this.id = id;
-        this.level = level;
-        this.active = active;
-    }
     
     public AccessLevelDto() {
         
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -45,13 +38,4 @@ public class AccessLevelDto implements Serializable {
         this.level = level;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-    
-    
 }

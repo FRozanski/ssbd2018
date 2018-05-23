@@ -5,23 +5,20 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author piotrek
  */
-public class PassDto {
+@XmlRootElement
+public class PassDto implements Serializable {
     
     private String accountId;
     private String oldPass;
     private String newPassOne;
     private String newPassTwo;
-    
-    public PassDto(String accountId, String oldPass, String newPassOne, String newPassTwo) {
-        this.accountId = accountId;
-        this.oldPass = oldPass;
-        this.newPassOne = newPassOne;
-        this.newPassTwo = newPassTwo;
-    }
     
     public String getAccountId() {
         return accountId;

@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,9 +17,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 @Local
 public interface ShippingMethodFacadeLocal {
 
-    void create(ShippingMethod shippingMethod);
+    void create(ShippingMethod shippingMethod) throws AppBaseException;
 
-    void edit(ShippingMethod shippingMethod);
+    void edit(ShippingMethod shippingMethod) throws AppBaseException;
 
     ShippingMethod find(Object id);
 

@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 @Local
 public interface ArchivalPasswordFacadeLocal {
 
-    void create(ArchivalPassword archivalPassword);
+    void create(ArchivalPassword archivalPassword) throws AppBaseException;
 
     ArchivalPassword find(Object id);
 

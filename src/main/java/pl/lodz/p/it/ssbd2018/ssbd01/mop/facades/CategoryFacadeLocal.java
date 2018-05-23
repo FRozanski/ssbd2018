@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,9 +17,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 @Local
 public interface CategoryFacadeLocal {
 
-    void create(Category category);
+    void create(Category category) throws AppBaseException;
 
-    void edit(Category category);
+    void edit(Category category) throws AppBaseException;
 
     Category find(Object id);
 

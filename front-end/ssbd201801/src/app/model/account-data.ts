@@ -19,5 +19,7 @@ export interface AccountData {
     password?: string;
     password2?: string;
     roles?: string[];
-
+    oldPass?: string;
+    newPassOne?: string;
+    newPassTwo?: string;
 }

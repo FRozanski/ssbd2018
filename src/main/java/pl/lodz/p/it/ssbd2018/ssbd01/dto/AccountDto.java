@@ -6,9 +6,12 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 
@@ -19,7 +22,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 @XmlRootElement
 public class AccountDto implements Serializable{
     
-    // nie ma tu wszystkich pól, klasa utworzona dla testu
     private Long id;
     private String login;
     private long numberOfProducts;
@@ -38,7 +40,7 @@ public class AccountDto implements Serializable{
     private boolean confirm;
     private boolean active;
     private boolean used;
-    private long version = 0;
+    private List<String> accessLevels;
     
     public AccountDto() {
         
@@ -47,7 +49,7 @@ public class AccountDto implements Serializable{
     public AccountDto(Long id, String login, long numberOfProducts, long numberOfOrders, 
             long numberOfLogins, String name, String surname, String email, String phone, 
             String street, String streetNumber, String flatNumber, String postalCode, 
-            String city, String country, boolean confirm, boolean active, boolean used) {
+            String city, String country, boolean confirm, boolean active, boolean used, Collection<AccountAlevel> accountALevel) {
         this.id = id;
         this.login = login;
         this.numberOfProducts = numberOfProducts;
@@ -66,6 +68,12 @@ public class AccountDto implements Serializable{
         this.confirm = confirm;
         this.active = active;
         this.used = used;
+        
+        accessLevels = new ArrayList<>();
+        List<AccountAlevel> levels = new ArrayList(accountALevel);
+        for (int i=0; i<levels.size(); i++) {
+            accessLevels.add(levels.get(i).getIdAlevel().getLevel());
+        }
     }
 
     public Long getId() {
@@ -212,12 +220,18 @@ public class AccountDto implements Serializable{
         this.used = used;
     }
 
-    public long getVersion() {
-        return version;
+    /**
+     * @return the accessLevels
+     */
+    public List<String> getAccessLevels() {
+        return accessLevels;
     }
 
-    public void setVersion(long version) {
-        this.version = version;
+    /**
+     * @param accessLevels the accessLevels to set
+     */
+    public void setAccessLevels(List<String> accessLevels) {
+        this.accessLevels = accessLevels;
     }
 
     

@@ -78,11 +78,8 @@
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.FLAT_NUMBER' | translate" formControlName='flatNumber' required>
+        <input matInput [placeholder]="'ACCOUNT.FLAT_NUMBER' | translate" formControlName='flatNumber'>
       </mat-form-field>
-      <div class="errors-space" *ngIf="isRequiredSatisfied('flatNumber')">
-        {{ "FORM.FIELD_REQUIRED" | translate }}
-      </div>
 
       <mat-form-field>
         <input matInput [placeholder]="'ACCOUNT.POSTAL_CODE' | translate" formControlName='postalCode' required>

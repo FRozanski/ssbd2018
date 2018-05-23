@@ -22,9 +22,9 @@ public interface AccountManagerLocal {
     
     Account getAccountToEdit(Account account);
     
-    void saveAccountAfterEdit(Account account); 
+    void saveAccountAfterEdit(Account account) throws AppBaseException; 
     
-    void registerAccount(Account account, ServletContext servletContext);
+    void registerAccount(Account account, ServletContext servletContext) throws AppBaseException;
     
     void confirmAccount(Account account) throws AppBaseException;
     
@@ -32,15 +32,19 @@ public interface AccountManagerLocal {
     
     void unlockAccount(long accountId) throws AccountException;
     
-    void addAccessLevelToAccount(AccessLevel accessLevel, Account account);
+    public Account getMyAccountToEdit(Account account);
+    
+    public Account getMyAccountByLogin(String login) throws AppBaseException;
+    
+    void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException;
     
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
 
     public String getVeryficationToken(Account account);
     
-    public Account getAccountById(long id);
+    public Account getAccountById(long id) throws AppBaseException;
     
-    public Account getAccountByLogin(String login);
+    public Account getAccountByLogin(String login) throws AppBaseException;
     
     public Account getAccountByToken(String token) throws AppBaseException;
 
@@ -50,11 +54,11 @@ public interface AccountManagerLocal {
 
     public AccessLevel getAccessLevelById(Long idAccessLevel);
     
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo);
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException;
     
-    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo);
+    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException;
 
     public Account getMyAccountById(long id);
 
-    public void saveMyAccountAfterEdit(Account myAccount);
+    public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException;
 }

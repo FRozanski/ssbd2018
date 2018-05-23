@@ -5,6 +5,8 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.shared_facades;
 
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+
 /**
  *
  * @author fifi
@@ -15,11 +17,13 @@ public abstract class AbstractFacadeCreateUpdate<T> extends AbstractFacadeBase<T
         super(entityClass);        
     }
     
-    public void create(T entity) {
+    public void create(T entity) throws AppBaseException {
         getEntityManager().persist(entity);
+        getEntityManager().flush();
     }
 
-    public void edit(T entity) {
+    public void edit(T entity) throws AppBaseException {
         getEntityManager().merge(entity);
+        getEntityManager().flush();
     }
 }

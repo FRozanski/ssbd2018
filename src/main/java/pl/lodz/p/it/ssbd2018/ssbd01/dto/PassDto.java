@@ -21,19 +21,8 @@ public class PassDto implements Serializable {
     private String newPassOne;
     private String newPassTwo;
     
-    public PassDto(String login, String oldPass, String newPassOne, String newPassTwo) {
-        this.login = login;
-        this.oldPass = oldPass;
-        this.newPassOne = newPassOne;
-        this.newPassTwo = newPassTwo;
-    }
-    
-    public PassDto() {
-        
-    }
-
-    public String getLogin() {
-        return login;
+    public String getAccountId() {
+        return accountId;
     }
 
     public void setLogin(String login) {

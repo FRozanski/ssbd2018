@@ -34,7 +34,8 @@ export class AccountEditComponent implements OnInit {
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
-      this.accountService.editAccount(this.idEditToken, account).subscribe(() => {
+      account.id = this.idEditToken;
+      this.accountService.editAccount(account).subscribe(() => {
         alert("Pomyślnie edytowano użytkownika"); // temp
         this.router.navigate(['/main'])
       },
@@ -104,8 +105,7 @@ export class AccountEditComponent implements OnInit {
       });
 
       this.idEditToken = account.id;
-      debugger;
-      
+
     });
   }
 

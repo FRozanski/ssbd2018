@@ -165,7 +165,7 @@ public class AccountWebService {
     @Path("updateAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateAccount(EditAccountDto accountDto) {
-        if (!idChanger.containsId(accountDto.getId())) {
+        if (!idChanger.containsId(accountDto.getId()) || accountDto.getId() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
                     .type(MediaType.APPLICATION_JSON)

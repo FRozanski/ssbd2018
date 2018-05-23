@@ -36,8 +36,9 @@ export class AccountService {
     return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
   }
 
-  editAccount(encodedId: string, account: AccountData): Observable<any> {
-    return this.httpClient.put<AccountData>(this.uri + "/" + encodedId, {
+  editAccount(account: AccountData): Observable<any> {
+    return this.httpClient.put<AccountData>(this.uri + "/updateAccount", {
+      "id": account.id,
       "city": account.city,
       "country": account.country,
       "email": account.email,
@@ -46,12 +47,12 @@ export class AccountService {
       "postalCode": account.postalCode,
       "street": account.street,
       "streetNumber": account.streetNumber,
-      "surname": account.surname,
-      "version": 0
+      "surname": account.surname
     });
   }
 
   editLoggedUserAccount(account: AccountData) {
+    console.log("Sending account to api: ", account);
     return this.httpClient.put<AccountData>(this.uri + "/updateMyAccount", account);
   }
 

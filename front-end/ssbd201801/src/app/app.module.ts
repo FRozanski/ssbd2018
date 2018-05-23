@@ -15,7 +15,8 @@ import {
   MatInputModule,
   MatCardModule,
   MatSidenavModule,
-  MatSortModule, MatPaginatorModule
+  MatSortModule, 
+  MatPaginatorModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,11 +26,11 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthUtilService } from './common/auth-util.service';
 import { AuthGuard } from './common/user-guard';
 import { AccountEditComponent } from './account-edit/account-edit.component';
-// import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
 import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationConfirmService } from './common/registration-confirm.service';
+import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -92,6 +93,15 @@ const appRoutes: Routes = [
     path: 'registrationConfirm', 
     component: RegistrationConfirmComponent
   },
+  { 
+    path: 'myAccount', 
+    component: OwnAccountEditComponent,
+    data: 
+    {
+      expectedRole: "USER"
+    },
+    canActivate: [AuthGuard]
+  },
   {
     path: '**',
     redirectTo: 'main'
@@ -100,7 +110,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
+declarations: [
     AppComponent,
     MainPageComponent,
     AccountListComponent,
@@ -109,8 +119,8 @@ const appRoutes: Routes = [
     ChangeOthersPasswordComponent,
     ChangePasswordComponent,
     SidenavComponent,
-    AccountEditComponent//,
-    // OwnAccountEditComponent
+    AccountEditComponent,
+    OwnAccountEditComponent
   ],
   imports: [
     MatTableModule,

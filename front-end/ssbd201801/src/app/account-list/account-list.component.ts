@@ -34,6 +34,12 @@ export class AccountListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
+
   onEditClick(account: AccountData) {
     throw new Error('onEditClick(..) is not implemented yet.');
   }

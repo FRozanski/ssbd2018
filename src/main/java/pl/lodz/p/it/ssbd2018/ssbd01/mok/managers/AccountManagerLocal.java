@@ -32,6 +32,10 @@ public interface AccountManagerLocal {
     
     void unlockAccount(long accountId) throws AccountException;
     
+    public Account getMyAccountToEdit(Account account);
+    
+    public Account getMyAccountByLogin(String login) throws AppBaseException;
+    
     void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException;
     
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);

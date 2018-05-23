@@ -105,7 +105,7 @@ public class AccountWebService {
         }
         String login = servletRequest.getUserPrincipal().getName();
         try {
-            Account accountToEdit = accountManagerLocal.getAccountToEdit(accountManagerLocal.getAccountByLogin(login));
+            Account accountToEdit = accountManagerLocal.getMyAccountToEdit(accountManagerLocal.getMyAccountByLogin(login));
             EditAccountDto accountDto = DtoMapper.mapToEditOwnAccount(accountToEdit);
             return Response.ok(accountDto).build();
         } catch (AccountException ex) {
@@ -124,7 +124,7 @@ public class AccountWebService {
     @PUT
     @Path("updateMyAccount")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateAccount(EditAccountDto accountDto, @Context HttpServletRequest servletRequest) {
+    public Response updateMyAccount(EditAccountDto accountDto, @Context HttpServletRequest servletRequest) {
         if (servletRequest.getUserPrincipal() == null) {
             return Response.status(Response.Status.NO_CONTENT)
                     .type(MediaType.APPLICATION_JSON)
@@ -132,7 +132,7 @@ public class AccountWebService {
         }
         try {
             String login = servletRequest.getUserPrincipal().getName();
-            Account accountToEdit = accountManagerLocal.getAccountByLogin(login);
+            Account accountToEdit = accountManagerLocal.getMyAccountByLogin(login);
             Account account = DtoMapper.mapEditAccountDto(accountDto, accountToEdit);
             return valideAndEditAccount(account);
         } catch (AccountOptimisticException ex) {
@@ -290,7 +290,7 @@ public class AccountWebService {
         }
 
         try {
-            Account account = accountManagerLocal.getAccountByLogin(login);
+            Account account = accountManagerLocal.getMyAccountByLogin(login);
             accountManagerLocal.changeYourPassword(account, passObj.getOldPass(), passObj.getNewPassOne(), passObj.getNewPassTwo());
         } catch (PasswordNotMatch ex) {
             return Response.status(Response.Status.BAD_REQUEST)

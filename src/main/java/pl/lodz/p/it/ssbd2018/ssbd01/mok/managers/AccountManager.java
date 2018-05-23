@@ -69,9 +69,17 @@ public class AccountManager implements AccountManagerLocal {
         return accessLevelFacade.findAll();
     }
 
+    
     @Override
     @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
+        Account tmpAccount = accountFacade.find(account.getId());
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+    }
+    
+    @Override
+    @RolesAllowed("getMyAccountToEdit")
+    public Account getMyAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
@@ -236,6 +244,13 @@ public class AccountManager implements AccountManagerLocal {
     @Override
     @RolesAllowed("getAccountById")
     public Account getAccountByLogin(String login) throws AppBaseException {
+        Account tmpAccount = accountFacade.findByLogin(login);
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+    }
+    
+    @Override
+    @RolesAllowed("getMyAccountById")
+    public Account getMyAccountByLogin(String login) throws AppBaseException {
         Account tmpAccount = accountFacade.findByLogin(login);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }

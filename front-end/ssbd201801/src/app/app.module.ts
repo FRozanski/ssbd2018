@@ -42,6 +42,9 @@ const appRoutes: Routes = [
     MainPageComponent,
     AccountListComponent,
     RegisterComponent,
+    RegistrationConfirmComponent,
+    ChangeOthersPasswordComponent,
+    ChangePasswordComponent,
     SidenavComponent,
   ],
   imports: [
@@ -67,7 +70,8 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   providers: [
     AccountService,
-    RegistrationConfirmComponent
+    RegistrationConfirmComponent,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ]
 })
 export class AppModule { }

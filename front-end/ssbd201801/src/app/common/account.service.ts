@@ -33,7 +33,9 @@ export class AccountService {
     return this.httpClient.get<AccountData>(this.uri + "/myIdentity");
   }
 
-
+  changePassword(account: AccountData): Observable<AccountData>{
+    return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
+  }
 
 
 }

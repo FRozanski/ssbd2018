@@ -5,27 +5,44 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author piotrek
  */
-public class PassDto {
+@XmlRootElement
+public class PassDto implements Serializable {
     
-    private String accountId;
+//    private String accountId;
+    private String login;
     private String oldPass;
     private String newPassOne;
     private String newPassTwo;
     
-    public PassDto(String accountId, String oldPass, String newPassOne, String newPassTwo) {
-        this.accountId = accountId;
+    public PassDto(String login, String oldPass, String newPassOne, String newPassTwo) {
+        this.login = login;
         this.oldPass = oldPass;
         this.newPassOne = newPassOne;
         this.newPassTwo = newPassTwo;
     }
     
-    public String getAccountId() {
-        return accountId;
+    public PassDto() {
+        
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }  
+    
+//    public String getAccountId() {
+//        return accountId;
+//    }
 
     public String getOldPass() {
         return oldPass;
@@ -39,9 +56,9 @@ public class PassDto {
         return newPassTwo;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
+//    public void setAccountId(String accountId) {
+//        this.accountId = accountId;
+//    }
 
     public void setOldPass(String oldPass) {
         this.oldPass = oldPass;

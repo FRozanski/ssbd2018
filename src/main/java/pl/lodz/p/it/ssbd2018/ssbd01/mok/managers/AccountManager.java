@@ -247,6 +247,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
+    @RolesAllowed("getAccountByLogin")
     public Account getAccountByLogin(String login) {
         return accountFacade.findByLogin(login);
     }

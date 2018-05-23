@@ -8,7 +8,15 @@ import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AccountService } from './common/account.service';
-import { MatTableModule, MatCheckboxModule, MatButtonModule, MatInputModule, MatCardModule, MatSidenavModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatCheckboxModule,
+  MatButtonModule,
+  MatInputModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatSortModule, MatPaginatorModule
+} from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -68,10 +76,27 @@ const appRoutes: Routes = [
       expectedRole: "ADMIN"
     }
   },
+  { 
+    path: 'changePassword', 
+    component: ChangePasswordComponent,
+    data: 
+    {
+      expectedRole: "USER"
+    }
+  },
+  { 
+    path: 'changeOthersPassword', 
+    component: ChangeOthersPasswordComponent
+  },
+  { 
+    path: 'registrationConfirm', 
+    component: RegistrationConfirmComponent
+  },
   {
     path: '**',
     redirectTo: 'main'
   }
+
 ];
 
 @NgModule({
@@ -94,6 +119,8 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatCardModule,
     MatSidenavModule,
+    MatSortModule,
+    MatPaginatorModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),

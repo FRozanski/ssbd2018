@@ -29,7 +29,7 @@ export class AccountService {
   }
 
   getCurrentUserIdentity(): Observable<AccountData> {
-    return this.httpClient.get<AccountData>(this.uri + '/myAccountToEdit');
+    return this.httpClient.get<AccountData>(this.uri + '/myIdentity');
   }
 
   changePassword(account: AccountData): Observable<AccountData> {

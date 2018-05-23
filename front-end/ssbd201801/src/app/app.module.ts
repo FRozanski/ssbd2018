@@ -15,7 +15,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
-import {RegistrationConfirmService} from './common/registration-confirm.service';
+import { RegistrationConfirmService } from './common/registration-confirm.service';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

@@ -11,7 +11,11 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class AccountService {
 
   readonly uri: string = environment.apiUrl + '/webresources/account';
-
+  
+  private loginSource = new BehaviorSubject<string>('default login');
+  
+  currentLogin = this.loginSource.asObservable();
+  
   constructor(private httpClient: HttpClient) { }
 
   getAllAccounts(): Observable<AccountData[]> {
@@ -25,6 +29,16 @@ export class AccountService {
   getCurrentUserIdentity(): Observable<AccountData> {
     return this.httpClient.get<AccountData>(this.uri + '/myIdentity');
   }
+  
+  changePassword(account: AccountData): Observable<AccountData> {
+    return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
+  }
 
+  changeOthersPassword(account: AccountData): Observable<AccountData>{
+    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
+  }
 
+  passLogin(login: string) {
+    this.loginSource.next(login);
+  }
 }

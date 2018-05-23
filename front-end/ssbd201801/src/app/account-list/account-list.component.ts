@@ -24,8 +24,6 @@ export class AccountListComponent implements OnInit {
   ngOnInit() {
     this.accountService.getAllAccounts().subscribe((data) => {
       this.dataSource = data;
-    }, () => {
-      window.location.href = environment.apiUrl + '/login/login.html';
     });
   }
 

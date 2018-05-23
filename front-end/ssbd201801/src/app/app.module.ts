@@ -14,8 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
+import { AuthUtilService } from './common/auth-util.service';
+import { AuthGuard } from './common/user-guard';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -26,13 +26,37 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: 'main', component: MainPageComponent },
-  { path: 'accounts', component: AccountListComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'changeOthersPassword', component: ChangeOthersPasswordComponent },
-  { path: '**', redirectTo: 'main' }
+  {
+    path: '',
+    redirectTo: 'main',
+    pathMatch: 'full'
+  },
+  {
+    path: 'main',
+    component: MainPageComponent
+  },
+  {
+    path: 'accounts', 
+    canActivate: [AuthGuard],
+    component: AccountListComponent, 
+    data:
+      {
+        expectedRole: "ADMIN"
+      }
+  },
+  {
+    path: 'register', 
+    canActivate: [AuthGuard],
+    component: RegisterComponent, 
+    data:
+      {
+        expectedRole: "GUEST"
+      }
+  },
+  {
+    path: '**',
+    redirectTo: 'main'
+  }
 ];
 
 @NgModule({
@@ -68,7 +92,9 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   providers: [
     AccountService,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    AuthUtilService,
+    AuthGuard
   ]
 })
 export class AppModule { }

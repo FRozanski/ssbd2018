@@ -10,17 +10,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class AccountService {
 
-  private loginSource = new BehaviorSubject<string>('default login');
-  currentLogin = this.loginSource.asObservable();
-
-  public Roles: any = {
-    Admin: 'ADMIN',
-    Manager: 'MANAGER',
-    User: 'USER',
-    Virtual: 'VIRTUAL'
-  };
-
-  readonly uri: string = environment.apiUrl + '/webresources/account';
+  readonly uri: string = environment.apiUrl + "/webresources/account";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -36,15 +26,5 @@ export class AccountService {
     return this.httpClient.get<AccountData>(this.uri + '/myIdentity');
   }
 
-  changePassword(account: AccountData): Observable<AccountData> {
-    return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
-  }
 
-  changeOthersPassword(account: AccountData): Observable<AccountData>{
-    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
-  }
-
-  passLogin(login: string) {
-    this.loginSource.next(login);
-  }
 }

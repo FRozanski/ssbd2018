@@ -39,7 +39,8 @@ public class DtoMapper {
                 account.getCountry(),
                 account.getConfirm(),
                 account.getActive(),
-                account.isUsed()
+                account.isUsed(),
+                account.getAccessLevelCollection()
         );
     }
 

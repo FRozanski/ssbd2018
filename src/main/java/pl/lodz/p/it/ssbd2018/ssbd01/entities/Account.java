@@ -69,6 +69,9 @@ public class Account implements Serializable {
 
     @OneToMany(mappedBy = "idAccount")
     private Collection<ArchivalPassword> archivalPasswordCollection;
+    
+    @OneToMany(mappedBy = "idAccount")
+    private Collection<AccountAlevel> accessLevelCollection;
 
     private static final int STARTING_NUMBER = 0;
     private static final long serialVersionUID = 1L;
@@ -445,6 +448,11 @@ public class Account implements Serializable {
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));
         calendar.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(calendar.getTime().getTime());
+    }
+    
+    @XmlTransient
+    public Collection<AccountAlevel> getAccessLevelCollection() {
+        return accessLevelCollection;
     }
 
     @XmlTransient

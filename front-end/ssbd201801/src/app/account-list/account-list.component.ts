@@ -47,7 +47,7 @@ export class AccountListComponent implements OnInit {
 
 
   onChangePasswordClick(account: AccountData) {
-    this.accountService.passLogin(account.login);
+    this.accountService.passId(account.id);
     window.location.href = environment.apiUrl + '/ng/#/changeOthersPassword';
   }
 }

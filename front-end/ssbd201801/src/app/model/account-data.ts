@@ -19,4 +19,6 @@ export interface AccountData {
     oldPass?: string;
     newPassOne?: string;
     newPassTwo?: string;
+    id?: string;
+    accountId?: string;
 }

@@ -471,7 +471,7 @@ public class Account implements Serializable {
         if (this.version != version) {
             throw new AccountOptimisticException("account_optimistic_lock_exception");
         } else {
-            this.version = Math.abs(new Random().nextInt());
+            this.version = new Random().nextLong();
         }
     }
 }

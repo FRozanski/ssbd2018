@@ -5,23 +5,13 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
-import javax.servlet.ServletContext;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.DELETE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
-import javax.ejb.EJBAccessException;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import org.json.simple.JSONObject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -37,8 +27,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.json.simple.JSONArray;
-import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccessLevelDto;
 import org.json.simple.JSONObject;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.DtoMapper;
@@ -56,6 +44,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.EmailNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.LoginNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordNotMatch;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PhoneNotUniqueException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.*;
 

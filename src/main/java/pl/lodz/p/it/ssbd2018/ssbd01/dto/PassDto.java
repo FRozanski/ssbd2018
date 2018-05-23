@@ -15,8 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class PassDto implements Serializable {
     
-//    private String accountId;
-    private String login;
+    private String accountId;
     private String oldPass;
     private String newPassOne;
     private String newPassTwo;
@@ -24,14 +23,6 @@ public class PassDto implements Serializable {
     public String getAccountId() {
         return accountId;
     }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }  
-    
-//    public String getAccountId() {
-//        return accountId;
-//    }
 
     public String getOldPass() {
         return oldPass;
@@ -45,9 +36,9 @@ public class PassDto implements Serializable {
         return newPassTwo;
     }
 
-//    public void setAccountId(String accountId) {
-//        this.accountId = accountId;
-//    }
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 
     public void setOldPass(String oldPass) {
         this.oldPass = oldPass;

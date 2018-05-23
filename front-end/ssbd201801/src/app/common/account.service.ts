@@ -10,7 +10,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class AccountService {
 
-  readonly uri: string = environment.apiUrl + "/webresources/account";
+  readonly uri: string = environment.apiUrl + '/webresources/account';
 
   constructor(private httpClient: HttpClient) { }
 

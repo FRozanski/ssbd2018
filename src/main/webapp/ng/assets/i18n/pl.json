@@ -34,7 +34,9 @@
     },
     "REGISTER" : {
         "BASIC_DATA" : "Dane podstawowe",
-        "ADDRESS_DATA" : "Dane adresowe"
+        "ADDRESS_DATA" : "Dane adresowe",
+        "ACCOUNT_CONFIRMED": "Pomyślnie aktywowano konto.",
+        "ACCOUNT_NOT_CONFIRMED": "Nie udało się aktywować konta."
     },
     "PASSWORD" : {
         "CHANGE_PASSWORD" : "Zmień hasło",

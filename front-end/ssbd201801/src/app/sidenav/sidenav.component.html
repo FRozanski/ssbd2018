@@ -27,6 +27,10 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/register' *ngIf='hasRole("ADMIN")'>Zarejestruj konto</button>
+    </p>
+
+    <p>
       <button mat-button>Wyloguj</button>
     </p>
   </mat-sidenav>

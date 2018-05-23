@@ -1,9 +1,10 @@
 
-import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountData } from '../model/account-data';
 import { environment } from '../../environments/environment';
+import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-account-list',
@@ -21,10 +22,23 @@ export class AccountListComponent implements OnInit {
 
   constructor (private accountService: AccountService) { }
 
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   ngOnInit() {
     this.accountService.getAllAccounts().subscribe((data) => {
-      this.dataSource = data;
+      this.dataSource = new MatTableDataSource<AccountData>(data);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    }, () => {
+      window.location.href = environment.apiUrl + '/login/login.html';
     });
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   onEditClick(account: AccountData) {

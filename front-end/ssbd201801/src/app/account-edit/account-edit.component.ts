@@ -19,6 +19,8 @@ export class AccountEditComponent implements OnInit {
   wasFormSent: boolean = false;
   formValidationMessage: string = "";
 
+  idEditToken: string;
+
   constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -32,14 +34,12 @@ export class AccountEditComponent implements OnInit {
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
-      this.accountService.editAccount(this.userId, account).subscribe(() => {
+      this.accountService.editAccount(this.idEditToken, account).subscribe(() => {
         alert("Pomyślnie edytowano użytkownika"); // temp
         this.router.navigate(['/main'])
       },
         (errorResponse) => {
-          this.formValidationMessage = errorResponse.error.message;
-          ;
-          
+          this.formValidationMessage = errorResponse.error.message;          
         }
       )
     }
@@ -100,8 +100,12 @@ export class AccountEditComponent implements OnInit {
         "postalCode": account.postalCode,
         "street": account.street,
         "streetNumber": account.streetNumber,
-        "flatNumber": account.flatNumber
+        "flatNumber": account.flatNumber + ""
       });
+
+      this.idEditToken = account.id;
+      debugger;
+      
     });
   }
 

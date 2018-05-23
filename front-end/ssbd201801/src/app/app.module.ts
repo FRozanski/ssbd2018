@@ -25,7 +25,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthUtilService } from './common/auth-util.service';
 import { AuthGuard } from './common/user-guard';
 import { AccountEditComponent } from './account-edit/account-edit.component';
-import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
+// import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
 import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
@@ -109,8 +109,8 @@ const appRoutes: Routes = [
     ChangeOthersPasswordComponent,
     ChangePasswordComponent,
     SidenavComponent,
-    AccountEditComponent,
-    OwnAccountEditComponent
+    AccountEditComponent//,
+    // OwnAccountEditComponent
   ],
   imports: [
     MatTableModule,

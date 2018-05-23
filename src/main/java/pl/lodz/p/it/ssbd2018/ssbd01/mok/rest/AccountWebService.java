@@ -160,8 +160,8 @@ public class AccountWebService {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateAccount(@PathParam("accountId") String accountId, EditAccountDto accountDto) {
         if (!idChanger.containsId(accountId)) {
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity(new WebErrorInfo("401", UNAUTHORIZED))
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }

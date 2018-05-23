@@ -36,8 +36,19 @@ export class AccountService {
     return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
   }
 
-  editAccount(id: number, account: AccountData): Observable<any> {
-    return this.httpClient.put<AccountData>(this.uri + "/" + id, account);
+  editAccount(encodedId: string, account: AccountData): Observable<any> {
+    return this.httpClient.put<AccountData>(this.uri + "/" + encodedId, {
+      "city": account.city,
+      "country": account.country,
+      "email": account.email,
+      "name": account.name,
+      "phone": account.phone,
+      "postalCode": account.postalCode,
+      "street": account.street,
+      "streetNumber": account.streetNumber,
+      "surname": account.surname,
+      "version": 0
+    });
   }
 
   editLoggedUserAccount(account: AccountData) {

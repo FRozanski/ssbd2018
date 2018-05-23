@@ -58,34 +58,34 @@ public class AccountManager implements AccountManagerLocal {
     private final SendMailUtils mailSender = new SendMailUtils();
 
     @Override
-    @RolesAllowed("getAllAccounts")
+    //@RolesAllowed("getAllAccounts")
     public List<Account> getAllAccounts() {
         return accountFacade.findAll();
     }
 
     @Override
-    @RolesAllowed("getAllAccessLevels")
+    //@RolesAllowed("getAllAccessLevels")
     public List<AccessLevel> getAllAccessLevels() {
         return accessLevelFacade.findAll();
     }
 
     
     @Override
-    @RolesAllowed("getAccountToEdit")
+    //@RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
     
     @Override
-    @RolesAllowed("getMyAccountToEdit")
+    //@RolesAllowed("getMyAccountToEdit")
     public Account getMyAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
-    @RolesAllowed("changeYourPassword")
+    //@RolesAllowed("changeYourPassword")
     public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException {
         Account tmpAccount = accountFacade.find((account.getId()));
         String passHash = tmpAccount.getPassword();
@@ -104,7 +104,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("changeOthersPassword")
+    //@RolesAllowed("changeOthersPassword")
     public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException {
         Account tmpAccount = accountFacade.find((account.getId()));
 
@@ -119,7 +119,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("saveAccountAfterEdit")
+    //@RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) throws AppBaseException {
         try {
             accountFacade.edit(account);
@@ -146,7 +146,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("lockAccount")
+    //@RolesAllowed("lockAccount")
     public void lockAccount(long accountId) throws AccountException {
         try {
             Account account = accountFacade.find(accountId);
@@ -164,7 +164,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("unlockAccount")
+    //@RolesAllowed("unlockAccount")
     public void unlockAccount(long accountId) throws AccountException {
         try {
             Account account = accountFacade.find(accountId);
@@ -181,7 +181,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("addAccessLevelToAccount")
+    //@RolesAllowed("addAccessLevelToAccount")
     public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException {
         AccountAlevel accountAlevel = new AccountAlevel();
         accountAlevel.setIdAlevel(accessLevel);
@@ -190,7 +190,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("dismissAccessLevelFromAccount")
+    //@RolesAllowed("dismissAccessLevelFromAccount")
     public void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account) {
         List<AccountAlevel> accountAlevels = accountAlevelFacade.findAll();
         AccountAlevel accountAlevel = null;
@@ -236,27 +236,27 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountById")
+    //@RolesAllowed("getAccountById")
     public String getVeryficationToken(Account account) {
         return accountFacade.find(account.getId()).getToken();
     }
 
     @Override
-    @RolesAllowed("getAccountById")
+    //@RolesAllowed("getAccountById")
     public Account getAccountByLogin(String login) throws AppBaseException {
         Account tmpAccount = accountFacade.findByLogin(login);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
     
     @Override
-    @RolesAllowed("getMyAccountById")
+    //@RolesAllowed("getMyAccountById")
     public Account getMyAccountByLogin(String login) throws AppBaseException {
         Account tmpAccount = accountFacade.findByLogin(login);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
-    @RolesAllowed("getAccountById")
+    //@RolesAllowed("getAccountById")
     public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }
@@ -269,35 +269,35 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountById")
+    //@RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
-    @RolesAllowed("getAccountAlevel")
+    //@RolesAllowed("getAccountAlevel")
     public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel) {
         AccountAlevel accountAlevel = accountAlevelFacade.findByAccountAndAccessLevel(idAccount, idAccessLevel);
         return (AccountAlevel) CloneUtils.deepCloneThroughSerialization(accountAlevel);
     }
 
     @Override
-    @RolesAllowed("getAccessLevelById")
+    //@RolesAllowed("getAccessLevelById")
     public AccessLevel getAccessLevelById(Long idAccessLevel) {
         AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
         return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
     }
 
     @Override
-    @RolesAllowed("getMyAccountById")
+    //@RolesAllowed("getMyAccountById")
     public Account getMyAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
-    @RolesAllowed("saveMyAccountAfterEdit")
+    //@RolesAllowed("saveMyAccountAfterEdit")
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }

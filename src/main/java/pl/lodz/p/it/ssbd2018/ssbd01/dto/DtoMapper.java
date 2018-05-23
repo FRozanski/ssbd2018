@@ -46,7 +46,7 @@ public class DtoMapper {
 
     public static EditAccountDto mapToEditAccount(Account account, IdChanger idChanger) {
         EditAccountDto editableAccount = new EditAccountDto();
-        editableAccount.setId(idChanger.addId(account.getId()));
+        editableAccount.setId(idChanger.addIdAndVersion(account.getId(), account.getVersion()));
         editableAccount.setCity(account.getCity());
         editableAccount.setName(account.getName());
         editableAccount.setSurname(account.getSurname());
@@ -58,7 +58,6 @@ public class DtoMapper {
         editableAccount.setFlatNumber(account.getFlatNumber());
         editableAccount.setPostalCode(account.getPostalCode());
         editableAccount.setCountry(account.getCountry());
-        editableAccount.setVersion(account.getVersion());
         return editableAccount;
     }
 
@@ -75,11 +74,10 @@ public class DtoMapper {
         editableAccount.setFlatNumber(account.getFlatNumber());
         editableAccount.setPostalCode(account.getPostalCode());
         editableAccount.setCountry(account.getCountry());
-        editableAccount.setVersion(account.getVersion());
         return editableAccount;
     }
 
-    public static Account mapEditAccountDto(EditAccountDto accountDto, Account accountToEdit) throws AccountOptimisticException {
+    public static Account mapEditAccountDto(EditAccountDto accountDto, Account accountToEdit, IdChanger idchanger) throws AccountOptimisticException {
         accountToEdit.setName(accountDto.getName());
         accountToEdit.setSurname(accountDto.getSurname());
         accountToEdit.setEmail(accountDto.getEmail());
@@ -90,7 +88,7 @@ public class DtoMapper {
         accountToEdit.setPostalCode(accountDto.getPostalCode());
         accountToEdit.setCity(accountDto.getCity());
         accountToEdit.setCountry(accountDto.getCountry());
-        accountToEdit.setVersion(accountDto.getVersion());
+        accountToEdit.setVersion(idchanger.getVersion(accountDto.getId()));
         return accountToEdit;
     }
 

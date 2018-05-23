@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -18,9 +17,11 @@ import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.*;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
@@ -34,7 +35,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
  * @author piotrek
  * @author agkan
  */
-@TransactionAttribute(TransactionAttributeType.MANDATORY)
+@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class AccountManager implements AccountManagerLocal {
 
@@ -47,7 +48,7 @@ public class AccountManager implements AccountManagerLocal {
 
     @EJB
     private ArchivalPasswordFacadeLocal archivalPasswordFacadeLocal;
-    
+
     @EJB
     private AccessLevelFacadeLocal accessLevelFacade;
 
@@ -77,57 +78,46 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     @RolesAllowed("changeYourPassword")
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException{
+    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException {
         Account tmpAccount = accountFacade.find((account.getId()));
         String passHash = tmpAccount.getPassword();
-        if (passHash.contentEquals(HashUtils.sha256(oldPass))) {
-            if (newPassOne.length() >= 8) {
-                if (newPassOne.contentEquals(newPassTwo)) {
-                    try {
-                        tmpAccount.setPassword(HashUtils.sha256(newPassOne));
-                        accountFacade.edit(tmpAccount);
-                        ArchivalPassword archivalPassword = new ArchivalPassword(tmpAccount.getPassword(), generateCurrentDate(), tmpAccount);
-                        archivalPasswordFacadeLocal.create(archivalPassword);
-                    } catch (IllegalArgumentException ae) {
-                        throw new IllegalArgumentException("Coś się zepsuło.", ae);
-                    }
-                } else {
-                    throw new IllegalArgumentException("Nowe hasła nie są zgodne.");
-                }
-            } else {
-                throw new IllegalArgumentException("Nowe hasło jest za krótkie. Powinno posiadać conajmniej 8 znaków");
-            }
-        } else {
-            throw new IllegalArgumentException("Niepoprawne stare hasło");
+        if (!passHash.contentEquals(HashUtils.sha256(oldPass))) {
+            throw new PasswordNotMatch("password_not_match_error");
+        }
+
+        try {
+            tmpAccount.setPassword(HashUtils.sha256(newPassOne));
+            accountFacade.edit(tmpAccount);
+            ArchivalPassword archivalPassword = new ArchivalPassword(tmpAccount.getPassword(), generateCurrentDate(), tmpAccount);
+            archivalPasswordFacadeLocal.create(archivalPassword);
+        } catch (AppBaseException ex) {
+            throw new AccountException("unknown_exception");
         }
     }
-    
+
     @Override
     @RolesAllowed("changeOthersPassword")
     public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException {
         Account tmpAccount = accountFacade.find((account.getId()));
-        if (newPassOne.length() > 8) {
-            if (newPassOne.contentEquals(newPassTwo)) {
-                try {
-                    tmpAccount.setPassword(HashUtils.sha256(newPassOne));
-                    accountFacade.edit(tmpAccount);
-                    ArchivalPassword archivalPassword = new ArchivalPassword(tmpAccount.getPassword(), generateCurrentDate(), tmpAccount);
-                    archivalPasswordFacadeLocal.create(archivalPassword);
-                } catch (IllegalArgumentException ae) {
-                    throw new IllegalArgumentException("Coś się zepsuło.", ae);
-                }
-            } else {
-                throw new IllegalArgumentException("Nowe hasła nie są zgodne.");
-            }
-        } else {
-            throw new IllegalArgumentException("Nowe hasło jest za krótkie. Powinno posiadać conajmniej 8 znaków");
+
+        try {
+            tmpAccount.setPassword(HashUtils.sha256(newPassOne));
+            accountFacade.edit(tmpAccount);
+            ArchivalPassword archivalPassword = new ArchivalPassword(tmpAccount.getPassword(), generateCurrentDate(), tmpAccount);
+            archivalPasswordFacadeLocal.create(archivalPassword);
+        } catch (AppBaseException ex) {
+            throw new AccountException("unknown_exception");
         }
     }
-    
+
     @Override
     @RolesAllowed("saveAccountAfterEdit")
-    public void saveAccountAfterEdit(Account account) {
-        accountFacade.edit(account);
+    public void saveAccountAfterEdit(Account account) throws AppBaseException {
+        try {
+            accountFacade.edit(account);
+        } catch (OptimisticLockException oe) {
+            throw new AccountOptimisticException("account_optimistic_error");
+        }
     }
 
     @Override
@@ -135,53 +125,51 @@ public class AccountManager implements AccountManagerLocal {
     public void registerAccount(Account account, ServletContext servletContext) throws AppBaseException {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.create(account);
-//        loger.log(Level.INFO, "Account Created.");
-//
-//        AccountAlevel level = new AccountAlevel();
-//        level.setIdAccount(account);
-//        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
-//        accountAlevelFacade.create(level);
-//        loger.log(Level.INFO, "Access level added to account.");
-//        
-//        ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-//        archivalPasswordFacadeLocal.create(archivalPassword);
-//        loger.log(Level.INFO, "ArchivalPassword saved for account.");
-//        
-//        this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
-//        loger.log(Level.INFO, "E-mail with activation token sent.");
+
+        AccountAlevel level = new AccountAlevel();
+        level.setIdAccount(account);
+        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
+        accountAlevelFacade.create(level);
+
+        ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
+        archivalPasswordFacadeLocal.create(archivalPassword);
+
+        this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
     }
 
     @Override
     @RolesAllowed("lockAccount")
-    public void lockAccount(long accountId) throws AccountException{
+    public void lockAccount(long accountId) throws AccountException {
         try {
             Account account = accountFacade.find(accountId);
             account.setActive(false);
             accountFacade.edit(account);
-            
             mailSender.sendMailAfterAccountLock(account.getEmail());
-        //FIXME - dodac podzial na wyjatki
+
         } catch (NullPointerException npe) {
-            throw new AccountException("lock_error");
+            throw new AccountNotFoundException("wrong_account_id_error");
         } catch (OptimisticLockException oe) {
-            throw new AccountException("lock_error");
+            throw new AccountOptimisticException("account_optimistic_error");
+        } catch (AppBaseException ex) {
+            throw new AccountException("unknow_error");
         }
     }
 
     @Override
     @RolesAllowed("unlockAccount")
     public void unlockAccount(long accountId) throws AccountException {
-        try { 
+        try {
             Account account = accountFacade.find(accountId);
             account.setActive(true);
             accountFacade.edit(account);
-        //FIXME - dodac podzial na wyjatki
         } catch (NullPointerException npe) {
-            throw new AccountException("unlock_error");
+            throw new AccountNotFoundException("wrong_account_id_error");
         } catch (OptimisticLockException oe) {
-            throw new AccountException("unlock_error");
+            throw new AccountOptimisticException("account_optimistic_error");
+        } catch (AppBaseException ex) {
+            throw new AccountException("unknow_error");
         }
-        
+
     }
 
     @Override
@@ -232,26 +220,28 @@ public class AccountManager implements AccountManagerLocal {
             account.setConfirmationDate(confirmationDate);
             account.setUsed(true);
             accountFacade.edit(account);
-            
             mailSender.sendMailAfterActivation(account.getEmail());
+
         } catch (OptimisticLockException oe) {
-
-        } catch (PersistenceException pe) {
-
+            throw new AccountOptimisticException("account_optimistic_error");
         }
     }
 
     @Override
+    @RolesAllowed("getAccountById")
     public String getVeryficationToken(Account account) {
         return accountFacade.find(account.getId()).getToken();
     }
 
     @Override
-    public Account getAccountByLogin(String login) {
-        return accountFacade.findByLogin(login);
+    @RolesAllowed("getAccountById")
+    public Account getAccountByLogin(String login) throws AppBaseException {
+        Account tmpAccount = accountFacade.findByLogin(login);
+        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
+    @RolesAllowed("getAccountById")
     public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }
@@ -284,7 +274,6 @@ public class AccountManager implements AccountManagerLocal {
         return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
     }
 
-
     @Override
     @RolesAllowed("getMyAccountById")
     public Account getMyAccountById(long id) {
@@ -294,10 +283,10 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     @RolesAllowed("saveMyAccountAfterEdit")
-    public void saveMyAccountAfterEdit(Account myAccount) {
+    public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }
-    
+
     private Date generateCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));

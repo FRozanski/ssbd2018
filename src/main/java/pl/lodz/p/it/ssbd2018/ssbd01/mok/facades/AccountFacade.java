@@ -14,10 +14,13 @@ import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.EmailNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.LoginNotUniqueException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PhoneNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
@@ -40,28 +43,55 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     public AccountFacade() {
         super(Account.class);
     }
-    
+
     @Override
     @PermitAll
     public void create(Account account) throws AppBaseException {
         try {
             super.create(account);
-        } catch (Exception e) {
-            System.out.println("WYJATEK");
-            throw new LoginNotUniqueException("ms");
+        } catch (PersistenceException ex) {
+            if (ex.getMessage().contains("login_unique")) {
+                throw new LoginNotUniqueException("login_unique");
+            } else if (ex.getMessage().contains("phone_unique")) {
+                throw new PhoneNotUniqueException("phone_unique");
+            } else if (ex.getMessage().contains("email_unique")) {
+                throw new EmailNotUniqueException("email_unique");
+            }    
+        } catch (ConstraintViolationException ex) {
+            throw new AccountException("constraint_violation");
         }
+        
+    }
+    
+    @Override
+    @PermitAll
+    public void edit(Account account) throws AppBaseException {
+        try {
+            super.edit(account);
+        } catch (PersistenceException ex) {
+            if (ex.getMessage().contains("login_unique")) {
+                throw new LoginNotUniqueException("login_unique");
+            } else if (ex.getMessage().contains("phone_unique")) {
+                throw new PhoneNotUniqueException("phone_unique");
+            } else if (ex.getMessage().contains("email_unique")) {
+                throw new EmailNotUniqueException("email_unique");
+            }    
+        } catch (ConstraintViolationException ex) {
+            throw new AccountException("constraint_violation");
+        }
+        
     }
 
     @Override
-    public Account findByToken(String token) throws AppBaseException{
-        Account account  = null;
+    public Account findByToken(String token) throws AppBaseException {
+        Account account = null;
         try {
             TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByToken", Account.class).setParameter("token", token);
-            account = typedQuery.getSingleResult();            
+            account = typedQuery.getSingleResult();
             em.flush();
-        } catch(OptimisticLockException oe) {
+        } catch (OptimisticLockException oe) {
 
-        } catch(PersistenceException pe) {
+        } catch (PersistenceException pe) {
 
         }
         return account;
@@ -72,5 +102,5 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
         TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByLogin", Account.class).setParameter("login", login);
         return typedQuery.getSingleResult();
     }
-    
+
 }

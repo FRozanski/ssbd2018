@@ -19,7 +19,7 @@ public interface Order1FacadeLocal {
 
     void create(Order1 order1) throws AppBaseException;
 
-    void edit(Order1 order1);
+    void edit(Order1 order1) throws AppBaseException;
 
     Order1 find(Object id);
 

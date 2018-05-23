@@ -19,7 +19,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 @XmlRootElement
 public class AccountDto implements Serializable{
     
-    // nie ma tu wszystkich pól, klasa utworzona dla testu
     private Long id;
     private String login;
     private long numberOfProducts;

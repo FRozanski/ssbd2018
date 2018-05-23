@@ -21,7 +21,7 @@ public class PasswordTooShortException extends AccountException {
 
     @Override
     public String getCode() {
-        return super.getCode() + ".password_too_short"; 
+        return super.getCode() + ".password_length_error"; 
     }
     
 }

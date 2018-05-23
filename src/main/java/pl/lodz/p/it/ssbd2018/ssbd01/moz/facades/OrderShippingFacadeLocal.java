@@ -19,7 +19,7 @@ public interface OrderShippingFacadeLocal {
 
     void create(OrderShipping orderShipping) throws AppBaseException;
 
-    void edit(OrderShipping orderShipping);
+    void edit(OrderShipping orderShipping) throws AppBaseException;
 
     OrderShipping find(Object id);
 

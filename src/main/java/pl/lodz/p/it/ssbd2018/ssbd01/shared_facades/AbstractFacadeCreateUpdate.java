@@ -22,7 +22,7 @@ public abstract class AbstractFacadeCreateUpdate<T> extends AbstractFacadeBase<T
         getEntityManager().flush();
     }
 
-    public void edit(T entity) {
+    public void edit(T entity) throws AppBaseException {
         getEntityManager().merge(entity);
         getEntityManager().flush();
     }

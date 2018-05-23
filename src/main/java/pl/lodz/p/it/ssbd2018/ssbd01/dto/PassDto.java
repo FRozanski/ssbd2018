@@ -16,13 +16,6 @@ public class PassDto {
     private String newPassOne;
     private String newPassTwo;
     
-    public PassDto(String accountId, String oldPass, String newPassOne, String newPassTwo) {
-        this.accountId = accountId;
-        this.oldPass = oldPass;
-        this.newPassOne = newPassOne;
-        this.newPassTwo = newPassTwo;
-    }
-    
     public String getAccountId() {
         return accountId;
     }

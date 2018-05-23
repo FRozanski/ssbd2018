@@ -19,7 +19,7 @@ public interface AccountAlevelFacadeLocal {
 
     void create(AccountAlevel accountAlevel) throws AppBaseException;
 
-    void edit(AccountAlevel accountAlevel);
+    void edit(AccountAlevel accountAlevel) throws AppBaseException;
 
     void remove(AccountAlevel accountAlevel);
 

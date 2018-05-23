@@ -19,7 +19,7 @@ public interface ShippingMethodFacadeLocal {
 
     void create(ShippingMethod shippingMethod) throws AppBaseException;
 
-    void edit(ShippingMethod shippingMethod);
+    void edit(ShippingMethod shippingMethod) throws AppBaseException;
 
     ShippingMethod find(Object id);
 

@@ -19,7 +19,7 @@ public interface CategoryFacadeLocal {
 
     void create(Category category) throws AppBaseException;
 
-    void edit(Category category);
+    void edit(Category category) throws AppBaseException;
 
     Category find(Object id);
 

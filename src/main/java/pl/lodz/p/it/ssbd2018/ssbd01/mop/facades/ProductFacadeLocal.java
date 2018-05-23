@@ -19,7 +19,7 @@ public interface ProductFacadeLocal {
 
     void create(Product product) throws AppBaseException;
 
-    void edit(Product product);
+    void edit(Product product) throws AppBaseException;
 
     Product find(Object id);
 

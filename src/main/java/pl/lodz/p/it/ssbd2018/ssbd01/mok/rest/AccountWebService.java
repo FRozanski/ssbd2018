@@ -52,6 +52,7 @@ import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.*;
  *
  * @author dlange
  * @author agkan
+ * @author michalmalec
  */
 @Path("account")
 public class AccountWebService {
@@ -451,6 +452,100 @@ public class AccountWebService {
         }
     }
 
+    @GET
+    @Path("myLogin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMyLogin(@Context HttpServletRequest servletRequest) {
+        if (servletRequest.getUserPrincipal() == null) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } else {
+            JSONObject json = new JSONObject();
+            json.put("login", servletRequest.getUserPrincipal().getName());
+
+            return Response.status(Response.Status.OK)
+                    .entity(json)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("myRoles")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMyRole(@Context HttpServletRequest servletRequest) {
+        List<String> levels = new ArrayList<>();
+        if (servletRequest.getUserPrincipal() == null) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (servletRequest.isUserInRole("ADMIN")) {
+            levels.add("ADMIN");
+        }
+        if (servletRequest.isUserInRole("MANAGER")) {
+            levels.add("MANAGER");
+        }
+        if (servletRequest.isUserInRole("USER")) {
+            levels.add("USER");
+        }
+        if (servletRequest.isUserInRole("VIRTUAL")) {
+            levels.add("VIRTUAL");
+        }
+        if (levels.isEmpty()) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } else {
+            JSONObject json = new JSONObject();
+            json.put("roles", levels);
+
+            return Response.status(Response.Status.OK)
+                    .entity(json)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    @GET
+    @Path("myIdentity")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMyIdentity(@Context HttpServletRequest servletRequest) {
+        List<String> levels = new ArrayList<>();
+        if (servletRequest.getUserPrincipal() == null) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (servletRequest.isUserInRole("ADMIN")) {
+            levels.add("ADMIN");
+        }
+        if (servletRequest.isUserInRole("MANAGER")) {
+            levels.add("MANAGER");
+        }
+        if (servletRequest.isUserInRole("USER")) {
+            levels.add("USER");
+        }
+        if (servletRequest.isUserInRole("VIRTUAL")) {
+            levels.add("VIRTUAL");
+        }
+        if (levels.isEmpty()) {
+            return Response.status(Response.Status.NO_CONTENT)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } else {
+            JSONObject json = new JSONObject();
+            json.put("roles", levels);
+            json.put("login", servletRequest.getUserPrincipal().getName());
+
+            return Response.status(Response.Status.OK)
+                    .entity(json)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
     private Response valideAndCreateAccount(Account account, ServletContext servletContext) {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -459,11 +554,13 @@ public class AccountWebService {
 
         if (constraintViolations.size() > 0) {
             for (int i = 0; i < errors.size(); i++) {
-                if (errors.get(i).equals(constraintViolations.iterator().next().getMessage())) {
-                    return Response.status(Response.Status.BAD_REQUEST)
-                            .entity(new WebErrorInfo("400", errors.get(i)))
-                            .type(MediaType.APPLICATION_JSON)
-                            .build();
+                for (ConstraintViolation<Account> temp : constraintViolations) {
+                    if (errors.get(i).equals(temp.getMessage())) {
+                        return Response.status(Response.Status.BAD_REQUEST)
+                                .entity(new WebErrorInfo("400", errors.get(i)))
+                                .type(MediaType.APPLICATION_JSON)
+                                .build();
+                    }
                 }
             }
         }
@@ -512,11 +609,13 @@ public class AccountWebService {
 
         if (constraintViolations.size() > 0) {
             for (int i = 0; i < errors.size(); i++) {
-                if (errors.get(i).equals(constraintViolations.iterator().next().getMessage())) {
-                    return Response.status(Response.Status.BAD_REQUEST)
-                            .entity(new WebErrorInfo("400", errors.get(i)))
-                            .type(MediaType.APPLICATION_JSON)
-                            .build();
+                for (ConstraintViolation<Account> temp : constraintViolations) {
+                    if (errors.get(i).equals(temp.getMessage())) {
+                        return Response.status(Response.Status.BAD_REQUEST)
+                                .entity(new WebErrorInfo("400", errors.get(i)))
+                                .type(MediaType.APPLICATION_JSON)
+                                .build();
+                    }
                 }
             }
         }

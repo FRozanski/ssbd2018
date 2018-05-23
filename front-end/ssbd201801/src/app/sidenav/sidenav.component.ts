@@ -25,6 +25,7 @@ export class SidenavComponent implements OnInit {
 
   }
 
+  // todo: use AuthUtil
   hasRole(role: string): boolean {  
 
     let hasRole: boolean = false;
@@ -36,6 +37,8 @@ export class SidenavComponent implements OnInit {
     return hasRole;
   }
 
+  
+  // todo: use AuthUtil
   isGuest() {
     if (!this.userIdentity) return true;
     if (!this.userIdentity.roles) return true;

@@ -247,11 +247,13 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
+    @RolesAllowed("getAccountByLogin")
     public Account getAccountByLogin(String login) {
         return accountFacade.findByLogin(login);
     }
 
     @Override
+    @PermitAll
     public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }

@@ -84,6 +84,13 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="changePassword">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.CHANGE_OF_PASSWORD' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)='onChangePasswordClick(element)'>{{'ACCOUNT.CHANGE_OF_PASSWORD'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

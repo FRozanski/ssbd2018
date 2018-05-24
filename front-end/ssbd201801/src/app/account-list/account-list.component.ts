@@ -49,7 +49,6 @@ export class AccountListComponent implements OnInit {
 
   onChangePasswordClick(account: AccountData) {
     this.accountService.passId(+account.id);
-    console.log("account.id = " + (+account.id));
-    this.router.navigate(["/changeOthersPassword/" + account.id]);
+    this.router.navigate(["/changeOthersPassword"]);
   }
 }

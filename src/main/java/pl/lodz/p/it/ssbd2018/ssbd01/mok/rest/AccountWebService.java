@@ -132,6 +132,18 @@ public class AccountWebService {
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
+        if (accountDto.getId() == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", NO_ID_SENT))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (!idChanger.containsId(accountDto.getId())) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", EDITING_SESION_EXPIRED))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
         try {
             String login = servletRequest.getUserPrincipal().getName();
             Account accountToEdit = accountManagerLocal.getMyAccountByLogin(login);
@@ -165,9 +177,15 @@ public class AccountWebService {
     @Path("updateAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response updateAccount(EditAccountDto accountDto) {
-        if (!idChanger.containsId(accountDto.getId()) || accountDto.getId() == null) {
+        if (accountDto.getId() == null) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
+                    .entity(new WebErrorInfo("400", NO_ID_SENT))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (!idChanger.containsId(accountDto.getId())) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", EDITING_SESION_EXPIRED))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }

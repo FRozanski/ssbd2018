@@ -15,17 +15,22 @@ import {
   MatInputModule,
   MatCardModule,
   MatSidenavModule,
-  MatSortModule, MatPaginatorModule
+  MatSortModule, 
+  MatPaginatorModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { AuthUtilService } from './common/auth-util.service';
+import { AuthGuard } from './common/user-guard';
+import { AccountEditComponent } from './account-edit/account-edit.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
-import { RegistrationConfirmService } from './common/registration-confirm.service';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegistrationConfirmService } from './common/registration-confirm.service';
+import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,18 +41,76 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: 'main', pathMatch: 'full' },
-  { path: 'main', component: MainPageComponent },
-  { path: 'accounts', component: AccountListComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'changeOthersPassword', component: ChangeOthersPasswordComponent },
-  { path: 'registrationConfirm', component: RegistrationConfirmComponent },
-  { path: '**', redirectTo: 'main' }
+  {
+    path: '',
+    redirectTo: 'main',
+    pathMatch: 'full'
+  },
+  {
+    path: 'main',
+    component: MainPageComponent
+  },
+  {
+    path: 'accounts', 
+    canActivate: [AuthGuard],
+    component: AccountListComponent, 
+    data:
+      {
+        expectedRole: "ADMIN"
+      }
+  },
+  {
+    path: 'register', 
+    canActivate: [AuthGuard],
+    component: RegisterComponent, 
+    data:
+      {
+        expectedRole: "GUEST"
+      }
+  },
+  {
+    path: 'accountEdit/:id',
+    canActivate: [AuthGuard],
+    component: AccountEditComponent,
+    data: 
+    {
+      expectedRole: "ADMIN"
+    }
+  },
+  { 
+    path: 'changePassword', 
+    component: ChangePasswordComponent,
+    data: 
+    {
+      expectedRole: "USER"
+    }
+  },
+  { 
+    path: 'changeOthersPassword', 
+    component: ChangeOthersPasswordComponent
+  },
+  { 
+    path: 'registrationConfirm', 
+    component: RegistrationConfirmComponent
+  },
+  { 
+    path: 'myAccount', 
+    component: OwnAccountEditComponent,
+    data: 
+    {
+      expectedRole: "USER"
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: '**',
+    redirectTo: 'main'
+  }
+
 ];
 
 @NgModule({
-  declarations: [
+declarations: [
     AppComponent,
     MainPageComponent,
     AccountListComponent,
@@ -56,9 +119,8 @@ const appRoutes: Routes = [
     ChangeOthersPasswordComponent,
     ChangePasswordComponent,
     SidenavComponent,
-    RegistrationConfirmComponent,
-    ChangePasswordComponent,
-    ChangeOthersPasswordComponent,
+    AccountEditComponent,
+    OwnAccountEditComponent
   ],
   imports: [
     MatTableModule,
@@ -85,8 +147,11 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent],
   providers: [
     AccountService,
+    RegistrationConfirmComponent,
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    AuthGuard,
     RegistrationConfirmService,
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
+    AuthUtilService
   ]
 })
 export class AppModule { }

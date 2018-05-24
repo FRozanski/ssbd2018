@@ -3,7 +3,8 @@ import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountData } from '../model/account-data';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environments/environment'
+import { Router } from '@angular/router';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 
 @Component({
@@ -20,7 +21,7 @@ export class AccountListComponent implements OnInit {
   ];
   dataSource;
 
-  constructor (private accountService: AccountService) { }
+  constructor (private accountService: AccountService, private router: Router) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -42,12 +43,12 @@ export class AccountListComponent implements OnInit {
   }
 
   onEditClick(account: AccountData) {
-    throw new Error('onEditClick(..) is not implemented yet.');
+    this.router.navigate(["/accountEdit/" + account.id]);
   }
 
 
   onChangePasswordClick(account: AccountData) {
     this.accountService.passLogin(account.login);
-    window.location.href = environment.apiUrl + '/ng/#/changeOthersPassword';
+    this.router.navigate(["/changeOthersPassword/" + account.id]);
   }
 }

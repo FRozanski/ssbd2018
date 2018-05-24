@@ -22,7 +22,6 @@ public class EditAccountDto {
     private String postalCode;
     private String city;
     private String country;
-    private long version;
 
     /**
      * @return the id
@@ -176,20 +175,6 @@ public class EditAccountDto {
      */
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    /**
-     * @return the version
-     */
-    public long getVersion() {
-        return version;
-    }
-
-    /**
-     * @param version the version to set
-     */
-    public void setVersion(long version) {
-        this.version = version;
     }
     
 }

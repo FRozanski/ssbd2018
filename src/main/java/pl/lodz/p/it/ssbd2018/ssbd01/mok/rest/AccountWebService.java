@@ -143,23 +143,14 @@ public class AccountWebService {
             }
             Account account = DtoMapper.mapEditAccountDto(accountDto, accountToEdit, idChanger);
             return valideAndEditAccount(account);
-        } catch (AccountOptimisticException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", ex.getCode()))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        } catch (AccountException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        } catch (AppBaseException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
-                    .type(MediaType.APPLICATION_JSON)
+        } catch (Exception e) {
+          return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("500", e.getMessage()))
+                    .type(MediaType.TEXT_PLAIN)
                     .build();
         }
     }
+    
 
     @PUT
     @Path("updateAccount")

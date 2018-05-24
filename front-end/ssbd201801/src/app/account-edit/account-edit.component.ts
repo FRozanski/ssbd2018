@@ -40,7 +40,8 @@ export class AccountEditComponent implements OnInit {
         this.router.navigate(['/main'])
       },
         (errorResponse) => {
-          this.formValidationMessage = errorResponse.error.message;          
+          this.formValidationMessage = errorResponse.error.message;
+          this.loadUserData();    
         }
       )
     }
@@ -91,6 +92,9 @@ export class AccountEditComponent implements OnInit {
 
   private loadUserData() {
     this.accountService.getAccountToEdit(this.userId).subscribe((account: AccountData) => {
+
+      if(!account.flatNumber) account.flatNumber = "";
+
       this.form.setValue({
         "city": account.city,
         "country": account.country,

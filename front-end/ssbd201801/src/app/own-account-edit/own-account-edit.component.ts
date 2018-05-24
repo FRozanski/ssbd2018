@@ -43,7 +43,8 @@ export class OwnAccountEditComponent implements OnInit {
           this.router.navigate(['/main'])
         },
           (errorResponse) => {
-            this.formValidationMessage = errorResponse.error.message;          
+            this.formValidationMessage = errorResponse.error.message;
+            this.loadUserData();          
           }
         )
       }
@@ -101,6 +102,9 @@ export class OwnAccountEditComponent implements OnInit {
   
     private loadUserData() {
       this.accountService.getLoggedUserDataToEdit().subscribe((account: AccountData) => {
+
+      if(!account.flatNumber) account.flatNumber = "";
+
         this.form.setValue({
           "city": account.city,
           "country": account.country,
@@ -111,7 +115,7 @@ export class OwnAccountEditComponent implements OnInit {
           "postalCode": account.postalCode,
           "street": account.street,
           "streetNumber": account.streetNumber,
-          "flatNumber": account.flatNumber + ""
+          "flatNumber": account.flatNumber
         });
   
         this.idEditToken = account.id;

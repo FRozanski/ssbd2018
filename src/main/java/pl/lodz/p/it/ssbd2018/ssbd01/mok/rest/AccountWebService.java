@@ -107,8 +107,8 @@ public class AccountWebService {
         }
         String login = servletRequest.getUserPrincipal().getName();
         try {
-            Account accountToEdit = accountManagerLocal.getMyAccountToEdit(accountManagerLocal.getMyAccountByLogin(login));
-            EditAccountDto accountDto = DtoMapper.mapToEditOwnAccount(accountToEdit);
+            Account accountToEdit = accountManagerLocal.getAccountToEdit(accountManagerLocal.getMyAccountByLogin(login));
+            EditAccountDto accountDto = DtoMapper.mapToEditAccount(accountToEdit, idChanger);
             return Response.ok(accountDto).build();
         } catch (AccountException ex) {
             return Response.status(Response.Status.BAD_REQUEST)
@@ -132,42 +132,57 @@ public class AccountWebService {
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
+        if (accountDto.getId() == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", NO_ID_SENT))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (!idChanger.containsId(accountDto.getId())) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", EDITING_SESION_EXPIRED))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
         try {
             String login = servletRequest.getUserPrincipal().getName();
             Account accountToEdit = accountManagerLocal.getMyAccountByLogin(login);
-            Account account = DtoMapper.mapEditAccountDto(accountDto, accountToEdit);
+            if (!idChanger.getId(accountDto.getId()).equals(accountToEdit.getId())) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", UNAUTHORIZED))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+            }
+            Account account = DtoMapper.mapEditAccountDto(accountDto, accountToEdit, idChanger);
             return valideAndEditAccount(account);
-        } catch (AccountOptimisticException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", ex.getCode()))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        } catch (AccountException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        } catch (AppBaseException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
-                    .type(MediaType.APPLICATION_JSON)
+        } catch (Exception e) {
+          return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("500", e.getMessage()))
+                    .type(MediaType.TEXT_PLAIN)
                     .build();
         }
     }
+    
 
     @PUT
-    @Path("{accountId}")
+    @Path("updateAccount")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateAccount(@PathParam("accountId") String accountId, EditAccountDto accountDto) {
-        if (!idChanger.containsId(accountId)) {
-            return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity(new WebErrorInfo("401", UNAUTHORIZED))
+    public Response updateAccount(EditAccountDto accountDto) {
+        if (accountDto.getId() == null) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", NO_ID_SENT))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+        if (!idChanger.containsId(accountDto.getId())) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", EDITING_SESION_EXPIRED))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
         try {
-            Account accountToEdit = accountManagerLocal.getAccountById(idChanger.getId(accountId));
-            Account account = DtoMapper.mapEditAccountDto(accountDto, accountToEdit);
+            Account accountToEdit = accountManagerLocal.getAccountById(idChanger.getId(accountDto.getId()));
+            Account account = DtoMapper.mapEditAccountDto(accountDto, accountToEdit, idChanger);
             return valideAndEditAccount(account);
         } catch (AccountOptimisticException ex) {
             return Response.status(Response.Status.BAD_REQUEST)

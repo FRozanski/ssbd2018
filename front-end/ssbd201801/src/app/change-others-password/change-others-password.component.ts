@@ -21,7 +21,7 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   formValidationMessage = '';
 
-  othersIdDb = '';
+  othersIdDb: number;
 
   accountToEdit: AccountData = {};
 

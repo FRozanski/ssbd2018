@@ -1,15 +1,18 @@
 export interface AccountData {
+    id?: string;
     city?: string,
     confirm?: boolean,
+    active?: boolean;
     country?: string,
     email?: string,
-    firstName?: string,
-    lastName?: string,
+    name?: string,
+    surname?: string,
     login?: string,
     phone?: string,
     postalCode?: string,
     street?: string,
-    streetNumber?: string
+    streetNumber?: string,
+    flatNumber?: string;
     numberOfLogins?: number,
     numberOfOrders?: number,
     numberOfProducts?: number,
@@ -19,6 +22,5 @@ export interface AccountData {
     oldPass?: string;
     newPassOne?: string;
     newPassTwo?: string;
-    id?: string;
     accountId?: string;
 }

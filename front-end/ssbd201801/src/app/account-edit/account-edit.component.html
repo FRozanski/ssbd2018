@@ -8,27 +8,6 @@
     <mat-card-content>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.LOGIN' | translate" formControlName='login' required>
-      </mat-form-field>
-      <div class="errors-space" *ngIf="isRequiredSatisfied('login')">
-        {{ "FORM.FIELD_REQUIRED" | translate }}
-      </div>
-
-      <mat-form-field>
-        <input matInput type="password" [placeholder]="'ACCOUNT.PASSWORD' | translate" formControlName='password' required>
-      </mat-form-field>
-      <div class="errors-space" *ngIf="isRequiredSatisfied('password')">
-        {{ "FORM.FIELD_REQUIRED" | translate }}
-      </div>
-
-      <mat-form-field>
-        <input matInput type="password" [placeholder]="'ACCOUNT.REPLY_PASSWORD' | translate" formControlName='password2' required>
-      </mat-form-field>
-      <div class="errors-space" *ngIf="isRequiredSatisfied('password2')">
-        {{ "FORM.FIELD_REQUIRED" | translate }}
-      </div>
-
-      <mat-form-field>
         <input matInput [placeholder]="'ACCOUNT.EMAIL' | translate" formControlName='email' required>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('email')">
@@ -78,8 +57,11 @@
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'ACCOUNT.FLAT_NUMBER' | translate" formControlName='flatNumber'>
+        <input matInput [placeholder]="'ACCOUNT.FLAT_NUMBER' | translate" formControlName='flatNumber' required>
       </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('flatNumber')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
 
       <mat-form-field>
         <input matInput [placeholder]="'ACCOUNT.POSTAL_CODE' | translate" formControlName='postalCode' required>

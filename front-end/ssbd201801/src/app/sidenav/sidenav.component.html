@@ -13,7 +13,6 @@
       <button mat-button routerLink='/register' *ngIf='isGuest()'>Rejestracja</button>
     </p>
 
-
     <p>
       <button mat-button (click)='onLoginClick()' *ngIf='isGuest()'>Logowanie</button>
     </p>
@@ -23,13 +22,9 @@
     </p>
 
     <p>
-      <button mat-button *ngIf='hasRole("USER")'>Moje konto</button>
+      <button mat-button *ngIf='hasRole("USER")' routerLink='/myAccount'>Moje konto</button>
     </p>
 
-    <p>
-      <button mat-button routerLink='/register' *ngIf='hasRole("ADMIN")'>Zarejestruj konto</button>
-    </p>
-    
     <p>
       <button mat-button routerLink='/changePassword' *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>Zmień hasło</button>
     </p>

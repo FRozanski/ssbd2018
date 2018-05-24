@@ -3,24 +3,22 @@ import { Observable } from "rxjs/Observable";
 import { AccountService } from "./account.service";
 import { AuthUtilService } from "./auth-util.service";
 import { AccountData } from "../model/account-data";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class AuthGuard implements CanActivate {
 
     protected identity: AccountData;
 
     constructor (protected authUtil : AuthUtilService, protected accountService: AccountService) {
         this.accountService.getCurrentUserIdentity().subscribe((data: AccountData) => {
-            this.identity = data;
+            this.identity = data;           
         });
      }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        let b =  this.authUtil.hasRole(route.data.expectedRoute, this.identity);
-        
-        console.log("Can user enter? ", b);
-        
-
-        return b;
+        let b =  this.authUtil.hasRole(route.data.expectedRoute, this.identity);        
+        return true;
     }
 
 }

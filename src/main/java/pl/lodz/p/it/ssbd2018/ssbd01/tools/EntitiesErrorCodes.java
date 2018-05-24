@@ -16,6 +16,8 @@ public class EntitiesErrorCodes {
 
     public static final String UNKNOWN_ERROR = "unknown_error";
     public static final String UNAUTHORIZED = "user_is_not_authorized";
+    public static final String EDITING_SESION_EXPIRED = "editing_sesion_expired";
+    public static final String NO_ID_SENT = "no_id_sent";
     public static final String POSTAL_CODE_LENGTH_ERROR = "postal_code_length_error";
     public static final String PASSWORD_LENGTH_ERROR = "password_length_error";
     public static final String PASSWORD_DIFFERENT_ERROR = "password_different_error";

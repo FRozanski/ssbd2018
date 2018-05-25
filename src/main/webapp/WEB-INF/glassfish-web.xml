@@ -48,6 +48,10 @@
     <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>confirmAccount</role-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>unlockAccount</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>

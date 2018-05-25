@@ -31,6 +31,8 @@ public interface AccountManagerLocal {
     
     void lockAccount(long accountId) throws AccountException;
     
+    void confirmAccount(long accountId) throws AccountException;
+    
     void unlockAccount(long accountId) throws AccountException;
     
     public Account getMyAccountToEdit(Account account);

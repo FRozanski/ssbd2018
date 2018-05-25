@@ -62,6 +62,7 @@ public class AccountWebService {
     AccountManagerLocal accountManagerLocal;
 
     @GET
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllAccounts() {
         List<FullAccountDto> fullAccountDto = AccountMapper.INSTANCE.accountsToEditableDTO(accountManagerLocal.getAllAccounts());
@@ -73,6 +74,7 @@ public class AccountWebService {
 
     @GET
     @Path("{accountId}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAccountToEdit(@PathParam("accountId") String accountId) {
         try {
@@ -91,6 +93,7 @@ public class AccountWebService {
 
     @GET
     @Path("myAccountToEdit")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getMyAccountToEdit(@Context HttpServletRequest servletRequest) {
         try {
@@ -111,6 +114,7 @@ public class AccountWebService {
     @PUT
     @Path("updateMyAccount")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateMyAccount(EditableAccountDto accountDto, @Context HttpServletRequest servletRequest) {
         try {
             String login = getUserLogin(servletRequest);
@@ -133,6 +137,7 @@ public class AccountWebService {
     @PUT
     @Path("updateAccount")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updateAccount(EditableAccountDto accountDto) {
         try {
             Account accountToEdit = accountManagerLocal.getAccountById(accountDto.getId());
@@ -154,6 +159,7 @@ public class AccountWebService {
     @GET
     @Path("allAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getAccessLevel() {
         List<AccessLevel> accessLevel = accountManagerLocal.getAllAccessLevels();
         JSONObject json = new JSONObject();
@@ -190,6 +196,7 @@ public class AccountWebService {
     @PUT
     @Path("changeMyPassword")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response changeMyPassword(MyPasswordDto passDto, @Context HttpServletRequest servletRequest) {
         try {
             String login = getUserLogin(servletRequest);
@@ -213,6 +220,7 @@ public class AccountWebService {
     @PUT
     @Path("changeOthersPassword")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response changeOthersPassword(OtherPasswordDto passDto) {
         try {
             this.validatePassword(passDto);
@@ -268,10 +276,30 @@ public class AccountWebService {
                     .build();
         }
     }
+    
+    @POST
+    @Path("confirmAccount")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response confirmAccount(@QueryParam("accountId") long accountId) {
+        try {
+            accountManagerLocal.confirmAccount(accountId);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
 
     @POST
     @Path("addAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response addAccessLevelToAccount(@QueryParam("accountId") long accountId,
             @QueryParam("alevelId") long alevelId) {
         try {
@@ -294,6 +322,7 @@ public class AccountWebService {
     @DELETE
     @Path("deleteAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deleteAccountAlevel(@QueryParam("accountId") long accountId,
             @QueryParam("alevelId") long alevelId) {
         try {
@@ -314,6 +343,7 @@ public class AccountWebService {
 
     @GET
     @Path("confirmAccountByToken")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response confirmAccount(@QueryParam("token") String token) {
         try {

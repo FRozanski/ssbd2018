@@ -8,10 +8,10 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -35,6 +35,7 @@ public class SessionWebService {
     @GET
     @Path("logOut")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response logOut(@Context HttpServletRequest session) {
         session.getSession().invalidate();
         return Response.status(Response.Status.OK)
@@ -46,6 +47,7 @@ public class SessionWebService {
     @GET
     @Path("myLogin")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response getMyLogin(@Context HttpServletRequest servletRequest) {
         try {
             String login = this.getUserLogin(servletRequest);
@@ -67,6 +69,7 @@ public class SessionWebService {
     @GET
     @Path("myIdentity")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response getMyIdentity(@Context HttpServletRequest servletRequest) {
         try {
             String login = getUserLogin(servletRequest);

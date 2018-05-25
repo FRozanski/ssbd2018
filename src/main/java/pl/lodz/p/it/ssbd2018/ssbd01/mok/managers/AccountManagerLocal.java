@@ -27,12 +27,12 @@ public interface AccountManagerLocal {
     
     void registerAccount(Account account, ServletContext servletContext) throws AppBaseException;
     
-    void confirmAccount(Account account) throws AppBaseException;
+    void confirmAccount(long accountId) throws AppBaseException;
     
     void lockAccount(long accountId) throws AccountException;
     
-    void confirmAccount(long accountId) throws AccountException;
-    
+    void confirmAccountByToken(String token) throws AppBaseException;
+            
     void unlockAccount(long accountId) throws AccountException;
     
     public Account getMyAccountToEdit(Account account);

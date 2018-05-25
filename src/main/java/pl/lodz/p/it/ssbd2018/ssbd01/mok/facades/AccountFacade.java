@@ -18,6 +18,7 @@ import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.EmailNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.LoginNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PhoneNotUniqueException;
@@ -56,18 +57,20 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
                 throw new PhoneNotUniqueException("phone_unique");
             } else if (ex.getMessage().contains("email_unique")) {
                 throw new EmailNotUniqueException("email_unique");
-            }    
+            }
         } catch (ConstraintViolationException ex) {
             throw new AccountException("constraint_violation");
         }
-        
+
     }
-    
+
     @Override
     @PermitAll
     public void edit(Account account) throws AppBaseException {
         try {
             super.edit(account);
+        } catch (OptimisticLockException oe) {
+            throw new AccountOptimisticException("account_optimistic_error");
         } catch (PersistenceException ex) {
             if (ex.getMessage().contains("login_unique")) {
                 throw new LoginNotUniqueException("login_unique");
@@ -75,25 +78,19 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
                 throw new PhoneNotUniqueException("phone_unique");
             } else if (ex.getMessage().contains("email_unique")) {
                 throw new EmailNotUniqueException("email_unique");
-            }    
+            }
         } catch (ConstraintViolationException ex) {
             throw new AccountException("constraint_violation");
         }
-        
+
     }
 
     @Override
     public Account findByToken(String token) throws AppBaseException {
-        Account account = null;
-        try {
-            TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByToken", Account.class).setParameter("token", token);
-            account = typedQuery.getSingleResult();
-            em.flush();
-        } catch (OptimisticLockException oe) {
-
-        } catch (PersistenceException pe) {
-
-        }
+        Account account;
+        TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByToken", Account.class).setParameter("token", token);
+        account = typedQuery.getSingleResult();
+        em.flush();
         return account;
     }
 

@@ -69,14 +69,13 @@ public class AccountManager implements AccountManagerLocal {
         return accessLevelFacade.findAll();
     }
 
-    
     @Override
     //@RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) {
         Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
-    
+
     @Override
     //@RolesAllowed("getMyAccountToEdit")
     public Account getMyAccountToEdit(Account account) {
@@ -119,7 +118,6 @@ public class AccountManager implements AccountManagerLocal {
             throw new AccountOptimisticException("account_optimistic_error");
         }
     }
-    
 
     @Override
     @PermitAll
@@ -150,21 +148,6 @@ public class AccountManager implements AccountManagerLocal {
             throw new AccountNotFoundException("wrong_account_id_error");
         } catch (OptimisticLockException oe) {
             throw new AccountOptimisticException("account_optimistic_error");
-        } catch (AppBaseException ex) {
-            throw new AccountException("unknow_error");
-        }
-    }
-    
-    @Override
-    //@RolesAllowed("confirmAccount")
-    public void confirmAccount(long accountId) throws AccountException {
-        try {
-            Account account = accountFacade.find(accountId);
-            account.setConfirm(true);
-            accountFacade.edit(account);
-            //mailSender.sendMailAfterAccountActive(account.getEmail());
-        } catch (NullPointerException npe) {
-            throw new AccountNotFoundException("wrong_account_id_error");
         } catch (AppBaseException ex) {
             throw new AccountException("unknow_error");
         }
@@ -219,27 +202,30 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
+    //@RolesAllowed("confirmAccount")
+    public void confirmAccount(long accountId) throws AppBaseException {
+        Account account = accountFacade.find(accountId);
+        this.checkIfAccountConfirmed(account);
+        
+        Date confirmationDate = Calendar.getInstance().getTime();
+        account.setConfirm(true);
+        account.setConfirmationDate(confirmationDate);
+        accountFacade.edit(account);
+        mailSender.sendMailAfterActivation(account.getEmail());
+    }
+
+    @Override
     @PermitAll
-    public void confirmAccount(Account account) throws AppBaseException {
-        try {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(new Timestamp(calendar.getTime().getTime()));
-            Date confirmationDate = new Date(calendar.getTime().getTime());
-            long timeDiff = account.getExpiryDate().getTime() - confirmationDate.getTime();
-
-            if (account.getConfirm() == true || account.getConfirmationDate() != null || timeDiff <= 0 || account.isUsed() == true) {
-                throw new PersistenceException();
-            }
-
-            account.setConfirm(true);
-            account.setConfirmationDate(confirmationDate);
-            account.setUsed(true);
-            accountFacade.edit(account);
-            mailSender.sendMailAfterActivation(account.getEmail());
-
-        } catch (OptimisticLockException oe) {
-            throw new AccountOptimisticException("account_optimistic_error");
-        }
+    public void confirmAccountByToken(String token) throws AppBaseException {
+        Account account = accountFacade.findByToken(token);
+        Date confirmationDate = Calendar.getInstance().getTime();
+        this.checkIfAccountConfirmed(account);
+        this.checkVerificationToken(account);
+        account.setConfirm(true);
+        account.setConfirmationDate(confirmationDate);
+        account.setUsed(true);
+        accountFacade.edit(account);
+        mailSender.sendMailAfterActivation(account.getEmail());
     }
 
     @Override
@@ -254,7 +240,7 @@ public class AccountManager implements AccountManagerLocal {
         Account tmpAccount = accountFacade.findByLogin(login);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
-    
+
     @Override
     //@RolesAllowed("getMyAccountById")
     public Account getMyAccountByLogin(String login) throws AppBaseException {
@@ -314,5 +300,20 @@ public class AccountManager implements AccountManagerLocal {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));
         return new Date(calendar.getTime().getTime());
+    }
+
+    private void checkVerificationToken(Account account) throws AppBaseException {
+        Date now = Calendar.getInstance().getTime();
+        if (now.after(account.getExpiryDate())) {
+            throw new TokenExpiredException("token_expired_exception");
+        } else if (account.isUsed() == true) {
+            throw new TokenUsedException("token_used_exception");
+        }
+    }
+    
+    private void checkIfAccountConfirmed(Account account) throws AppBaseException {
+        if (account.getConfirm() == true) {
+            throw new AccountWasConfirmed("account_was_confirmed_exception");
+        } 
     }
 }

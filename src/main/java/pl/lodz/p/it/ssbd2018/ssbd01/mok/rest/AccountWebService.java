@@ -211,7 +211,7 @@ public class AccountWebService {
                     .build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
+                    .entity(new WebErrorInfo("400", ex.getCode()))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
@@ -239,7 +239,7 @@ public class AccountWebService {
         }
     }
 
-    @POST
+    @PUT
     @Path("lockAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -258,7 +258,7 @@ public class AccountWebService {
         }
     }
 
-    @POST
+    @PUT
     @Path("unlockAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -276,27 +276,8 @@ public class AccountWebService {
                     .build();
         }
     }
-    
-    @POST
-    @Path("confirmAccount")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response confirmAccount(@QueryParam("accountId") long accountId) {
-        try {
-            accountManagerLocal.confirmAccount(accountId);
-            return Response.status(Response.Status.OK)
-                    .entity(new WebErrorInfo("200", SUCCESS))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        } catch (AppBaseException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", ex.getCode()))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        }
-    }
 
-    @POST
+    @PUT
     @Path("addAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -312,7 +293,7 @@ public class AccountWebService {
                     .build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
+                    .entity(new WebErrorInfo("400", ex.getCode()))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
@@ -335,27 +316,45 @@ public class AccountWebService {
                     .build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", UNKNOWN_ERROR))
+                    .entity(new WebErrorInfo("400", ex.getCode()))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
     }
-
-    @GET
-    @Path("confirmAccountByToken")
+    
+    @PUT
+    @Path("confirmAccount")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response confirmAccount(@QueryParam("token") String token) {
+    public Response confirmAccount(@QueryParam("accountId") long accountId) {
         try {
-            Account account = accountManagerLocal.getAccountByToken(token); //@PermitAll ?
-            accountManagerLocal.confirmAccount(account);
+            accountManagerLocal.confirmAccount(accountId);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("404", ex.getMessage()))
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    @PUT
+    @Path("confirmAccountByToken")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response confirmAccountByToken(@QueryParam("token") String token) {
+        try {
+            accountManagerLocal.confirmAccountByToken(token);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }

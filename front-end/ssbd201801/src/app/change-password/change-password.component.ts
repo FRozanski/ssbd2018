@@ -6,6 +6,7 @@ import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {AccountData} from '../model/account-data';
 import {SessionService} from '../common/session.service';
+import {MessageService} from '../common/message.service';
 
 @Component({
   selector: 'app-change-password',
@@ -24,7 +25,9 @@ export class ChangePasswordComponent implements OnInit {
 
   myAccountToEdit: AccountData = {};
 
-  constructor(private accountService: AccountService, private sessionService: SessionService, private location: Location, private translateService: TranslateService, private router: Router) { }
+  constructor(private accountService: AccountService, private sessionService: SessionService,
+              private location: Location, private translateService: TranslateService, private router: Router,
+              private messageService: MessageService) { }
 
   ngOnInit() {
 
@@ -47,6 +50,7 @@ export class ChangePasswordComponent implements OnInit {
       account.id = this.myAccountToEdit.id;
       account.version = this.myAccountToEdit.version;
       this.accountService.changeMyPassword(account).subscribe(() => {
+          this.messageService.passMessage(this.translateService.instant('success'));
           this.router.navigate(['/main']);
         },
         (errorResponse) => {

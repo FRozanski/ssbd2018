@@ -81,5 +81,7 @@
   "app.exception.mok.account_alevel": "Nie udało się wykonać działania na poziomie dostępu konta",
   "app.exception.mok.account_alevel.already_exists": "Konto posiada już ten poziom dostępu",
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
-  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny"
+  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
+
+  "success": "Operacja została pomyślnie wykonana."
 }

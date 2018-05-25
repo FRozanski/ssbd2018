@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import {RegistrationConfirmService} from '../common/registration-confirm.service';
 import {AccountData} from '../model/account-data';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-registration-confirm',
@@ -13,9 +14,12 @@ export class RegistrationConfirmComponent implements OnInit {
   token: string;
   isConfirm = false;
 
+  validationMessage = '';
+
   constructor (
     private registrationConfirmService: RegistrationConfirmService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -27,8 +31,9 @@ export class RegistrationConfirmComponent implements OnInit {
       .subscribe((data: AccountData) => {
         // this.accountToConfirm = data;
         this.isConfirm = data.confirm;
-      }, () => {
-        this.isConfirm = false;
+      }, (errorResponse) => {
+        console.log(errorResponse.error.message);
+        // this.validationMessage = this.translateService.instant(errorResponse.error.message);
       });
   }
 

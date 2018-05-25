@@ -27,14 +27,14 @@ export class RegisterComponent implements OnInit {
     this.initializeForm();
   }
 
-  sendForm() {   
+  sendForm() {
     this.wasFormSent = true;
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
       this.accountService.registerAccount(account).subscribe(() => {
         this.router.navigate(['/main']);
-      }, 
+      },
         (errorResponse) => {
           this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
       });
@@ -78,9 +78,7 @@ export class RegisterComponent implements OnInit {
       streetNumber: new FormControl("", [
         Validators.required
       ]),
-      flatNumber: new FormControl("", [
-        Validators.required
-      ]),
+      flatNumber: new FormControl(""),
       postalCode: new FormControl("", [
         Validators.required
       ]),

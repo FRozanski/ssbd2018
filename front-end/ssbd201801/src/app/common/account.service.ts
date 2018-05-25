@@ -12,13 +12,13 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AccountService {
 
-  readonly uri: string = environment.apiUrl + "/webresources/account";
+  readonly uri: string = environment.apiUrl + '/webresources/account';
+
+  private idSource = new BehaviorSubject<number>(0);
+
+  currentId = this.idSource.asObservable();
 
   constructor(private httpClient: HttpClient, private authUtilService: AuthUtilService) { }
-
-  private loginSource = new BehaviorSubject<string>('default login');
-
-  currentLogin = this.loginSource.asObservable();
 
   getAllAccounts(): Observable<AccountData[]> {
     return this.httpClient.get<AccountData[]>(this.uri);
@@ -34,6 +34,10 @@ export class AccountService {
 
   changePassword(account: AccountData): Observable<AccountData> {
     return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
+  }
+
+  changeOthersPassword(account: AccountData): Observable<AccountData> {
+    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
   }
 
   editAccount(account: AccountData): Observable<any> {
@@ -64,11 +68,7 @@ export class AccountService {
     return this.httpClient.get<AccountData>(this.uri + "/myAccountToEdit");
   }
 
-  changeOthersPassword(account: AccountData): Observable<AccountData> {
-    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
-  }
-
-  passLogin(login: string) {
-    this.loginSource.next(login);
+  passId(id: number) {
+    this.idSource.next(id);
   }
 }

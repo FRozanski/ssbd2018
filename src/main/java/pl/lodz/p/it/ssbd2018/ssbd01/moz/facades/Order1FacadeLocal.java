@@ -21,7 +21,7 @@ public interface Order1FacadeLocal {
 
     void edit(Order1 order1) throws AppBaseException;
 
-    Order1 find(Object id);
+    Order1 find(Object id) throws AppBaseException;
 
     List<Order1> findAll();
 

@@ -21,7 +21,7 @@ public interface AccountManagerLocal {
     
     List<AccessLevel> getAllAccessLevels();
     
-    Account getAccountToEdit(Account account);
+    Account getAccountToEdit(Account account) throws AppBaseException;
     
     void saveAccountAfterEdit(Account account) throws AppBaseException; 
     
@@ -35,7 +35,7 @@ public interface AccountManagerLocal {
             
     void unlockAccount(long accountId) throws AccountException;
     
-    public Account getMyAccountToEdit(Account account);
+    public Account getMyAccountToEdit(Account account) throws AppBaseException;
     
     public Account getMyAccountByLogin(String login) throws AppBaseException;
     
@@ -43,7 +43,7 @@ public interface AccountManagerLocal {
     
     void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
 
-    public String getVeryficationToken(Account account);
+    public String getVeryficationToken(Account account) throws AppBaseException;
     
     public Account getAccountById(long id) throws AppBaseException;
     
@@ -55,13 +55,13 @@ public interface AccountManagerLocal {
     
     public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
 
-    public AccessLevel getAccessLevelById(Long idAccessLevel);
+    public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException;
     
     public void changeMyPassword(Account account) throws AppBaseException;
     
     public void changeOthersPassword(Account account) throws AppBaseException;
 
-    public Account getMyAccountById(long id);
+    public Account getMyAccountById(long id) throws AppBaseException;
 
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException;
 }

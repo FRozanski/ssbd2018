@@ -21,11 +21,11 @@ public interface AccountFacadeLocal {
 
     void edit(Account account) throws AppBaseException;
 
-    Account find(Object id);
+    Account find(Object id) throws AppBaseException;
     
     Account findByToken(String token) throws AppBaseException;
     
-    Account findByLogin(String login);
+    Account findByLogin(String login) throws AppBaseException;
 
     List<Account> findAll();
 

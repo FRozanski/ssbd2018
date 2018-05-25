@@ -71,14 +71,14 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("getAccountToEdit")
-    public Account getAccountToEdit(Account account) {
+    public Account getAccountToEdit(Account account) throws AppBaseException {
         Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
     //@RolesAllowed("getMyAccountToEdit")
-    public Account getMyAccountToEdit(Account account) {
+    public Account getMyAccountToEdit(Account account) throws AppBaseException {
         Account tmpAccount = accountFacade.find(account.getId());
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
@@ -230,7 +230,7 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("getAccountById")
-    public String getVeryficationToken(Account account) {
+    public String getVeryficationToken(Account account) throws AppBaseException {
         return accountFacade.find(account.getId()).getToken();
     }
 
@@ -263,10 +263,9 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("getAccountById")
-    public Account getAccountById(long id) {
+    public Account getAccountById(long id) throws AppBaseException {
         Account tmpAccount = accountFacade.find(id);
         return tmpAccount;
-        //return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override
@@ -278,14 +277,14 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("getAccessLevelById")
-    public AccessLevel getAccessLevelById(Long idAccessLevel) {
+    public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException {
         AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
         return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
     }
 
     @Override
     //@RolesAllowed("getMyAccountById")
-    public Account getMyAccountById(long id) {
+    public Account getMyAccountById(long id) throws AppBaseException {
         Account tmpAccount = accountFacade.find(id);
         return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }

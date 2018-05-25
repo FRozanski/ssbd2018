@@ -21,7 +21,7 @@ public interface CategoryFacadeLocal {
 
     void edit(Category category) throws AppBaseException;
 
-    Category find(Object id);
+    Category find(Object id) throws AppBaseException;
 
     List<Category> findAll();
 

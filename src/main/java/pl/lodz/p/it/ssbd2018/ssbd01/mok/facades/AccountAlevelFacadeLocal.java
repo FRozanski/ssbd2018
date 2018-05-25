@@ -21,7 +21,7 @@ public interface AccountAlevelFacadeLocal {
 
     void remove(AccountAlevel accountAlevel);
 
-    AccountAlevel find(Object id);
+    AccountAlevel find(Object id) throws AppBaseException;
 
     List<AccountAlevel> findAll();
 

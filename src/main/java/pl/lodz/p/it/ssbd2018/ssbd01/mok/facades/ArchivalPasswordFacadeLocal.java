@@ -19,7 +19,7 @@ public interface ArchivalPasswordFacadeLocal {
 
     void create(ArchivalPassword archivalPassword) throws AppBaseException;
 
-    ArchivalPassword find(Object id);
+    ArchivalPassword find(Object id) throws AppBaseException;
 
     List<ArchivalPassword> findAll();
 

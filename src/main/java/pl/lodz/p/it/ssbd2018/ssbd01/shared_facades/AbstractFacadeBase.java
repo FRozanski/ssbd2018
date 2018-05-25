@@ -7,6 +7,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.shared_facades;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -22,7 +23,7 @@ public abstract class AbstractFacadeBase<T> {
 
     protected abstract EntityManager getEntityManager();    
 
-    public T find(Object id) {
+    public T find(Object id) throws AppBaseException {
         return getEntityManager().find(entityClass, id);
     }
 

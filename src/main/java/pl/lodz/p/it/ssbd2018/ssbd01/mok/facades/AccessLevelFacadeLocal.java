@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -16,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 @Local
 public interface AccessLevelFacadeLocal {
 
-    AccessLevel find(Object id);
+    AccessLevel find(Object id) throws AppBaseException;
 
     List<AccessLevel> findAll();
     

@@ -76,9 +76,10 @@ public class AccountWebService {
     @Path("{accountId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAccountToEdit(@PathParam("accountId") String accountId) {
+    public Response getAccountToEdit(@PathParam("accountId") long accountId) {
         try {
-            EditableAccountDto accountDto = AccountMapper.INSTANCE.accountToEditableDto(accountManagerLocal.getAccountById(Long.valueOf(accountId)));
+            Account accountToEdit = accountManagerLocal.getAccountById(accountId);
+            EditableAccountDto accountDto = AccountMapper.INSTANCE.accountToEditableDto(accountToEdit);
             return Response.status(Response.Status.OK)
                     .entity(accountDto)
                     .type(MediaType.APPLICATION_JSON)
@@ -98,7 +99,8 @@ public class AccountWebService {
     public Response getMyAccountToEdit(@Context HttpServletRequest servletRequest) {
         try {
             String login = getUserLogin(servletRequest);
-            EditableAccountDto accountDto = AccountMapper.INSTANCE.accountToEditableDto(accountManagerLocal.getMyAccountByLogin(login));
+            Account accountToEdit = accountManagerLocal.getMyAccountByLogin(login);
+            EditableAccountDto accountDto = AccountMapper.INSTANCE.accountToEditableDto(accountToEdit);
             return Response.status(Response.Status.OK)
                     .entity(accountDto)
                     .type(MediaType.APPLICATION_JSON)

@@ -29,7 +29,6 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
 import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { RegistrationConfirmService } from './common/registration-confirm.service';
 import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 import {SessionService} from './common/session.service';
 import { AccountStatisticsComponent } from './account-statistics/account-statistics.component';
@@ -89,7 +88,7 @@ const appRoutes: Routes = [
     }
   },
   {
-    path: 'changePassword',
+    path: 'changeMyPassword',
     component: ChangePasswordComponent,
     data:
     {
@@ -163,7 +162,6 @@ declarations: [
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,
-    RegistrationConfirmService,
     AuthUtilService
   ]
 })

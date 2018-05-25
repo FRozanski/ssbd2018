@@ -39,7 +39,7 @@ export class ChangePasswordComponent implements OnInit {
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
       account.login = this.userIdentity.login;
-      this.accountService.changePassword(account).subscribe(() => {
+      this.accountService.changeMyPassword(account).subscribe(() => {
           this.router.navigate(['/main']);
         },
         (errorResponse) => {

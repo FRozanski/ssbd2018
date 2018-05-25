@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpResponse, HttpRequest } from '@angular/common/http';
+import {HttpClient, HttpResponse, HttpRequest, HttpParams} from '@angular/common/http';
 import { environment } from '../../environments/environment'
 import { AccountData } from '../model/account-data';
 import { post } from 'selenium-webdriver/http';
@@ -24,19 +24,20 @@ export class AccountService {
     return this.httpClient.get<AccountData[]>(this.uri);
   }
 
-  registerAccount(account: AccountData): Observable<AccountData> {
-    return this.httpClient.post<AccountData>(this.uri + '/registerAccount', account);
+  getAccountToEdit(id: number): Observable<AccountData> {
+    return this.httpClient.get<AccountData>(this.uri + "/" + id);
   }
 
-  changePassword(account: AccountData): Observable<AccountData> {
-    return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
+  getMyAccountToEdit(): Observable<AccountData> {
+    return this.httpClient.get<AccountData>(this.uri + "/myAccountToEdit");
   }
 
-  changeOthersPassword(account: AccountData): Observable<AccountData> {
-    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
+  updateMyAccount(account: AccountData) {
+    console.log("Sending account to api: ", account);
+    return this.httpClient.put<AccountData>(this.uri + "/updateMyAccount", account);
   }
 
-  editAccount(account: AccountData): Observable<any> {
+  updateAccount(account: AccountData): Observable<any> {
     return this.httpClient.put<AccountData>(this.uri + "/updateAccount", {
       "id": account.id,
       "city": account.city,
@@ -51,17 +52,58 @@ export class AccountService {
     });
   }
 
-  editLoggedUserAccount(account: AccountData) {
-    console.log("Sending account to api: ", account);
-    return this.httpClient.put<AccountData>(this.uri + "/updateMyAccount", account);
+  getAccessLevel(): Observable<AccountData> {
+    return this.httpClient.get<AccountData>(this.uri + '/allAccessLevel');
   }
 
-  getAccountToEdit(id: number): Observable<AccountData> {
-    return this.httpClient.get<AccountData>(this.uri + "/" + id);
+  registerAccount(account: AccountData): Observable<AccountData> {
+    return this.httpClient.post<AccountData>(this.uri + '/registerAccount', account);
   }
 
-  getLoggedUserDataToEdit(): Observable<AccountData> {
-    return this.httpClient.get<AccountData>(this.uri + "/myAccountToEdit");
+  changeMyPassword(account: AccountData): Observable<AccountData> {
+    return this.httpClient.put<AccountData>(this.uri + '/changeMyPassword', account);
+  }
+
+  changeOthersPassword(account: AccountData): Observable<AccountData> {
+    return this.httpClient.put<AccountData>(this.uri + '/changeOthersPassword', account);
+  }
+
+  lockAccount(accountId: number) {
+    const params = new HttpParams()
+      .set('accountId', accountId.toString());
+    return this.httpClient.put(this.uri + '/lockAccount', {params});
+  }
+
+  unlockAccount(accountId: number) {
+    const params = new HttpParams()
+      .set('accountId', accountId.toString());
+    return this.httpClient.put(this.uri + '/unlockAccount', {params});
+  }
+
+  addAccessLevelToAccount(accountId: number, alevelId: number) {
+    const params = new HttpParams()
+      .set('accountId', accountId.toString())
+      .set('alevelId', alevelId.toString());
+    return this.httpClient.put(this.uri + '/addAccessLevel', {params});
+  }
+
+  deleteAccountAlevel(accountId: number, alevelId: number) {
+    const params = new HttpParams()
+      .set('accountId', accountId.toString())
+      .set('alevelId', alevelId.toString());
+    return this.httpClient.delete(this.uri + '/deleteAccessLevel', {params});
+  }
+
+  confirmAccount(accountId: number) {
+    const params = new HttpParams()
+      .set('accountId', accountId.toString());
+    return this.httpClient.put(this.uri + '/confirmAccount', {params});
+  }
+
+  confirmAccountByToken(token: string) {
+    const params = new HttpParams()
+      .set('token', token);
+    return this.httpClient.put(this.uri + '/confirmAccount', {params});
   }
 
   passId(id: number) {

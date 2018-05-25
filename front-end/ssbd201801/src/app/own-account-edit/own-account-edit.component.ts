@@ -17,7 +17,7 @@ export class OwnAccountEditComponent implements OnInit {
     wasFormSent: boolean = false;
     formValidationMessage: string = "";
 
-    idEditToken: string;
+    idEditToken: number;
 
     constructor(
         private accountService: AccountService,

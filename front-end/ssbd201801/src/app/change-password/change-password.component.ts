@@ -22,12 +22,18 @@ export class ChangePasswordComponent implements OnInit {
 
   userIdentity: AccountData = {};
 
+  myAccountToEdit: AccountData = {};
+
   constructor(private accountService: AccountService, private sessionService: SessionService, private location: Location, private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
 
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;
+    });
+
+    this.accountService.getMyAccountToEdit().subscribe((account: AccountData) => {
+      this.myAccountToEdit = account;
     });
 
     this.initializeForm();
@@ -38,7 +44,8 @@ export class ChangePasswordComponent implements OnInit {
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
-      account.login = this.userIdentity.login;
+      account.id = this.myAccountToEdit.id;
+      account.version = this.myAccountToEdit.version;
       this.accountService.changeMyPassword(account).subscribe(() => {
           this.router.navigate(['/main']);
         },

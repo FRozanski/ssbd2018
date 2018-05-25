@@ -19,7 +19,7 @@ export class AccountEditComponent implements OnInit {
   wasFormSent: boolean = false;
   formValidationMessage: string = "";
 
-  idEditToken: string;
+  idEditToken: number;
 
   constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router, private activatedRoute: ActivatedRoute) { }
 

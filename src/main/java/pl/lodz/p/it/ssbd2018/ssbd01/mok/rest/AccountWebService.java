@@ -287,9 +287,7 @@ public class AccountWebService {
     public Response addAccessLevelToAccount(@QueryParam("accountId") long accountId,
             @QueryParam("alevelId") long alevelId) {
         try {
-            AccessLevel accessLevel = accountManagerLocal.getAccessLevelById(alevelId);
-            Account account = accountManagerLocal.getAccountById(accountId);
-            accountManagerLocal.addAccessLevelToAccount(accessLevel, account);
+            accountManagerLocal.addAccessLevelToAccount(accountId, alevelId);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
@@ -310,9 +308,7 @@ public class AccountWebService {
     public Response deleteAccountAlevel(@QueryParam("accountId") long accountId,
             @QueryParam("alevelId") long alevelId) {
         try {
-            AccessLevel accessLevel = accountManagerLocal.getAccessLevelById(alevelId);
-            Account account = accountManagerLocal.getAccountById(accountId);
-            accountManagerLocal.dismissAccessLevelFromAccount(accessLevel, account);
+            accountManagerLocal.dismissAccessLevelFromAccount(accountId, alevelId);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)

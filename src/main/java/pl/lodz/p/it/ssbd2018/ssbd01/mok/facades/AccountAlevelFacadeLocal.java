@@ -7,6 +7,8 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
 import java.util.List;
 import javax.ejb.Local;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
@@ -29,6 +31,6 @@ public interface AccountAlevelFacadeLocal {
 
     int count();
 
-    AccountAlevel findByAccountAndAccessLevel(Long idAccount, Long idAccessLevel);
+    AccountAlevel findByAccountAndAccessLevel(Account account, AccessLevel accessLevel) throws AppBaseException;
     
 }

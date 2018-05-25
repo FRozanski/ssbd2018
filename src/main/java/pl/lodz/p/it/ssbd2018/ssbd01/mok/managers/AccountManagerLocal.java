@@ -39,9 +39,9 @@ public interface AccountManagerLocal {
     
     public Account getMyAccountByLogin(String login) throws AppBaseException;
     
-    void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException;
+    public void addAccessLevelToAccount(long accountId, long accessLevelId) throws AppBaseException;
     
-    void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
+    public void dismissAccessLevelFromAccount(long accountId, long accessLevelId) throws AppBaseException;
 
     public String getVeryficationToken(Account account) throws AppBaseException;
     
@@ -52,8 +52,6 @@ public interface AccountManagerLocal {
     public Account getAccountByToken(String token) throws AppBaseException;
 
     public void sendMailWithVeryficationLink(String mail, String veryficationLink);
-    
-    public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
 
     public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException;
     

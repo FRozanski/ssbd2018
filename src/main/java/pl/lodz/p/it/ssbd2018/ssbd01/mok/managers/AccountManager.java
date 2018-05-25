@@ -81,25 +81,25 @@ public class AccountManager implements AccountManagerLocal {
     @Override
     //@RolesAllowed("changeYourPassword")
     public void changeMyPassword(Account account) throws AppBaseException {
-            account.setPassword(HashUtils.sha256(account.getPassword()));
-            accountFacade.edit(account);
-            ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-            archivalPasswordFacadeLocal.create(archivalPassword);
+        account.setPassword(HashUtils.sha256(account.getPassword()));
+        accountFacade.edit(account);
+        ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
+        archivalPasswordFacadeLocal.create(archivalPassword);
     }
 
     @Override
     //@RolesAllowed("changeOthersPassword")
     public void changeOthersPassword(Account account) throws AppBaseException {
-            account.setPassword(HashUtils.sha256(account.getPassword()));
-            accountFacade.edit(account);
-            ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-            archivalPasswordFacadeLocal.create(archivalPassword);
+        account.setPassword(HashUtils.sha256(account.getPassword()));
+        accountFacade.edit(account);
+        ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
+        archivalPasswordFacadeLocal.create(archivalPassword);
     }
 
     @Override
     //@RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) throws AppBaseException {
-            accountFacade.edit(account);
+        accountFacade.edit(account);
     }
 
     @Override
@@ -122,24 +122,26 @@ public class AccountManager implements AccountManagerLocal {
     @Override
     //@RolesAllowed("lockAccount")
     public void lockAccount(long accountId) throws AppBaseException {
-            Account account = accountFacade.find(accountId);
-            account.setActive(false);
-            accountFacade.edit(account);
-            mailSender.sendMailAfterAccountLock(account.getEmail());
+        Account account = accountFacade.find(accountId);
+        account.setActive(false);
+        accountFacade.edit(account);
+        mailSender.sendMailAfterAccountLock(account.getEmail());
     }
 
     @Override
     //@RolesAllowed("unlockAccount")
     public void unlockAccount(long accountId) throws AppBaseException {
-            Account account = accountFacade.find(accountId);
-            account.setActive(true);
-            accountFacade.edit(account);
+        Account account = accountFacade.find(accountId);
+        account.setActive(true);
+        accountFacade.edit(account);
     }
 
     @Override
     //@RolesAllowed("addAccessLevelToAccount")
-    public void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException {
+    public void addAccessLevelToAccount(long accountId, long accessLevelId) throws AppBaseException {
         AccountAlevel accountAlevel = new AccountAlevel();
+        AccessLevel accessLevel = accessLevelFacade.find(accessLevelId);
+        Account account = accountFacade.find(accountId);
         accountAlevel.setIdAlevel(accessLevel);
         accountAlevel.setIdAccount(account);
         accountAlevelFacade.create(accountAlevel);
@@ -147,19 +149,12 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("dismissAccessLevelFromAccount")
-    public void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account) {
-        List<AccountAlevel> accountAlevels = accountAlevelFacade.findAll();
-        AccountAlevel accountAlevel = null;
-        for (AccountAlevel aal : accountAlevels) {
-            if (aal.getIdAccount().equals(account)
-                    && aal.getIdAlevel().equals(accessLevel)) {
-                accountAlevel = aal;
-                break;
-            }
-        }
-        if (accountAlevel != null) {
-            accountAlevelFacade.remove(accountAlevel);
-        }
+    public void dismissAccessLevelFromAccount(long accountId, long accessLevelId) throws AppBaseException {
+        AccessLevel accessLevel = accessLevelFacade.find(accessLevelId);
+        Account account = accountFacade.find(accountId);
+        AccountAlevel level = accountAlevelFacade.
+                findByAccountAndAccessLevel(account, accessLevel);
+        accountAlevelFacade.remove(level);
     }
 
     @Override
@@ -172,7 +167,7 @@ public class AccountManager implements AccountManagerLocal {
     public void confirmAccount(long accountId) throws AppBaseException {
         Account account = accountFacade.find(accountId);
         this.checkIfAccountConfirmed(account);
-        
+
         Date confirmationDate = Calendar.getInstance().getTime();
         account.setConfirm(true);
         account.setConfirmationDate(confirmationDate);
@@ -235,13 +230,6 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("getAccountAlevel")
-    public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel) {
-        AccountAlevel accountAlevel = accountAlevelFacade.findByAccountAndAccessLevel(idAccount, idAccessLevel);
-        return (AccountAlevel) CloneUtils.deepCloneThroughSerialization(accountAlevel);
-    }
-
-    @Override
     //@RolesAllowed("getAccessLevelById")
     public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException {
         AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
@@ -275,10 +263,10 @@ public class AccountManager implements AccountManagerLocal {
             throw new TokenUsedException("token_used_exception");
         }
     }
-    
+
     private void checkIfAccountConfirmed(Account account) throws AppBaseException {
         if (account.getConfirm() == true) {
             throw new AccountWasConfirmed("account_was_confirmed_exception");
-        } 
+        }
     }
 }

@@ -20,7 +20,6 @@ public class ErrorCodes {
     public static final String USER_ALREADY_LOGIN = "user_already_login";
     public static final String USER_ALREADY_LOGOUT = "user_already_logout";
     public static final String UNAUTHORIZED = "user_is_not_authorized";
-    public static final String EDITING_SESION_EXPIRED = "editing_sesion_expired";
     public static final String NO_ID_SENT = "no_id_sent";
     public static final String POSTAL_CODE_LENGTH_ERROR = "postal_code_length_error";
     public static final String PASSWORD_LENGTH_ERROR = "password_length_error";
@@ -59,7 +58,6 @@ public class ErrorCodes {
         errors.add(FLAT_NUMBER_PATTERN_ERROR);
         errors.add(CITY_LENGTH_ERROR);
         errors.add(COUNTRY_LENGTH_ERROR);
-        
         return errors;
     }
     

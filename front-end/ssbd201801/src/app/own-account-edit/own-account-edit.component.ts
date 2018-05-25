@@ -18,6 +18,7 @@ export class OwnAccountEditComponent implements OnInit {
     formValidationMessage: string = "";
 
     idEditToken: number;
+    version: number;
 
     constructor(
         private accountService: AccountService,
@@ -38,8 +39,12 @@ export class OwnAccountEditComponent implements OnInit {
       if (this.form.valid) {
         let account: AccountData = <AccountData>this.form.value;
         account.id = this.idEditToken;
+        account.version = this.version;
+        if (account.flatNumber === '') {
+          account.flatNumber = null;
+        }
         this.accountService.updateMyAccount(account).subscribe(() => {
-          alert("Pomyślnie edytowano użytkownika");
+          alert(this.translateService.instant('success'));
           this.router.navigate(['/main'])
         },
           (errorResponse) => {
@@ -85,9 +90,8 @@ export class OwnAccountEditComponent implements OnInit {
         streetNumber: new FormControl("", [
           Validators.required
         ]),
-        flatNumber: new FormControl("", [
-          Validators.required
-        ]),
+        flatNumber: new FormControl(''
+          ),
         postalCode: new FormControl("", [
           Validators.required
         ]),
@@ -119,6 +123,7 @@ export class OwnAccountEditComponent implements OnInit {
         });
 
         this.idEditToken = account.id;
+        this.version = account.version;
 
       });
     }

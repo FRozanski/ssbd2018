@@ -7,39 +7,19 @@
 
   <mat-table #table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="city">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CITY' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.city}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="confirm">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CONFIRMED' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="country">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.COUNTRY' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.country}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.EMAIL' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NAME' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.SURNAME' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="login">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LOGIN' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.login}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="confirm">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.ACTIVE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.active}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="numberOfLogins">
@@ -55,40 +35,6 @@
     <ng-container matColumnDef="numberOfProducts">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_PRODUCTS' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.numberOfProducts}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="phone">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.PHONE' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.phone}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="postalCode">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.POSTAL_CODE' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.postalCode}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="street">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.STREET' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.street}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="streetNumber">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.STREET_NUMBER' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.streetNumber}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="edit">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.EDIT' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button (click)='onEditClick(element)'>{{'ACCOUNT.EDIT'| translate }}</button>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="changePassword">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.CHANGE_OF_PASSWORD' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button (click)='onChangePasswordClick(element)'>{{'ACCOUNT.CHANGE_OF_PASSWORD'| translate }}</button>
-      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

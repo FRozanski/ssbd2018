@@ -22,6 +22,10 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/statistics' *ngIf='hasRole("ADMIN")'>Statystyki kont</button>
+    </p>
+
+    <p>
       <button mat-button *ngIf='hasRole("USER")' routerLink='/myAccount'>Moje konto</button>
     </p>
 

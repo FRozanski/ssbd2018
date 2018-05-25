@@ -62,6 +62,15 @@ const appRoutes: Routes = [
       }
   },
   {
+    path: 'statistics',
+    canActivate: [AuthGuard],
+    component: AccountStatisticsComponent,
+    data:
+      {
+        expectedRole: 'ADMIN'
+      }
+  },
+  {
     path: 'register',
     canActivate: [AuthGuard],
     component: RegisterComponent,

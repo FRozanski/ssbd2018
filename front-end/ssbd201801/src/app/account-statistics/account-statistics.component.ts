@@ -13,10 +13,9 @@ import {AccountData} from '../model/account-data';
 export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
-    'city', 'confirm', 'country', 'email', 'firstName',
-    'lastName', 'login', 'numberOfLogins', 'numberOfOrders',
-    'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber', 'edit', 'changePassword'
-  ];
+    'login', 'confirm', 'active',
+    'numberOfLogins', 'numberOfOrders', 'numberOfProducts'
+    ];
   dataSource;
 
   constructor (private accountService: AccountService, private router: Router) { }
@@ -41,13 +40,13 @@ export class AccountStatisticsComponent implements OnInit {
   }
 
   onEditClick(account: AccountData) {
-    this.router.navigate(["/accountEdit/" + account.id]);
+    this.router.navigate(['/accountEdit/' + account.id]);
   }
 
 
   onChangePasswordClick(account: AccountData) {
     this.accountService.passId(+account.id);
-    this.router.navigate(["/changeOthersPassword"]);
+    this.router.navigate(['/changeOthersPassword']);
   }
 
 }

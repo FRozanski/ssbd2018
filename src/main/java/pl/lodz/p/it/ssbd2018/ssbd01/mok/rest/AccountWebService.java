@@ -45,9 +45,10 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mapper.AccessLevelMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.AccountMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.PasswordMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
-import pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.*;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.*;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
+import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.UserAlreadyLogoutException;
 
 /**
  *
@@ -366,7 +367,7 @@ public class AccountWebService {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Account>> constraintViolations = validator.validate(account);
-        List<String> errors = new EntitiesErrorCodes().getAllErrors();
+        List<String> errors = new ErrorCodes().getAllErrors();
 
         if (constraintViolations.size() > 0) {
             for (int i = 0; i < errors.size(); i++) {
@@ -394,9 +395,9 @@ public class AccountWebService {
         }
     }
 
-    private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized {
+    private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {
         if (servletRequest.getUserPrincipal() == null) {
-            throw new UserUnauthorized("user_unauthorized");
+            throw new UserAlreadyLogoutException("user_already_logout_error");
         }
         return servletRequest.getUserPrincipal().getName();
     }

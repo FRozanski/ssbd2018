@@ -30,6 +30,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mok.rest.AccountWebService.class);
+        resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mok.rest.AuthWebService.class);
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mok.rest.SessionWebService.class);
     }
     

@@ -12,10 +12,13 @@ import java.util.List;
  *
  * @author michal
  */
-public class EntitiesErrorCodes {
+public class ErrorCodes {
 
     public static final String UNKNOWN_ERROR = "unknown_error";
     public static final String SUCCESS = "success";
+    public static final String AUTHENTICATION_ERROR = "authentication_error";
+    public static final String USER_ALREADY_LOGIN = "user_already_login";
+    public static final String USER_ALREADY_LOGOUT = "user_already_logout";
     public static final String UNAUTHORIZED = "user_is_not_authorized";
     public static final String EDITING_SESION_EXPIRED = "editing_sesion_expired";
     public static final String NO_ID_SENT = "no_id_sent";

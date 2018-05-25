@@ -7,23 +7,18 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.SUCCESS;
+import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.UserAlreadyLogoutException;
 
 /**
  *
@@ -31,18 +26,6 @@ import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.SUCCESS;
  */
 @Path("session")
 public class SessionWebService {
-
-    @GET
-    @Path("logOut")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response logOut(@Context HttpServletRequest session) {
-        session.getSession().invalidate();
-        return Response.status(Response.Status.OK)
-                .entity(new WebErrorInfo("200", SUCCESS))
-                .type(MediaType.APPLICATION_JSON)
-                .build();
-    }
 
     @GET
     @Path("myLogin")
@@ -89,9 +72,9 @@ public class SessionWebService {
         }
     }
 
-    private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized {
+    protected String getUserLogin(HttpServletRequest servletRequest) throws AppBaseException {
         if (servletRequest.getUserPrincipal() == null) {
-            throw new UserUnauthorized("user_unauthorized");
+            throw new UserAlreadyLogoutException("user_already_logout_error");
         }
         return servletRequest.getUserPrincipal().getName();
     }
@@ -112,22 +95,4 @@ public class SessionWebService {
         }
         return levels;
     }
-
-//    @GET
-//    @Path("logIn")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response logIn(@Context HttpServletRequest request) throws ServletException {
-//        request.login("admin", "01user1ssbd");
-//        HttpSession session = request.getSession();
-//        String cookie = session.getId();
-//
-//        JSONObject json = new JSONObject();
-//        json.put("cookie", cookie);
-//
-//        return Response.status(Response.Status.OK)
-//                .entity(json)
-//                .cookie(new NewCookie("JSESSIONID", cookie))
-//                .type(MediaType.APPLICATION_JSON)
-//                .build();
-//    }
 }

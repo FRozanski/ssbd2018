@@ -86,17 +86,11 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("changeYourPassword")
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException {
-        Account tmpAccount = accountFacade.find((account.getId()));
-        String passHash = tmpAccount.getPassword();
-        if (!passHash.contentEquals(HashUtils.sha256(oldPass))) {
-            throw new PasswordNotMatch("password_not_match_error");
-        }
-
+    public void changeMyPassword(Account account) throws AppBaseException {
         try {
-            tmpAccount.setPassword(HashUtils.sha256(newPassOne));
-            accountFacade.edit(tmpAccount);
-            ArchivalPassword archivalPassword = new ArchivalPassword(tmpAccount.getPassword(), generateCurrentDate(), tmpAccount);
+            account.setPassword(HashUtils.sha256(account.getPassword()));
+            accountFacade.edit(account);
+            ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
             archivalPasswordFacadeLocal.create(archivalPassword);
         } catch (AppBaseException ex) {
             throw new AccountException("unknown_exception");
@@ -105,13 +99,11 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("changeOthersPassword")
-    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException {
-        Account tmpAccount = accountFacade.find((account.getId()));
-
+    public void changeOthersPassword(Account account) throws AppBaseException {
         try {
-            tmpAccount.setPassword(HashUtils.sha256(newPassOne));
-            accountFacade.edit(tmpAccount);
-            ArchivalPassword archivalPassword = new ArchivalPassword(tmpAccount.getPassword(), generateCurrentDate(), tmpAccount);
+            account.setPassword(HashUtils.sha256(account.getPassword()));
+            accountFacade.edit(account);
+            ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
             archivalPasswordFacadeLocal.create(archivalPassword);
         } catch (AppBaseException ex) {
             throw new AccountException("unknown_exception");
@@ -127,6 +119,7 @@ public class AccountManager implements AccountManagerLocal {
             throw new AccountOptimisticException("account_optimistic_error");
         }
     }
+    
 
     @Override
     @PermitAll
@@ -272,7 +265,8 @@ public class AccountManager implements AccountManagerLocal {
     //@RolesAllowed("getAccountById")
     public Account getAccountById(long id) {
         Account tmpAccount = accountFacade.find(id);
-        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+        return tmpAccount;
+        //return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
     }
 
     @Override

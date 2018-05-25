@@ -12,6 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 /**
  *
  * @author piotrek
+ * @author michalmalec
  */
 @Local
 public interface AccountManagerLocal {
@@ -54,9 +55,9 @@ public interface AccountManagerLocal {
 
     public AccessLevel getAccessLevelById(Long idAccessLevel);
     
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException;
+    public void changeMyPassword(Account account) throws AppBaseException;
     
-    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException;
+    public void changeOthersPassword(Account account) throws AppBaseException;
 
     public Account getMyAccountById(long id);
 

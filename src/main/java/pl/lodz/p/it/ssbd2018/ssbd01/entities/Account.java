@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -37,7 +36,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.EntitiesErrorCodes.*;
 
 /**
@@ -473,13 +471,9 @@ public class Account implements Serializable {
 
     /**
      * @param version the version to set
-     * @throws pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException
+     * 
      */
-    public void setVersion(long version) throws AccountOptimisticException {
-        if (this.version != version) {
-            throw new AccountOptimisticException("account_optimistic_lock_exception");
-        } else {
-            this.version = new Random().nextLong();
-        }
+    public void setVersion(long version) {
+       this.version = version;
     }
 }

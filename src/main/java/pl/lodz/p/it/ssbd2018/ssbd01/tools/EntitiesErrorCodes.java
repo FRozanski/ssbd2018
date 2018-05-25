@@ -15,6 +15,7 @@ import java.util.List;
 public class EntitiesErrorCodes {
 
     public static final String UNKNOWN_ERROR = "unknown_error";
+    public static final String SUCCESS = "success";
     public static final String UNAUTHORIZED = "user_is_not_authorized";
     public static final String EDITING_SESION_EXPIRED = "editing_sesion_expired";
     public static final String NO_ID_SENT = "no_id_sent";

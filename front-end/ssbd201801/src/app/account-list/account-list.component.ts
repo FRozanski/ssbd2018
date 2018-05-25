@@ -16,7 +16,7 @@ export class AccountListComponent implements OnInit {
 
   displayedColumns = [
     'login', 'firstName', 'surname', 'email', 'phone', 'country', 'city', 'street',
-    'streetNumber', 'flatNumber', 'postalCode', 'edit', 'changeMyPassword'
+    'streetNumber', 'flatNumber', 'postalCode', 'edit', 'changePassword'
     ];
   dataSource;
 

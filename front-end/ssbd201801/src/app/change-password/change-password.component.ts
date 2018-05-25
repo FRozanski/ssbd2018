@@ -69,13 +69,13 @@ export class ChangePasswordComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      oldPass: new FormControl("", [
+      oldPassword: new FormControl("", [
         Validators.required
       ]),
-      newPassOne: new FormControl("", [
+      firstPassword: new FormControl("", [
         Validators.required
       ]),
-      newPassTwo: new FormControl("", [
+      secondPassword: new FormControl("", [
         Validators.required
       ])
     });

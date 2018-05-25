@@ -61,13 +61,15 @@ export class AccountService {
   }
 
   changeMyPassword(account: AccountData): Observable<AccountData> {
-    return this.httpClient.put<AccountData>(this.uri + '/changeMyPassword', {
-      "firstPassword": account.newPassOne,
-      "secondPassword": account.newPassTwo,
-      "oldPassword": account.oldPass,
-      "id": account.id,
-      "version": account.version
-    });
+    return this.httpClient.put<AccountData>(this.uri + '/changeMyPassword', account
+      //{
+      // "firstPassword": account.firstPassword,
+      // "secondPassword": account.secondPassword,
+      // "oldPassword": account.oldPassword,
+      // "id": account.id,
+      // "version": account.version
+    // }
+    );
   }
 
   changeOthersPassword(account: AccountData): Observable<AccountData> {

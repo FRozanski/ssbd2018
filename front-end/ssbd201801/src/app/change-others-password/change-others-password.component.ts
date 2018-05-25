@@ -7,6 +7,7 @@ import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {MatTableDataSource} from '@angular/material';
 import {environment} from '../../environments/environment';
+import {MessageService} from '../common/message.service';
 
 @Component({
   selector: 'app-change-others-password',
@@ -25,10 +26,13 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   accountToEdit: AccountData = {};
 
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
+  constructor(private accountService: AccountService, private location: Location,
+              private translateService: TranslateService, private router: Router,
+              private messageService: MessageService) { }
 
   ngOnInit() {
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);
+    console.log('othersIdDb = ' + this.othersIdDb);
 
     this.accountService.getAccountToEdit(this.othersIdDb).subscribe((data: AccountData) => {
       this.accountToEdit = data;
@@ -45,8 +49,10 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
     if (this.form.valid) {
       const account: AccountData = <AccountData>this.form.value;
-      account.accountId = this.accountToEdit.id;
+      account.id = this.accountToEdit.id;
+      account.version = this.accountToEdit.version;
       this.accountService.changeOthersPassword(account).subscribe(() => {
+          this.messageService.passMessage(this.translateService.instant('success'));
           this.router.navigate(['/main']);
         },
         (errorResponse) => {
@@ -65,10 +71,10 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      newPassOne: new FormControl('', [
+      firstPassword: new FormControl('', [
         Validators.required
       ]),
-      newPassTwo: new FormControl('', [
+      secondPassword: new FormControl('', [
         Validators.required
       ])
     });

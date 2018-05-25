@@ -15,7 +15,7 @@ import {
   MatInputModule,
   MatCardModule,
   MatSidenavModule,
-  MatSortModule, 
+  MatSortModule,
   MatPaginatorModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
@@ -31,6 +31,7 @@ import { ChangeOthersPasswordComponent } from './change-others-password/change-o
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationConfirmService } from './common/registration-confirm.service';
 import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
+import {SessionService} from './common/session.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -51,54 +52,54 @@ const appRoutes: Routes = [
     component: MainPageComponent
   },
   {
-    path: 'accounts', 
+    path: 'accounts',
     canActivate: [AuthGuard],
-    component: AccountListComponent, 
+    component: AccountListComponent,
     data:
       {
-        expectedRole: "ADMIN"
+        expectedRole: 'ADMIN'
       }
   },
   {
-    path: 'register', 
+    path: 'register',
     canActivate: [AuthGuard],
-    component: RegisterComponent, 
+    component: RegisterComponent,
     data:
       {
-        expectedRole: "GUEST"
+        expectedRole: 'GUEST'
       }
   },
   {
     path: 'accountEdit/:id',
     canActivate: [AuthGuard],
     component: AccountEditComponent,
-    data: 
+    data:
     {
-      expectedRole: "ADMIN"
+      expectedRole: 'ADMIN'
     }
   },
-  { 
-    path: 'changePassword', 
+  {
+    path: 'changePassword',
     component: ChangePasswordComponent,
-    data: 
+    data:
     {
-      expectedRole: "USER"
+      expectedRole: 'USER'
     }
   },
-  { 
-    path: 'changeOthersPassword', 
+  {
+    path: 'changeOthersPassword',
     component: ChangeOthersPasswordComponent
   },
-  { 
-    path: 'registrationConfirm', 
+  {
+    path: 'registrationConfirm',
     component: RegistrationConfirmComponent
   },
-  { 
-    path: 'myAccount', 
+  {
+    path: 'myAccount',
     component: OwnAccountEditComponent,
-    data: 
+    data:
     {
-      expectedRole: "USER"
+      expectedRole: 'USER'
     },
     canActivate: [AuthGuard]
   },
@@ -147,6 +148,7 @@ declarations: [
   bootstrap: [AppComponent],
   providers: [
     AccountService,
+    SessionService,
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,

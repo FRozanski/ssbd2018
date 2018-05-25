@@ -28,10 +28,6 @@ export class AccountService {
     return this.httpClient.post<AccountData>(this.uri + '/registerAccount', account);
   }
 
-  getCurrentUserIdentity(): Observable<AccountData> {
-    return this.httpClient.get<AccountData>(this.uri + '/myIdentity');
-  }
-
   changePassword(account: AccountData): Observable<AccountData> {
     return this.httpClient.put<AccountData>(this.uri + '/changePassword', account);
   }

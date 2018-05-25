@@ -32,7 +32,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 import {SessionService} from './common/session.service';
 import { AccountStatisticsComponent } from './account-statistics/account-statistics.component';
-import {MessageService} from './common/message.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -160,7 +159,6 @@ declarations: [
   providers: [
     AccountService,
     SessionService,
-    MessageService,
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,

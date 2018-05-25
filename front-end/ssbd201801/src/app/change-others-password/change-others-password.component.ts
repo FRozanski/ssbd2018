@@ -5,9 +5,6 @@ import {AccountService} from '../common/account.service';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
-import {MatTableDataSource} from '@angular/material';
-import {environment} from '../../environments/environment';
-import {MessageService} from '../common/message.service';
 
 @Component({
   selector: 'app-change-others-password',
@@ -27,12 +24,10 @@ export class ChangeOthersPasswordComponent implements OnInit {
   accountToEdit: AccountData = {};
 
   constructor(private accountService: AccountService, private location: Location,
-              private translateService: TranslateService, private router: Router,
-              private messageService: MessageService) { }
+              private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);
-    console.log('othersIdDb = ' + this.othersIdDb);
 
     this.accountService.getAccountToEdit(this.othersIdDb).subscribe((data: AccountData) => {
       this.accountToEdit = data;
@@ -52,7 +47,7 @@ export class ChangeOthersPasswordComponent implements OnInit {
       account.id = this.accountToEdit.id;
       account.version = this.accountToEdit.version;
       this.accountService.changeOthersPassword(account).subscribe(() => {
-          this.messageService.passMessage(this.translateService.instant('success'));
+          alert(this.translateService.instant('success'));
           this.router.navigate(['/main']);
         },
         (errorResponse) => {

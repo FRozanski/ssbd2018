@@ -21,6 +21,6 @@ public class TokenNotFoundException extends VeryficationTokenException {
 
     @Override
     public String getCode() {
-        return super.getCode() + ".token_not_found_unique";
+        return super.getCode() + ".token_not_found";
     }
 }

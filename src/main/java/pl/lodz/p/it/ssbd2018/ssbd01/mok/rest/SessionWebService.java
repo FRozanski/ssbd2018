@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.UserAlreadyLogoutException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 
 /**
  *

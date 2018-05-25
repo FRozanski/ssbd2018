@@ -29,11 +29,11 @@ public interface AccountManagerLocal {
     
     void confirmAccount(long accountId) throws AppBaseException;
     
-    void lockAccount(long accountId) throws AccountException;
+    void lockAccount(long accountId) throws AppBaseException;
     
     void confirmAccountByToken(String token) throws AppBaseException;
             
-    void unlockAccount(long accountId) throws AccountException;
+    void unlockAccount(long accountId) throws AppBaseException;
     
     public Account getMyAccountToEdit(Account account) throws AppBaseException;
     

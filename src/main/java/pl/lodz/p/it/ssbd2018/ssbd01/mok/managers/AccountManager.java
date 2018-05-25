@@ -6,13 +6,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
-import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.persistence.OptimisticLockException;
-import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
@@ -20,8 +17,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.*;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountNotFoundException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
@@ -86,37 +81,25 @@ public class AccountManager implements AccountManagerLocal {
     @Override
     //@RolesAllowed("changeYourPassword")
     public void changeMyPassword(Account account) throws AppBaseException {
-        try {
             account.setPassword(HashUtils.sha256(account.getPassword()));
             accountFacade.edit(account);
             ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
             archivalPasswordFacadeLocal.create(archivalPassword);
-        } catch (AppBaseException ex) {
-            throw new AccountException("unknown_exception");
-        }
     }
 
     @Override
     //@RolesAllowed("changeOthersPassword")
     public void changeOthersPassword(Account account) throws AppBaseException {
-        try {
             account.setPassword(HashUtils.sha256(account.getPassword()));
             accountFacade.edit(account);
             ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
             archivalPasswordFacadeLocal.create(archivalPassword);
-        } catch (AppBaseException ex) {
-            throw new AccountException("unknown_exception");
-        }
     }
 
     @Override
     //@RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) throws AppBaseException {
-        try {
             accountFacade.edit(account);
-        } catch (OptimisticLockException oe) {
-            throw new AccountOptimisticException("account_optimistic_error");
-        }
     }
 
     @Override
@@ -138,36 +121,19 @@ public class AccountManager implements AccountManagerLocal {
 
     @Override
     //@RolesAllowed("lockAccount")
-    public void lockAccount(long accountId) throws AccountException {
-        try {
+    public void lockAccount(long accountId) throws AppBaseException {
             Account account = accountFacade.find(accountId);
             account.setActive(false);
             accountFacade.edit(account);
             mailSender.sendMailAfterAccountLock(account.getEmail());
-        } catch (NullPointerException npe) {
-            throw new AccountNotFoundException("wrong_account_id_error");
-        } catch (OptimisticLockException oe) {
-            throw new AccountOptimisticException("account_optimistic_error");
-        } catch (AppBaseException ex) {
-            throw new AccountException("unknow_error");
-        }
     }
 
     @Override
     //@RolesAllowed("unlockAccount")
-    public void unlockAccount(long accountId) throws AccountException {
-        try {
+    public void unlockAccount(long accountId) throws AppBaseException {
             Account account = accountFacade.find(accountId);
             account.setActive(true);
             accountFacade.edit(account);
-        } catch (NullPointerException npe) {
-            throw new AccountNotFoundException("wrong_account_id_error");
-        } catch (OptimisticLockException oe) {
-            throw new AccountOptimisticException("account_optimistic_error");
-        } catch (AppBaseException ex) {
-            throw new AccountException("unknow_error");
-        }
-
     }
 
     @Override

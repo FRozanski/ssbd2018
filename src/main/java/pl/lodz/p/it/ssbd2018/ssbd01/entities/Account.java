@@ -125,7 +125,6 @@ public class Account implements Serializable {
     //secondary table UserData
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version", table = "user_data")
     @JoinColumns({
         @JoinColumn(name = "version", referencedColumnName = "version", table = "account")})
@@ -186,7 +185,6 @@ public class Account implements Serializable {
     //secondary table veryfication_token
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version", table = "veryfication_token")
     @JoinColumns({
         @JoinColumn(name = "version", referencedColumnName = "version", table = "account")})

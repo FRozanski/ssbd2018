@@ -10,8 +10,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccessLevelExistsException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeBase;
 
 /**
@@ -27,6 +28,15 @@ public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implement
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    @Override
+    public AccessLevel find(Object id) throws AppBaseException {
+        AccessLevel accessLevel = super.find(id);
+        if (accessLevel == null) {
+            throw new AccessLevelExistsException("access_level_not_found_exception");
+        }
+        return accessLevel;
     }
 
     public AccessLevelFacade() {

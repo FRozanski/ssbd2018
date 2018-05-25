@@ -21,7 +21,7 @@ public interface ShippingMethodFacadeLocal {
 
     void edit(ShippingMethod shippingMethod) throws AppBaseException;
 
-    ShippingMethod find(Object id);
+    ShippingMethod find(Object id) throws AppBaseException;
 
     List<ShippingMethod> findAll();
 

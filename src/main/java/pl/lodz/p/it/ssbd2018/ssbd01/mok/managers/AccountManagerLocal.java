@@ -5,13 +5,12 @@ import javax.ejb.Local;
 import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
  * @author piotrek
+ * @author michalmalec
  */
 @Local
 public interface AccountManagerLocal {
@@ -20,27 +19,29 @@ public interface AccountManagerLocal {
     
     List<AccessLevel> getAllAccessLevels();
     
-    Account getAccountToEdit(Account account);
+    Account getAccountToEdit(Account account) throws AppBaseException;
     
     void saveAccountAfterEdit(Account account) throws AppBaseException; 
     
     void registerAccount(Account account, ServletContext servletContext) throws AppBaseException;
     
-    void confirmAccount(Account account) throws AppBaseException;
+    void confirmAccount(long accountId) throws AppBaseException;
     
-    void lockAccount(long accountId) throws AccountException;
+    void lockAccount(long accountId) throws AppBaseException;
     
-    void unlockAccount(long accountId) throws AccountException;
+    void confirmAccountByToken(String token) throws AppBaseException;
+            
+    void unlockAccount(long accountId) throws AppBaseException;
     
-    public Account getMyAccountToEdit(Account account);
+    public Account getMyAccountToEdit(Account account) throws AppBaseException;
     
     public Account getMyAccountByLogin(String login) throws AppBaseException;
     
-    void addAccessLevelToAccount(AccessLevel accessLevel, Account account) throws AppBaseException;
+    public void addAccessLevelToAccount(long accountId, long accessLevelId) throws AppBaseException;
     
-    void dismissAccessLevelFromAccount(AccessLevel accessLevel, Account account);
+    public void dismissAccessLevelFromAccount(long accountId, long accessLevelId) throws AppBaseException;
 
-    public String getVeryficationToken(Account account);
+    public String getVeryficationToken(Account account) throws AppBaseException;
     
     public Account getAccountById(long id) throws AppBaseException;
     
@@ -48,17 +49,13 @@ public interface AccountManagerLocal {
     
     public Account getAccountByToken(String token) throws AppBaseException;
 
-    public void sendMailWithVeryficationLink(String mail, String veryficationLink);
+    public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException;
     
-    public AccountAlevel getAccountAlevel(Long idAccount, Long idAccessLevel);
+    public void changeMyPassword(Account account) throws AppBaseException;
+    
+    public void changeOthersPassword(Account account) throws AppBaseException;
 
-    public AccessLevel getAccessLevelById(Long idAccessLevel);
-    
-    public void changeYourPassword(Account account, String oldPass, String newPassOne, String newPassTwo) throws AppBaseException;
-    
-    public void changeOthersPassword(Account account, String newPassOne, String newPassTwo) throws AppBaseException;
-
-    public Account getMyAccountById(long id);
+    public Account getMyAccountById(long id) throws AppBaseException;
 
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException;
 }

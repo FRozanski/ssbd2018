@@ -21,7 +21,7 @@ public interface ProductFacadeLocal {
 
     void edit(Product product) throws AppBaseException;
 
-    Product find(Object id);
+    Product find(Object id) throws AppBaseException;
 
     List<Product> findAll();
 

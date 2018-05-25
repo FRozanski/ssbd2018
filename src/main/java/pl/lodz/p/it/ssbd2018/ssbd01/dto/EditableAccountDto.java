@@ -5,13 +5,14 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
+
 /**
  *
  * @author michal
  */
-public class NewAccountDto extends BasicNewAccountDto {
-
-    private String login;
+public class EditableAccountDto {
+    
+    private long id;
     private String name;
     private String surname;
     private String email;
@@ -22,21 +23,22 @@ public class NewAccountDto extends BasicNewAccountDto {
     private String postalCode;
     private String city;
     private String country;
-    
+    private long version;
+
     /**
-     * @return the login
+     * @return the id
      */
-    public String getLogin() {
-        return login;
+    public long getId() {
+        return id;
     }
 
     /**
-     * @param login the login to set
+     * @param id the id to set
      */
-    public void setLogin(String login) {
-        this.login = login;
+    public void setId(long id) {
+        this.id = id;
     }
-    
+
     /**
      * @return the name
      */
@@ -176,4 +178,19 @@ public class NewAccountDto extends BasicNewAccountDto {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
+    }
+    
 }

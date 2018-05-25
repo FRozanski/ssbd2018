@@ -5,15 +5,11 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
-import java.io.Serializable;
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  *
  * @author agkan
  */
-@XmlRootElement
-public class AccessLevelDto implements Serializable {
+public class AccessLevelDto {
     
     private String id;
     private String level;

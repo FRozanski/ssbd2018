@@ -21,7 +21,7 @@ public interface OrderShippingFacadeLocal {
 
     void edit(OrderShipping orderShipping) throws AppBaseException;
 
-    OrderShipping find(Object id);
+    OrderShipping find(Object id) throws AppBaseException;
 
     List<OrderShipping> findAll();
 

@@ -1,23 +1,22 @@
-
-import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
-import { AccountService } from '../common/account.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { AccountData } from '../model/account-data';
-import { environment } from '../../environments/environment'
-import { Router } from '@angular/router';
-import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {Router} from '@angular/router';
+import {AccountService} from '../common/account.service';
+import {environment} from '../../environments/environment';
+import {AccountData} from '../model/account-data';
 
 @Component({
-  selector: 'app-account-list',
-  templateUrl: './account-list.component.html',
-  styleUrls: ['./account-list.component.css']
+  selector: 'app-account-statistics',
+  templateUrl: './account-statistics.component.html',
+  styleUrls: ['./account-statistics.component.css']
 })
-export class AccountListComponent implements OnInit {
+export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
-    'login', 'firstName', 'surname', 'email', 'phone', 'country', 'city', 'street',
-    'streetNumber', 'flatNumber', 'postalCode', 'edit', 'changePassword'
-    ];
+    'city', 'confirm', 'country', 'email', 'firstName',
+    'lastName', 'login', 'numberOfLogins', 'numberOfOrders',
+    'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber', 'edit', 'changePassword'
+  ];
   dataSource;
 
   constructor (private accountService: AccountService, private router: Router) { }
@@ -50,4 +49,5 @@ export class AccountListComponent implements OnInit {
     this.accountService.passId(+account.id);
     this.router.navigate(["/changeOthersPassword"]);
   }
+
 }

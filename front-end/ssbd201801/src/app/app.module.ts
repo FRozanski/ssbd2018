@@ -32,6 +32,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { RegistrationConfirmService } from './common/registration-confirm.service';
 import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 import {SessionService} from './common/session.service';
+import { AccountStatisticsComponent } from './account-statistics/account-statistics.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -121,7 +122,8 @@ declarations: [
     ChangePasswordComponent,
     SidenavComponent,
     AccountEditComponent,
-    OwnAccountEditComponent
+    OwnAccountEditComponent,
+    AccountStatisticsComponent
   ],
   imports: [
     MatTableModule,

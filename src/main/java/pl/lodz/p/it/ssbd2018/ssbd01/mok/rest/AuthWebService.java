@@ -73,13 +73,12 @@ public class AuthWebService {
         if (httpRequest.getUserPrincipal() != null) {
             throw new UserAlreadyLoginException("user_already_login");
         }
-        if (loginDto.getPassword() == null || loginDto.getUsername() == null) {
-            throw new PasswordOrUsernameException("password_or_username_exception");
+        if ("".equals(loginDto.getPassword()) || "".equals(loginDto.getUsername())) {
+            throw new PasswordOrUsernameException("null_password_or_username_exception");
         }
         try {
             httpRequest.login(loginDto.getUsername(), loginDto.getPassword());
             httpRequest.getSession().getId();
-
         } catch (ServletException ex) {
             throw new LoginException("wrong_password_or_username_error");
         }

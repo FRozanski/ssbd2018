@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions;
+package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web;
 
 /**
  *
  * @author michal
  */
-public class LoginException extends WebBaseException {
+public class UserAlreadyLogoutException extends WebBaseException {
     
-    public LoginException(String message, Throwable cause) {
+    public UserAlreadyLogoutException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public LoginException(String message) {
+    public UserAlreadyLogoutException(String message) {
         super(message);
     }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".wrong_password_or_username_error"; 
+        return super.getCode() + ".user_already_logout_error"; 
     }
 }

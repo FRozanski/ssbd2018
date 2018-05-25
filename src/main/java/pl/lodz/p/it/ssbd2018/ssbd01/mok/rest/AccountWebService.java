@@ -48,7 +48,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.*;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.UserAlreadyLogoutException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 
 /**
  *

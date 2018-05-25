@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
@@ -21,7 +22,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.ArchivalPasswordFacadeLocal;
-import pl.lodz.p.it.ssbd2018.ssbd01.tools.CloneUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
 
@@ -53,33 +53,31 @@ public class AccountManager implements AccountManagerLocal {
     private final SendMailUtils mailSender = new SendMailUtils();
 
     @Override
-    //@RolesAllowed("getAllAccounts")
+    @RolesAllowed("getAllAccounts")
     public List<Account> getAllAccounts() {
         return accountFacade.findAll();
     }
 
     @Override
-    //@RolesAllowed("getAllAccessLevels")
+    @RolesAllowed("getAllAccessLevels")
     public List<AccessLevel> getAllAccessLevels() {
         return accessLevelFacade.findAll();
     }
 
     @Override
-    //@RolesAllowed("getAccountToEdit")
+    @RolesAllowed("getAccountToEdit")
     public Account getAccountToEdit(Account account) throws AppBaseException {
-        Account tmpAccount = accountFacade.find(account.getId());
-        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+        return accountFacade.find(account.getId());
     }
 
     @Override
-    //@RolesAllowed("getMyAccountToEdit")
+    @RolesAllowed("getMyAccountToEdit")
     public Account getMyAccountToEdit(Account account) throws AppBaseException {
-        Account tmpAccount = accountFacade.find(account.getId());
-        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+        return accountFacade.find(account.getId());
     }
 
     @Override
-    //@RolesAllowed("changeYourPassword")
+    @RolesAllowed("changeMyPassword")
     public void changeMyPassword(Account account) throws AppBaseException {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.edit(account);
@@ -88,7 +86,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("changeOthersPassword")
+    @RolesAllowed("changeOthersPassword")
     public void changeOthersPassword(Account account) throws AppBaseException {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.edit(account);
@@ -97,7 +95,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("saveAccountAfterEdit")
+    @RolesAllowed("saveAccountAfterEdit")
     public void saveAccountAfterEdit(Account account) throws AppBaseException {
         accountFacade.edit(account);
     }
@@ -120,7 +118,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("lockAccount")
+    @RolesAllowed("lockAccount")
     public void lockAccount(long accountId) throws AppBaseException {
         Account account = accountFacade.find(accountId);
         account.setActive(false);
@@ -129,7 +127,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("unlockAccount")
+    @RolesAllowed("unlockAccount")
     public void unlockAccount(long accountId) throws AppBaseException {
         Account account = accountFacade.find(accountId);
         account.setActive(true);
@@ -137,7 +135,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("addAccessLevelToAccount")
+    @RolesAllowed("addAccessLevelToAccount")
     public void addAccessLevelToAccount(long accountId, long accessLevelId) throws AppBaseException {
         AccountAlevel accountAlevel = new AccountAlevel();
         AccessLevel accessLevel = accessLevelFacade.find(accessLevelId);
@@ -148,7 +146,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("dismissAccessLevelFromAccount")
+    @RolesAllowed("dismissAccessLevelFromAccount")
     public void dismissAccessLevelFromAccount(long accountId, long accessLevelId) throws AppBaseException {
         AccessLevel accessLevel = accessLevelFacade.find(accessLevelId);
         Account account = accountFacade.find(accountId);
@@ -158,12 +156,7 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    public void sendMailWithVeryficationLink(String mail, String veryficationLink) {
-        mailSender.sendVerificationEmail(mail, veryficationLink);
-    }
-
-    @Override
-    //@RolesAllowed("confirmAccount")
+    @RolesAllowed("confirmAccount")
     public void confirmAccount(long accountId) throws AppBaseException {
         Account account = accountFacade.find(accountId);
         this.checkIfAccountConfirmed(account);
@@ -190,61 +183,50 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    //@RolesAllowed("getAccountById")
+    @RolesAllowed("basicAccountGet")
     public String getVeryficationToken(Account account) throws AppBaseException {
         return accountFacade.find(account.getId()).getToken();
     }
 
     @Override
-    //@RolesAllowed("getAccountById")
+    @RolesAllowed("basicAccountGet")
     public Account getAccountByLogin(String login) throws AppBaseException {
-        Account tmpAccount = accountFacade.findByLogin(login);
-        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+        return accountFacade.findByLogin(login);
     }
 
     @Override
-    //@RolesAllowed("getMyAccountById")
+    @RolesAllowed("basicMyAccountGet")
     public Account getMyAccountByLogin(String login) throws AppBaseException {
-        Account tmpAccount = accountFacade.findByLogin(login);
-        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+        return accountFacade.findByLogin(login);
     }
 
     @Override
-    //@RolesAllowed("getAccountById")
+    @RolesAllowed("basicAccountGet")
     public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }
 
-    private String createVeryficationLink(Account account, ServletContext servletContext) {
-        String veryficationToken = account.getToken();
-        String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
-        veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
-        return veryficationLink;
-    }
-
     @Override
-    //@RolesAllowed("getAccountById")
+    @RolesAllowed("basicAccountGet")
     public Account getAccountById(long id) throws AppBaseException {
         Account tmpAccount = accountFacade.find(id);
         return tmpAccount;
     }
 
     @Override
-    //@RolesAllowed("getAccessLevelById")
+    @RolesAllowed("basicAccountGet")
     public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException {
-        AccessLevel accessLevel = accessLevelFacade.find(idAccessLevel);
-        return (AccessLevel) CloneUtils.deepCloneThroughSerialization(accessLevel);
+        return accessLevelFacade.find(idAccessLevel);
     }
 
     @Override
-    //@RolesAllowed("getMyAccountById")
+    @RolesAllowed("basicMyAccountGet")
     public Account getMyAccountById(long id) throws AppBaseException {
-        Account tmpAccount = accountFacade.find(id);
-        return (Account) CloneUtils.deepCloneThroughSerialization(tmpAccount);
+        return accountFacade.find(id);
     }
 
     @Override
-    //@RolesAllowed("saveMyAccountAfterEdit")
+    @RolesAllowed("basicMyAccountGet")
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }
@@ -268,5 +250,16 @@ public class AccountManager implements AccountManagerLocal {
         if (account.getConfirm() == true) {
             throw new AccountWasConfirmed("account_was_confirmed_exception");
         }
+    }
+
+    private void sendMailWithVeryficationLink(String mail, String veryficationLink) {
+        mailSender.sendVerificationEmail(mail, veryficationLink);
+    }
+    
+     private String createVeryficationLink(Account account, ServletContext servletContext) {
+        String veryficationToken = account.getToken();
+        String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
+        veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
+        return veryficationLink;
     }
 }

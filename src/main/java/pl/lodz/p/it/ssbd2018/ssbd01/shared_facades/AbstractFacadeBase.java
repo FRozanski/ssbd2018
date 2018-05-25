@@ -12,6 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 /**
  *
  * @author fifi
+ * @param <T>
  */
 public abstract class AbstractFacadeBase<T> {
 

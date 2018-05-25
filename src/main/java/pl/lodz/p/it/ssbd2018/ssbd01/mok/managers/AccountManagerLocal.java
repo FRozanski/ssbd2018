@@ -49,8 +49,6 @@ public interface AccountManagerLocal {
     
     public Account getAccountByToken(String token) throws AppBaseException;
 
-    public void sendMailWithVeryficationLink(String mail, String veryficationLink);
-
     public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException;
     
     public void changeMyPassword(Account account) throws AppBaseException;

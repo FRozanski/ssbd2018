@@ -1,7 +1,7 @@
 <mat-sidenav-container class="nav-container" (backdropClick)="sidenav.close()">
-  <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose>
-    <p> {{ "HOME.WELCOME" | translate }}, {{ getUserLogin() }}</p>
-    <p>{{ "HOME.USER_ROLES" | translate }}: {{ getUserAccessLevels() }}</p>
+  <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose (openedChange)='onSidenavOpenedChange()' >
+    <p> {{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</p>
+    <p>{{ "HOME.USER_ROLES" | translate }}: {{ roles }}</p>
     <p>
       <button mat-button mat-raised-button color='primary' (click)="sidenav.close()"> < </button>
     </p>
@@ -14,7 +14,7 @@
     </p>
 
     <p>
-      <button mat-button (click)='onLoginClick()' *ngIf='isGuest()'>Logowanie</button>
+      <button mat-button routerLink='/login' *ngIf='isGuest()'>Logowanie</button>
     </p>
 
     <p>
@@ -42,8 +42,9 @@
     <p>
       <button mat-button mat-raised-button color='primary' (click)="sidenav.open()">></button>
     </p>
+    <app-notifications></app-notifications>
 
     <router-outlet></router-outlet>
-  </mat-sidenav-content>
 
+  </mat-sidenav-content>
 </mat-sidenav-container>

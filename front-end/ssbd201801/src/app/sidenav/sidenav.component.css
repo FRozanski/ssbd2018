@@ -13,3 +13,8 @@
   mat-sidenav button {
     width: 100%;
   }
+
+  app-notifications {
+    position: absolute;
+    right: 30px;
+  }

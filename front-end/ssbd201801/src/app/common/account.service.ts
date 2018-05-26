@@ -8,6 +8,7 @@ import { AuthUtilService } from './auth-util.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
+import { Credentials } from '../model/credentials';
 
 @Injectable()
 export class AccountService {
@@ -33,7 +34,6 @@ export class AccountService {
   }
 
   updateMyAccount(account: AccountData) {
-    console.log("Sending account to api: ", account);
     return this.httpClient.put<AccountData>(this.uri + "/updateMyAccount", account);
   }
 
@@ -98,4 +98,5 @@ export class AccountService {
   passId(id: number) {
     this.idSource.next(id);
   }
+
 }

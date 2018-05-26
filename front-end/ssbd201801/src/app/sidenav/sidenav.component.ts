@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import {SessionService} from '../common/session.service';
+import { AuthUtilService } from '../common/auth-util.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -15,60 +16,31 @@ import {SessionService} from '../common/session.service';
 export class SidenavComponent implements OnInit {
 
   userIdentity: AccountData = {};
+  roles: string = "";
 
-  constructor(private sessionService: SessionService, private translateService: TranslateService) { }
+  constructor(private sessionService: SessionService, private translateService: TranslateService, private authUtil: AuthUtilService) { }
 
   ngOnInit() {
-
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;
     });
-
   }
 
-  // todo: use AuthUtil
   hasRole(role: string): boolean {
-
-    let hasRole: boolean = false;
-
-    if(this.userIdentity && this.userIdentity.roles) {
-      hasRole = this.userIdentity.roles.indexOf(role) !== -1;
-    }
-
-    return hasRole;
+    return this.authUtil.hasRole(role, this.userIdentity);
   }
-
-
-  // todo: use AuthUtil
   isGuest() {
-    if (!this.userIdentity) return true;
-    if (!this.userIdentity.roles) return true;
-    if (this.userIdentity.roles.length === 0) return true;
-    else return false;
+    return this.authUtil.isGuest, this.userIdentity;
   }
 
-  getUserLogin() {
-    if(this.userIdentity && this.userIdentity.login) return this.userIdentity.login;
-    else return "Guest";
+  onSidenavOpenedChange() {
+    this.sessionService.getMyIdentity().toPromise().then((data) => {
+      this.userIdentity.login = data.login;
+      this.roles = JSON.stringify(data.roles);
+    }).catch((data) => {
+      this.userIdentity.login = "Gość";// translate
+      this.roles = "[GUEST]"
+    });
   }
-
-  getUserAccessLevels() {
-    if(this.userIdentity && this.userIdentity.roles)
-    {
-      let roles = this.userIdentity.roles;
-      if(roles.indexOf("VIRTUAL") !== -1) {
-        return this.translateService.instant("HOME.ACTIVATE_ACCOUNT");
-      } else {
-        return JSON.stringify(roles);
-      }
-    }
-    else return '["GUEST"]';
-  }
-
-  onLoginClick() {
-    window.location.href= environment.apiUrl + '/login/login.html';
-  }
-
-
 
 }

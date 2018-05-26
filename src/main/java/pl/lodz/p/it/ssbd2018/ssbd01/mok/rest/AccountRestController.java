@@ -57,7 +57,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
  * @author michalmalec
  */
 @Path("account")
-public class AccountWebService {
+public class AccountRestController {
 
     @EJB
     AccountManagerLocal accountManagerLocal;

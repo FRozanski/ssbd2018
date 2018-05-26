@@ -19,11 +19,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.dto.LoginDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.*;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.LoginException;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.LogoutException;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.PasswordOrUsernameException;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.UserAlreadyLoginException;
-import pl.lodz.p.it.ssbd2018.ssbd01.web.exceptions.UserAlreadyLogoutException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.LoginException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.LogoutException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.PasswordOrUsernameException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLoginException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 
 /**
  *

@@ -16,7 +16,7 @@ export class AccountStatisticsComponent implements OnInit {
   displayedColumns = [
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders', 'numberOfProducts',
-    'confirmAccount', 'lockAccount', 'unlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
+    'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
     ];
   dataSource;
 
@@ -59,24 +59,24 @@ export class AccountStatisticsComponent implements OnInit {
       });
   }
 
-  onLockClick(account: AccountData) {
-    this.accountService.lockAccount(account.id).subscribe(() => {
-        alert(this.translateService.instant('success'));
-        window.location.reload();
-      },
-      (errorResponse) => {
-        this.validationMessage = this.translateService.instant(errorResponse.error.message);
-      });
-  }
-
-  onUnlockClick(account: AccountData) {
-    this.accountService.unlockAccount(account.id).subscribe(() => {
-        alert(this.translateService.instant('success'));
-        window.location.reload();
-      },
-      (errorResponse) => {
-        this.validationMessage = this.translateService.instant(errorResponse.error.message);
-      });
+  onLockUnlockClick(account: AccountData) {
+    if (this.isActive(account)) {
+      this.accountService.lockAccount(account.id).subscribe(() => {
+          alert(this.translateService.instant('success'));
+          window.location.reload();
+        },
+        (errorResponse) => {
+          this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        });
+    } else {
+      this.accountService.unlockAccount(account.id).subscribe(() => {
+          alert(this.translateService.instant('success'));
+          window.location.reload();
+        },
+        (errorResponse) => {
+          this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        });
+    }
   }
 
   onAddDeleteAdminClick(account: AccountData) {
@@ -195,5 +195,12 @@ export class AccountStatisticsComponent implements OnInit {
       return this.translateService.instant('ACCOUNT.DELETE_ACCESS_LEVEL');
     else
       return this.translateService.instant('ACCOUNT.ADD_ACCESS_LEVEL');
+  }
+
+  applyLockOrUnlockAccountLabel(account: AccountData) {
+    if (this.isActive(account))
+      return this.translateService.instant('ACCOUNT.LOCK_ACCOUNT');
+    else
+      return this.translateService.instant('ACCOUNT.UNLOCK_ACCOUNT');
   }
 }

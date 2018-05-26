@@ -30,6 +30,7 @@
         "CONFIRM_ACCOUNT": "Potwierdź",
         "LOCK_ACCOUNT": "Zablokuj",
         "UNLOCK_ACCOUNT": "Odblokuj",
+        "LOCK_UNLOCK_ACCOUNT": "Zablokuj / Odblokuj",
         "ADMIN": "Administrator",
         "MANAGER": "Moderator",
         "USER": "Użytkownik",

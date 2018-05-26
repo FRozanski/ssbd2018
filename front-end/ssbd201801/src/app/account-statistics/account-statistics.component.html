@@ -47,17 +47,10 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="lockAccount">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.LOCK_ACCOUNT' | translate }} </mat-header-cell>
+    <ng-container matColumnDef="lockOrUnlockAccount">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.LOCK_UNLOCK_ACCOUNT' | translate }} </mat-header-cell>
       <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button *ngIf='isActive(element)' (click)='onLockClick(element)'>{{'ACCOUNT.LOCK_ACCOUNT'| translate }}</button>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="unlockAccount">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.UNLOCK_ACCOUNT' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button *ngIf='!isActive(element)' (click)='onUnlockClick(element)'>{{'ACCOUNT.UNLOCK_ACCOUNT'| translate }}</button>
+        <button mat-button (click)='onLockUnlockClick(element)'>{{ applyLockOrUnlockAccountLabel(element) }}</button>
       </mat-cell>
     </ng-container>
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 const CurrentLanguage = 'pl';
-const Languages = ['pl','keys'];
+const Languages = ['pl','en', 'keys'];
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
   }
 
   private setupTranslationService() {
-    this.translateService.addLangs(Languages);
-    this.translateService.setDefaultLang(CurrentLanguage);
+    this.translateService.addLangs(Languages);   
+    this.translateService.setDefaultLang(this.translateService.getBrowserLang());
   }
 }

@@ -12,8 +12,6 @@ import {AccountService} from '../common/account.service';
 })
 export class RegistrationConfirmComponent implements OnInit {
   token: string;
-  isConfirm = false;
-
   validationMessage = '';
 
   constructor (
@@ -29,11 +27,9 @@ export class RegistrationConfirmComponent implements OnInit {
 
     this.accountService.confirmAccountByToken(this.token)
       .subscribe((data: AccountData) => {
-        // this.accountToConfirm = data;
-        this.isConfirm = data.confirm;
+        alert(this.translateService.instant('REGISTER.ACCOUNT_CONFIRMED'));
       }, (errorResponse) => {
-        console.log(errorResponse.error.message);
-        // this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        this.validationMessage = this.translateService.instant(errorResponse.error.message);
       });
   }
 

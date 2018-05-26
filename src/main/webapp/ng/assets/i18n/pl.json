@@ -29,7 +29,10 @@
         "CHANGE_OF_PASSWORD": "Zmiana hasła",
         "CONFIRM_ACCOUNT": "Potwierdź",
         "LOCK_ACCOUNT": "Zablokuj",
-        "UNLOCK_ACCOUNT": "Odblokuj"
+        "UNLOCK_ACCOUNT": "Odblokuj",
+        "ADMIN": "Administrator",
+        "ADD_ACCESS_LEVEL": "Przyznaj",
+        "DELETE_ACCESS_LEVEL": "Odbierz"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",

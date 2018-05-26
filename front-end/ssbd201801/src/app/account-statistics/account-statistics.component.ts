@@ -16,11 +16,15 @@ export class AccountStatisticsComponent implements OnInit {
   displayedColumns = [
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders', 'numberOfProducts',
-    'confirmAccount', 'lockAccount', 'unlockAccount'
+    'confirmAccount', 'lockAccount', 'unlockAccount', 'adminAccessLevel'
     ];
   dataSource;
 
   validationMessage = '';
+
+  adminAccessLevelId = 2;
+  userAccessLevelId = 4;
+  managerAccessLevelId = 3;
 
   constructor (private accountService: AccountService, private router: Router,
                private translateService: TranslateService) { }
@@ -36,6 +40,7 @@ export class AccountStatisticsComponent implements OnInit {
     }, () => {
       window.location.href = environment.apiUrl + '/login/login.html';
     });
+
   }
 
   applyFilter(filterValue: string) {
@@ -74,6 +79,26 @@ export class AccountStatisticsComponent implements OnInit {
       });
   }
 
+  onAddDeleteAdminClick(account: AccountData) {
+    if (!this.isAdmin(account)) {
+      this.accountService.addAccessLevelToAccount(account.id, this.adminAccessLevelId).subscribe(() => {
+          alert(this.translateService.instant('success'));
+          window.location.reload();
+        },
+        (errorResponse) => {
+          this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        });
+    } else {
+      this.accountService.deleteAccountAlevel(account.id, this.adminAccessLevelId).subscribe(() => {
+          alert(this.translateService.instant('success'));
+          window.location.reload();
+        },
+        (errorResponse) => {
+          this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        });
+    }
+  }
+
   isConfirm(account: AccountData) {
     if (account.confirm) { return true; }
     else { return false; }
@@ -84,4 +109,19 @@ export class AccountStatisticsComponent implements OnInit {
     else { return false; }
   }
 
+  isAdmin(account: AccountData) {
+    for (const level of account.accessLevels) {
+      if (level === 'admin') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  applyAddOrDeleteAdminAccessLevelLabel(account: AccountData) {
+    if (this.isAdmin(account))
+      return this.translateService.instant('ACCOUNT.DELETE_ACCESS_LEVEL');
+    else
+      return this.translateService.instant('ACCOUNT.ADD_ACCESS_LEVEL');
+  }
 }

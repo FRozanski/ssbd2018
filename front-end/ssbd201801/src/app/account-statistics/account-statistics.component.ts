@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AccountService} from '../common/account.service';
 import {environment} from '../../environments/environment';
 import {AccountData} from '../model/account-data';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account-statistics',
@@ -14,11 +15,15 @@ export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
     'login', 'confirm', 'active',
-    'numberOfLogins', 'numberOfOrders', 'numberOfProducts'
+    'numberOfLogins', 'numberOfOrders', 'numberOfProducts',
+    'confirmAccount'
     ];
   dataSource;
 
-  constructor (private accountService: AccountService, private router: Router) { }
+  validationMessage = '';
+
+  constructor (private accountService: AccountService, private router: Router,
+               private translateService: TranslateService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,14 +44,18 @@ export class AccountStatisticsComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  onEditClick(account: AccountData) {
-    this.router.navigate(['/accountEdit/' + account.id]);
+  onConfirmClick(account: AccountData) {
+    this.accountService.confirmAccount(account.id).subscribe(() => {
+      alert(this.translateService.instant('success'));
+    },
+      (errorResponse) => {
+        this.validationMessage = this.translateService.instant(errorResponse.error.message);
+      });
   }
 
-
-  onChangePasswordClick(account: AccountData) {
-    this.accountService.passId(+account.id);
-    this.router.navigate(['/changeOthersPassword']);
+  isConfirm(account: AccountData) {
+    if (account.confirm) { return true; }
+    else { return false; }
   }
 
 }

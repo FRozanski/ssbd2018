@@ -86,7 +86,7 @@ export class AccountService {
   confirmAccount(accountId: number) {
     const params = new HttpParams()
       .set('accountId', accountId.toString());
-    return this.httpClient.put(this.uri + '/confirmAccount', {params});
+    return this.httpClient.put(this.uri + '/confirmAccount', params);
   }
 
   confirmAccountByToken(token: string) {

@@ -15,16 +15,16 @@
       </div>
 
       <mat-form-field>
-        <input matInput type="password" [placeholder]="'ACCOUNT.PASSWORD' | translate" formControlName='password' required>
+        <input matInput type="password" [placeholder]="'ACCOUNT.PASSWORD' | translate" formControlName='firstPassword' required>
       </mat-form-field>
-      <div class="errors-space" *ngIf="isRequiredSatisfied('password')">
+      <div class="errors-space" *ngIf="isRequiredSatisfied('firstPassword')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
       <mat-form-field>
-        <input matInput type="password" [placeholder]="'ACCOUNT.REPLY_PASSWORD' | translate" formControlName='password2' required>
+        <input matInput type="password" [placeholder]="'ACCOUNT.REPLY_PASSWORD' | translate" formControlName='secondPassword' required>
       </mat-form-field>
-      <div class="errors-space" *ngIf="isRequiredSatisfied('password2')">
+      <div class="errors-space" *ngIf="isRequiredSatisfied('secondPassword')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 

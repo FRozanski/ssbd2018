@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {AccountData} from '../model/account-data';
+import {SessionService} from '../common/session.service';
 
 @Component({
   selector: 'app-change-password',
@@ -21,12 +22,19 @@ export class ChangePasswordComponent implements OnInit {
 
   userIdentity: AccountData = {};
 
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
+  myAccountToEdit: AccountData = {};
+
+  constructor(private accountService: AccountService, private sessionService: SessionService,
+              private location: Location, private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
 
-    this.accountService.getCurrentUserIdentity().subscribe((data: AccountData) => {
+    this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;
+    });
+
+    this.accountService.getMyAccountToEdit().subscribe((account: AccountData) => {
+      this.myAccountToEdit = account;
     });
 
     this.initializeForm();
@@ -37,8 +45,10 @@ export class ChangePasswordComponent implements OnInit {
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
-      account.login = this.userIdentity.login;
-      this.accountService.changePassword(account).subscribe(() => {
+      account.id = this.myAccountToEdit.id;
+      account.version = this.myAccountToEdit.version;
+      this.accountService.changeMyPassword(account).subscribe(() => {
+          alert(this.translateService.instant('success'));
           this.router.navigate(['/main']);
         },
         (errorResponse) => {
@@ -57,13 +67,13 @@ export class ChangePasswordComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      oldPass: new FormControl("", [
+      oldPassword: new FormControl("", [
         Validators.required
       ]),
-      newPassOne: new FormControl("", [
+      firstPassword: new FormControl("", [
         Validators.required
       ]),
-      newPassTwo: new FormControl("", [
+      secondPassword: new FormControl("", [
         Validators.required
       ])
     });

@@ -1,5 +1,5 @@
 export interface AccountData {
-    id?: string;
+    id?: number;
     city?: string,
     confirm?: boolean,
     active?: boolean;
@@ -19,8 +19,9 @@ export interface AccountData {
     password?: string;
     password2?: string;
     roles?: string[];
-    oldPass?: string;
-    newPassOne?: string;
-    newPassTwo?: string;
-    accountId?: string;
+    oldPassword?: string;
+    firstPassword?: string;
+    secondPassword?: string;
+    accountId?: number;
+    version?: number;
 }

@@ -22,11 +22,15 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/statistics' *ngIf='hasRole("ADMIN")'>Statystyki kont</button>
+    </p>
+
+    <p>
       <button mat-button *ngIf='hasRole("USER")' routerLink='/myAccount'>Moje konto</button>
     </p>
 
     <p>
-      <button mat-button routerLink='/changePassword' *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>Zmień hasło</button>
+      <button mat-button routerLink='/changeMyPassword' *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>Zmień hasło</button>
     </p>
 
     <p>

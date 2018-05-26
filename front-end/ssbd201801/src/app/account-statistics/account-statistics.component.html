@@ -1,0 +1,59 @@
+<div class="example-container mat-elevation-z8">
+  <mat-card class='errors-card' *ngIf='validationMessage !== "" ' >
+    <p>{{ validationMessage }} </p>
+  </mat-card>
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="login">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LOGIN' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.login}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="confirm">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.ACTIVE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.active}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfLogins">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_LOGINS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfLogins}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfOrders">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_ORDERS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfOrders}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="numberOfProducts">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.NUM_OF_PRODUCTS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.numberOfProducts}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="confirmAccount">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.CONFIRM_ACCOUNT' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button *ngIf='!isConfirm(element)' (click)='onConfirmClick(element)'>{{'ACCOUNT.CONFIRM_ACCOUNT'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

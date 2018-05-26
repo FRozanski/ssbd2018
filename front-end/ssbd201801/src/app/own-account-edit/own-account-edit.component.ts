@@ -16,55 +16,60 @@ export class OwnAccountEditComponent implements OnInit {
     form: FormGroup;
     wasFormSent: boolean = false;
     formValidationMessage: string = "";
-  
-    idEditToken: string;
-  
+
+    idEditToken: number;
+    version: number;
+
     constructor(
-        private accountService: AccountService, 
-        private location: Location, 
-        private translateService: TranslateService, 
-        private router: Router, 
+        private accountService: AccountService,
+        private location: Location,
+        private translateService: TranslateService,
+        private router: Router,
         private activatedRoute: ActivatedRoute
     ) { }
-  
+
     ngOnInit() {
       this.initializeForm();
       this.loadUserData();
     }
-  
+
     sendForm() {
       this.wasFormSent = true;
-  
+
       if (this.form.valid) {
         let account: AccountData = <AccountData>this.form.value;
         account.id = this.idEditToken;
-        this.accountService.editLoggedUserAccount(account).subscribe(() => {
-          alert("Pomyślnie edytowano użytkownika"); 
-          this.router.navigate(['/main'])
+        account.version = this.version;
+        if (account.flatNumber === '') {
+          account.flatNumber = null;
+        }
+        this.accountService.updateMyAccount(account).subscribe(() => {
+          alert(this.translateService.instant('success'));
+          this.router.navigate(['/main']);
         },
           (errorResponse) => {
             this.formValidationMessage = errorResponse.error.message;
-            this.loadUserData();          
+            this.loadUserData();
           }
         )
       }
     }
-  
+
     onReturnClick() {
       this.location.back();
     }
-  
+
     isRequiredSatisfied(controlName: string) {
       return (
-                this.form.get(controlName).errors && 
-                this.form.get(controlName).errors.required) && 
+                this.form.get(controlName).errors &&
+                this.form.get(controlName).errors.required) &&
                 ((
-                    this.form.get(controlName).dirty || 
-                    this.form.get(controlName).touched) || 
+                    this.form.get(controlName).dirty ||
+                    this.form.get(controlName).touched) ||
                     this.wasFormSent
                 );
     }
-  
+
     private initializeForm() {
       this.form = new FormGroup({
         email: new FormControl("", [
@@ -85,9 +90,8 @@ export class OwnAccountEditComponent implements OnInit {
         streetNumber: new FormControl("", [
           Validators.required
         ]),
-        flatNumber: new FormControl("", [
-          Validators.required
-        ]),
+        flatNumber: new FormControl(''
+          ),
         postalCode: new FormControl("", [
           Validators.required
         ]),
@@ -99,9 +103,9 @@ export class OwnAccountEditComponent implements OnInit {
         ])
       });
     }
-  
+
     private loadUserData() {
-      this.accountService.getLoggedUserDataToEdit().subscribe((account: AccountData) => {
+      this.accountService.getMyAccountToEdit().subscribe((account: AccountData) => {
 
       if(!account.flatNumber) account.flatNumber = "";
 
@@ -117,9 +121,10 @@ export class OwnAccountEditComponent implements OnInit {
           "streetNumber": account.streetNumber,
           "flatNumber": account.flatNumber
         });
-  
+
         this.idEditToken = account.id;
-  
+        this.version = account.version;
+
       });
     }
 

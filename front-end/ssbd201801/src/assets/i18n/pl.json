@@ -7,7 +7,8 @@
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",
-        "CONFIRMED" : "Potwierdzone",
+        "CONFIRM" : "Potwierdzone",
+        "ACTIVE" : "Aktywne",
         "COUNTRY" : "Kraj",
         "EMAIL" : "E-mail",
         "NAME" : "Imię",
@@ -25,7 +26,8 @@
         "PASSWORD" : "Hasło",
         "REPLY_PASSWORD" : "Powtórz hasło",
         "FLAT_NUMBER": "Numer mieszkania",
-        "CHANGE_OF_PASSWORD": "Zmiana hasła"
+        "CHANGE_OF_PASSWORD": "Zmiana hasła",
+        "CONFIRM_ACCOUNT": "Potwierdź"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",
@@ -80,5 +82,7 @@
   "app.exception.mok.account_alevel": "Nie udało się wykonać działania na poziomie dostępu konta",
   "app.exception.mok.account_alevel.already_exists": "Konto posiada już ten poziom dostępu",
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
-  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny"
+  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
+
+  "success": "Operacja została pomyślnie wykonana."
 }

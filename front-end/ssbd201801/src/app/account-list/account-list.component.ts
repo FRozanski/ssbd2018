@@ -15,10 +15,9 @@ import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 export class AccountListComponent implements OnInit {
 
   displayedColumns = [
-    'city', 'confirm', 'country', 'email', 'firstName',
-    'lastName', 'login', 'numberOfLogins', 'numberOfOrders',
-    'numberOfProducts', 'phone', 'postalCode', 'street', 'streetNumber', 'edit', 'changePassword'
-  ];
+    'login', 'firstName', 'surname', 'email', 'phone', 'country', 'city', 'street',
+    'streetNumber', 'flatNumber', 'postalCode', 'edit', 'changePassword'
+    ];
   dataSource;
 
   constructor (private accountService: AccountService, private router: Router) { }

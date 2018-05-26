@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import 'rxjs/add/operator/filter';
-import {AccountData} from '../model/account-data';
 import {TranslateService} from '@ngx-translate/core';
 import {AccountService} from '../common/account.service';
 
@@ -13,6 +12,7 @@ import {AccountService} from '../common/account.service';
 export class RegistrationConfirmComponent implements OnInit {
   token: string;
   validationMessage = '';
+  confirmationMessage = '';
 
   constructor (
     private accountService: AccountService,
@@ -23,14 +23,19 @@ export class RegistrationConfirmComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .filter(params => params.token)
-      .subscribe(params => this.token = params.token);
+      .subscribe(params => {
+        this.token = params.token;
 
-    this.accountService.confirmAccountByToken(this.token)
-      .subscribe((data: AccountData) => {
-        alert(this.translateService.instant('REGISTER.ACCOUNT_CONFIRMED'));
+        this.accountService.confirmAccountByToken(this.token)
+          .subscribe(() => {
+            this.validationMessage = '';
+            this.confirmationMessage = this.translateService.instant('REGISTER.ACCOUNT_CONFIRMED');
+          }, (errorResponse) => {
+            this.confirmationMessage = this.translateService.instant('REGISTER.ACCOUNT_NOT_CONFIRMED');
+            this.validationMessage = this.translateService.instant(errorResponse.error.message);
+          });
       }, (errorResponse) => {
         this.validationMessage = this.translateService.instant(errorResponse.error.message);
       });
   }
-
 }

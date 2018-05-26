@@ -100,7 +100,7 @@ const appRoutes: Routes = [
     component: ChangeOthersPasswordComponent
   },
   {
-    path: 'confirmAccountByToken',
+    path: 'registrationConfirm',
     component: RegistrationConfirmComponent
   },
   {

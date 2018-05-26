@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
@@ -230,10 +231,18 @@ public class AccountManager implements AccountManagerLocal {
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }
+    
+    @Override
+    @RolesAllowed("updateLoginDateAndIp")
+    public void updateLoginDateAndIp(String login, String ip) throws AppBaseException {
+        Account account = this.getMyAccountByLogin(login);
+        account.setLastLoginDate(this.generateCurrentDate());
+        account.setLastLoginIp(ip);
+        accountFacade.edit(account);
+    }
 
     private Date generateCurrentDate() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Timestamp(calendar.getTime().getTime()));
+        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Warsaw"));
         return new Date(calendar.getTime().getTime());
     }
 

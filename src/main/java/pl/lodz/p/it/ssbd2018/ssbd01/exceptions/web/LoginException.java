@@ -21,6 +21,6 @@ public class LoginException extends WebBaseException {
 
     @Override
     public String getCode() {
-        return super.getCode() + ".wrong_password_or_username_error"; 
+        return super.getCode() + ".login_error"; 
     }
 }

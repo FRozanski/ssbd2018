@@ -33,6 +33,8 @@ public interface AccountManagerLocal {
             
     void unlockAccount(long accountId) throws AppBaseException;
     
+    public void updateLoginDateAndIp(String login, String ip) throws AppBaseException;
+    
     public Account getMyAccountToEdit(Account account) throws AppBaseException;
     
     public Account getMyAccountByLogin(String login) throws AppBaseException;

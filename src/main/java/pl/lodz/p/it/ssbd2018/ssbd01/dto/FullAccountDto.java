@@ -32,6 +32,8 @@ public class FullAccountDto {
     private long numberOfLogins;
     private boolean confirm;
     private boolean active;
+    private String lastLoginDate;
+    private String lastLoginIp;
     private List<String> accessLevels = new ArrayList<>();
 
     /**
@@ -312,6 +314,34 @@ public class FullAccountDto {
      */
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    /**
+     * @return the lastLoginDate
+     */
+    public String getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    /**
+     * @param lastLoginDate the lastLoginDate to set
+     */
+    public void setLastLoginDate(String lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    /**
+     * @return the lastLoginIp
+     */
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    /**
+     * @param lastLoginIp the lastLoginIp to set
+     */
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
     }
   
     

@@ -65,6 +65,13 @@ import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.*;
     , @NamedQuery(name = "Account.findByToken", query = "SELECT a FROM Account a WHERE a.token = :token")})
 public class Account implements Serializable {
 
+    @Column(name = "last_login_date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLoginDate;
+    @Size(max = 15)
+    @Column(name = "last_login_ip")
+    private String lastLoginIp;
+
     @OneToMany(mappedBy = "idAccount")
     private Collection<ArchivalPassword> archivalPasswordCollection;
     
@@ -473,5 +480,21 @@ public class Account implements Serializable {
      */
     public void setVersion(long version) {
        this.version = version;
+    }
+
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
+    public void setLastLoginDate(Date lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
     }
 }

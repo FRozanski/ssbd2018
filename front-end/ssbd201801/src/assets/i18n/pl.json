@@ -31,6 +31,8 @@
         "LOCK_ACCOUNT": "Zablokuj",
         "UNLOCK_ACCOUNT": "Odblokuj",
         "ADMIN": "Administrator",
+        "MANAGER": "Moderator",
+        "USER": "Użytkownik",
         "ADD_ACCESS_LEVEL": "Przyznaj",
         "DELETE_ACCESS_LEVEL": "Odbierz"
     },

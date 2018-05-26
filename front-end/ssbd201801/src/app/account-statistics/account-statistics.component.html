@@ -68,6 +68,20 @@
       </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="managerAccessLevel">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.MANAGER' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)="onAddDeleteManagerClick(element)">{{ applyAddOrDeleteManagerAccessLevelLabel(element) }}</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="userAccessLevel">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.USER' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)="onAddDeleteUserClick(element)">{{ applyAddOrDeleteUserAccessLevelLabel(element) }}</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

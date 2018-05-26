@@ -60,20 +60,20 @@ export class AccountService {
   lockAccount(accountId: number) {
     const params = new HttpParams()
       .set('accountId', accountId.toString());
-    return this.httpClient.put(this.uri + '/lockAccount', {params});
+    return this.httpClient.put(this.uri + '/lockAccount', null, {params});
   }
 
   unlockAccount(accountId: number) {
     const params = new HttpParams()
       .set('accountId', accountId.toString());
-    return this.httpClient.put(this.uri + '/unlockAccount', {params});
+    return this.httpClient.put(this.uri + '/unlockAccount', null, {params});
   }
 
   addAccessLevelToAccount(accountId: number, alevelId: number) {
     const params = new HttpParams()
       .set('accountId', accountId.toString())
       .set('alevelId', alevelId.toString());
-    return this.httpClient.put(this.uri + '/addAccessLevel', {params});
+    return this.httpClient.put(this.uri + '/addAccessLevel', null, {params});
   }
 
   deleteAccountAlevel(accountId: number, alevelId: number) {
@@ -86,13 +86,13 @@ export class AccountService {
   confirmAccount(accountId: number) {
     const params = new HttpParams()
       .set('accountId', accountId.toString());
-    return this.httpClient.put(this.uri + '/confirmAccount', params);
+    return this.httpClient.put(this.uri + '/confirmAccount', null, {params});
   }
 
   confirmAccountByToken(token: string) {
     const params = new HttpParams()
       .set('token', token);
-    return this.httpClient.put(this.uri + '/confirmAccount', {params});
+    return this.httpClient.put(this.uri + '/confirmAccountByToken', null, {params});
   }
 
   passId(id: number) {

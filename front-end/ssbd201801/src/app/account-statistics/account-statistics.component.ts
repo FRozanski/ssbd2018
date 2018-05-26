@@ -47,6 +47,7 @@ export class AccountStatisticsComponent implements OnInit {
   onConfirmClick(account: AccountData) {
     this.accountService.confirmAccount(account.id).subscribe(() => {
       alert(this.translateService.instant('success'));
+      window.location.reload();
     },
       (errorResponse) => {
         this.validationMessage = this.translateService.instant(errorResponse.error.message);

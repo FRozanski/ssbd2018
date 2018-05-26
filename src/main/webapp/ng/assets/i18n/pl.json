@@ -27,7 +27,9 @@
         "REPLY_PASSWORD" : "Powtórz hasło",
         "FLAT_NUMBER": "Numer mieszkania",
         "CHANGE_OF_PASSWORD": "Zmiana hasła",
-        "CONFIRM_ACCOUNT": "Potwierdź"
+        "CONFIRM_ACCOUNT": "Potwierdź",
+        "LOCK_ACCOUNT": "Zablokuj",
+        "UNLOCK_ACCOUNT": "Odblokuj"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",

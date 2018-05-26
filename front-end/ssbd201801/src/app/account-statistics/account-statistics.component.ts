@@ -16,7 +16,7 @@ export class AccountStatisticsComponent implements OnInit {
   displayedColumns = [
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders', 'numberOfProducts',
-    'confirmAccount'
+    'confirmAccount', 'lockAccount', 'unlockAccount'
     ];
   dataSource;
 
@@ -54,8 +54,33 @@ export class AccountStatisticsComponent implements OnInit {
       });
   }
 
+  onLockClick(account: AccountData) {
+    this.accountService.lockAccount(account.id).subscribe(() => {
+        alert(this.translateService.instant('success'));
+        window.location.reload();
+      },
+      (errorResponse) => {
+        this.validationMessage = this.translateService.instant(errorResponse.error.message);
+      });
+  }
+
+  onUnlockClick(account: AccountData) {
+    this.accountService.unlockAccount(account.id).subscribe(() => {
+        alert(this.translateService.instant('success'));
+        window.location.reload();
+      },
+      (errorResponse) => {
+        this.validationMessage = this.translateService.instant(errorResponse.error.message);
+      });
+  }
+
   isConfirm(account: AccountData) {
     if (account.confirm) { return true; }
+    else { return false; }
+  }
+
+  isActive(account: AccountData) {
+    if (account.active) { return true; }
     else { return false; }
   }
 

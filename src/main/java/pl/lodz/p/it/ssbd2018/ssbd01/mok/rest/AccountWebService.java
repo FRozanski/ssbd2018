@@ -35,11 +35,13 @@ import pl.lodz.p.it.ssbd2018.ssbd01.dto.NewAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.OtherPasswordDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordNotMatch;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordSameAsArchivalPasswordException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordTooShortException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.AccessLevelMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.AccountMapper;
@@ -205,7 +207,8 @@ public class AccountWebService {
             String login = getUserLogin(servletRequest);
             this.validatePassword(passDto);
             Account accountToEdit = accountManagerLocal.getMyAccountByLogin(login);
-            this.varifyPasswords(passDto, accountToEdit);
+            this.verifyPasswords(passDto, accountToEdit);
+            this.verifyArchivalPaswords(accountToEdit, passDto);            
             PasswordMapper.INSTANCE.newPasswordDtoToAccount(passDto, accountToEdit);
             accountManagerLocal.changeMyPassword(accountToEdit);
             return Response.status(Response.Status.OK)
@@ -382,13 +385,19 @@ public class AccountWebService {
         }
         if (!account.getFirstPassword().equals(account.getSecondPassword())) {
             throw new PasswordNotMatch("password_not_match");
-        }
+        }                        
     }
 
-    private void varifyPasswords(MyPasswordDto passDto, Account account) throws AppBaseException {
+    private void verifyPasswords(MyPasswordDto passDto, Account account) throws AppBaseException {
         if (!account.getPassword().contentEquals(HashUtils.sha256(passDto.getOldPassword()))) {
             throw new PasswordNotMatch("password_not_match_error");
         }
+    }
+    
+    private void verifyArchivalPaswords(Account account, BasicNewAccountDto passDto) throws AppBaseException {
+        for(ArchivalPassword archivalPassword : accountManagerLocal.getAllArchivalPasswordsByAccount(account.getId()))
+            if(archivalPassword.getPassword().contentEquals(HashUtils.sha256(passDto.getFirstPassword())))
+                throw new PasswordSameAsArchivalPasswordException("password_same_as_archival_error");
     }
 
     private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {

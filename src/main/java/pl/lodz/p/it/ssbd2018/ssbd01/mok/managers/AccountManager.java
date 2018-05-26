@@ -42,7 +42,7 @@ public class AccountManager implements AccountManagerLocal {
     private AccountFacadeLocal accountFacade;
 
     @EJB
-    private ArchivalPasswordFacadeLocal archivalPasswordFacadeLocal;
+    private ArchivalPasswordFacadeLocal archivalPasswordFacade;
 
     @EJB
     private AccessLevelFacadeLocal accessLevelFacade;
@@ -82,7 +82,7 @@ public class AccountManager implements AccountManagerLocal {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.edit(account);
         ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-        archivalPasswordFacadeLocal.create(archivalPassword);
+        archivalPasswordFacade.create(archivalPassword);
     }
 
     @Override
@@ -91,7 +91,7 @@ public class AccountManager implements AccountManagerLocal {
         account.setPassword(HashUtils.sha256(account.getPassword()));
         accountFacade.edit(account);
         ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-        archivalPasswordFacadeLocal.create(archivalPassword);
+        archivalPasswordFacade.create(archivalPassword);
     }
 
     @Override
@@ -112,7 +112,7 @@ public class AccountManager implements AccountManagerLocal {
         accountAlevelFacade.create(level);
 
         ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
-        archivalPasswordFacadeLocal.create(archivalPassword);
+        archivalPasswordFacade.create(archivalPassword);
 
         this.sendMailWithVeryficationLink(account.getEmail(), createVeryficationLink(account, servletContext));
     }
@@ -230,7 +230,13 @@ public class AccountManager implements AccountManagerLocal {
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }
-
+    
+    @Override
+    @RolesAllowed("getAllArchivalPasswordsByAccount")
+    public List<ArchivalPassword> getAllArchivalPasswordsByAccount(long accountId) {
+        return archivalPasswordFacade.findByAccountId(accountId);
+    }
+    
     private Date generateCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));
@@ -261,5 +267,5 @@ public class AccountManager implements AccountManagerLocal {
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
         veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
         return veryficationLink;
-    }
+    }    
 }

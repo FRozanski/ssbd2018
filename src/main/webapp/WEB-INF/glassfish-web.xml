@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE glassfish-web-app PUBLIC "-//GlassFish.org//DTD GlassFish Application Server 3.1 Servlet 3.0//EN" "http://glassfish.org/dtds/glassfish-web-app_3_0-1.dtd">
 <glassfish-web-app error-url="">
+  <context-root>/filip</context-root>
   <security-role-mapping>
     <role-name>USER</role-name>
     <group-name>user</group-name>
@@ -48,10 +49,6 @@
     <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
-    <role-name>confirmAccount</role-name>
-    <group-name>admin</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
     <role-name>unlockAccount</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
@@ -65,6 +62,10 @@
     <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>getAccountById</role-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>getAccountAlevel</role-name>
     <group-name>admin</group-name>
   </security-role-mapping>
@@ -73,7 +74,7 @@
     <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-    <role-name>changeMyPassword</role-name>
+    <role-name>changeYourPassword</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
     <group-name>user</group-name>
@@ -83,18 +84,19 @@
     <group-name>admin</group-name>
   </security-role-mapping>
   <security-role-mapping>
-    <role-name>basicAccountGet</role-name>
-    <group-name>admin</group-name>
-    <group-name>manager</group-name>
-  </security-role-mapping>
-  <security-role-mapping>
-    <role-name>basicMyAccountGet</role-name>
+    <role-name>getMyAccountById</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>saveMyAccountAfterEdit</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllArchivalPasswordsByAccount</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
     <group-name>user</group-name>

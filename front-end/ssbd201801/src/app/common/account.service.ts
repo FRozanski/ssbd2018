@@ -38,18 +38,7 @@ export class AccountService {
   }
 
   updateAccount(account: AccountData): Observable<any> {
-    return this.httpClient.put<AccountData>(this.uri + "/updateAccount", {
-      "id": account.id,
-      "city": account.city,
-      "country": account.country,
-      "email": account.email,
-      "name": account.name,
-      "phone": account.phone,
-      "postalCode": account.postalCode,
-      "street": account.street,
-      "streetNumber": account.streetNumber,
-      "surname": account.surname
-    });
+    return this.httpClient.put<AccountData>(this.uri + "/updateAccount", account);
   }
 
   getAccessLevel(): Observable<AccountData> {
@@ -61,15 +50,7 @@ export class AccountService {
   }
 
   changeMyPassword(account: AccountData): Observable<AccountData> {
-    return this.httpClient.put<AccountData>(this.uri + '/changeMyPassword', account
-      //{
-      // "firstPassword": account.firstPassword,
-      // "secondPassword": account.secondPassword,
-      // "oldPassword": account.oldPassword,
-      // "id": account.id,
-      // "version": account.version
-    // }
-    );
+    return this.httpClient.put<AccountData>(this.uri + '/changeMyPassword', account);
   }
 
   changeOthersPassword(account: AccountData): Observable<AccountData> {

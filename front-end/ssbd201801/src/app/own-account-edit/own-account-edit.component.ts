@@ -45,7 +45,7 @@ export class OwnAccountEditComponent implements OnInit {
         }
         this.accountService.updateMyAccount(account).subscribe(() => {
           alert(this.translateService.instant('success'));
-          this.router.navigate(['/main'])
+          this.router.navigate(['/main']);
         },
           (errorResponse) => {
             this.formValidationMessage = errorResponse.error.message;

@@ -32,7 +32,11 @@ export class RegisterComponent implements OnInit {
 
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
+      if (account.flatNumber === '') {
+        account.flatNumber = null;
+      }
       this.accountService.registerAccount(account).subscribe(() => {
+        alert(this.translateService.instant('success')); // temp
         this.router.navigate(['/main']);
       },
         (errorResponse) => {
@@ -54,10 +58,10 @@ export class RegisterComponent implements OnInit {
       login: new FormControl("", [
         Validators.required
       ]),
-      password: new FormControl("", [
+      firstPassword: new FormControl("", [
         Validators.required
       ]),
-      password2: new FormControl("", [
+      secondPassword: new FormControl("", [
         Validators.required
       ]),
       email: new FormControl("", [
@@ -78,7 +82,8 @@ export class RegisterComponent implements OnInit {
       streetNumber: new FormControl("", [
         Validators.required
       ]),
-      flatNumber: new FormControl(""),
+      flatNumber: new FormControl(""
+      ),
       postalCode: new FormControl("", [
         Validators.required
       ]),

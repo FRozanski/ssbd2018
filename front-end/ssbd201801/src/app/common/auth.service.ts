@@ -13,4 +13,8 @@ export class AuthService {
   login(credentials: Credentials) {
     return this.httpClient.post(this.uri + '/login', credentials)
   }
+
+  logout() {
+    return this.httpClient.post(this.uri + '/logout', {});
+  }
 }

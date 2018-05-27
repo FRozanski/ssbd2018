@@ -20,6 +20,16 @@
       <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="lastLoginDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LAST_LOGIN_DATE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastLoginDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastLoginIp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LAST_LOGIN_IP' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastLoginIp}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="active">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.ACTIVE' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.active}} </mat-cell>

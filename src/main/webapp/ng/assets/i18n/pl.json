@@ -35,7 +35,9 @@
         "MANAGER": "Moderator",
         "USER": "Użytkownik",
         "ADD_ACCESS_LEVEL": "Przyznaj",
-        "DELETE_ACCESS_LEVEL": "Odbierz"
+        "DELETE_ACCESS_LEVEL": "Odbierz",
+      "LAST_LOGIN_DATE" : "Data ostatniego logowania",
+      "LAST_LOGIN_IP" : "IP ostatniego logowania"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",

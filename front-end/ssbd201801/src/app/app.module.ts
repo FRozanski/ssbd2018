@@ -15,7 +15,7 @@ import {
   MatInputModule,
   MatCardModule,
   MatSidenavModule,
-  MatSortModule, 
+  MatSortModule,
   MatPaginatorModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
@@ -29,8 +29,9 @@ import { AccountEditComponent } from './account-edit/account-edit.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
 import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
-import { RegistrationConfirmService } from './common/registration-confirm.service';
 import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
+import {SessionService} from './common/session.service';
+import { AccountStatisticsComponent } from './account-statistics/account-statistics.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -51,54 +52,63 @@ const appRoutes: Routes = [
     component: MainPageComponent
   },
   {
-    path: 'accounts', 
+    path: 'accounts',
     canActivate: [AuthGuard],
-    component: AccountListComponent, 
+    component: AccountListComponent,
     data:
       {
-        expectedRole: "ADMIN"
+        expectedRole: 'ADMIN'
       }
   },
   {
-    path: 'register', 
+    path: 'statistics',
     canActivate: [AuthGuard],
-    component: RegisterComponent, 
+    component: AccountStatisticsComponent,
     data:
       {
-        expectedRole: "GUEST"
+        expectedRole: 'ADMIN'
+      }
+  },
+  {
+    path: 'register',
+    canActivate: [AuthGuard],
+    component: RegisterComponent,
+    data:
+      {
+        expectedRole: 'GUEST'
       }
   },
   {
     path: 'accountEdit/:id',
     canActivate: [AuthGuard],
     component: AccountEditComponent,
-    data: 
+    data:
     {
-      expectedRole: "ADMIN"
+      expectedRole: 'ADMIN'
     }
   },
-  { 
-    path: 'changePassword', 
+  {
+    path: 'changeMyPassword',
     component: ChangePasswordComponent,
-    data: 
+    data:
     {
-      expectedRole: "USER"
+      expectedRole: 'USER'
     }
   },
-  { 
-    path: 'changeOthersPassword', 
+  {
+    path: 'changeOthersPassword',
     component: ChangeOthersPasswordComponent
   },
-  { 
-    path: 'registrationConfirm', 
+  {
+    path: 'confirmAccountByToken',
     component: RegistrationConfirmComponent
   },
-  { 
-    path: 'myAccount', 
+  {
+    path: 'myAccount',
     component: OwnAccountEditComponent,
-    data: 
+    data:
     {
-      expectedRole: "USER"
+      expectedRole: 'USER'
     },
     canActivate: [AuthGuard]
   },
@@ -120,7 +130,8 @@ declarations: [
     ChangePasswordComponent,
     SidenavComponent,
     AccountEditComponent,
-    OwnAccountEditComponent
+    OwnAccountEditComponent,
+    AccountStatisticsComponent
   ],
   imports: [
     MatTableModule,
@@ -147,10 +158,10 @@ declarations: [
   bootstrap: [AppComponent],
   providers: [
     AccountService,
+    SessionService,
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,
-    RegistrationConfirmService,
     AuthUtilService
   ]
 })

@@ -19,7 +19,8 @@ export class AccountEditComponent implements OnInit {
   wasFormSent: boolean = false;
   formValidationMessage: string = "";
 
-  idEditToken: string;
+  idEditToken: number;
+  version: number;
 
   constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -35,13 +36,17 @@ export class AccountEditComponent implements OnInit {
     if (this.form.valid) {
       let account: AccountData = <AccountData>this.form.value;
       account.id = this.idEditToken;
-      this.accountService.editAccount(account).subscribe(() => {
-        alert("Pomyślnie edytowano użytkownika"); // temp
-        this.router.navigate(['/main'])
+      account.version = this.version;
+      if (account.flatNumber === '') {
+        account.flatNumber = null;
+      }
+      this.accountService.updateAccount(account).subscribe(() => {
+        alert(this.translateService.instant('success')); // temp
+        this.router.navigate(['/main']);
       },
         (errorResponse) => {
           this.formValidationMessage = errorResponse.error.message;
-          this.loadUserData();    
+          this.loadUserData();
         }
       )
     }
@@ -75,9 +80,8 @@ export class AccountEditComponent implements OnInit {
       streetNumber: new FormControl("", [
         Validators.required
       ]),
-      flatNumber: new FormControl("", [
-        Validators.required
-      ]),
+      flatNumber: new FormControl('',
+      ),
       postalCode: new FormControl("", [
         Validators.required
       ]),
@@ -105,10 +109,11 @@ export class AccountEditComponent implements OnInit {
         "postalCode": account.postalCode,
         "street": account.street,
         "streetNumber": account.streetNumber,
-        "flatNumber": account.flatNumber + ""
+        "flatNumber": account.flatNumber
       });
 
       this.idEditToken = account.id;
+      this.version = account.version;
 
     });
   }

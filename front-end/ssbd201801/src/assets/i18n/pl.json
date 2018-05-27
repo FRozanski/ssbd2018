@@ -7,7 +7,8 @@
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",
-        "CONFIRMED" : "Potwierdzone",
+        "CONFIRM" : "Potwierdzone",
+        "ACTIVE" : "Aktywne",
         "COUNTRY" : "Kraj",
         "EMAIL" : "E-mail",
         "NAME" : "Imię",
@@ -25,7 +26,16 @@
         "PASSWORD" : "Hasło",
         "REPLY_PASSWORD" : "Powtórz hasło",
         "FLAT_NUMBER": "Numer mieszkania",
-        "CHANGE_OF_PASSWORD": "Zmiana hasła"
+        "CHANGE_OF_PASSWORD": "Zmiana hasła",
+        "CONFIRM_ACCOUNT": "Potwierdź",
+        "LOCK_ACCOUNT": "Zablokuj",
+        "UNLOCK_ACCOUNT": "Odblokuj",
+        "LOCK_UNLOCK_ACCOUNT": "Zablokuj / Odblokuj",
+        "ADMIN": "Administrator",
+        "MANAGER": "Moderator",
+        "USER": "Użytkownik",
+        "ADD_ACCESS_LEVEL": "Przyznaj",
+        "DELETE_ACCESS_LEVEL": "Odbierz"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",
@@ -69,6 +79,7 @@
   "app.exception.mok.account.account_optimistic_error": "Nie udało się wykonać działania, spróbuj ponownie.",
   "app.exception.mok.account": "Nie udało się wykonać działania na koncie",
   "app.exception.mok.account.not_found": "Nie znaleziono konta",
+  "app.exception.mok.account.account_was_confirmed": "Konto zostało już potwierdzone",
   "app.exception.mok.account.password_different_error": "Podane hasła są różne",
   "app.exception.mok.account.password_not_match_error": "Podane hasła są różne",
   "app.exception.mok.account.password_length_error": "Podane hasło jest za krótkie",
@@ -80,5 +91,7 @@
   "app.exception.mok.account_alevel": "Nie udało się wykonać działania na poziomie dostępu konta",
   "app.exception.mok.account_alevel.already_exists": "Konto posiada już ten poziom dostępu",
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
-  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny"
+  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
+
+  "success": "Operacja została pomyślnie wykonana."
 }

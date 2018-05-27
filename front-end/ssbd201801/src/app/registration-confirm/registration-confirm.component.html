@@ -2,10 +2,4 @@
   <mat-card class='errors-card' *ngIf='validationMessage !== "" ' >
     <p>{{ validationMessage }} </p>
   </mat-card>
-  <div class="row">
-    <div class="col-xs-12" *ngIf="isConfirm;then account_confirmed else account_not_confirmed"></div>
-  </div>
 </div>
-
-<ng-template #account_confirmed>{{ 'REGISTER.ACCOUNT_CONFIRMED' | translate }}</ng-template>
-<ng-template #account_not_confirmed>{{ 'REGISTER.ACCOUNT_NOT_CONFIRMED' | translate }}</ng-template>

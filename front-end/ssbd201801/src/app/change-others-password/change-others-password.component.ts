@@ -5,8 +5,6 @@ import {AccountService} from '../common/account.service';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
-import {MatTableDataSource} from '@angular/material';
-import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-change-others-password',
@@ -25,7 +23,8 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   accountToEdit: AccountData = {};
 
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
+  constructor(private accountService: AccountService, private location: Location,
+              private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);
@@ -45,8 +44,10 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
     if (this.form.valid) {
       const account: AccountData = <AccountData>this.form.value;
-      account.accountId = this.accountToEdit.id;
+      account.id = this.accountToEdit.id;
+      account.version = this.accountToEdit.version;
       this.accountService.changeOthersPassword(account).subscribe(() => {
+          alert(this.translateService.instant('success'));
           this.router.navigate(['/main']);
         },
         (errorResponse) => {
@@ -65,10 +66,10 @@ export class ChangeOthersPasswordComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      newPassOne: new FormControl('', [
+      firstPassword: new FormControl('', [
         Validators.required
       ]),
-      newPassTwo: new FormControl('', [
+      secondPassword: new FormControl('', [
         Validators.required
       ])
     });

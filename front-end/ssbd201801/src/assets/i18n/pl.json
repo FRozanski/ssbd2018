@@ -5,6 +5,16 @@
         "USER_ROLES" : "Poziomy dostępu użytkownika",
         "ACTIVATE_ACCOUNT" : "Musisz aktywować konto!"
     },
+    "SIDE_NAV" : {
+        "MAIN_PAGE" : "Strona główna",
+        "REGISTER" : "Rejestracja",
+        "LOGIN" : "Logowanie",
+        "ACCOUNTS" : "Lista kont",
+        "STATISTICS" : "Statystyki kont",
+        "MY_ACCOUNT" : "Moje konto",
+        "CHANGE_MY_PASSWORD" : "Zmień hasło",
+        "LOGOUT" : "Wyloguj"
+    },
     "ACCOUNT" : {
         "CITY" : "Miasto",
         "CONFIRM" : "Potwierdzone",

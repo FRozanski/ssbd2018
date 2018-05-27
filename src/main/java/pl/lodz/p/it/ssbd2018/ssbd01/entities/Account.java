@@ -158,11 +158,11 @@ public class Account implements Serializable {
     private String street;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "\\d+", message = STREET_NUMBER_PATTERN_ERROR)
+    @Pattern(regexp = "[1-9]\\d+", message = STREET_NUMBER_PATTERN_ERROR)
     @Size(min = 1, max = 10, message = STREET_NUMBER_LENGTH_ERROR)
     @Column(name = "street_number", table = "user_data")
     private String streetNumber;
-    @Pattern(regexp = "\\d+", message = FLAT_NUMBER_PATTERN_ERROR)
+    @Pattern(regexp = "[1-9]\\d+", message = FLAT_NUMBER_PATTERN_ERROR)
     @Size(max = 10, message = FLAT_NUMBER_LENGTH_ERROR)
     @Column(name = "flat_number", table = "user_data")
     private String flatNumber;

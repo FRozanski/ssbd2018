@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mapper;
 import java.util.List;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.InheritInverseConfiguration;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -25,23 +26,22 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 @Mapper
 @DecoratedWith(AccountMapperDecorator.class)
 public interface AccountMapper {
-    
-    AccountMapper INSTANCE = Mappers.getMapper( AccountMapper.class );
-    
+
+    AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
+
     List<FullAccountDto> accountsToEditableDTO(List<Account> accounts);
-    
-    EditableAccountDto accountToEditableDto (Account account);
-    
+
+    EditableAccountDto accountToEditableDto(Account account);
+
     @InheritInverseConfiguration
     Account accountDtoToAccount(EditableAccountDto accountDto, @MappingTarget Account account);
-    
+
     @InheritInverseConfiguration
     Account basicAccountDtoToAccount(BasicAccountDto accountDto, @MappingTarget Account account);
     
     @InheritInverseConfiguration
     @Mapping(source = "firstPassword", target = "password")
-    Account newAccountDtoToAccount(NewAccountDto accountDto, @MappingTarget Account account); 
-    
-//    FullAccountDto accountToFullDTO (Account account);
-    
+    @IterableMapping(dateFormat = "dd.MM.yyyy hh:mm:ss")
+    Account newAccountDtoToAccount(NewAccountDto accountDto, @MappingTarget Account account);
+
 }

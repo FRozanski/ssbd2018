@@ -5,6 +5,9 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author michal
@@ -27,7 +30,9 @@ public class FullAccountDto extends BasicAccountDto {
     private long numberOfLogins;
     private boolean confirm;
     private boolean active;
-    private long version;
+    private String lastLoginDate;
+    private String lastLoginIp;
+    private List<String> accessLevels = new ArrayList<>();
 
     /**
      * @return the numberOfProducts
@@ -268,16 +273,32 @@ public class FullAccountDto extends BasicAccountDto {
     }
 
     /**
-     * @return the version
+     * @return the lastLoginDate
      */
-    public long getVersion() {
-        return version;
+    public String getLastLoginDate() {
+        return lastLoginDate;
     }
 
     /**
-     * @param version the version to set
+     * @param lastLoginDate the lastLoginDate to set
      */
-    public void setVersion(long version) {
-        this.version = version;
+    public void setLastLoginDate(String lastLoginDate) {
+        this.lastLoginDate = lastLoginDate;
     }
+
+    /**
+     * @return the lastLoginIp
+     */
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    /**
+     * @param lastLoginIp the lastLoginIp to set
+     */
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
+    }
+  
+    
 }

@@ -16,7 +16,7 @@ export class AccountStatisticsComponent implements OnInit {
   displayedColumns = [
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders', 
-    'numberOfProducts', 'confirmAccount'
+    'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
     ];
   dataSource;
 

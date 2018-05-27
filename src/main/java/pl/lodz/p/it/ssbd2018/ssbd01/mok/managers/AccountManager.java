@@ -236,6 +236,7 @@ public class AccountManager implements AccountManagerLocal {
     @RolesAllowed("updateLoginDateAndIp")
     public void updateLoginDateAndIp(String login, String ip) throws AppBaseException {
         Account account = this.getMyAccountByLogin(login);
+        account.setNumberOfLogins(account.getNumberOfLogins() + 1);
         account.setLastLoginDate(this.generateCurrentDate());
         account.setLastLoginIp(ip);
         accountFacade.edit(account);

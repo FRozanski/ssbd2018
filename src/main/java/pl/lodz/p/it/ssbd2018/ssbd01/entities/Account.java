@@ -131,11 +131,13 @@ public class Account implements Serializable {
     private long versionUserData;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = NAME_SYNTAX_ERROR)
     @Size(min = 1, max = 32, message = NAME_LENGTH_ERROR)
     @Column(name = "name", table = "user_data")
     private String name;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = SURNAME_SYNTAX_ERROR)
     @Size(min = 1, max = 32, message = SURNAME_LENGTH_ERROR)
     @Column(name = "surname", table = "user_data")
     private String surname;
@@ -153,6 +155,7 @@ public class Account implements Serializable {
     private String phone;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = STREET_SYNTAX_ERROR)
     @Size(min = 1, max = 60, message = STREET_LENGTH_ERROR)
     @Column(name = "street", table = "user_data")
     private String street;
@@ -173,11 +176,13 @@ public class Account implements Serializable {
     private String postalCode;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = CITY_SYNTAX_ERROR)
     @Size(min = 1, max = 60, message = CITY_LENGTH_ERROR)
     @Column(name = "city", table = "user_data")
     private String city;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = COUNTRY_SYNTAX_ERROR)
     @Size(min = 1, max = 60, message = COUNTRY_LENGTH_ERROR)
     @Column(name = "country", table = "user_data")
     private String country;

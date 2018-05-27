@@ -6,6 +6,7 @@ import { AuthService } from '../common/auth.service';
 import { NotificationService } from '../common/notification.service';
 import { SessionService } from '../common/session.service';
 import { Router } from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -18,10 +19,11 @@ export class LoginComponent implements OnInit {
   wasFormSent: boolean;
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private notificationService: NotificationService,
     private sessionService: SessionService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -34,12 +36,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let creds: Credentials = <Credentials>this.form.value;       
+    let creds: Credentials = <Credentials>this.form.value;
+    console.log("creds: ", creds);
+
     this.authService.login(creds).subscribe((data) => {
-      this.notificationService.displayNotification("Udało się zalogować!");
-      this.router.navigate(['/main']);  
+      this.notificationService.displayNotification(this.translateService.instant('LOGIN.SUCCESS'));
+      this.router.navigate['/main'];
     }, (data) => {
-      this.notificationService.displayNotification("Nie udało się zalogować!");
+      this.notificationService.displayNotification(this.translateService.instant('LOGIN.FAILURE'));
     });
   }
 

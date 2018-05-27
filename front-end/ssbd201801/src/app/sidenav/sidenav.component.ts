@@ -17,14 +17,25 @@ import { AuthService } from '../common/auth.service';
 export class SidenavComponent implements OnInit {
 
   userIdentity: AccountData = {};
-  rolesStringified: string = "";
+  roles: string = "";
 
   constructor(private sessionService: SessionService, private translateService: TranslateService, 
     private authUtil: AuthUtilService, private authService: AuthService) { 
     }
 
   ngOnInit() {
-    this.updateLoginAndRoles();
+    this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
+      this.userIdentity = data;
+    }, (errorResponse) => {
+      console.log(this.translateService.instant(errorResponse.error.message));
+    });
+  }
+
+  hasRole(role: string): boolean {
+    return this.authUtil.hasRole(role, this.userIdentity);
+  }
+  isGuest() {
+    return this.authUtil.isGuest, this.userIdentity;
   }
 
   onSidenavOpenedChange() {
@@ -41,16 +52,10 @@ export class SidenavComponent implements OnInit {
     this.sessionService.getMyIdentity().toPromise().then((data) => {
       this.userIdentity.login = data.login;
       this.userIdentity.roles = data.roles;
-      this.rolesStringified = JSON.stringify(data.roles);
+      this.roles = JSON.stringify(data.roles);
     }).catch((data) => {
-      this.userIdentity.login = "Gość";// translate
-      this.userIdentity.roles = ["GUEST"];
-      this.rolesStringified = JSON.stringify(this.userIdentity.roles);
+      this.userIdentity.login = this.translateService.instant('SIDE_NAV.GUEST');
+      this.roles = this.translateService.instant('SIDE_NAV.GUEST');
     });
-  }
-  
-  hasRole(role: string): boolean {
-    return this.authUtil.hasRole(role, this.userIdentity);
-  }
-
+  }  
 }

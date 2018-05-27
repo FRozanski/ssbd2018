@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
         account.flatNumber = null;
       }
       this.accountService.registerAccount(account).subscribe(() => {
-        alert(this.translateService.instant('success')); // temp
+        alert(this.translateService.instant('SUCCESS.REGISTER'));
         this.router.navigate(['/main']);
       },
         (errorResponse) => {

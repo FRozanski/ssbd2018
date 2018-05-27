@@ -1,20 +1,20 @@
 <mat-sidenav-container class="nav-container" (backdropClick)="sidenav.close()">
   <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose (openedChange)='onSidenavOpenedChange()' >
-    <p> {{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</p>
-    <p>{{ "HOME.USER_ROLES" | translate }}: {{ roles }}</p>
     <p>
       <button mat-button mat-raised-button color='primary' (click)="sidenav.close()"> < </button>
     </p>
+    <p> {{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</p>
+    <p>{{ "HOME.USER_ROLES" | translate }}: {{ rolesStringified }}</p>
     <p>
       <button mat-button routerLink='/main'>Strona główna</button>
     </p>
 
     <p>
-      <button mat-button routerLink='/register' *ngIf='isGuest()'>Rejestracja</button>
+      <button mat-button routerLink='/register' *ngIf='hasRole("GUEST")'>Rejestracja</button>
     </p>
 
     <p>
-      <button mat-button routerLink='/login' *ngIf='isGuest()'>Logowanie</button>
+      <button mat-button routerLink='/login' *ngIf='hasRole("GUEST")'>Logowanie</button>
     </p>
 
     <p>
@@ -34,7 +34,7 @@
     </p>
 
     <p>
-      <button mat-button>Wyloguj</button>
+      <button mat-button (click)='onLogoutClick()' *ngIf='hasRole("USER")'>Wyloguj</button>
     </p>
   </mat-sidenav>
 
@@ -45,6 +45,5 @@
     <app-notifications></app-notifications>
 
     <router-outlet></router-outlet>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

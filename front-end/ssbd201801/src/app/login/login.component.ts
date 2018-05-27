@@ -34,16 +34,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let creds: Credentials = <Credentials>this.form.value;  
-    console.log("creds: ", creds);
-     
+    let creds: Credentials = <Credentials>this.form.value;       
     this.authService.login(creds).subscribe((data) => {
       this.notificationService.displayNotification("Udało się zalogować!");
-      this.router.navigate['/main'];
+      this.router.navigate(['/main']);  
     }, (data) => {
       this.notificationService.displayNotification("Nie udało się zalogować!");
     });
-
   }
 
   isRequiredSatisfied(controlName: string) {

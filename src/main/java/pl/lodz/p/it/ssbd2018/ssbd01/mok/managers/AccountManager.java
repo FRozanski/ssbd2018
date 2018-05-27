@@ -1,10 +1,13 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
@@ -12,6 +15,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.servlet.ServletContext;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
@@ -29,6 +33,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
  *
  * @author piotrek
  * @author agkan
+ * @author michalmalec
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
@@ -108,7 +113,7 @@ public class AccountManager implements AccountManagerLocal {
 
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
-        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL).get(0));
+        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL));
         accountAlevelFacade.create(level);
 
         ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
@@ -132,27 +137,6 @@ public class AccountManager implements AccountManagerLocal {
         Account account = accountFacade.find(accountId);
         account.setActive(true);
         accountFacade.edit(account);
-    }
-
-    @Override
-    @RolesAllowed("addAccessLevelToAccount")
-    public void addAccessLevelToAccount(long accountId, long accessLevelId) throws AppBaseException {
-        AccountAlevel accountAlevel = new AccountAlevel();
-        AccessLevel accessLevel = accessLevelFacade.find(accessLevelId);
-        Account account = accountFacade.find(accountId);
-        accountAlevel.setIdAlevel(accessLevel);
-        accountAlevel.setIdAccount(account);
-        accountAlevelFacade.create(accountAlevel);
-    }
-
-    @Override
-    @RolesAllowed("dismissAccessLevelFromAccount")
-    public void dismissAccessLevelFromAccount(long accountId, long accessLevelId) throws AppBaseException {
-        AccessLevel accessLevel = accessLevelFacade.find(accessLevelId);
-        Account account = accountFacade.find(accountId);
-        AccountAlevel level = accountAlevelFacade.
-                findByAccountAndAccessLevel(account, accessLevel);
-        accountAlevelFacade.remove(level);
     }
 
     @Override
@@ -231,6 +215,48 @@ public class AccountManager implements AccountManagerLocal {
         accountFacade.edit(myAccount);
     }
 
+    @Override
+    @RolesAllowed("alterAccountAccessLevel")
+    public void alterAccountAccessLevel(Account account, List<String> accessLevelDto) throws AppBaseException {
+        if (accessLevelDto.isEmpty()) {
+            throw new AccountWithNoAccessLevelException("no_access_level_error");
+        }
+        List<AccessLevel> accountAccessLevel = account
+                .getAccessLevelCollection()
+                .stream()
+                .map(AccountAlevel::getIdAlevel)
+                .collect(Collectors.toList());
+        List<AccessLevel> accessLevel = new ArrayList<>();
+        for (int i = 0; i < accessLevelDto.size(); i++) {
+            accessLevel.add(accessLevelFacade.findByLevel(accessLevelDto.get(i)));
+        }
+        for (int i = 0; i < accessLevel.size(); i++) {
+            if (!accountAccessLevel.contains(accessLevel.get(i))) {
+                this.addAccessLevelToAccount(account, accessLevel.get(i));
+            }
+        }
+        for (int i = 0; i < accountAccessLevel.size(); i++) {
+            if (!accessLevel.contains(accountAccessLevel.get(i))) {
+                this.dismissAccessLevelFromAccount(account, accountAccessLevel.get(i));
+            }
+        }
+    }
+
+    @RolesAllowed("addAccessLevelToAccount")
+    private void addAccessLevelToAccount(Account account, AccessLevel accessLevel) throws AppBaseException {
+        AccountAlevel accountAlevel = new AccountAlevel();
+        accountAlevel.setIdAlevel(accessLevel);
+        accountAlevel.setIdAccount(account);
+        accountAlevelFacade.create(accountAlevel);
+    }
+
+    @RolesAllowed("dismissAccessLevelFromAccount")
+    private void dismissAccessLevelFromAccount(Account account, AccessLevel accessLevel) throws AppBaseException {
+        AccountAlevel level = accountAlevelFacade.
+                findByAccountAndAccessLevel(account, accessLevel);
+        accountAlevelFacade.remove(level);
+    }
+
     private Date generateCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Timestamp(calendar.getTime().getTime()));
@@ -255,8 +281,8 @@ public class AccountManager implements AccountManagerLocal {
     private void sendMailWithVeryficationLink(String mail, String veryficationLink) {
         mailSender.sendVerificationEmail(mail, veryficationLink);
     }
-    
-     private String createVeryficationLink(Account account, ServletContext servletContext) {
+
+    private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
         veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;

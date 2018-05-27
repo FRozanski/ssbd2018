@@ -12,6 +12,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.EditableAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.FullAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.NewAccountDto;
@@ -33,6 +34,9 @@ public interface AccountMapper {
     
     @InheritInverseConfiguration
     Account accountDtoToAccount(EditableAccountDto accountDto, @MappingTarget Account account);
+    
+    @InheritInverseConfiguration
+    Account basicAccountDtoToAccount(BasicAccountDto accountDto, @MappingTarget Account account);
     
     @InheritInverseConfiguration
     @Mapping(source = "firstPassword", target = "password")

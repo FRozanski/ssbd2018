@@ -21,7 +21,7 @@ public interface AccessLevelFacadeLocal {
 
     List<AccessLevel> findAll();
     
-    List<AccessLevel> findByLevel(String level);
+    AccessLevel findByLevel(String level) throws AppBaseException;
 
     List<AccessLevel> findRange(int[] range);
 

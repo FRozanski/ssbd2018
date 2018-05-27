@@ -5,11 +5,11 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccessLevelExistsException;
@@ -44,9 +44,15 @@ public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implement
     }
 
     @Override
-    public List<AccessLevel> findByLevel(String level) {
-        Query query = getEntityManager().createNamedQuery("AccessLevel.findByLevel").setParameter("level", level);
-        return query.getResultList();
+    public AccessLevel findByLevel(String level) throws AppBaseException {
+        try {
+            AccessLevel accessLevel;
+            TypedQuery<AccessLevel> typedQuery = em.createNamedQuery("AccessLevel.findByLevel", AccessLevel.class).setParameter("level", level);
+            accessLevel = typedQuery.getSingleResult();
+            return accessLevel;
+        } catch (NoResultException ex) {
+            throw new AccessLevelExistsException("access_level_not_found_exception");
+        }
     }
     
 }

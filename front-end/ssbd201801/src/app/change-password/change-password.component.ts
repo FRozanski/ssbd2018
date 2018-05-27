@@ -48,7 +48,7 @@ export class ChangePasswordComponent implements OnInit {
       account.id = this.myAccountToEdit.id;
       account.version = this.myAccountToEdit.version;
       this.accountService.changeMyPassword(account).subscribe(() => {
-          alert(this.translateService.instant('success'));
+          alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
           this.router.navigate(['/main']);
         },
         (errorResponse) => {

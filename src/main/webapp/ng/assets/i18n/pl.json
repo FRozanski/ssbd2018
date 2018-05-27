@@ -71,6 +71,18 @@
       "PREVIOUS_PAGE" : "Poprzednia strona",
       "FILTER" : "Filtruj"
     },
+    "LOGIN" : {
+      "SUCCESS" : "Zalogowano",
+      "FAILURE" : "Nie udało się zalogować"
+    },
+    "SUCCESS" : {
+      "ACCOUNT_EDIT" : "Pomyślnie edytowano konto",
+      "ACCOUNT_CONFIRM" : "Pomyślnie aktywowano konto",
+      "ACCOUNT_LOCK" : "Pomyślnie zablokowano konto",
+      "ACCOUNT_UNLOCK" : "Pomyślnie odblokowano konto",
+      "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
+      "REGISTER" : "Pomyślnie zarejestrowano konto"
+    },
   "unknown_error": "Wystąpił nieznany błąd",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",
   "postal_code_length_error": "Podany kod pocztowy ma nieodpowiedni format",

@@ -41,7 +41,7 @@ export class AccountEditComponent implements OnInit {
         account.flatNumber = null;
       }
       this.accountService.updateAccount(account).subscribe(() => {
-        alert(this.translateService.instant('success')); // temp
+        alert(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
         this.router.navigate(['/main']);
       },
         (errorResponse) => {

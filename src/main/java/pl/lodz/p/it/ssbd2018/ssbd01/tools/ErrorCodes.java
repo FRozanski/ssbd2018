@@ -33,7 +33,6 @@ public class ErrorCodes {
     public static final String EMAIL_PATTERN_EXCEPTION = "email_pattern_error";
     public static final String PHONE_LENGTH_ERROR = "phone_length_error";
     public static final String PHONE_PATTERN_ERROR = "phone_pattern_error";
-    public static final String STREET_SYNTAX_ERROR = "street_syntax_error";
     public static final String STREET_LENGTH_ERROR = "street_length_error";
     public static final String STREET_NUMBER_LENGTH_ERROR = "street_number_length_error";
     public static final String STREET_NUMBER_PATTERN_ERROR = "street_number_pattern_error";
@@ -58,7 +57,6 @@ public class ErrorCodes {
         errors.add(EMAIL_PATTERN_EXCEPTION);
         errors.add(PHONE_LENGTH_ERROR);
         errors.add(PHONE_PATTERN_ERROR);
-        errors.add(STREET_SYNTAX_ERROR);
         errors.add(STREET_LENGTH_ERROR);
         errors.add(STREET_NUMBER_LENGTH_ERROR);
         errors.add(STREET_NUMBER_PATTERN_ERROR);

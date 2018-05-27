@@ -137,7 +137,7 @@ public class Account implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "[a-zA-Z]+", message = SURNAME_SYNTAX_ERROR)
+    @Pattern(regexp = "/^[a-z ,.'-]+$/i", message = SURNAME_SYNTAX_ERROR)
     @Size(min = 1, max = 32, message = SURNAME_LENGTH_ERROR)
     @Column(name = "surname", table = "user_data")
     private String surname;
@@ -155,7 +155,6 @@ public class Account implements Serializable {
     private String phone;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "[a-zA-Z]+", message = STREET_SYNTAX_ERROR)
     @Size(min = 1, max = 60, message = STREET_LENGTH_ERROR)
     @Column(name = "street", table = "user_data")
     private String street;

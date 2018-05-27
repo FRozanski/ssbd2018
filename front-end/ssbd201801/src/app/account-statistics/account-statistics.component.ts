@@ -103,7 +103,7 @@ export class AccountStatisticsComponent implements OnInit {
 
   private alterAccountAccessLevel(account: AccountData) {
     this.accountService.alterAccountAccessLevel(account).subscribe(() => {
-        alert(this.translateService.instant('success'));
+        alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
       },
       (errorResponse) => {
         alert(this.translateService.instant(errorResponse.error.message));

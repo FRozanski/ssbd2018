@@ -13,7 +13,8 @@
         "STATISTICS" : "Statystyki kont",
         "MY_ACCOUNT" : "Moje konto",
         "CHANGE_MY_PASSWORD" : "Zmień hasło",
-        "LOGOUT" : "Wyloguj"
+        "LOGOUT" : "Wyloguj",
+        "GUEST" : "Gość"
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",

@@ -24,4 +24,5 @@ export interface AccountData {
     secondPassword?: string;
     accountId?: number;
     version?: number;
+    accessLevels?: string[];
 }

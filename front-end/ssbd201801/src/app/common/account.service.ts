@@ -83,6 +83,10 @@ export class AccountService {
     return this.httpClient.delete(this.uri + '/deleteAccessLevel', {params});
   }
 
+  alterAccountAccessLevel(account: AccountData) {
+    return this.httpClient.put<AccountData>(this.uri + '/alterAccountAccessLevel', account);
+  }
+
   confirmAccount(accountId: number) {
     const params = new HttpParams()
       .set('accountId', accountId.toString());

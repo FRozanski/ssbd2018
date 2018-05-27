@@ -46,7 +46,9 @@
         "MANAGER": "Moderator",
         "USER": "Użytkownik",
         "ADD_ACCESS_LEVEL": "Przyznaj",
-        "DELETE_ACCESS_LEVEL": "Odbierz"
+        "DELETE_ACCESS_LEVEL": "Odbierz",
+        "ACCESS_LEVELS" : "Poziomy dostępu",
+        "ALTER" : "Zmień"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",
@@ -81,7 +83,8 @@
       "ACCOUNT_LOCK" : "Pomyślnie zablokowano konto",
       "ACCOUNT_UNLOCK" : "Pomyślnie odblokowano konto",
       "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
-      "REGISTER" : "Pomyślnie zarejestrowano konto"
+      "REGISTER" : "Pomyślnie zarejestrowano konto",
+      "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta"
     },
   "unknown_error": "Wystąpił nieznany błąd",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",
@@ -106,6 +109,7 @@
   "app.exception.mok.account.email_not_unique": "Podany email nie jest unikalny",
   "app.exception.mok.account.phone_not_unique": "Podany numer telefonu nie jest unikalny",
   "app.exception.mok.account.account_optimistic_error": "Nie udało się wykonać działania, spróbuj ponownie.",
+  "app.exception.mok.account.account_with_no_access_level": "Konto musi posiadać przynajmniej jeden poziom dostępu",
   "app.exception.mok.account": "Nie udało się wykonać działania na koncie",
   "app.exception.mok.account.not_found": "Nie znaleziono konta",
   "app.exception.mok.account.account_was_confirmed": "Konto zostało już potwierdzone",

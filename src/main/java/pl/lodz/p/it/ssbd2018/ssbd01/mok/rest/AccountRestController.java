@@ -57,7 +57,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
  * @author michalmalec
  */
 @Path("account")
-public class AccountWebService {
+public class AccountRestController {
 
     @EJB
     AccountManagerLocal accountManagerLocal;
@@ -323,7 +323,6 @@ public class AccountWebService {
     
     @PUT
     @Path("confirmAccount")
-    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response confirmAccount(@QueryParam("accountId") long accountId) {
         try {

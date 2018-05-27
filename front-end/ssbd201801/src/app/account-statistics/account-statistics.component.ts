@@ -15,8 +15,8 @@ export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
     'login', 'confirm', 'active',
-    'numberOfLogins', 'numberOfOrders', 'numberOfProducts',
-    'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
+    'numberOfLogins', 'numberOfOrders', 
+    'numberOfProducts', 'confirmAccount'
     ];
   dataSource;
 
@@ -37,8 +37,6 @@ export class AccountStatisticsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    }, () => {
-      window.location.href = environment.apiUrl + '/login/login.html';
     });
 
   }

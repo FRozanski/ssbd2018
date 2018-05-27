@@ -24,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthUtilService } from './common/auth-util.service';
-import { AuthGuard } from './common/user-guard';
+import { AuthGuard } from './common/auth-guard';
 import { AccountEditComponent } from './account-edit/account-edit.component';
 import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
 import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
@@ -32,6 +32,10 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
 import {SessionService} from './common/session.service';
 import { AccountStatisticsComponent } from './account-statistics/account-statistics.component';
+import { LoginComponent } from './login/login.component';
+import { AuthService } from './common/auth.service';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationService } from './common/notification.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -113,6 +117,15 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'login',
+    component: LoginComponent,
+    data:
+    {
+      expectedRole: 'GUEST'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
     path: '**',
     redirectTo: 'main'
   }
@@ -131,7 +144,9 @@ declarations: [
     SidenavComponent,
     AccountEditComponent,
     OwnAccountEditComponent,
-    AccountStatisticsComponent
+    AccountStatisticsComponent,
+    LoginComponent,
+    NotificationsComponent
   ],
   imports: [
     MatTableModule,
@@ -162,7 +177,9 @@ declarations: [
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,
-    AuthUtilService
+    AuthUtilService,
+    AuthService,
+    NotificationService
   ]
 })
 export class AppModule { }

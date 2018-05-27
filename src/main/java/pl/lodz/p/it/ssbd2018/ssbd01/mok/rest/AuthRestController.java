@@ -31,7 +31,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
  */
 @PermitAll
 @Path("/auth")
-public class AuthWebService {
+public class AuthRestController {
 
     @POST
     @Path("/login")

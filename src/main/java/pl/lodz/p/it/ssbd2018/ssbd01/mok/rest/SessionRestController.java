@@ -25,7 +25,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
  * @author michal
  */
 @Path("session")
-public class SessionWebService {
+public class SessionRestController {
 
     @GET
     @Path("myLogin")

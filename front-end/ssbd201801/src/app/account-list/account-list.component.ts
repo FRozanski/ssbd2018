@@ -30,14 +30,12 @@ export class AccountListComponent implements OnInit {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    }, () => {
-      window.location.href = environment.apiUrl + '/login/login.html';
     });
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase(); 
     this.dataSource.filter = filterValue;
   }
 

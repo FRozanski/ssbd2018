@@ -5,6 +5,7 @@ import javax.ejb.Local;
 import javax.servlet.ServletContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
@@ -18,6 +19,8 @@ public interface AccountManagerLocal {
     List<Account> getAllAccounts();
     
     List<AccessLevel> getAllAccessLevels();
+    
+    List<ArchivalPassword> getAllArchivalPasswordsByAccount(long accountId);
     
     Account getAccountToEdit(Account account) throws AppBaseException;
     

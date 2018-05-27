@@ -54,6 +54,11 @@
         "NEW_PASSWORD" : "Nowe hasło",
         "CONFIRM_NEW_PASSWORD" : "Potwierdź nowe hasło"
     },
+    "MAT_TABLE" : {
+      "ITEMS_PER_PAGE" : "Liczba elementów na stronie",
+      "NEXT_PAGE" : "Następna strona",
+      "PREVIOUS_PAGE" : "Poprzednia strona"
+    },
   "unknown_error": "Wystąpił nieznany błąd",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",
   "postal_code_length_error": "Podany kod pocztowy ma nieodpowiedni format",

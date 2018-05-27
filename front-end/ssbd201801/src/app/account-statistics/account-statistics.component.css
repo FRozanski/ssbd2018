@@ -49,3 +49,7 @@ mat-header-cell {
 .example-margin {
   margin: 0 10px;
 }
+
+mat-card.errors-card {
+  color: red;
+}

@@ -79,6 +79,7 @@
   "app.exception.mok.account.email_not_unique": "Podany email nie jest unikalny",
   "app.exception.mok.account.phone_not_unique": "Podany numer telefonu nie jest unikalny",
   "app.exception.mok.account.account_optimistic_error": "Nie udało się wykonać działania, spróbuj ponownie.",
+  "app.exception.mok.account.account_with_no_access_level": "Konto musi posiadać przynajmniej jeden poziom dostępu",
   "app.exception.mok.account": "Nie udało się wykonać działania na koncie",
   "app.exception.mok.account.not_found": "Nie znaleziono konta",
   "app.exception.mok.account.account_was_confirmed": "Konto zostało już potwierdzone",

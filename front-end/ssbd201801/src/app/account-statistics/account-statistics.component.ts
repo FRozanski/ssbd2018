@@ -17,15 +17,11 @@ export class AccountStatisticsComponent implements OnInit {
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders',
     'numberOfProducts', 'confirmAccount'
-    , 'accessLevels'
+    , 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
     ];
   dataSource;
 
   validationMessage = '';
-
-  adminAccessLevelId = 2;
-  userAccessLevelId = 4;
-  managerAccessLevelId = 3;
 
   constructor (private accountService: AccountService, private router: Router,
                private translateService: TranslateService) { }
@@ -80,66 +76,38 @@ export class AccountStatisticsComponent implements OnInit {
 
   onAddDeleteAdminClick(account: AccountData) {
     if (!this.isAdmin(account)) {
-      this.accountService.addAccessLevelToAccount(account.id, this.adminAccessLevelId).subscribe(() => {
-          alert(this.translateService.instant('success'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+      account.accessLevels.push('admin');
     } else {
-      this.accountService.deleteAccountAlevel(account.id, this.adminAccessLevelId).subscribe(() => {
-          alert(this.translateService.instant('success'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+      account.accessLevels.splice(this.adminId(account), 1);
     }
+    this.alterAccountAccessLevel(account);
   }
 
   onAddDeleteManagerClick(account: AccountData) {
     if (!this.isManager(account)) {
-      this.accountService.addAccessLevelToAccount(account.id, this.managerAccessLevelId).subscribe(() => {
-          alert(this.translateService.instant('success'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+      account.accessLevels.push('manager');
     } else {
-      this.accountService.deleteAccountAlevel(account.id, this.adminAccessLevelId).subscribe(() => {
-          alert(this.translateService.instant('success'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+      account.accessLevels.splice(this.managerId(account), 1);
     }
+    this.alterAccountAccessLevel(account);
   }
 
   onAddDeleteUserClick(account: AccountData) {
     if (!this.isUser(account)) {
-      this.accountService.addAccessLevelToAccount(account.id, this.userAccessLevelId).subscribe(() => {
-          alert(this.translateService.instant('success'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+      account.accessLevels.push('user');
     } else {
-      this.accountService.deleteAccountAlevel(account.id, this.adminAccessLevelId).subscribe(() => {
-          alert(this.translateService.instant('success'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+      account.accessLevels.splice(this.userId(account), 1);
     }
+    this.alterAccountAccessLevel(account);
   }
 
-  onAlterAccountAccessLevel(account: AccountData) {
-    console.log('click');
+  private alterAccountAccessLevel(account: AccountData) {
+    this.accountService.alterAccountAccessLevel(account).subscribe(() => {
+        alert(this.translateService.instant('success'));
+      },
+      (errorResponse) => {
+        this.validationMessage = this.translateService.instant(errorResponse.error.message);
+      });
   }
 
   isConfirm(account: AccountData) {
@@ -159,6 +127,39 @@ export class AccountStatisticsComponent implements OnInit {
       }
     }
     return false;
+  }
+
+  adminId(account: AccountData) {
+    let i = 0;
+    for (const level of account.accessLevels) {
+      if (level === 'admin') {
+        return i;
+      }
+      i++;
+    }
+    return null;
+  }
+
+  managerId(account: AccountData) {
+    let i = 0;
+    for (const level of account.accessLevels) {
+      if (level === 'manager') {
+        return i;
+      }
+      i++;
+    }
+    return null;
+  }
+
+  userId(account: AccountData) {
+    let i = 0;
+    for (const level of account.accessLevels) {
+      if (level === 'user') {
+        return i;
+      }
+      i++;
+    }
+    return null;
   }
 
   isManager(account: AccountData) {

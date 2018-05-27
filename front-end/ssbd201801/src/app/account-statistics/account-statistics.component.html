@@ -75,16 +75,6 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="accessLevels">
-      <mat-header-cell *matHeaderCellDef>{{ 'ACCOUNT.ACCESS_LEVELS' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <mat-checkbox class="example-section" [checked]="isUser(element)" >{{ 'ACCOUNT.USER' | translate }}</mat-checkbox>
-        <mat-checkbox class="example-section" [checked]="isAdmin(element)" >{{ 'ACCOUNT.ADMIN' | translate }}</mat-checkbox>
-        <mat-checkbox class="example-section" [checked]="isManager(element)" >{{ 'ACCOUNT.MANAGER' | translate }}</mat-checkbox>
-        <button mat-button (click)="onAlterAccountAccessLevel(element)" >{{ 'ACCOUNT.ALTER' | translate }}</button>
-      </mat-cell>
-    </ng-container>
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

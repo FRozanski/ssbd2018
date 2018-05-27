@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.rest;
 
 import javax.annotation.security.PermitAll;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
@@ -24,6 +25,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.LogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.PasswordOrUsernameException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLoginException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 
 /**
  *
@@ -33,13 +35,18 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 @Path("/auth")
 public class AuthRestController {
 
+    @EJB
+    AccountManagerLocal accountManagerLocal;
+
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response login(LoginDto loginDto, @Context HttpServletRequest httpRequest) {
         try {
+            httpRequest.getSession(true);
             this.validateAndLogin(loginDto, httpRequest);
+            accountManagerLocal.updateLoginDateAndIp(loginDto.getUsername(), httpRequest.getRemoteAddr());
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
@@ -78,9 +85,9 @@ public class AuthRestController {
         }
         try {
             httpRequest.login(loginDto.getUsername(), loginDto.getPassword());
-            httpRequest.getSession().getId();
+            httpRequest.getSession(true);
         } catch (ServletException ex) {
-            throw new LoginException("wrong_password_or_username_error");
+            throw new LoginException("login_error");
         }
     }
 

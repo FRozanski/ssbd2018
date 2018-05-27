@@ -15,8 +15,9 @@ export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
     'login', 'confirm', 'active',
-    'numberOfLogins', 'numberOfOrders', 
+    'numberOfLogins', 'numberOfOrders',
     'numberOfProducts', 'confirmAccount'
+    , 'accessLevels'
     ];
   dataSource;
 
@@ -135,6 +136,10 @@ export class AccountStatisticsComponent implements OnInit {
           this.validationMessage = this.translateService.instant(errorResponse.error.message);
         });
     }
+  }
+
+  onAlterAccountAccessLevel(account: AccountData) {
+    console.log('click');
   }
 
   isConfirm(account: AccountData) {

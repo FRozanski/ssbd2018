@@ -248,11 +248,11 @@ MIT
 MIT
 MIT
 
-@angular/compiler@5.2.11
+@angular/compiler@5.2.10
 MIT
 MIT
 
-@angular/platform-browser-dynamic@5.2.11
+@angular/platform-browser-dynamic@5.2.10
 MIT
 MIT
 

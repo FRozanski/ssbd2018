@@ -106,7 +106,8 @@ export class AccountStatisticsComponent implements OnInit {
         alert(this.translateService.instant('success'));
       },
       (errorResponse) => {
-        this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        alert(this.translateService.instant(errorResponse.error.message));
+        window.location.reload();
       });
   }
 

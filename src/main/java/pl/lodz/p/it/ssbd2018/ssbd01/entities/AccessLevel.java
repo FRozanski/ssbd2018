@@ -6,17 +6,21 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,6 +36,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "AccessLevel.findByActive", query = "SELECT a FROM AccessLevel a WHERE a.active = :active")
     , @NamedQuery(name = "AccessLevel.findByVersion", query = "SELECT a FROM AccessLevel a WHERE a.version = :version")})
 public class AccessLevel implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAlevel")
+    private Collection<AccountAlevel> accountAlevelCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -106,6 +113,15 @@ public class AccessLevel implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mok.entity.AccessLevel[ id=" + id + " ]";
+    }
+
+    @XmlTransient
+    public Collection<AccountAlevel> getAccountAlevelCollection() {
+        return accountAlevelCollection;
+    }
+
+    public void setAccountAlevelCollection(Collection<AccountAlevel> accountAlevelCollection) {
+        this.accountAlevelCollection = accountAlevelCollection;
     }
 
 }

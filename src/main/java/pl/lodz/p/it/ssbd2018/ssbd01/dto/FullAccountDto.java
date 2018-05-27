@@ -5,16 +5,12 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author michal
  */
-public class FullAccountDto {
-    
-    private long id;
+public class FullAccountDto extends BasicAccountDto {
+
     private String login;
     private String name;
     private String surname;
@@ -26,13 +22,12 @@ public class FullAccountDto {
     private String postalCode;
     private String city;
     private String country;
-    private long version;
     private long numberOfProducts;
     private long numberOfOrders;
     private long numberOfLogins;
     private boolean confirm;
     private boolean active;
-    private List<String> accessLevels = new ArrayList<>();
+    private long version;
 
     /**
      * @return the numberOfProducts
@@ -102,34 +97,6 @@ public class FullAccountDto {
      */
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    /**
-     * @return the accessLevels
-     */
-    public List<String> getAccessLevels() {
-        return accessLevels;
-    }
-
-    /**
-     * @param accessLevels the accessLevels to set
-     */
-    public void setAccessLevels(List<String> accessLevels) {
-        this.accessLevels = accessLevels;
-    }
-
-    /**
-     * @return the id
-     */
-    public long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(long id) {
-        this.id = id;
     }
 
     /**
@@ -273,20 +240,6 @@ public class FullAccountDto {
     }
 
     /**
-     * @return the version
-     */
-    public long getVersion() {
-        return version;
-    }
-
-    /**
-     * @param version the version to set
-     */
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-    /**
      * @return the confirm
      */
     public boolean isConfirm() {
@@ -313,6 +266,18 @@ public class FullAccountDto {
     public void setLogin(String login) {
         this.login = login;
     }
-  
-    
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
+    }
 }

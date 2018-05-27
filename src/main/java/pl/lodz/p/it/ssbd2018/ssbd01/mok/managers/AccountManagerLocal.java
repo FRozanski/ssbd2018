@@ -3,6 +3,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 import java.util.List;
 import javax.ejb.Local;
 import javax.servlet.ServletContext;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
@@ -36,13 +37,11 @@ public interface AccountManagerLocal {
             
     void unlockAccount(long accountId) throws AppBaseException;
     
+    public void alterAccountAccessLevel(Account account, List<String> accessLevel) throws AppBaseException;
+    
     public Account getMyAccountToEdit(Account account) throws AppBaseException;
     
     public Account getMyAccountByLogin(String login) throws AppBaseException;
-    
-    public void addAccessLevelToAccount(long accountId, long accessLevelId) throws AppBaseException;
-    
-    public void dismissAccessLevelFromAccount(long accountId, long accessLevelId) throws AppBaseException;
 
     public String getVeryficationToken(Account account) throws AppBaseException;
     

@@ -10,7 +10,6 @@ import java.util.Set;
 import javax.ejb.EJB;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -27,6 +26,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.json.simple.JSONObject;
+import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicNewAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.EditableAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.dto.FullAccountDto;
@@ -285,34 +285,14 @@ public class AccountWebService {
     }
 
     @PUT
-    @Path("addAccessLevel")
+    @Path("alterAccountAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addAccessLevelToAccount(@QueryParam("accountId") long accountId,
-            @QueryParam("alevelId") long alevelId) {
+    public Response alterAccountAccessLevel(BasicAccountDto accountDto) {
         try {
-            accountManagerLocal.addAccessLevelToAccount(accountId, alevelId);
-            return Response.status(Response.Status.OK)
-                    .entity(new WebErrorInfo("200", SUCCESS))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        } catch (AppBaseException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", ex.getCode()))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        }
-
-    }
-
-    @DELETE
-    @Path("deleteAccessLevel")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteAccountAlevel(@QueryParam("accountId") long accountId,
-            @QueryParam("alevelId") long alevelId) {
-        try {
-            accountManagerLocal.dismissAccessLevelFromAccount(accountId, alevelId);
+            Account account = accountManagerLocal.getAccountById(accountDto.getId());
+            AccountMapper.INSTANCE.basicAccountDtoToAccount(accountDto, account);
+            accountManagerLocal.alterAccountAccessLevel(account, accountDto.getAccessLevels());
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
@@ -324,7 +304,7 @@ public class AccountWebService {
                     .build();
         }
     }
-    
+
     @PUT
     @Path("confirmAccount")
     @Consumes(MediaType.APPLICATION_JSON)

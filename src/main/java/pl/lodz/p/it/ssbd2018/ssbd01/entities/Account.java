@@ -138,11 +138,13 @@ public class Account implements Serializable {
     private long versionUserData;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = NAME_SYNTAX_ERROR)
     @Size(min = 1, max = 32, message = NAME_LENGTH_ERROR)
     @Column(name = "name", table = "user_data")
     private String name;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "/^[a-z ,.'-]+$/i", message = SURNAME_SYNTAX_ERROR)
     @Size(min = 1, max = 32, message = SURNAME_LENGTH_ERROR)
     @Column(name = "surname", table = "user_data")
     private String surname;
@@ -165,11 +167,11 @@ public class Account implements Serializable {
     private String street;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "\\d+", message = STREET_NUMBER_PATTERN_ERROR)
+    @Pattern(regexp = "[1-9]\\d+", message = STREET_NUMBER_PATTERN_ERROR)
     @Size(min = 1, max = 10, message = STREET_NUMBER_LENGTH_ERROR)
     @Column(name = "street_number", table = "user_data")
     private String streetNumber;
-    @Pattern(regexp = "\\d+", message = FLAT_NUMBER_PATTERN_ERROR)
+    @Pattern(regexp = "[1-9]\\d+", message = FLAT_NUMBER_PATTERN_ERROR)
     @Size(max = 10, message = FLAT_NUMBER_LENGTH_ERROR)
     @Column(name = "flat_number", table = "user_data")
     private String flatNumber;
@@ -180,11 +182,13 @@ public class Account implements Serializable {
     private String postalCode;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = CITY_SYNTAX_ERROR)
     @Size(min = 1, max = 60, message = CITY_LENGTH_ERROR)
     @Column(name = "city", table = "user_data")
     private String city;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-Z]+", message = COUNTRY_SYNTAX_ERROR)
     @Size(min = 1, max = 60, message = COUNTRY_LENGTH_ERROR)
     @Column(name = "country", table = "user_data")
     private String country;

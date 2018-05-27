@@ -46,7 +46,7 @@ export class AccountStatisticsComponent implements OnInit {
 
   onConfirmClick(account: AccountData) {
     this.accountService.confirmAccount(account.id).subscribe(() => {
-      alert(this.translateService.instant('success'));
+      alert(this.translateService.instant('SUCCESS.ACCOUNT_CONFIRM'));
       window.location.reload();
     },
       (errorResponse) => {
@@ -57,7 +57,7 @@ export class AccountStatisticsComponent implements OnInit {
   onLockUnlockClick(account: AccountData) {
     if (this.isActive(account)) {
       this.accountService.lockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('success'));
+          alert(this.translateService.instant('SUCCESS.ACCOUNT_LOCK'));
           window.location.reload();
         },
         (errorResponse) => {
@@ -65,7 +65,7 @@ export class AccountStatisticsComponent implements OnInit {
         });
     } else {
       this.accountService.unlockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('success'));
+          alert(this.translateService.instant('SUCCESS.ACCOUNT_UNLOCK'));
           window.location.reload();
         },
         (errorResponse) => {

@@ -16,7 +16,7 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatSortModule,
-  MatPaginatorModule
+  MatPaginatorModule, MatPaginatorIntl
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -36,6 +36,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './common/auth.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationService } from './common/notification.service';
+import {MatPaginatorIntlPl} from './common/mat-table-utils/mat-paginator-intl-pl';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -179,7 +180,8 @@ declarations: [
     AuthGuard,
     AuthUtilService,
     AuthService,
-    NotificationService
+    NotificationService,
+    {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPl}
   ]
 })
 export class AppModule { }

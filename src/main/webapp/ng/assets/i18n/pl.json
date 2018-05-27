@@ -5,6 +5,17 @@
         "USER_ROLES" : "Poziomy dostępu użytkownika",
         "ACTIVATE_ACCOUNT" : "Musisz aktywować konto!"
     },
+    "SIDE_NAV" : {
+        "MAIN_PAGE" : "Strona główna",
+        "REGISTER" : "Rejestracja",
+        "LOGIN" : "Logowanie",
+        "ACCOUNTS" : "Lista kont",
+        "STATISTICS" : "Statystyki kont",
+        "MY_ACCOUNT" : "Moje konto",
+        "CHANGE_MY_PASSWORD" : "Zmień hasło",
+        "LOGOUT" : "Wyloguj",
+        "GUEST" : "Gość"
+    },
     "ACCOUNT" : {
         "CITY" : "Miasto",
         "CONFIRM" : "Potwierdzone",
@@ -55,6 +66,24 @@
         "OLD_PASSWORD" : "Stare hasło",
         "NEW_PASSWORD" : "Nowe hasło",
         "CONFIRM_NEW_PASSWORD" : "Potwierdź nowe hasło"
+    },
+    "MAT_TABLE" : {
+      "ITEMS_PER_PAGE" : "Liczba elementów na stronie",
+      "NEXT_PAGE" : "Następna strona",
+      "PREVIOUS_PAGE" : "Poprzednia strona",
+      "FILTER" : "Filtruj"
+    },
+    "LOGIN" : {
+      "SUCCESS" : "Zalogowano",
+      "FAILURE" : "Nie udało się zalogować"
+    },
+    "SUCCESS" : {
+      "ACCOUNT_EDIT" : "Pomyślnie edytowano konto",
+      "ACCOUNT_CONFIRM" : "Pomyślnie aktywowano konto",
+      "ACCOUNT_LOCK" : "Pomyślnie zablokowano konto",
+      "ACCOUNT_UNLOCK" : "Pomyślnie odblokowano konto",
+      "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
+      "REGISTER" : "Pomyślnie zarejestrowano konto"
     },
   "unknown_error": "Wystąpił nieznany błąd",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",

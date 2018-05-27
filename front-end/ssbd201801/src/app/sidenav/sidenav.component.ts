@@ -23,6 +23,8 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;
+    }, (errorResponse) => {
+      console.log(this.translateService.instant(errorResponse.error.message));
     });
   }
 
@@ -38,8 +40,8 @@ export class SidenavComponent implements OnInit {
       this.userIdentity.login = data.login;
       this.roles = JSON.stringify(data.roles);
     }).catch((data) => {
-      this.userIdentity.login = "Gość";// translate
-      this.roles = "[GUEST]"
+      this.userIdentity.login = this.translateService.instant('SIDE_NAV.GUEST');
+      this.roles = this.translateService.instant('SIDE_NAV.GUEST');
     });
   }
 

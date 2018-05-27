@@ -231,6 +231,7 @@ public class AccountWebService {
         try {
             this.validatePassword(passDto);
             Account accountToEdit = accountManagerLocal.getAccountById(passDto.getId());
+            this.verifyArchivalPaswords(accountToEdit, passDto); 
             PasswordMapper.INSTANCE.newPasswordDtoToAccount(passDto, accountToEdit);
             accountManagerLocal.changeOthersPassword(accountToEdit);
             return Response.status(Response.Status.OK)

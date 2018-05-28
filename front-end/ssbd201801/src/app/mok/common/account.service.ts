@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import {HttpClient, HttpResponse, HttpRequest, HttpParams} from '@angular/common/http';
-import { environment } from '../../environments/environment'
+import { environment } from '../../../environments/environment'
 import { AccountData } from '../model/account-data';
 import { post } from 'selenium-webdriver/http';
 import { AuthUtilService } from './auth-util.service';

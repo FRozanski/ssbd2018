@@ -1,13 +1,12 @@
 import { Component, ViewChild, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { AccountService } from '../common/account.service';
-import { AccountData } from '../model/account-data';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import {SessionService} from '../common/session.service';
-import { AuthUtilService } from '../common/auth-util.service';
-import { AuthService } from '../common/auth.service';
+import { SessionService } from '../../mok/common/session.service';
+import { AuthUtilService } from '../../mok/common/auth-util.service';
+import { AuthService } from '../../mok/common/auth.service';
+import { AccountData } from '../../mok/model/account-data';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -26,10 +25,8 @@ export class SidenavComponent implements OnInit {
   ngOnInit() {
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;
-    }, (errorResponse) => {
-      console.log(this.translateService.instant(errorResponse.error.message));
     });
-  }
+  } 
 
   hasRole(role: string): boolean {
     return this.authUtil.hasRole(role, this.userIdentity);

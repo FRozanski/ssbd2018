@@ -1,10 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Router} from '@angular/router';
-import {AccountService} from '../common/account.service';
-import {environment} from '../../environments/environment';
-import {AccountData} from '../model/account-data';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
+import { AccountService } from '../common/account.service';
+import { AccountData } from '../model/account-data';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-account-statistics',
@@ -15,15 +14,15 @@ export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
     'login', 'confirm', 'active',
-    'numberOfLogins', 'numberOfOrders', 
+    'numberOfLogins', 'numberOfOrders',
     'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
-    ];
+  ];
   dataSource;
 
   validationMessage = '';
 
-  constructor (private accountService: AccountService, private router: Router,
-               private translateService: TranslateService) { }
+  constructor(private accountService: AccountService, private router: Router,
+    private translateService: TranslateService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -56,17 +55,17 @@ export class AccountStatisticsComponent implements OnInit {
   onLockUnlockClick(account: AccountData) {
     if (this.isActive(account)) {
       this.accountService.lockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_LOCK'));
-          window.location.reload();
-        },
+        alert(this.translateService.instant('SUCCESS.ACCOUNT_LOCK'));
+        window.location.reload();
+      },
         (errorResponse) => {
           this.validationMessage = this.translateService.instant(errorResponse.error.message);
         });
     } else {
       this.accountService.unlockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_UNLOCK'));
-          window.location.reload();
-        },
+        alert(this.translateService.instant('SUCCESS.ACCOUNT_UNLOCK'));
+        window.location.reload();
+      },
         (errorResponse) => {
           this.validationMessage = this.translateService.instant(errorResponse.error.message);
         });
@@ -102,8 +101,8 @@ export class AccountStatisticsComponent implements OnInit {
 
   private alterAccountAccessLevel(account: AccountData) {
     this.accountService.alterAccountAccessLevel(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
-      },
+      alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
+    },
       (errorResponse) => {
         alert(this.translateService.instant(errorResponse.error.message));
         window.location.reload();

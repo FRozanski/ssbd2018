@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AccountData} from '../model/account-data';
-import {AccountService} from '../common/account.service';
-import {Router} from '@angular/router';
-import {Location} from '@angular/common';
-import {TranslateService} from '@ngx-translate/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountData } from '../model/account-data';
+import { AccountService } from '../common/account.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-change-others-password',
@@ -24,7 +24,7 @@ export class ChangeOthersPasswordComponent implements OnInit {
   accountToEdit: AccountData = {};
 
   constructor(private accountService: AccountService, private location: Location,
-              private translateService: TranslateService, private router: Router) { }
+    private translateService: TranslateService, private router: Router) { }
 
   ngOnInit() {
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);
@@ -47,9 +47,9 @@ export class ChangeOthersPasswordComponent implements OnInit {
       account.id = this.accountToEdit.id;
       account.version = this.accountToEdit.version;
       this.accountService.changeOthersPassword(account).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
-          this.router.navigate(['/main']);
-        },
+        alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
+        this.router.navigate(['/main']);
+      },
         (errorResponse) => {
           this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
         });

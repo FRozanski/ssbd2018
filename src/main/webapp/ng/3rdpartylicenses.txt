@@ -160,6 +160,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 MIT
 MIT
 
+@angular/router@5.2.11
+MIT
+MIT
+
 @types/selenium-webdriver@2.53.43
 MIT
 MIT License
@@ -185,10 +189,6 @@ MIT License
     SOFTWARE
 
 @angular/platform-browser@5.2.11
-MIT
-MIT
-
-@angular/router@5.2.11
 MIT
 MIT
 

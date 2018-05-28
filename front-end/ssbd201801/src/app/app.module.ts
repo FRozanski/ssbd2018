@@ -4,10 +4,8 @@ import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
-import { AccountService } from './common/account.service';
 import {
   MatTableModule,
   MatCheckboxModule,
@@ -18,25 +16,28 @@ import {
   MatSortModule,
   MatPaginatorModule, MatPaginatorIntl
 } from '@angular/material';
-import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { SidenavComponent } from './sidenav/sidenav.component';
-import { AuthUtilService } from './common/auth-util.service';
-import { AuthGuard } from './common/auth-guard';
-import { AccountEditComponent } from './account-edit/account-edit.component';
-import { RegistrationConfirmComponent } from './registration-confirm/registration-confirm.component';
-import { ChangeOthersPasswordComponent } from './change-others-password/change-others-password.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { OwnAccountEditComponent } from './own-account-edit/own-account-edit.component';
-import {SessionService} from './common/session.service';
-import { AccountStatisticsComponent } from './account-statistics/account-statistics.component';
-import { LoginComponent } from './login/login.component';
-import { AuthService } from './common/auth.service';
-import { NotificationsComponent } from './notifications/notifications.component';
-import { NotificationService } from './common/notification.service';
-import {MatPaginatorIntlPl} from './common/mat-table-utils/mat-paginator-intl-pl';
+import { AuthUtilService } from './mok/common/auth-util.service';
+import { AuthGuard } from './mok/common/auth-guard';
+import { AccountListComponent } from './mok/account-list/account-list.component';
+import { AccountStatisticsComponent } from './mok/account-statistics/account-statistics.component';
+import { ChangePasswordComponent } from './mok/change-password/change-password.component';
+import { ChangeOthersPasswordComponent } from './mok/change-others-password/change-others-password.component';
+import { LoginComponent } from './mok/login/login.component';
+import { AccountService } from './mok/common/account.service';
+import { SessionService } from './mok/common/session.service';
+import { AuthService } from './mok/common/auth.service';
+import { NotificationService } from './mok/common/notification.service';
+import { MatPaginatorIntlPl } from './mok/common/mat-table-utils/mat-paginator-intl-pl';
+import { RegisterComponent } from './mok/register/register.component';
+import { RegistrationConfirmComponent } from './mok/registration-confirm/registration-confirm.component';
+import { SidenavComponent } from './shared/sidenav/sidenav.component';
+import { NotificationsComponent } from './shared/notifications/notifications.component';
+import { AccountEditComponent } from './mok/account-forms/account-edit/account-edit.component';
+import { OwnAccountEditComponent } from './mok/account-forms/own-account-edit/own-account-edit.component';
+import { AccountFormComponent } from './mok/account-forms/account-form/account-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -147,7 +148,8 @@ declarations: [
     OwnAccountEditComponent,
     AccountStatisticsComponent,
     LoginComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    AccountFormComponent
   ],
   imports: [
     MatTableModule,

@@ -1,11 +1,10 @@
 
-import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountData } from '../model/account-data';
-import { environment } from '../../environments/environment'
 import { Router } from '@angular/router';
-import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-account-list',
@@ -17,10 +16,10 @@ export class AccountListComponent implements OnInit {
   displayedColumns = [
     'login', 'firstName', 'surname', 'email', 'phone', 'country', 'city', 'street',
     'streetNumber', 'flatNumber', 'postalCode', 'edit', 'changePassword'
-    ];
+  ];
   dataSource;
 
-  constructor (private accountService: AccountService, private router: Router) { }
+  constructor(private accountService: AccountService, private router: Router) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -34,8 +33,8 @@ export class AccountListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); 
-    filterValue = filterValue.toLowerCase(); 
+    filterValue = filterValue.trim();
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 

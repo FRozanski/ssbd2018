@@ -72,18 +72,6 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
     }
 
     @Override
-    @RolesAllowed("getAccountToEdit")
-    public Account getAccountToEdit(Account account) throws AppBaseException {
-        return accountFacade.find(account.getId());
-    }
-
-    @Override
-    @RolesAllowed("getMyAccountToEdit")
-    public Account getMyAccountToEdit(Account account) throws AppBaseException {
-        return accountFacade.find(account.getId());
-    }
-
-    @Override
     @RolesAllowed("changeMyPassword")
     public void changeMyPassword(Account account) throws AppBaseException {
         account.setPassword(HashUtils.sha256(account.getPassword()));
@@ -169,50 +157,20 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
-    public String getVeryficationToken(Account account) throws AppBaseException {
-        return accountFacade.find(account.getId()).getToken();
-    }
-
-    @Override
-    @RolesAllowed("basicAccountGet")
-    public Account getAccountByLogin(String login) throws AppBaseException {
-        return accountFacade.findByLogin(login);
-    }
-
-    @Override
-    @RolesAllowed("basicMyAccountGet")
+    @RolesAllowed("getMyAccountByLogin")
     public Account getMyAccountByLogin(String login) throws AppBaseException {
         return accountFacade.findByLogin(login);
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
-    public Account getAccountByToken(String token) throws AppBaseException {
-        return accountFacade.findByToken(token);
-    }
-
-    @Override
-    @RolesAllowed("basicAccountGet")
+    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) throws AppBaseException {
         Account tmpAccount = accountFacade.find(id);
         return tmpAccount;
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
-    public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException {
-        return accessLevelFacade.find(idAccessLevel);
-    }
-
-    @Override
-    @RolesAllowed("basicMyAccountGet")
-    public Account getMyAccountById(long id) throws AppBaseException {
-        return accountFacade.find(id);
-    }
-
-    @Override
-    @RolesAllowed("basicMyAccountGet")
+    @RolesAllowed("saveMyAccountAfterEdit")
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }

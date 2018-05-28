@@ -37,8 +37,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     let creds: Credentials = <Credentials>this.form.value;
-    console.log("creds: ", creds);
-
     this.authService.login(creds).subscribe((data) => {
       this.notificationService.displayNotification(this.translateService.instant('LOGIN.SUCCESS'));
       this.router.navigate['/main'];

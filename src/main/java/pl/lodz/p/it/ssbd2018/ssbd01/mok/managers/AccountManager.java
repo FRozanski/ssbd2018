@@ -1,9 +1,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -12,11 +10,11 @@ import java.util.stream.Collectors;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import javax.servlet.ServletContext;
-import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
@@ -28,7 +26,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.ArchivalPasswordFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.TransactionLogger;
 
 /**
  *
@@ -37,8 +37,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
  * @author michalmalec
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-@Stateless
-public class AccountManager implements AccountManagerLocal {
+@Stateful
+@Interceptors(LoggerInterceptor.class)
+public class AccountManager extends TransactionLogger implements AccountManagerLocal {
 
     private static final String DEFAULT_ACCESS_LEVEL = "user";
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());

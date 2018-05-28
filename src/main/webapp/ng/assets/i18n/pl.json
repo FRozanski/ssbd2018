@@ -47,6 +47,8 @@
         "USER": "Użytkownik",
         "ADD_ACCESS_LEVEL": "Przyznaj",
         "DELETE_ACCESS_LEVEL": "Odbierz",
+        "LAST_LOGIN_DATE" : "Data ostatniego logowania",
+        "LAST_LOGIN_IP" : "IP ostatniego logowania",
         "ACCESS_LEVELS" : "Poziomy dostępu",
         "ALTER" : "Zmień"
     },

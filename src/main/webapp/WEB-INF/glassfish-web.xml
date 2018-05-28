@@ -35,8 +35,6 @@
     <security-role-mapping>
         <role-name>saveAccountAfterEdit</role-name>
         <group-name>admin</group-name>
-        <group-name>manager</group-name>
-        <group-name>user</group-name>
     </security-role-mapping>
     <security-role-mapping>
         <role-name>confirmAccount</role-name>
@@ -91,7 +89,6 @@
     <security-role-mapping>
         <role-name>basicAccountGet</role-name>
         <group-name>admin</group-name>
-        <group-name>manager</group-name>
     </security-role-mapping>
     <security-role-mapping>
         <role-name>basicMyAccountGet</role-name>

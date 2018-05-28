@@ -126,7 +126,7 @@ public class AccountRestController {
             Account accountToEdit = accountManagerLocal.getMyAccountByLogin(login);
             AccountMapper.INSTANCE.accountDtoToAccount(accountDto, accountToEdit);
             this.validateConstraints(accountToEdit);
-            accountManagerLocal.saveAccountAfterEdit(accountToEdit);
+            accountManagerLocal.saveMyAccountAfterEdit(accountToEdit);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)

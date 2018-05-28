@@ -8,13 +8,4 @@
             pl.lodz.p.it.ssbd2018.ssbd01.exceptions.ExceptionActionListener
         </action-listener>
     </application>-->
-    
-    <navigation-rule>
-        <from-view-id>/lista.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>list-edit</from-outcome>
-            <to-view-id>/edit.xhtml</to-view-id>
-            <redirect />
-        </navigation-case>
-    </navigation-rule>
 </faces-config>

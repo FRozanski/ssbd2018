@@ -87,16 +87,6 @@
         <group-name>admin</group-name>
     </security-role-mapping>
     <security-role-mapping>
-        <role-name>basicAccountGet</role-name>
-        <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
-        <role-name>basicMyAccountGet</role-name>
-        <group-name>admin</group-name>
-        <group-name>manager</group-name>
-        <group-name>user</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
         <role-name>saveMyAccountAfterEdit</role-name>
         <group-name>admin</group-name>
         <group-name>manager</group-name>
@@ -108,6 +98,46 @@
     </security-role-mapping>
     <security-role-mapping>
         <role-name>getAllArchivalPasswordsByAccount</role-name>
+        <group-name>admin</group-name>
+        <group-name>manager</group-name>
+        <group-name>user</group-name>
+    </security-role-mapping>
+    
+    
+    <security-role-mapping>
+        <role-name>getVeryficationToken</role-name>
+        <group-name>admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>getAccountByLogin</role-name>
+        <group-name>admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>getMyAccountByLogin</role-name>
+        <group-name>admin</group-name>
+        <group-name>manager</group-name>
+        <group-name>user</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>getAccountById</role-name>
+        <group-name>admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>saveMyAccountAfterEdit</role-name>
+        <group-name>admin</group-name>
+        <group-name>manager</group-name>
+        <group-name>user</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>getAccountByToken</role-name>
+        <group-name>admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>getAccessLevelById</role-name>
+        <group-name>admin</group-name>
+    </security-role-mapping>
+    <security-role-mapping>
+        <role-name>getMyAccountById</role-name>
         <group-name>admin</group-name>
         <group-name>manager</group-name>
         <group-name>user</group-name>

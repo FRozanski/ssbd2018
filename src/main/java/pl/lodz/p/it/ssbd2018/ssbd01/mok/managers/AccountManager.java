@@ -168,50 +168,50 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
+    @RolesAllowed("getVeryficationToken")
     public String getVeryficationToken(Account account) throws AppBaseException {
         return accountFacade.find(account.getId()).getToken();
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
+    @RolesAllowed("getAccountByLogin")
     public Account getAccountByLogin(String login) throws AppBaseException {
         return accountFacade.findByLogin(login);
     }
 
     @Override
-    @RolesAllowed("basicMyAccountGet")
+    @RolesAllowed("getMyAccountByLogin")
     public Account getMyAccountByLogin(String login) throws AppBaseException {
         return accountFacade.findByLogin(login);
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
+    @RolesAllowed("getAccountByToken")
     public Account getAccountByToken(String token) throws AppBaseException {
         return accountFacade.findByToken(token);
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
+    @RolesAllowed("getAccountById")
     public Account getAccountById(long id) throws AppBaseException {
         Account tmpAccount = accountFacade.find(id);
         return tmpAccount;
     }
 
     @Override
-    @RolesAllowed("basicAccountGet")
+    @RolesAllowed("getAccessLevelById")
     public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException {
         return accessLevelFacade.find(idAccessLevel);
     }
 
     @Override
-    @RolesAllowed("basicMyAccountGet")
+    @RolesAllowed("getMyAccountById")
     public Account getMyAccountById(long id) throws AppBaseException {
         return accountFacade.find(id);
     }
 
     @Override
-    @RolesAllowed("basicMyAccountGet")
+    @RolesAllowed("saveMyAccountAfterEdit")
     public void saveMyAccountAfterEdit(Account myAccount) throws AppBaseException {
         accountFacade.edit(myAccount);
     }

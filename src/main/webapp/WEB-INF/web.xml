@@ -38,7 +38,7 @@
         </user-data-constraint>
     </security-constraint>
     
-    <!-- definicja metody logowania, odwołanie do stron z formularzem logowania i komunikatem błędu -->
+    <!-- definicja metody logowania -->
     <login-config>
         <auth-method>FORM</auth-method>
         <realm-name>ssbd01realm</realm-name>

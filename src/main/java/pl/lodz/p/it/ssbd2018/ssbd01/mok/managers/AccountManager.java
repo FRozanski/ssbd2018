@@ -71,18 +71,6 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("getAccountToEdit")
-    public Account getAccountToEdit(Account account) throws AppBaseException {
-        return accountFacade.find(account.getId());
-    }
-
-    @Override
-    @RolesAllowed("getMyAccountToEdit")
-    public Account getMyAccountToEdit(Account account) throws AppBaseException {
-        return accountFacade.find(account.getId());
-    }
-
-    @Override
     @RolesAllowed("changeMyPassword")
     public void changeMyPassword(Account account) throws AppBaseException {
         account.setPassword(HashUtils.sha256(account.getPassword()));
@@ -168,27 +156,9 @@ public class AccountManager implements AccountManagerLocal {
     }
 
     @Override
-    @RolesAllowed("getVeryficationToken")
-    public String getVeryficationToken(Account account) throws AppBaseException {
-        return accountFacade.find(account.getId()).getToken();
-    }
-
-    @Override
-    @RolesAllowed("getAccountByLogin")
-    public Account getAccountByLogin(String login) throws AppBaseException {
-        return accountFacade.findByLogin(login);
-    }
-
-    @Override
     @RolesAllowed("getMyAccountByLogin")
     public Account getMyAccountByLogin(String login) throws AppBaseException {
         return accountFacade.findByLogin(login);
-    }
-
-    @Override
-    @RolesAllowed("getAccountByToken")
-    public Account getAccountByToken(String token) throws AppBaseException {
-        return accountFacade.findByToken(token);
     }
 
     @Override
@@ -196,18 +166,6 @@ public class AccountManager implements AccountManagerLocal {
     public Account getAccountById(long id) throws AppBaseException {
         Account tmpAccount = accountFacade.find(id);
         return tmpAccount;
-    }
-
-    @Override
-    @RolesAllowed("getAccessLevelById")
-    public AccessLevel getAccessLevelById(Long idAccessLevel) throws AppBaseException {
-        return accessLevelFacade.find(idAccessLevel);
-    }
-
-    @Override
-    @RolesAllowed("getMyAccountById")
-    public Account getMyAccountById(long id) throws AppBaseException {
-        return accountFacade.find(id);
     }
 
     @Override

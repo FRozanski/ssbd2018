@@ -23,16 +23,6 @@
         <group-name>admin</group-name>
     </security-role-mapping>
     <security-role-mapping>
-        <role-name>getAccountToEdit</role-name>
-        <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
-        <role-name>getMyAccountToEdit</role-name>
-        <group-name>admin</group-name>
-        <group-name>manager</group-name>
-        <group-name>user</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
         <role-name>saveAccountAfterEdit</role-name>
         <group-name>admin</group-name>
     </security-role-mapping>
@@ -73,10 +63,6 @@
         <group-name>admin</group-name>
     </security-role-mapping>
     <security-role-mapping>
-        <role-name>getAccessLevelById</role-name>
-        <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
         <role-name>changeMyPassword</role-name>
         <group-name>admin</group-name>
         <group-name>manager</group-name>
@@ -105,14 +91,6 @@
     
     
     <security-role-mapping>
-        <role-name>getVeryficationToken</role-name>
-        <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
-        <role-name>getAccountByLogin</role-name>
-        <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
         <role-name>getMyAccountByLogin</role-name>
         <group-name>admin</group-name>
         <group-name>manager</group-name>
@@ -129,18 +107,8 @@
         <group-name>user</group-name>
     </security-role-mapping>
     <security-role-mapping>
-        <role-name>getAccountByToken</role-name>
-        <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
         <role-name>getAccessLevelById</role-name>
         <group-name>admin</group-name>
-    </security-role-mapping>
-    <security-role-mapping>
-        <role-name>getMyAccountById</role-name>
-        <group-name>admin</group-name>
-        <group-name>manager</group-name>
-        <group-name>user</group-name>
     </security-role-mapping>
     <class-loader delegate="true"/>
     <jsp-config>

@@ -54,7 +54,7 @@ export class AccountStatisticsComponent implements OnInit {
 
   }
   getDisplayedColumns(): string[] {
-    const isManager = this.hasRole('MANAGER');
+    const isManager = this.hasRole('MANAGER') && !this.hasRole('ADMIN');
     return this.displayedColumns
       .filter(cd => !isManager || cd.showManager)
       .map(cd => cd.def);

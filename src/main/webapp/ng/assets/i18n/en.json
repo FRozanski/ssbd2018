@@ -6,15 +6,16 @@
         "ACTIVATE_ACCOUNT" : "ACTIVATE_ACCOUNT"
     },
     "SIDE_NAV": {
-      "MAIN_PAGE": "Home page",
-      "REGISTER": "Registration",
-      "LOGIN": "Login",
-      "ACCOUNTS": "List of accounts",
-      "STATISTICS": "Account statistics",
-      "MY_ACCOUNT": "My account",
-      "CHANGE_MY_PASSWORD": "Change password",
-      "LOGOUT": "Log out",
-      "GUEST": "Guest"
+        "MAIN_PAGE": "Home page",
+        "REGISTER": "Registration",
+        "LOGIN": "Login",
+        "ACCOUNTS": "List of accounts",
+        "STATISTICS": "Account statistics",
+        "MY_ACCOUNT": "My account",
+        "CHANGE_MY_PASSWORD": "Change password",
+        "LOGOUT": "Log out",
+        "GUEST": "Guest",
+        "CREATE_ACCOUNT" : "Create account"
     },
     "ACCOUNT" : {
         "CITY" : "CITY",

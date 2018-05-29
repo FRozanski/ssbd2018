@@ -73,7 +73,9 @@
       "ITEMS_PER_PAGE" : "Liczba elementów na stronie",
       "NEXT_PAGE" : "Następna strona",
       "PREVIOUS_PAGE" : "Poprzednia strona",
-      "FILTER" : "Filtruj"
+      "FILTER" : "Filtruj",
+      "FIRST_PAGE" : "Pierwsza strona",
+      "LAST_PAGE" : "Ostatnia strona"
     },
     "LOGIN" : {
       "SUCCESS" : "Zalogowano",

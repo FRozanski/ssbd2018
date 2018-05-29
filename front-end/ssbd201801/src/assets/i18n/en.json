@@ -65,7 +65,8 @@
     },
     "LOGIN": {
       "SUCCESS": "Logged in",
-      "FAILURE": "Failed to log in"
+      "FAILURE": "Failed to log in",
+      "SIGN_IN" : "Sign in"
     },
     "SUCCESS": {
       "ACCOUNT_EDIT": "Account was successfully edited",

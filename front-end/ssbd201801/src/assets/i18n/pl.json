@@ -79,7 +79,8 @@
     },
     "LOGIN" : {
       "SUCCESS" : "Zalogowano",
-      "FAILURE" : "Nie udało się zalogować"
+      "FAILURE" : "Nie udało się zalogować",
+      "SIGN_IN" : "Zaloguj"
     },
     "SUCCESS" : {
       "ACCOUNT_EDIT" : "Pomyślnie edytowano konto",

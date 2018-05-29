@@ -5,6 +5,8 @@ import {AccountService} from '../common/account.service';
 import {environment} from '../../environments/environment';
 import {AccountData} from '../model/account-data';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthUtilService} from '../common/auth-util.service';
+import {SessionService} from '../common/session.service';
 
 @Component({
   selector: 'app-account-statistics',
@@ -14,17 +16,30 @@ import {TranslateService} from '@ngx-translate/core';
 export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
-    'login', 'confirm', 'active',
-    'lastLoginDate', 'lastLoginIp',
-    'numberOfLogins', 'numberOfOrders', 'numberOfProducts',
-    'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
+    {def: 'login', showManager: true},
+    {def: 'confirm', showManager: true},
+    {def: 'active', showManager: true},
+    {def: 'lastLoginDate', showManager: true},
+    {def: 'lastLoginIp', showManager: true},
+    {def: 'numberOfLogins', showManager: true},
+    {def: 'numberOfOrders', showManager: true},
+    {def: 'numberOfProducts', showManager: true},
+    {def: 'confirmAccount', showManager: true},
+    {def: 'lockOrUnlockAccount', showManager: true},
+    {def: 'adminAccessLevel', showManager: false},
+    {def: 'managerAccessLevel', showManager: false},
+    {def: 'userAccessLevel', showManager: false},
   ];
   dataSource;
 
   validationMessage = '';
 
+  userIdentity: AccountData = {};
+  rolesStringified = '';
+
   constructor (private accountService: AccountService, private router: Router,
-               private translateService: TranslateService) { }
+               private translateService: TranslateService, private authUtil: AuthUtilService,
+               private sessionService: SessionService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,7 +50,14 @@ export class AccountStatisticsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+    this.updateRoles();
 
+  }
+  getDisplayedColumns(): string[] {
+    const isManager = this.hasRole('MANAGER');
+    return this.displayedColumns
+      .filter(cd => !isManager || cd.showManager)
+      .map(cd => cd.def);
   }
 
   applyFilter(filterValue: string) {
@@ -207,5 +229,19 @@ export class AccountStatisticsComponent implements OnInit {
       return this.translateService.instant('ACCOUNT.LOCK_ACCOUNT');
     else
       return this.translateService.instant('ACCOUNT.UNLOCK_ACCOUNT');
+  }
+
+  updateRoles() {
+    this.sessionService.getMyIdentity().toPromise().then((data) => {
+      this.userIdentity.roles = data.roles;
+      this.rolesStringified = JSON.stringify(data.roles);
+    }).catch((data) => {
+      this.userIdentity.roles = this.translateService.instant('GUEST');
+      this.rolesStringified = JSON.stringify(this.userIdentity.roles);
+    });
+  }
+
+  hasRole(role: string): boolean {
+    return this.authUtil.hasRole(role, this.userIdentity);
   }
 }

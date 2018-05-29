@@ -23,6 +23,10 @@
         <description/>
         <role-name>ADMIN</role-name>
     </security-role>
+    <security-role>
+        <description/>
+        <role-name>VIRTUAL</role-name>
+    </security-role>
         
     <!-- kontrola dostepu aplikacji -->
     <security-constraint>

@@ -3,7 +3,6 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mok.managers;
 import java.util.List;
 import javax.ejb.Local;
 import javax.servlet.ServletContext;
-import pl.lodz.p.it.ssbd2018.ssbd01.dto.BasicAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;

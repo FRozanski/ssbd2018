@@ -143,7 +143,7 @@ public class Account implements Serializable {
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "[a-zA-z]+([ '-][a-zA-Z]+)*", message = SURNAME_SYNTAX_ERROR)
+    @Pattern(regexp = "[a-zA-z]+([ '-][a-zA-Z]+)*", message = SURNAME_PATTERN_ERROR)
     @Size(min = 1, max = 32, message = SURNAME_LENGTH_ERROR)
     @Column(name = "surname", table = "user_data")
     private String surname;

@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locationService.passRouter(this.router.url);
+    this.locationService.passRouter(this.translateService.instant('LOCATION.LOGIN_PAGE'));
     this.form = new FormGroup(
       {
         username: new FormControl("", [Validators.required]),

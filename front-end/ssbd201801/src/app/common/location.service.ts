@@ -5,7 +5,6 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 export class LocationService {
 
   private routerSource = new BehaviorSubject<string>('');
-
   currentRouter = this.routerSource.asObservable();
 
   constructor() { }

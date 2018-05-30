@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-main-page',
@@ -9,10 +11,11 @@ export class MainPageComponent implements OnInit {
 
   messageShown = '';
 
-  constructor() { }
+  constructor(private router: Router,
+              private locationService: LocationService) { }
 
   ngOnInit() {
-
+    this.locationService.passRouter(this.router.url);
   }
 
 }

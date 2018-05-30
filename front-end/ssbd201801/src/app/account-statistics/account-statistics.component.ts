@@ -5,6 +5,7 @@ import {AccountService} from '../common/account.service';
 import {environment} from '../../environments/environment';
 import {AccountData} from '../model/account-data';
 import {TranslateService} from '@ngx-translate/core';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-account-statistics',
@@ -23,13 +24,16 @@ export class AccountStatisticsComponent implements OnInit {
 
   validationMessage = '';
 
-  constructor (private accountService: AccountService, private router: Router,
-               private translateService: TranslateService) { }
+  constructor (private accountService: AccountService,
+               private translateService: TranslateService,
+               private router: Router,
+               private locationService: LocationService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    this.locationService.passRouter(this.router.url);
     this.accountService.getAllAccounts().subscribe((data) => {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;

@@ -6,6 +6,7 @@ import { HttpResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import {LocationService} from '../common/location.service';
 
 
 @Component({
@@ -21,9 +22,12 @@ export class RegisterComponent implements OnInit {
 
   formValidationMessage: string = "";
 
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
+  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService,
+              private router: Router,
+              private locationService: LocationService) { }
 
   ngOnInit() {
+    this.locationService.passRouter(this.router.url);
     this.initializeForm();
   }
 

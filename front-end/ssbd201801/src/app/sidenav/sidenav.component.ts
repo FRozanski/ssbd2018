@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {SessionService} from '../common/session.service';
 import { AuthUtilService } from '../common/auth-util.service';
 import { AuthService } from '../common/auth.service';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -18,12 +19,18 @@ export class SidenavComponent implements OnInit {
 
   userIdentity: AccountData = {};
   rolesStringified: string = "";
+  displayedRouter = '';
 
   constructor(private sessionService: SessionService, private translateService: TranslateService,
-    private authUtil: AuthUtilService, private authService: AuthService) {
+    private authUtil: AuthUtilService, private authService: AuthService,
+    private locationService: LocationService) {
     }
 
   ngOnInit() {
+    this.locationService.currentRouter.subscribe(router => this.displayedRouter = router,
+      (errorResponse) => {
+      console.log("error = " + errorResponse.toString());
+      });
     this.updateLoginAndRoles();
   }
 

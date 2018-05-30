@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import 'rxjs/add/operator/filter';
 import {TranslateService} from '@ngx-translate/core';
 import {AccountService} from '../common/account.service';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-registration-confirm',
@@ -17,10 +18,13 @@ export class RegistrationConfirmComponent implements OnInit {
   constructor (
     private accountService: AccountService,
     private route: ActivatedRoute,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private locationService: LocationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.locationService.passRouter(this.router.url);
     this.route.queryParams
       .filter(params => params.token)
       .subscribe(params => {

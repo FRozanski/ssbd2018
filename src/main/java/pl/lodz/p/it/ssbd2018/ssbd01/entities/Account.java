@@ -138,6 +138,7 @@ public class Account implements Serializable {
     private long versionUserData;
     @Basic(optional = false)
     @NotNull
+    @Pattern(regexp = "[a-zA-z]+([ '-][a-zA-Z]+)*", message = NAME_PATTERN_ERROR)
     @Size(min = 1, max = 32, message = NAME_LENGTH_ERROR)
     @Column(name = "name", table = "user_data")
     private String name;

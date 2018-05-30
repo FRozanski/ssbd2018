@@ -26,6 +26,7 @@ public class ErrorCodes {
     public static final String PASSWORD_DIFFERENT_ERROR = "password_different_error";
     public static final String LOGIN_LENGTH_ERROR = "login_length_error";
     public static final String NAME_LENGTH_ERROR = "name_length_error";
+    public static final String SURNAME_PATTERN_ERROR = "surname_pattern_error";
     public static final String SURNAME_LENGTH_ERROR = "surname_length_error";
     public static final String EMAIL_LENGTH_ERROR = "email_length_error";
     public static final String EMAIL_PATTERN_EXCEPTION = "email_pattern_error";
@@ -46,6 +47,7 @@ public class ErrorCodes {
         errors.add(PASSWORD_DIFFERENT_ERROR);
         errors.add(LOGIN_LENGTH_ERROR);
         errors.add(NAME_LENGTH_ERROR);
+        errors.add(SURNAME_PATTERN_ERROR);
         errors.add(SURNAME_LENGTH_ERROR);
         errors.add(EMAIL_LENGTH_ERROR);
         errors.add(EMAIL_PATTERN_EXCEPTION);

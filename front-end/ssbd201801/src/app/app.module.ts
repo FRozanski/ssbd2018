@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { AccountListComponent } from './account-list/account-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -16,7 +16,7 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatSortModule,
-  MatPaginatorModule, MatPaginatorIntl
+  MatPaginatorModule, MatPaginatorIntl, MatSnackBarModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +37,8 @@ import { AuthService } from './common/auth.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationService } from './common/notification.service';
 import {MatPaginatorIntlPl} from './common/mat-table-utils/mat-paginator-intl-pl';
+import {ErrorHandlerService} from './common/error-handler.service';
+import {RequestInterceptorService} from './common/request-interceptor.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -150,6 +152,7 @@ declarations: [
     NotificationsComponent
   ],
   imports: [
+    MatSnackBarModule,
     MatTableModule,
     MatCheckboxModule,
     MatInputModule,
@@ -181,7 +184,13 @@ declarations: [
     AuthUtilService,
     AuthService,
     NotificationService,
-    {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPl}
+    {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPl},
+    ErrorHandlerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true,
+    }
   ]
 })
 export class AppModule { }

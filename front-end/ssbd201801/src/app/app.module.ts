@@ -39,6 +39,7 @@ import { NotificationService } from './common/notification.service';
 import {MatPaginatorIntlPl} from './common/mat-table-utils/mat-paginator-intl-pl';
 import {ErrorHandlerService} from './common/error-handler.service';
 import {RequestInterceptorService} from './common/request-interceptor.service';
+import { ErrorsComponent } from './errors/errors.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -129,8 +130,16 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'error',
+    component: ErrorsComponent
+  },
+  {
     path: '**',
-    redirectTo: 'main'
+    component: ErrorsComponent,
+    data: {
+      error: 404
+    }
+    // redirectTo: 'main'
   }
 
 ];
@@ -149,7 +158,8 @@ declarations: [
     OwnAccountEditComponent,
     AccountStatisticsComponent,
     LoginComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    ErrorsComponent
   ],
   imports: [
     MatSnackBarModule,

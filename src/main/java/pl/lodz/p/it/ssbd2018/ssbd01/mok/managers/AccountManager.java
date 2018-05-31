@@ -261,7 +261,7 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
     private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
-        veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
+        veryficationLink = veryficationLink + "/ng/#/registrationConfirm?token=" + veryficationToken;
         return veryficationLink;
     }    
 }

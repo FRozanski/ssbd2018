@@ -15,7 +15,8 @@ export class AccountStatisticsComponent implements OnInit {
   displayedColumns = [
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders',
-    'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
+    'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel',
+    'lastLoginDate', 'lastLoginIp',
   ];
 
   dataSource: MatTableDataSource<AccountData>;

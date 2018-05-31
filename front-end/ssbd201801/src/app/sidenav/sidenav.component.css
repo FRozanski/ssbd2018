@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
   }
-  
+
   mat-sidenav {
     width: 275px;
   }
@@ -18,3 +18,16 @@
     position: absolute;
     right: 30px;
   }
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-h2 {
+  margin: 10px;
+  text-align: center;
+}
+.example-p {
+  margin: 10px;
+  text-align: center;
+}

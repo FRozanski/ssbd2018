@@ -3,8 +3,8 @@
     <p>
       <button mat-button mat-raised-button color='primary' (click)="sidenav.close()"> < </button>
     </p>
-    <p *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'> {{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</p>
-    <p *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>{{ "HOME.USER_ROLES" | translate }}: {{ rolesStringified }}</p>
+    <h2 *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")' class="example-h2">{{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</h2>
+    <p *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")' class="example-p">{{ "HOME.USER_ROLES" | translate }}: {{ rolesStringified | translate }}</p>
     <p>
       <button mat-button routerLink='/main'>{{ "SIDE_NAV.MAIN_PAGE" | translate }}</button>
     </p>

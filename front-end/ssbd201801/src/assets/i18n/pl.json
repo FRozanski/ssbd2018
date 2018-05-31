@@ -61,8 +61,9 @@
     "REGISTER" : {
         "BASIC_DATA" : "Dane podstawowe",
         "ADDRESS_DATA" : "Dane adresowe",
-        "ACCOUNT_CONFIRMED": "Pomyślnie aktywowano konto.",
-        "ACCOUNT_NOT_CONFIRMED": "Nie udało się aktywować konta."
+        "ACCOUNT_CONFIRMED": "Pomyślnie aktywowano konto",
+        "ACCOUNT_NOT_CONFIRMED": "Nie udało się aktywować konta",
+        "NO_TOKEN_PROVIDED" : "Nie podano tokenu weryfikacyjnego"
     },
     "PASSWORD" : {
         "CHANGE_PASSWORD" : "Zmień hasło",

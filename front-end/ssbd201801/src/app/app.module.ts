@@ -37,6 +37,7 @@ import { AuthService } from './common/auth.service';
 import { NotificationsComponent } from './notifications/notifications.component';
 import { NotificationService } from './common/notification.service';
 import {MatPaginatorIntlPl} from './common/mat-table-utils/mat-paginator-intl-pl';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -147,7 +148,8 @@ declarations: [
     OwnAccountEditComponent,
     AccountStatisticsComponent,
     LoginComponent,
-    NotificationsComponent
+    NotificationsComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     MatTableModule,

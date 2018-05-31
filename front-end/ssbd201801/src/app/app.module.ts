@@ -16,11 +16,11 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatSortModule,
-  MatPaginatorModule, MatPaginatorIntl
+  MatPaginatorModule, MatPaginatorIntl, MatDialogModule
 } from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { AuthUtilService } from './common/auth-util.service';
@@ -152,6 +152,7 @@ declarations: [
     ConfirmDialogComponent
   ],
   imports: [
+    MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
     MatInputModule,
@@ -162,6 +163,7 @@ declarations: [
     MatPaginatorModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
@@ -184,6 +186,7 @@ declarations: [
     AuthService,
     NotificationService,
     {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPl}
-  ]
+  ],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule { }

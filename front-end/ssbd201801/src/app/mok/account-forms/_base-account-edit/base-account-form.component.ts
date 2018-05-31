@@ -9,11 +9,11 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'app-account-form',
-  templateUrl: './account-form.component.html',
-  styleUrls: ['./account-form.component.css']
+  selector: 'app-base-account-form',
+  templateUrl: './base-account-form.component.html',
+  styleUrls: ['./base-account-form.component.css']
 })
-export class AccountFormComponent implements OnInit {
+export class BaseAccountFormComponent implements OnInit {
   
   wasFormSent: boolean = false;
   idEditToken: number;

@@ -37,7 +37,7 @@ import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { NotificationsComponent } from './shared/notifications/notifications.component';
 import { AccountEditComponent } from './mok/account-forms/account-edit/account-edit.component';
 import { OwnAccountEditComponent } from './mok/account-forms/own-account-edit/own-account-edit.component';
-import { AccountFormComponent } from './mok/account-forms/account-form/account-form.component';
+import { BaseAccountFormComponent } from './mok/account-forms/_base-account-edit/base-account-form.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -149,7 +149,7 @@ declarations: [
     AccountStatisticsComponent,
     LoginComponent,
     NotificationsComponent,
-    AccountFormComponent
+    BaseAccountFormComponent
   ],
   imports: [
     MatTableModule,

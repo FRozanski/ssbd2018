@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatTab } from '@angular/material';
 import { Router } from '@angular/router';
 import { AccountService } from '../common/account.service';
 import { AccountData } from '../model/account-data';
@@ -17,7 +17,8 @@ export class AccountStatisticsComponent implements OnInit {
     'numberOfLogins', 'numberOfOrders',
     'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
   ];
-  dataSource;
+
+  dataSource: MatTableDataSource<AccountData>;
 
   validationMessage = '';
 
@@ -37,8 +38,8 @@ export class AccountStatisticsComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    filterValue = filterValue.trim(); 
+    filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 

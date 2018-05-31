@@ -55,12 +55,12 @@ export class ChangePasswordComponent implements OnInit {
     if (this.form.valid) {
 
       this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        disableClose: false
-      });
-      this.dialogRef.componentInstance.confirmMessage = 'Are you sure?';
+          disableClose: false
+        });
+          this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
 
-      this.dialogRef.afterClosed().subscribe(result => {
-        if (result) {
+          this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
           const account: AccountData = <AccountData>this.form.value;
           account.id = this.myAccountToEdit.id;
           account.version = this.myAccountToEdit.version;

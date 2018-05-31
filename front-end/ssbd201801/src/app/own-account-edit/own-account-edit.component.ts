@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import {LocationService} from '../common/location.service';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-own-account-edit',
@@ -21,13 +23,16 @@ export class OwnAccountEditComponent implements OnInit {
     idEditToken: number;
     version: number;
 
+    dialogRef: MatDialogRef<ConfirmDialogComponent>;
+
     constructor(
         private accountService: AccountService,
         private location: Location,
         private translateService: TranslateService,
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private locationService: LocationService
+        private locationService: LocationService,
+        public dialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -42,21 +47,32 @@ export class OwnAccountEditComponent implements OnInit {
       this.wasFormSent = true;
 
       if (this.form.valid) {
-        let account: AccountData = <AccountData>this.form.value;
-        account.id = this.idEditToken;
-        account.version = this.version;
-        if (account.flatNumber === '') {
-          account.flatNumber = null;
-        }
-        this.accountService.updateMyAccount(account).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
-          this.router.navigate(['/main']);
-        },
-          (errorResponse) => {
-            this.formValidationMessage = errorResponse.error.message;
-            this.loadUserData();
+
+        this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+          disableClose: false
+        });
+        this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
+
+        this.dialogRef.afterClosed().subscribe(result => {
+          if (result) {
+            let account: AccountData = <AccountData>this.form.value;
+            account.id = this.idEditToken;
+            account.version = this.version;
+            if (account.flatNumber === '') {
+              account.flatNumber = null;
+            }
+            this.accountService.updateMyAccount(account).subscribe(() => {
+                alert(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
+                this.router.navigate(['/main']);
+              },
+              (errorResponse) => {
+                this.formValidationMessage = errorResponse.error.message;
+                this.loadUserData();
+              }
+            )
           }
-        )
+          this.dialogRef = null;
+        });
       }
     }
 

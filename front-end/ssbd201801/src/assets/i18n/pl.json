@@ -110,7 +110,8 @@
   "DIALOG" : {
     "CONFIRM_ACTION" : "Potwierdź operację",
     "OK" : "Potwierdzam",
-    "CANCEL" : "Anuluj"
+    "CANCEL" : "Anuluj",
+    "ARE_YOU_SURE" : "Czy jesteś pewien?"
   },
   "unknown_error": "Wystąpił nieznany błąd",
   "success": "Operacja została pomyślnie wykonana",

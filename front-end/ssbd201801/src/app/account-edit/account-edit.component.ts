@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import {LocationService} from '../common/location.service';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-account-edit',
@@ -17,15 +19,17 @@ export class AccountEditComponent implements OnInit {
 
   form: FormGroup;
   userId: number;
-  wasFormSent: boolean = false;
-  formValidationMessage: string = "";
+  wasFormSent = false;
+  formValidationMessage = '';
 
   idEditToken: number;
   version: number;
 
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
+
   constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService,
               private router: Router, private activatedRoute: ActivatedRoute,
-              private locationService: LocationService) { }
+              private locationService: LocationService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.locationService.passRouter(
@@ -42,21 +46,32 @@ export class AccountEditComponent implements OnInit {
     this.wasFormSent = true;
 
     if (this.form.valid) {
-      let account: AccountData = <AccountData>this.form.value;
-      account.id = this.idEditToken;
-      account.version = this.version;
-      if (account.flatNumber === '') {
-        account.flatNumber = null;
-      }
-      this.accountService.updateAccount(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
-        this.router.navigate(['/main']);
-      },
-        (errorResponse) => {
-          this.formValidationMessage = errorResponse.error.message;
-          this.loadUserData();
+
+      this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
+      this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
+
+      this.dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const account: AccountData = <AccountData>this.form.value;
+          account.id = this.idEditToken;
+          account.version = this.version;
+          if (account.flatNumber === '') {
+            account.flatNumber = null;
+          }
+          this.accountService.updateAccount(account).subscribe(() => {
+              alert(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
+              this.router.navigate(['/main']);
+            },
+            (errorResponse) => {
+              this.formValidationMessage = errorResponse.error.message;
+              this.loadUserData();
+            }
+          );
         }
-      )
+        this.dialogRef = null;
+      });
     }
   }
 
@@ -70,33 +85,33 @@ export class AccountEditComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      email: new FormControl("", [
+      email: new FormControl('', [
         Validators.required
       ]),
-      name: new FormControl("", [
+      name: new FormControl('', [
         Validators.required
       ]),
-      surname: new FormControl("", [
+      surname: new FormControl('', [
         Validators.required
       ]),
-      phone: new FormControl("", [
+      phone: new FormControl('', [
         Validators.required
       ]),
-      street: new FormControl("", [
+      street: new FormControl('', [
         Validators.required
       ]),
-      streetNumber: new FormControl("", [
+      streetNumber: new FormControl('', [
         Validators.required
       ]),
       flatNumber: new FormControl('',
       ),
-      postalCode: new FormControl("", [
+      postalCode: new FormControl('', [
         Validators.required
       ]),
-      city: new FormControl("", [
+      city: new FormControl('', [
         Validators.required
       ]),
-      country: new FormControl("", [
+      country: new FormControl('', [
         Validators.required
       ])
     });
@@ -105,19 +120,19 @@ export class AccountEditComponent implements OnInit {
   private loadUserData() {
     this.accountService.getAccountToEdit(this.userId).subscribe((account: AccountData) => {
 
-      if(!account.flatNumber) account.flatNumber = "";
+      if (!account.flatNumber) account.flatNumber = '';
 
       this.form.setValue({
-        "city": account.city,
-        "country": account.country,
-        "email": account.email,
-        "name": account.name,
-        "surname": account.surname,
-        "phone": account.phone,
-        "postalCode": account.postalCode,
-        "street": account.street,
-        "streetNumber": account.streetNumber,
-        "flatNumber": account.flatNumber
+        'city': account.city,
+        'country': account.country,
+        'email': account.email,
+        'name': account.name,
+        'surname': account.surname,
+        'phone': account.phone,
+        'postalCode': account.postalCode,
+        'street': account.street,
+        'streetNumber': account.streetNumber,
+        'flatNumber': account.flatNumber
       });
 
       this.idEditToken = account.id;

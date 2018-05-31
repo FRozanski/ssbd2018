@@ -56,7 +56,9 @@ export class RegisterComponent implements OnInit {
   }
 
   isRequiredSatisfied(controlName: string) {
-    return (this.form.get(controlName).errors && this.form.get(controlName).errors.required) && ((this.form.get(controlName).dirty || this.form.get(controlName).touched) || this.wasFormSent);
+    return (this.form.get(controlName).errors &&
+    this.form.get(controlName).errors.required) &&
+    ((this.form.get(controlName).dirty || this.form.get(controlName).touched) || this.wasFormSent);
   }
 
   private initializeForm() {

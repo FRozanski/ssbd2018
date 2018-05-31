@@ -33,7 +33,6 @@ export class RegistrationConfirmComponent implements OnInit {
       .filter(params => params.token)
       .subscribe(params => {
         this.token = params.token;
-        console.log("token=" + params.token + "token");
         this.accountService.confirmAccountByToken(this.token)
           .subscribe(() => {
             this.validationMessage = '';

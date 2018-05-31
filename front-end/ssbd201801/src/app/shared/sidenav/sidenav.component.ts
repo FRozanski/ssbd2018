@@ -1,15 +1,15 @@
 import { Component, ViewChild, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
-import { AccountService } from '../common/account.service';
-import { AccountData } from '../model/account-data';
 import { Observable } from 'rxjs/Observable';
-import { environment } from '../../environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import {SessionService} from '../common/session.service';
-import { AuthUtilService } from '../common/auth-util.service';
-import { AuthService } from '../common/auth.service';
-import {LocationService} from '../common/location.service';
-import {Router} from '@angular/router';
+import { SessionService } from '../../mok/common/session.service';
+import { AuthUtilService } from '../../mok/common/auth-util.service';
+import { AuthService } from '../../mok/common/auth.service';
+import { AccountData } from '../../mok/model/account-data';
+import { NotificationService } from '../../mok/common/notification.service';
+import { Route, Router } from '@angular/router';
+import { LocationService } from '../../mok/common/location.service';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -19,18 +19,32 @@ import {Router} from '@angular/router';
 export class SidenavComponent implements OnInit {
 
   userIdentity: AccountData = {};
-  rolesStringified = '';
-  displayedRouter = '';
+  rolesStringified: string = "";
 
-  constructor(private sessionService: SessionService, private translateService: TranslateService,
-    private authUtil: AuthUtilService, private authService: AuthService,
+  displayedRouter: string;
+
+  constructor(
+    private sessionService: SessionService,
+    private translateService: TranslateService,
+    private authUtil: AuthUtilService,
+    private authService: AuthService,
+    private notificationService: NotificationService,
+    private router: Router,
     private locationService: LocationService) {
     }
 
   ngOnInit() {
+    this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
+      this.userIdentity = data;
+    }, () => {
+      this.userIdentity = {
+        login: "Guest",
+        roles: ['GUEST']
+      }
+    });
     this.locationService.currentRouter.subscribe(router => {
-        this.displayedRouter = router;
-      });
+      this.displayedRouter = router;
+    });
     this.updateLoginAndRoles();
   }
 
@@ -41,6 +55,8 @@ export class SidenavComponent implements OnInit {
   onLogoutClick() {
     this.authService.logout().subscribe(() => {
       this.updateLoginAndRoles();
+      this.notificationService.displayTranslatedNotification("SUCCESS.LOGOUT");
+      this.router.navigate(['/main']);
     });
   }
 
@@ -61,9 +77,7 @@ export class SidenavComponent implements OnInit {
   }
 
   isMainPage(router: string): boolean {
-    if (router.length <= 0 || router === 'LOCATION.MAIN_PAGE')
-      return true;
-    else
-      return false;
+    if (router.length <= 0 || router === 'LOCATION.MAIN_PAGE') return true;
+    else return false;
   }
 }

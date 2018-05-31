@@ -3,7 +3,7 @@ import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { AccountService } from '../common/account.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AccountData } from '../model/account-data';
-import { environment } from '../../environments/environment'
+import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 import {LocationService} from '../common/location.service';

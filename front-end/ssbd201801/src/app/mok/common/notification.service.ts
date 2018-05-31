@@ -9,7 +9,7 @@ export class NotificationService {
     this.displayNotificationEmitter = new EventEmitter<string>();
   }
 
-  displayNotification(notification: string) {
+  displayTranslatedNotification(notification: string) {
     this.displayNotificationEmitter.emit(notification);
   }
 }

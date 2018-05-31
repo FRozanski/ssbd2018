@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationService } from '../common/notification.service';
 import { not } from '@angular/compiler/src/output/output_ast';
+import { NotificationService } from '../../mok/common/notification.service';
 
 @Component({
   selector: 'app-notifications',
@@ -9,7 +9,7 @@ import { not } from '@angular/compiler/src/output/output_ast';
 })
 export class NotificationsComponent implements OnInit {
 
-  private notificationTimeout = 3000;
+  private notificationDisplayTime = 5000;
   isNotificationDisplayed: boolean = false;
   public notification: string;
 
@@ -22,7 +22,7 @@ export class NotificationsComponent implements OnInit {
 
       setTimeout(() => {
         this.isNotificationDisplayed = false;
-      }, this.notificationTimeout);
+      }, this.notificationDisplayTime);
 
     });
   }

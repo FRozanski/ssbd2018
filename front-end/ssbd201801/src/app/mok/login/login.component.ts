@@ -6,8 +6,8 @@ import { AuthService } from '../common/auth.service';
 import { NotificationService } from '../common/notification.service';
 import { SessionService } from '../common/session.service';
 import { Router } from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {LocationService} from '../common/location.service';
+import { TranslateService } from '@ngx-translate/core';
+import { LocationService } from '../common/location.service';
 
 @Component({
   selector: 'app-login',
@@ -39,19 +39,21 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-
   onSubmit() {
-    let creds: Credentials = <Credentials>this.form.value;
+    const creds: Credentials = <Credentials>this.form.value;
     this.authService.login(creds).subscribe((data) => {
-      this.notificationService.displayNotification(this.translateService.instant('LOGIN.SUCCESS'));
-      this.router.navigate['/main'];
+      this.notificationService.displayTranslatedNotification('LOGIN.SUCCESS');
+      this.router.navigate(['/main']);
     }, (data) => {
-      this.notificationService.displayNotification(this.translateService.instant('LOGIN.FAILURE'));
+      this.notificationService.displayTranslatedNotification('LOGIN.FAILURE');
+
     });
   }
 
   isRequiredSatisfied(controlName: string) {
-    return (this.form.get(controlName).errors && this.form.get(controlName).errors.required) && ((this.form.get(controlName).dirty || this.form.get(controlName).touched) || this.wasFormSent);
+    return (this.form.get(controlName).errors &&
+    this.form.get(controlName).errors.required) &&
+    ((this.form.get(controlName).dirty || this.form.get(controlName).touched) || this.wasFormSent);
   }
 
 

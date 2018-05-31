@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {AccountService} from '../common/account.service';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {AccountData} from '../model/account-data';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthUtilService} from '../common/auth-util.service';

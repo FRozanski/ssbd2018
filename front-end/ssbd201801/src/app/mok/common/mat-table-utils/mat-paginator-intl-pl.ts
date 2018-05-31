@@ -1,6 +1,8 @@
 import {MatPaginatorIntl} from '@angular/material';
 import {TranslateService} from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class MatPaginatorIntlPl extends MatPaginatorIntl {
   itemsPerPageLabel = '';
   nextPageLabel = '';

@@ -21,27 +21,35 @@ import javax.mail.internet.MimeMessage;
 @LocalBean
 public class SendMailUtils {
 
-    private int port = 465;
-    private String host = "smtp.gmail.com";
-    private String from = "ssbd01team@gmail.com";
-    private boolean auth = true;
-    private String username = "ssbd01team@gmail.com";
-    private String password = "fajniebedziejaksieuda";
-    private String protocol = "SMTPS";
-    private boolean debug = true;
-    
+    private int PORT = 465;
+    private String HOST = "smtp.gmail.com";
+    private String FROM = "ssbd01team@gmail.com";
+    private boolean AUTH = true;
+    private String USERNAME = "ssbd01team@gmail.com";
+    private String PASSWORD = "fajniebedziejaksieuda";
+    private String PROTOCOL = "SMTPS";
+    private boolean DEBUG = true;
+    private String SUBJECT = "Welcome at Co-oper Service";
+    private String WELCOME_MESSAGE = "Witaj w gronie kooperantów!!! \n\n";
+    private String VERYFICATION_MESSAGE = "Aby potwierdzić chęć uczestnictwa, kliknij w link poniżej \n"
+                    + "\t Link aktywacyjny: ";
+    private String ACTIVATION_MESSAGE = "Twoje konto jest już aktywne! Zapraszamy do korzystania z serwisu.";
+    private String LOCK_MESSAGE = "Twoje konto zostało zablokowane.";
+    private String GREETINGS = "\n\n" 
+                    + "Pozdrawiamy! \n"
+                    + "KOOPERANT TEAM :D";
     private Session initializeEmailSettings() {    
         
         Properties props = new Properties();
-        props.put("mail.smtp.host", host);
-        props.put("mail.smtp.port", port);
+        props.put("mail.smtp.host", HOST);
+        props.put("mail.smtp.port", PORT);
         props.put("mail.smtp.ssl.enable", true);
         
         Authenticator authenticator = null;
-        if (auth) {
+        if (AUTH) {
             props.put("mail.smtp.auth", true);
             authenticator = new Authenticator() {
-                private PasswordAuthentication passwdAuth = new PasswordAuthentication(username, password);
+                private PasswordAuthentication passwdAuth = new PasswordAuthentication(USERNAME, PASSWORD);
 
                 @Override
                 public PasswordAuthentication getPasswordAuthentication() {
@@ -51,7 +59,7 @@ public class SendMailUtils {
         }
 
         Session session = Session.getInstance(props, authenticator);
-        session.setDebug(debug);
+        session.setDebug(DEBUG);
         
         return session;
     }
@@ -60,16 +68,12 @@ public class SendMailUtils {
         
         MimeMessage message = new MimeMessage(initializeEmailSettings());
         try {
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress(FROM));
             InternetAddress[] address = {new InternetAddress(to)};
             message.setRecipients(Message.RecipientType.TO, address);
-            message.setSubject("Welcome at Co-oper Service");
+            message.setSubject(SUBJECT);
             message.setSentDate(new Date());
-            message.setText("Witaj w gronie kooperantów!!! \n\n"
-                    + "Aby potwierdzić chęć uczestnictwa, kliknij w link poniżej \n"
-                    + "\t Link aktywacyjny: " + activationLink + "\n\n" 
-                    + "Pozdrawiamy! \n"
-                    + "KOOPERANT TEAM :D");
+            message.setText(WELCOME_MESSAGE + VERYFICATION_MESSAGE + activationLink + GREETINGS);                    
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();
@@ -80,15 +84,12 @@ public class SendMailUtils {
         
      MimeMessage message = new MimeMessage(initializeEmailSettings());
         try {
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress(FROM));
             InternetAddress[] address = {new InternetAddress(to)};
             message.setRecipients(Message.RecipientType.TO, address);
-            message.setSubject("Welcome at Co-oper Service");
+            message.setSubject(SUBJECT);
             message.setSentDate(new Date());
-            message.setText("Witaj w gronie kooperantów!!! \n\n"
-                    + "Twoje konto jest już aktywne! Zapraszamy do korzystania z serwisu. \\n\\n" 
-                    + "Pozdrawiamy! \n"
-                    + "KOOPERANT TEAM :D");
+            message.setText(WELCOME_MESSAGE + ACTIVATION_MESSAGE + GREETINGS);
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();
@@ -99,15 +100,12 @@ public class SendMailUtils {
         
      MimeMessage message = new MimeMessage(initializeEmailSettings());
         try {
-            message.setFrom(new InternetAddress(from));
+            message.setFrom(new InternetAddress(FROM));
             InternetAddress[] address = {new InternetAddress(to)};
             message.setRecipients(Message.RecipientType.TO, address);
-            message.setSubject("Welcome at Co-oper Service");
+            message.setSubject(SUBJECT);
             message.setSentDate(new Date());
-            message.setText("Witaj w gronie kooperantów!!! \n\n"
-                    + "Twoje konto zostało zablokowane. \\n\\n" 
-                    + "Pozdrawiamy! \n"
-                    + "KOOPERANT TEAM :D");
+            message.setText(WELCOME_MESSAGE + LOCK_MESSAGE + GREETINGS);
             Transport.send(message);
         } catch (MessagingException ex) {
             ex.printStackTrace();

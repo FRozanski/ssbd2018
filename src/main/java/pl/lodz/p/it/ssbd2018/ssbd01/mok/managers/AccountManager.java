@@ -21,10 +21,12 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.*;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.constants.AccountManagerConstants;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccessLevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountAlevelFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.ArchivalPasswordFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ConstantsParser;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
@@ -40,10 +42,12 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.TransactionLogger;
 @Stateful
 @Interceptors(LoggerInterceptor.class)
 public class AccountManager extends TransactionLogger implements AccountManagerLocal {
-
-    private static final String DEFAULT_ACCESS_LEVEL = "user";
-    private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
-    private static final String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
+    
+    //private static final AccountManagerConstants constants = (AccountManagerConstants)ConstantsParser.deserialize(AccountManager.class.getSimpleName());
+    private String DEFAULT_ACCESS_LEVEL = "user";
+    private  String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
+    
+    private static final Logger loger = Logger.getLogger(AccountManager.class.getName());    
 
     @EJB
     private AccountFacadeLocal accountFacade;
@@ -103,6 +107,7 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
 
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
+        //level.setIdAlevel(accessLevelFacade.findByLevel(constants.getDEFAULT_ACCESS_LEVEL()));
         level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL));
         accountAlevelFacade.create(level);
 
@@ -260,6 +265,7 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
 
     private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
+        //String veryficationLink = constants.getDEFAULT_URL() + servletContext.getContextPath();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
         veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
         return veryficationLink;

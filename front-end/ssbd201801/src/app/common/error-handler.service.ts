@@ -21,7 +21,8 @@ export class ErrorHandlerService {
         return this.notificationService.displayNotification('No Internet Connection');
       }
     } else {
-      this.router.navigate(['/error'], { queryParams: error });
+      if (error.status !== 400)
+        this.router.navigate(['/error'], { queryParams: error });
     }
   }
 }

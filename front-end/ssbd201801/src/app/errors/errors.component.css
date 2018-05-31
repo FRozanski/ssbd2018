@@ -4,8 +4,7 @@ h1, h3, h4, h5 {
 }
 
 .error-container {
-// width: 220px;
-  margin: 50% auto 0;
+  margin: 20% auto 0;
   transform: translateY(-50%);
   text-align: center;
   overflow-wrap: break-word;
@@ -22,4 +21,10 @@ h1, h3, h4, h5 {
 
 pre {
   overflow: scroll;
+}
+
+button {
+  font-size: 27px;
+  height: 64px;
+  margin: 25px;
 }

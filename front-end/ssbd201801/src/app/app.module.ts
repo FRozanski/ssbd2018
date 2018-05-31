@@ -16,8 +16,7 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatSortModule,
-  MatPaginatorModule, MatPaginatorIntl, MatSnackBarModule
-} from '@angular/material';
+  MatPaginatorModule, MatPaginatorIntl} from '@angular/material';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -162,7 +161,6 @@ declarations: [
     ErrorsComponent
   ],
   imports: [
-    MatSnackBarModule,
     MatTableModule,
     MatCheckboxModule,
     MatInputModule,

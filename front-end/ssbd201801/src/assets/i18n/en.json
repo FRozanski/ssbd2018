@@ -44,6 +44,12 @@
         "NEW_PASSWORD" : "NEW_PASSWORD",
         "CONFIRM_NEW_PASSWORD" : "CONFIRM_NEW_PASSWORD"
     },
+    "ERROR": {
+        "ERROR": "Error",
+        "NOT_FOUND": "Page not found",
+        "GO_BACK_HOME": "Return to main",
+        "UNKNOWN_ERROR": "An unknown error occurred, we apologize"
+    },
     "password_length_error" : "password_length_error",
     "password_different_error" : "password_different_error"
 

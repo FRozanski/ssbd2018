@@ -1,28 +1,34 @@
 <div class="error-container">
 
   <div *ngIf="data?.error">
-    <h1>ERROR {{ data?.error}}</h1>
-    <h5 *ngIf="data?.error === 404">Not found :(</h5>
-    <a mat-raised-button [routerLink]="'/main'">
-      <h5>Go Home</h5>
-    </a>
+    <h1>{{ "ERROR.ERROR" | translate }} {{ data?.error}}</h1>
+    <h5 *ngIf="data?.error === 404">{{ "ERROR.NOT_FOUND" | translate }}</h5>
+    <button mat-button
+      mat-raised-button
+       color='primary'
+       [routerLink]="'/main'">
+      <h5>{{ "ERROR.GO_BACK_HOME" | translate }}</h5>
+    </button>
   </div>
 
   <div *ngIf="routeParams.message">
-    <h1 *ngIf="routeParams?.status"> ERROR {{ routeParams?.status }}</h1><br/>
+    <h1 *ngIf="routeParams?.status"> {{ "ERROR.ERROR" | translate }} {{ routeParams?.status }}</h1><br/>
     <h3 *ngIf="routeParams?.message">{{ routeParams?.message }}</h3><br/>
 
-    <a mat-raised-button
+    <button mat-button mat-raised-button color='primary'
        routerLink="/"
        *ngIf="routeParams.status === '404'">
-      <h5>Go Back to home</h5>
-    </a>
+      <h5>{{ "ERROR.GO_BACK_HOME" | translate }}</h5>
+    </button>
   </div>
 
   <div *ngIf="!routeParams && !data">
-    <h1>Unknown error, sorry :(</h1>
-    <a mat-raised-button [routerLink]="'/main'">
-      <h5>Go Home</h5>
-    </a>
+    <h1>{{ "ERROR.UNKNOWN_ERROR" | translate }}</h1>
+    <button mat-button
+      mat-raised-button
+       color='primary'
+       [routerLink]="'/main'">
+      <h5>{{ "ERROR.GO_BACK_HOME" | translate }}</h5>
+    </button>
   </div>
 </div>

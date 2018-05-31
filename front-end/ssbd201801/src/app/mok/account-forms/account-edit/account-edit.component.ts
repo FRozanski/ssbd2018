@@ -17,7 +17,6 @@ import { NotificationService } from '../../common/notification.service';
 export class AccountEditComponent {
 
   accountSource: Observable<AccountData>;
-  formValidationMessage: string;
   userId: number;
 
   constructor(
@@ -37,11 +36,11 @@ export class AccountEditComponent {
 
   onFormSend(account: AccountData) {
     this.accountService.updateAccount(account).subscribe(() => {
-      this.notificationService.displayNotification(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
+      this.notificationService.displayTranslatedNotification('SUCCESS.ACCOUNT_EDIT');
       this.router.navigate(['/main']);
     },
       (errorResponse) => {
-        this.notificationService.displayNotification(this.translateService.instant(errorResponse.error.message));
+        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         this.loadUserData();
       }
     )

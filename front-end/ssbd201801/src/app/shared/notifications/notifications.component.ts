@@ -9,7 +9,7 @@ import { NotificationService } from '../../mok/common/notification.service';
 })
 export class NotificationsComponent implements OnInit {
 
-  private notificationTimeout = 3000;
+  private notificationDisplayTime = 5000;
   isNotificationDisplayed: boolean = false;
   public notification: string;
 
@@ -22,7 +22,7 @@ export class NotificationsComponent implements OnInit {
 
       setTimeout(() => {
         this.isNotificationDisplayed = false;
-      }, this.notificationTimeout);
+      }, this.notificationDisplayTime);
 
     });
   }

@@ -25,4 +25,6 @@ export interface AccountData {
     accountId?: number;
     version?: number;
     accessLevels?: string[];
+    lastLoginDate?: string;
+    lastLoginIp?: string;
 }

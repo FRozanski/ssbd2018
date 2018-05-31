@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { AccountData } from '../model/account-data';
 import { SessionService } from '../common/session.service';
+import { NotificationService } from '../common/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-change-password',
@@ -15,26 +17,34 @@ import { SessionService } from '../common/session.service';
 export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
-
   wasFormSent: boolean = false;
-
-  formValidationMessage: string = "";
-
   userIdentity: AccountData = {};
-
   myAccountToEdit: AccountData = {};
 
-  constructor(private accountService: AccountService, private sessionService: SessionService,
-    private location: Location, private translateService: TranslateService, private router: Router) { }
+  constructor(
+    private accountService: AccountService, 
+    private sessionService: SessionService,
+    private location: Location, 
+    private translateService: TranslateService, 
+    private router: Router,
+    private notificationService: NotificationService) { }
+
 
   ngOnInit() {
 
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;
+    }, () => {
+      this.userIdentity = {
+        login: "Guest",
+        roles: ['GUEST']
+      }
     });
 
     this.accountService.getMyAccountToEdit().subscribe((account: AccountData) => {
       this.myAccountToEdit = account;
+    }, (errorResponse: HttpErrorResponse) => {
+      this.notificationService.displayTranslatedNotification(errorResponse.error.message);
     });
 
     this.initializeForm();
@@ -48,11 +58,11 @@ export class ChangePasswordComponent implements OnInit {
       account.id = this.myAccountToEdit.id;
       account.version = this.myAccountToEdit.version;
       this.accountService.changeMyPassword(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
+        this.notificationService.displayTranslatedNotification('SUCCES.CHANGE_PASSWORD');
         this.router.navigate(['/main']);
       },
         (errorResponse) => {
-          this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+          this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         });
     }
   }

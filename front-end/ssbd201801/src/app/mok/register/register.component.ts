@@ -6,6 +6,7 @@ import { HttpResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { NotificationService } from '../common/notification.service';
 
 
 @Component({
@@ -16,12 +17,14 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-
   wasFormSent: boolean = false;
 
-  formValidationMessage: string = "";
-
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router) { }
+  constructor(
+    private accountService: AccountService, 
+    private location: Location, 
+    private translateService: TranslateService, 
+    private router: Router,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.initializeForm();
@@ -36,11 +39,11 @@ export class RegisterComponent implements OnInit {
         account.flatNumber = null;
       }
       this.accountService.registerAccount(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.REGISTER'));
+        this.notificationService.displayTranslatedNotification('SUCCESS.REGISTER');
         this.router.navigate(['/main']);
       },
         (errorResponse) => {
-          this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+          this.notificationService.displayTranslatedNotification(errorResponse.error.message);
       });
     }
   }

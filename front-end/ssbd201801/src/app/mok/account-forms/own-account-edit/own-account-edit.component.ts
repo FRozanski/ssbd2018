@@ -17,7 +17,6 @@ import { NotificationService } from '../../common/notification.service';
 export class OwnAccountEditComponent implements OnInit {
 
   accountSource: Observable<AccountData>;
-  formValidationMessage: string;
 
   constructor(
     private accountService: AccountService,
@@ -33,11 +32,11 @@ export class OwnAccountEditComponent implements OnInit {
 
   onFormSend(account: AccountData) {   
     this.accountService.updateMyAccount(account).subscribe(() => {
-      this.notificationService.displayNotification(this.translateService.instant('SUCCESS.ACCOUNT_EDIT'));
+      this.notificationService.displayTranslatedNotification('SUCCESS.ACCOUNT_EDIT');
       this.router.navigate(['/main']);
     },
       (errorResponse) => {
-        this.notificationService.displayNotification(this.translateService.instant(errorResponse.error.message));
+        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         this.loadUserData();
       }
     )

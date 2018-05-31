@@ -1,7 +1,4 @@
 <div class="example-container mat-elevation-z8">
-  <mat-card class='errors-card' *ngIf='validationMessage !== "" ' >
-    <p>{{ validationMessage }} </p>
-  </mat-card>
   <div class="example-header">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
@@ -18,6 +15,16 @@
     <ng-container matColumnDef="confirm">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastLoginDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LAST_LOGIN_DATE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastLoginDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="lastLoginIp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LAST_LOGIN_IP' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.lastLoginIp}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="active">

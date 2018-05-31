@@ -12,9 +12,15 @@ export class AuthGuard implements CanActivate {
     protected identity: AccountData;
 
     constructor (protected authUtil : AuthUtilService, protected sessionService: SessionService, ) {
+
         this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
             this.identity = data;
-        });
+          }, () => {
+            this.identity = {
+              login: "Guest",
+              roles: ['GUEST']
+            }
+          });
      }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {

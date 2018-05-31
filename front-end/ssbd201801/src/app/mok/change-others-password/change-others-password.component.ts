@@ -5,6 +5,7 @@ import { AccountService } from '../common/account.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from '../common/notification.service';
 
 @Component({
   selector: 'app-change-others-password',
@@ -14,17 +15,17 @@ import { TranslateService } from '@ngx-translate/core';
 export class ChangeOthersPasswordComponent implements OnInit {
 
   form: FormGroup;
-
   wasFormSent = false;
-
-  formValidationMessage = '';
-
   othersIdDb: number;
 
   accountToEdit: AccountData = {};
 
-  constructor(private accountService: AccountService, private location: Location,
-    private translateService: TranslateService, private router: Router) { }
+  constructor(
+    private accountService: AccountService, 
+    private location: Location,
+    private translateService: TranslateService, 
+    private router: Router,
+    private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);
@@ -33,7 +34,7 @@ export class ChangeOthersPasswordComponent implements OnInit {
       this.accountToEdit = data;
     },
       (errorResponse) => {
-        this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
       });
 
     this.initializeForm();
@@ -47,11 +48,11 @@ export class ChangeOthersPasswordComponent implements OnInit {
       account.id = this.accountToEdit.id;
       account.version = this.accountToEdit.version;
       this.accountService.changeOthersPassword(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
+        this.notificationService.displayTranslatedNotification('SUCCES.CHANGE_PASSWORD');
         this.router.navigate(['/main']);
       },
         (errorResponse) => {
-          this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+          this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         });
     }
   }

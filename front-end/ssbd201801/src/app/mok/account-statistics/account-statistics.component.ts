@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AccountService } from '../common/account.service';
 import { AccountData } from '../model/account-data';
 import { TranslateService } from '@ngx-translate/core';
+import { NotificationService } from '../common/notification.service';
 
 @Component({
   selector: 'app-account-statistics',
@@ -15,15 +16,17 @@ export class AccountStatisticsComponent implements OnInit {
   displayedColumns = [
     'login', 'confirm', 'active',
     'numberOfLogins', 'numberOfOrders',
-    'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel'
+    'numberOfProducts', 'confirmAccount', 'lockOrUnlockAccount', 'adminAccessLevel', 'managerAccessLevel', 'userAccessLevel',
+    'lastLoginDate', 'lastLoginIp',
   ];
 
   dataSource: MatTableDataSource<AccountData>;
 
-  validationMessage = '';
-
-  constructor(private accountService: AccountService, private router: Router,
-    private translateService: TranslateService) { }
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private translateService: TranslateService,
+    private notificationService: NotificationService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,37 +41,37 @@ export class AccountStatisticsComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); 
+    filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
 
   onConfirmClick(account: AccountData) {
     this.accountService.confirmAccount(account.id).subscribe(() => {
-      alert(this.translateService.instant('SUCCESS.ACCOUNT_CONFIRM'));
+      this.notificationService.displayTranslatedNotification('SUCCESS.ACCOUNT_CONFIRM');
       window.location.reload();
     },
       (errorResponse) => {
-        this.validationMessage = this.translateService.instant(errorResponse.error.message);
+        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
       });
   }
 
   onLockUnlockClick(account: AccountData) {
     if (this.isActive(account)) {
       this.accountService.lockAccount(account.id).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ACCOUNT_LOCK'));
+        this.notificationService.displayTranslatedNotification('SUCCESS.ACCOUNT_LOCK');
         window.location.reload();
       },
         (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
+          this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         });
     } else {
       this.accountService.unlockAccount(account.id).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ACCOUNT_UNLOCK'));
+        this.notificationService.displayTranslatedNotification('SUCCESS.ACCOUNT_UNLOCK');
         window.location.reload();
       },
         (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
+          this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         });
     }
   }
@@ -102,10 +105,11 @@ export class AccountStatisticsComponent implements OnInit {
 
   private alterAccountAccessLevel(account: AccountData) {
     this.accountService.alterAccountAccessLevel(account).subscribe(() => {
-      alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
+      this.notificationService.displayTranslatedNotification('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL');
+
     },
       (errorResponse) => {
-        alert(this.translateService.instant(errorResponse.error.message));
+        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         window.location.reload();
       });
   }

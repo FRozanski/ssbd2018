@@ -107,6 +107,11 @@
       "ADD_ACCOUNT_PAGE" : "Dodawanie nowego użytkownika",
       "REGISTRATION_CONFIRM" : "Aktywacja konta"
   },
+  "DIALOG" : {
+    "CONFIRM_ACTION" : "Potwierdź operację",
+    "OK" : "Potwierdzam",
+    "CANCEL" : "Anuluj"
+  },
   "unknown_error": "Wystąpił nieznany błąd",
   "success": "Operacja została pomyślnie wykonana",
   "authentication_error": "Nie udało się zalogować",

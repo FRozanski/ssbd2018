@@ -6,6 +6,8 @@ import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {AccountData} from '../model/account-data';
 import {SessionService} from '../common/session.service';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-change-password',
@@ -16,16 +18,19 @@ export class ChangePasswordComponent implements OnInit {
 
   form: FormGroup;
 
-  wasFormSent: boolean = false;
+  wasFormSent = false;
 
-  formValidationMessage: string = "";
+  formValidationMessage = '';
 
   userIdentity: AccountData = {};
 
   myAccountToEdit: AccountData = {};
 
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
+
   constructor(private accountService: AccountService, private sessionService: SessionService,
-              private location: Location, private translateService: TranslateService, private router: Router) { }
+              private location: Location, private translateService: TranslateService,
+              private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -44,16 +49,27 @@ export class ChangePasswordComponent implements OnInit {
     this.wasFormSent = true;
 
     if (this.form.valid) {
-      let account: AccountData = <AccountData>this.form.value;
-      account.id = this.myAccountToEdit.id;
-      account.version = this.myAccountToEdit.version;
-      this.accountService.changeMyPassword(account).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
-          this.router.navigate(['/main']);
-        },
-        (errorResponse) => {
-          this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+
+      this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
+      this.dialogRef.componentInstance.confirmMessage = 'Are you sure?';
+
+      this.dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const account: AccountData = <AccountData>this.form.value;
+          account.id = this.myAccountToEdit.id;
+          account.version = this.myAccountToEdit.version;
+          this.accountService.changeMyPassword(account).subscribe(() => {
+              alert(this.translateService.instant('SUCCESS.CHANGE_PASSWORD'));
+              this.router.navigate(['/main']);
+            },
+            (errorResponse) => {
+              this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+            });
+        }
+        this.dialogRef = null;
+      });
     }
   }
 
@@ -67,13 +83,13 @@ export class ChangePasswordComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      oldPassword: new FormControl("", [
+      oldPassword: new FormControl('', [
         Validators.required
       ]),
-      firstPassword: new FormControl("", [
+      firstPassword: new FormControl('', [
         Validators.required
       ]),
-      secondPassword: new FormControl("", [
+      secondPassword: new FormControl('', [
         Validators.required
       ])
     });

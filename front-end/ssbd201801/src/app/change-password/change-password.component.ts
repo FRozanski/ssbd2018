@@ -8,6 +8,7 @@ import {AccountData} from '../model/account-data';
 import {SessionService} from '../common/session.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-change-password',
@@ -30,9 +31,12 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private accountService: AccountService, private sessionService: SessionService,
               private location: Location, private translateService: TranslateService,
-              private router: Router, public dialog: MatDialog) { }
-
+              private router: Router, public dialog: MatDialog,
+              private locationService: LocationService) { }
   ngOnInit() {
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.CHANGE_PASSWORD_PAGE'));
 
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;

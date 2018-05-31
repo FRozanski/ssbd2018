@@ -38,6 +38,7 @@ import { NotificationsComponent } from './notifications/notifications.component'
 import { NotificationService } from './common/notification.service';
 import {MatPaginatorIntlPl} from './common/mat-table-utils/mat-paginator-intl-pl';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import {LocationService} from './common/location.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -179,6 +180,7 @@ declarations: [
   providers: [
     AccountService,
     SessionService,
+    LocationService,
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,

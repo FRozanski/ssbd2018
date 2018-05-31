@@ -93,6 +93,20 @@
       "REGISTER" : "Pomyślnie zarejestrowano konto",
       "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta"
     },
+  "LOCATION" : {
+      "YOUR_LOCATION" : "Twoja lokalizacja",
+      "MAIN_PAGE" : "Strona główna",
+      "LOGIN_PAGE" : "Logowanie",
+      "ACCOUNT_EDIT_PAGE" : "Edycja konta",
+      "ACCOUNT_LIST_PAGE" : "Lista kont",
+      "ACCOUNT_STATISTICS_PAGE" : "Statystyki kont",
+      "CHANGE_OTHERS_PASSWORD_PAGE" : "Zmiana hasła użytkownika",
+      "CHANGE_PASSWORD_PAGE" : "Zmiana własnego hasła",
+      "OWN_ACCOUNT_EDIT_PAGE" : "Edycja własnego konta",
+      "REGISTER_PAGE" : "Rejestracja",
+      "ADD_ACCOUNT_PAGE" : "Dodawanie nowego użytkownika",
+      "REGISTRATION_CONFIRM" : "Aktywacja konta"
+  },
   "unknown_error": "Wystąpił nieznany błąd",
   "success": "Operacja została pomyślnie wykonana",
   "authentication_error": "Nie udało się zalogować",

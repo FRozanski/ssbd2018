@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {SessionService} from '../common/session.service';
 import { AuthUtilService } from '../common/auth-util.service';
 import { AuthService } from '../common/auth.service';
+import {LocationService} from '../common/location.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sidenav',
@@ -17,13 +19,18 @@ import { AuthService } from '../common/auth.service';
 export class SidenavComponent implements OnInit {
 
   userIdentity: AccountData = {};
-  rolesStringified: string = "";
+  rolesStringified = '';
+  displayedRouter = '';
 
   constructor(private sessionService: SessionService, private translateService: TranslateService,
-    private authUtil: AuthUtilService, private authService: AuthService) {
+    private authUtil: AuthUtilService, private authService: AuthService,
+    private locationService: LocationService) {
     }
 
   ngOnInit() {
+    this.locationService.currentRouter.subscribe(router => {
+        this.displayedRouter = router;
+      });
     this.updateLoginAndRoles();
   }
 
@@ -53,4 +60,10 @@ export class SidenavComponent implements OnInit {
     return this.authUtil.hasRole(role, this.userIdentity);
   }
 
+  isMainPage(router: string): boolean {
+    if (router.length <= 0 || router === 'LOCATION.MAIN_PAGE')
+      return true;
+    else
+      return false;
+  }
 }

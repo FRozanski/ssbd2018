@@ -14,7 +14,8 @@
         "MY_ACCOUNT" : "Moje konto",
         "CHANGE_MY_PASSWORD" : "Zmień hasło",
         "LOGOUT" : "Wyloguj",
-        "GUEST" : "Gość"
+        "GUEST" : "Gość",
+        "CREATE_ACCOUNT" : "Utwórz konto"
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",
@@ -73,11 +74,14 @@
       "ITEMS_PER_PAGE" : "Liczba elementów na stronie",
       "NEXT_PAGE" : "Następna strona",
       "PREVIOUS_PAGE" : "Poprzednia strona",
-      "FILTER" : "Filtruj"
+      "FILTER" : "Filtruj",
+      "FIRST_PAGE" : "Pierwsza strona",
+      "LAST_PAGE" : "Ostatnia strona"
     },
     "LOGIN" : {
       "SUCCESS" : "Zalogowano",
-      "FAILURE" : "Nie udało się zalogować"
+      "FAILURE" : "Nie udało się zalogować",
+      "SIGN_IN" : "Zaloguj"
     },
     "SUCCESS" : {
       "ACCOUNT_EDIT" : "Pomyślnie edytowano konto",

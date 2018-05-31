@@ -12,6 +12,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.constants.SendMailUtilsConstants;
 
 /**
  *
@@ -21,6 +22,8 @@ import javax.mail.internet.MimeMessage;
 @LocalBean
 public class SendMailUtils {
 
+    //private static final SendMailUtilsConstants constants = (SendMailUtilsConstants)ConstantsParser.deserialize(SendMailUtils.class.getSimpleName());
+    
     private int PORT = 465;
     private String HOST = "smtp.gmail.com";
     private String FROM = "ssbd01team@gmail.com";

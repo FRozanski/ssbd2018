@@ -1,0 +1,22 @@
+<pl.lodz.p.it.ssbd2018.ssbd01.mok.constants.SendMailUtilsConstants>
+  <PORT>465</PORT>
+  <HOST>smtp.gmail.com</HOST>
+  <FROM>ssbd01team@gmail.com</FROM>
+  <AUTH>true</AUTH>
+  <USERNAME>ssbd01team@gmail.com</USERNAME>
+  <PASSWORD>fajniebedziejaksieuda</PASSWORD>
+  <PROTOCOL>SMTPS</PROTOCOL>
+  <DEBUG>true</DEBUG>
+  <SUBJECT>Welcome at Co-oper Service</SUBJECT>
+  <WELCOME__MESSAGE>Witaj w gronie kooperantow!!! 
+
+</WELCOME__MESSAGE>
+  <VERYFICATION__MESSAGE>Aby potwierdzic chec uczestnictwa, kliknij w link ponizej 
+	 Link aktywacyjny: </VERYFICATION__MESSAGE>
+  <ACTIVATION__MESSAGE>Twoje konto jest juz aktywne! Zapraszamy do korzystania z serwisu.</ACTIVATION__MESSAGE>
+  <LOCK__MESSAGE>Twoje konto zostalo zablokowane.</LOCK__MESSAGE>
+  <GREETINGS>
+
+Pozdrawiamy! 
+KOOPERANT TEAM :D</GREETINGS>
+</pl.lodz.p.it.ssbd2018.ssbd01.mok.constants.SendMailUtilsConstants>

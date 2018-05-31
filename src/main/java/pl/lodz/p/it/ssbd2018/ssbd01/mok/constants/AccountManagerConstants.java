@@ -13,8 +13,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
  * @author Filip
  */
 public class AccountManagerConstants {
+    
     private String DEFAULT_ACCESS_LEVEL;
-    private  String DEFAULT_URL;
+    private String DEFAULT_URL;
 
     public String getDEFAULT_ACCESS_LEVEL() {
         return DEFAULT_ACCESS_LEVEL;

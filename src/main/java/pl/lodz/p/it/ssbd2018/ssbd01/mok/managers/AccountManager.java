@@ -43,9 +43,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.TransactionLogger;
 @Interceptors(LoggerInterceptor.class)
 public class AccountManager extends TransactionLogger implements AccountManagerLocal {
     
-    //private static final AccountManagerConstants constants = (AccountManagerConstants)ConstantsParser.deserialize(AccountManager.class.getSimpleName());
-    private String DEFAULT_ACCESS_LEVEL = "user";
-    private  String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
+    private static final AccountManagerConstants constants = (AccountManagerConstants)ConstantsParser.deserialize(AccountManager.class.getSimpleName());
+//    private String DEFAULT_ACCESS_LEVEL = "user";
+//    private  String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
     
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());    
 
@@ -107,8 +107,8 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
 
         AccountAlevel level = new AccountAlevel();
         level.setIdAccount(account);
-        //level.setIdAlevel(accessLevelFacade.findByLevel(constants.getDEFAULT_ACCESS_LEVEL()));
-        level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL));
+        level.setIdAlevel(accessLevelFacade.findByLevel(constants.getDEFAULT_ACCESS_LEVEL()));
+        //level.setIdAlevel(accessLevelFacade.findByLevel(DEFAULT_ACCESS_LEVEL));
         accountAlevelFacade.create(level);
 
         ArchivalPassword archivalPassword = new ArchivalPassword(account.getPassword(), generateCurrentDate(), account);
@@ -265,8 +265,8 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
 
     private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
-        //String veryficationLink = constants.getDEFAULT_URL() + servletContext.getContextPath();
-        String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
+        String veryficationLink = constants.getDEFAULT_URL() + servletContext.getContextPath();  
+        //String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
         veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
         return veryficationLink;
     }    

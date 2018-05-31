@@ -6,6 +6,7 @@ import { HttpResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-own-account-edit',
@@ -25,10 +26,14 @@ export class OwnAccountEditComponent implements OnInit {
         private location: Location,
         private translateService: TranslateService,
         private router: Router,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private locationService: LocationService
     ) { }
 
     ngOnInit() {
+      this.locationService.passRouter(
+        this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+        this.translateService.instant('LOCATION.OWN_ACCOUNT_EDIT_PAGE'));
       this.initializeForm();
       this.loadUserData();
     }

@@ -7,6 +7,7 @@ import { NotificationService } from '../common/notification.service';
 import { SessionService } from '../common/session.service';
 import { Router } from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-login',
@@ -23,10 +24,14 @@ export class LoginComponent implements OnInit {
     private notificationService: NotificationService,
     private sessionService: SessionService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit() {
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.LOGIN_PAGE'));
     this.form = new FormGroup(
       {
         username: new FormControl("", [Validators.required]),

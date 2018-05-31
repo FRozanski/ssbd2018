@@ -7,6 +7,7 @@ import {AccountData} from '../model/account-data';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthUtilService} from '../common/auth-util.service';
 import {SessionService} from '../common/session.service';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-account-statistics',
@@ -33,18 +34,23 @@ export class AccountStatisticsComponent implements OnInit {
   dataSource;
 
   validationMessage = '';
-
   userIdentity: AccountData = {};
   rolesStringified = '';
 
-  constructor (private accountService: AccountService, private router: Router,
-               private translateService: TranslateService, private authUtil: AuthUtilService,
+  constructor (private accountService: AccountService,
+               private translateService: TranslateService,
+               private router: Router,
+               private authUtil: AuthUtilService,
+               private locationService: LocationService,
                private sessionService: SessionService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.ACCOUNT_STATISTICS_PAGE'));
     this.accountService.getAllAccounts().subscribe((data) => {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;

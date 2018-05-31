@@ -6,6 +6,7 @@ import { HttpResponse } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+import {LocationService} from '../common/location.service';
 
 @Component({
   selector: 'app-account-edit',
@@ -22,9 +23,16 @@ export class AccountEditComponent implements OnInit {
   idEditToken: number;
   version: number;
 
-  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService, private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService,
+              private router: Router, private activatedRoute: ActivatedRoute,
+              private locationService: LocationService) { }
 
   ngOnInit() {
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE') +
+      ' ' + String.fromCharCode(0x2192) + ' ' +
+      this.translateService.instant('LOCATION.ACCOUNT_EDIT_PAGE'));
     this.initializeForm();
     this.userId = this.activatedRoute.snapshot.params['id'];
     this.loadUserData();

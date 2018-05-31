@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {AccountService} from '../common/account.service';
 import {environment} from '../../environments/environment';
@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthUtilService} from '../common/auth-util.service';
 import {SessionService} from '../common/session.service';
 import {LocationService} from '../common/location.service';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-account-statistics',
@@ -37,12 +38,15 @@ export class AccountStatisticsComponent implements OnInit {
   userIdentity: AccountData = {};
   rolesStringified = '';
 
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
+
   constructor (private accountService: AccountService,
                private translateService: TranslateService,
                private router: Router,
                private authUtil: AuthUtilService,
                private locationService: LocationService,
-               private sessionService: SessionService) { }
+               private sessionService: SessionService,
+               public dialog: MatDialog) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -73,13 +77,23 @@ export class AccountStatisticsComponent implements OnInit {
   }
 
   onConfirmClick(account: AccountData) {
-    this.accountService.confirmAccount(account.id).subscribe(() => {
-      alert(this.translateService.instant('SUCCESS.ACCOUNT_CONFIRM'));
-      window.location.reload();
-    },
-      (errorResponse) => {
-        this.validationMessage = this.translateService.instant(errorResponse.error.message);
-      });
+    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.accountService.confirmAccount(account.id).subscribe(() => {
+            alert(this.translateService.instant('SUCCESS.ACCOUNT_CONFIRM'));
+            window.location.reload();
+          },
+          (errorResponse) => {
+            this.validationMessage = this.translateService.instant(errorResponse.error.message);
+          });
+      }
+      this.dialogRef = null;
+    });
   }
 
   onLockUnlockClick(account: AccountData) {

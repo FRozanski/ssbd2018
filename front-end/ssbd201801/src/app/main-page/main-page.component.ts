@@ -10,14 +10,12 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class MainPageComponent implements OnInit {
 
-  messageShown = '';
-
   constructor(private router: Router,
               private locationService: LocationService,
               private translateService: TranslateService) { }
 
   ngOnInit() {
-    this.locationService.passRouter(this.translateService.instant('LOCATION.MAIN_PAGE'));
+    this.locationService.passRouter('');
   }
 
 }

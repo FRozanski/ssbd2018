@@ -31,7 +31,9 @@ export class OwnAccountEditComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.locationService.passRouter(this.translateService.instant('LOCATION.OWN_ACCOUNT_EDIT_PAGE'));
+      this.locationService.passRouter(
+        this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+        this.translateService.instant('LOCATION.OWN_ACCOUNT_EDIT_PAGE'));
       this.initializeForm();
       this.loadUserData();
     }

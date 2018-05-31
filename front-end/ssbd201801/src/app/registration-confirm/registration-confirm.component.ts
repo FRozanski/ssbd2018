@@ -24,7 +24,9 @@ export class RegistrationConfirmComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locationService.passRouter(this.translateService.instant('LOCATION.REGISTRATION_CONFIRM'));
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.REGISTRATION_CONFIRM'));
     this.route.queryParams
       .filter(params => params.token)
       .subscribe(params => {

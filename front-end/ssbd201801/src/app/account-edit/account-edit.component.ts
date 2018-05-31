@@ -29,6 +29,7 @@ export class AccountEditComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
       this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE') +
       ' ' + String.fromCharCode(0x2192) + ' ' +
       this.translateService.instant('LOCATION.ACCOUNT_EDIT_PAGE'));

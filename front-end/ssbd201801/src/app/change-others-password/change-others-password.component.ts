@@ -29,7 +29,9 @@ export class ChangeOthersPasswordComponent implements OnInit {
               private locationService: LocationService) { }
 
   ngOnInit() {
-    this.locationService.passRouter(this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE') +
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE') +
       ' ' + String.fromCharCode(0x2192) + ' ' +
       this.translateService.instant('LOCATION.CHANGE_OTHERS_PASSWORD_PAGE'));
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);

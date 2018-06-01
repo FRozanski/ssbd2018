@@ -91,7 +91,8 @@
       "ACCOUNT_UNLOCK" : "Pomyślnie odblokowano konto",
       "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
       "REGISTER" : "Pomyślnie zarejestrowano konto",
-      "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta"
+      "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta",
+      "LOGOUT" : "Pomyślnie wylogowano!"
     },
   "LOCATION" : {
       "YOUR_LOCATION" : "Twoja lokalizacja",
@@ -102,7 +103,7 @@
       "ACCOUNT_STATISTICS_PAGE" : "Statystyki kont",
       "CHANGE_OTHERS_PASSWORD_PAGE" : "Zmiana hasła użytkownika",
       "CHANGE_PASSWORD_PAGE" : "Zmiana własnego hasła",
-      "OWN_ACCOUNT_EDIT_PAGE" : "Edycja własnego konta",
+      "OWN_ACCOUNT_EDIT_PAGE" : "Moje konto",
       "REGISTER_PAGE" : "Rejestracja",
       "ADD_ACCOUNT_PAGE" : "Dodawanie nowego użytkownika",
       "REGISTRATION_CONFIRM" : "Aktywacja konta"
@@ -161,5 +162,8 @@
   "app.exception.mok.account_alevel": "Nie udało się wykonać działania na poziomie dostępu konta",
   "app.exception.mok.account_alevel.already_exists": "Konto posiada już ten poziom dostępu",
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
-  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny"
+  "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
+  "app.exception.mok.account.email_pattern_error": "Podany adres email jest niepoprawny",
+  "success": "Operacja została pomyślnie wykonana.",
+  "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig"
 }

@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    width: 300px;
+}
+mat-card {  
+    background-color: #FFFFCC;
+    height: auto;
+    word-wrap: break-word;
+}

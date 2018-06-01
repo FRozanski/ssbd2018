@@ -54,25 +54,23 @@ public class SessionRestController {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response getMyIdentity(@Context HttpServletRequest servletRequest) {
+        JSONObject json = new JSONObject();
         try {
             String login = getUserLogin(servletRequest);
             List<String> levels = getUserRoles(servletRequest);
-            JSONObject json = new JSONObject();
             json.put("roles", levels);
             json.put("login", login);
-            return Response.status(Response.Status.OK)
+        } catch (UserAlreadyLogoutException ex) {
+            json.put("roles", "GUEST");
+            json.put("login", "GUEST");      
+        }
+        return Response.status(Response.Status.OK)
                     .entity(json)
                     .type(MediaType.APPLICATION_JSON)
                     .build();
-        } catch (AppBaseException ex) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(new WebErrorInfo("400", ex.getCode()))
-                    .type(MediaType.APPLICATION_JSON)
-                    .build();
-        }
     }
 
-    protected String getUserLogin(HttpServletRequest servletRequest) throws AppBaseException {
+    protected String getUserLogin(HttpServletRequest servletRequest) throws UserAlreadyLogoutException {
         if (servletRequest.getUserPrincipal() == null) {
             throw new UserAlreadyLogoutException("user_already_logout_error");
         }

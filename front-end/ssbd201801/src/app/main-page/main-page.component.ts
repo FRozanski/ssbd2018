@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LocationService} from '../common/location.service';
+import {LocationService} from '../mok/common/location.service';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({

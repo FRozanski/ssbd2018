@@ -14,10 +14,10 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatSortModule,
-  MatPaginatorModule, MatPaginatorIntl
+  MatPaginatorModule, MatPaginatorIntl, MatSelectModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { AccountListComponent } from './mok/account-list/account-list.component';
 import { AccountService } from './mok/common/account.service';
@@ -162,6 +162,7 @@ declarations: [
     MatSidenavModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
@@ -173,7 +174,8 @@ declarations: [
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    FormsModule
   ],
   bootstrap: [AppComponent],
   providers: [

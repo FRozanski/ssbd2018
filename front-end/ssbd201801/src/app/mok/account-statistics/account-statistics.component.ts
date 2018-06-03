@@ -8,6 +8,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthUtilService} from '../common/auth-util.service';
 import {SessionService} from '../common/session.service';
 import {LocationService} from '../common/location.service';
+import { FormControl } from '@angular/forms';
+import { SelectValues, SelectValue } from '../common/mat-table-utils/select-values';
 
 @Component({
   selector: 'app-account-statistics',
@@ -18,8 +20,6 @@ export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
     {def: 'login', showManager: true},
-    {def: 'confirm', showManager: true},
-    {def: 'active', showManager: true},
     {def: 'lastLoginDate', showManager: true},
     {def: 'lastLoginIp', showManager: true},
     {def: 'numberOfLogins', showManager: true},
@@ -27,15 +27,22 @@ export class AccountStatisticsComponent implements OnInit {
     {def: 'numberOfProducts', showManager: true},
     {def: 'confirmAccount', showManager: true},
     {def: 'lockOrUnlockAccount', showManager: true},
-    {def: 'adminAccessLevel', showManager: false},
-    {def: 'managerAccessLevel', showManager: false},
-    {def: 'userAccessLevel', showManager: false},
+    {def: 'accessLevel', showManager: true}
   ];
   dataSource;
 
   validationMessage = '';
   userIdentity: AccountData = {};
   rolesStringified = '';
+
+
+  changedAccounts: Set<AccountData> = new Set<AccountData>();
+  changedRows: Set<number> = new Set<number>();
+
+  readonly avaliableRoles: SelectValue[] = SelectValues.roleSelectValues;
+
+
+  selectValue: any;
 
   constructor (private accountService: AccountService,
                private translateService: TranslateService,
@@ -56,9 +63,30 @@ export class AccountStatisticsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
-    this.updateRoles();
+    this.updateRoles(); 
 
   }
+
+  onAccountChange(account: AccountData, rowId: number)
+  {
+    this.changedAccounts.add(account);
+    this.changedRows.add(rowId);
+    console.log(account);
+    
+  }
+
+  submitAccounts() {
+    console.log("Changed accounts: ", this.changedAccounts);
+    console.log("Selected rows: ", this.changedRows);
+  }
+
+  wasRowChanged(rowId) {
+    return this.changedRows.has(rowId);
+  }
+
+  getSelectValues
+
+
   getDisplayedColumns(): string[] {
     const isManager = this.hasRole('MANAGER') && !this.hasRole('ADMIN');
     return this.displayedColumns

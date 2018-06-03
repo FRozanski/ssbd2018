@@ -22,7 +22,29 @@ export class AccountService {
   constructor(private httpClient: HttpClient, private authUtilService: AuthUtilService) { }
 
   getAllAccounts(): Observable<AccountData[]> {
-    return this.httpClient.get<AccountData[]>(this.uri);
+    // return this.httpClient.get<AccountData[]>(this.uri);
+    return Observable.of([
+      {
+        login: "test1",
+        roles: ["USER"]
+      },
+      {
+        login: "test1",
+        roles: ["USER"]
+      },
+      {
+        login: "test1",
+        roles: ["USER"]
+      },
+      {
+        login: "test1",
+        roles: ["USER"]
+      },
+      {
+        login: "test1",
+        roles: ["USER"]
+      }
+    ])
   }
 
   getAccountToEdit(id: number): Observable<AccountData> {

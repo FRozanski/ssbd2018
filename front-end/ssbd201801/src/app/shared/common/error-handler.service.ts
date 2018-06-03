@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
 import {NotificationService} from '../../mok/common/notification.service';
@@ -9,7 +9,8 @@ export class ErrorHandlerService {
   constructor(
     private notificationService: NotificationService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   public handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
@@ -17,8 +18,7 @@ export class ErrorHandlerService {
         return this.notificationService.displayTranslatedNotification('ERROR.NO_INTERNET_CONNECTION');
       }
     } else {
-      if (error.status !== 400)
-        this.router.navigate(['/error'], { queryParams: error });
+      this.router.navigate(['/error'], {queryParams: error});
     }
   }
 }

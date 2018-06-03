@@ -6,15 +6,21 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.constants;
 
 import java.util.logging.Logger;
+import javax.annotation.Resource;
+import javax.ejb.Singleton;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
 
 /**
  *
  * @author Filip
  */
+@Singleton
 public class AccountManagerConstants {
     
+    @Resource
     private String DEFAULT_ACCESS_LEVEL;
+    
+    @Resource
     private String DEFAULT_URL;
 
     public String getDEFAULT_ACCESS_LEVEL() {

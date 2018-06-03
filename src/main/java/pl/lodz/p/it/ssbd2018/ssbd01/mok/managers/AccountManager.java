@@ -43,7 +43,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.TransactionLogger;
 @Interceptors(LoggerInterceptor.class)
 public class AccountManager extends TransactionLogger implements AccountManagerLocal {
     
-    private static final AccountManagerConstants constants = (AccountManagerConstants)ConstantsParser.deserialize(AccountManager.class.getSimpleName());
+    private static final AccountManagerConstants constants = new AccountManagerConstants();
 //    private String DEFAULT_ACCESS_LEVEL = "user";
 //    private  String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
     

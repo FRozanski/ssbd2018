@@ -14,7 +14,7 @@ export class ErrorHandlerService {
   public handleError(error: any) {
     if (error instanceof HttpErrorResponse) {
       if (!navigator.onLine) {
-        return this.notificationService.displayTranslatedNotification('No Internet Connection');
+        return this.notificationService.displayTranslatedNotification('ERROR.NO_INTERNET_CONNECTION');
       }
     } else {
       if (error.status !== 400)

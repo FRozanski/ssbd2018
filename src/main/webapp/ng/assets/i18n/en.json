@@ -61,7 +61,8 @@
         "ERROR": "Error",
         "NOT_FOUND": "Page not found",
         "GO_BACK_HOME": "Return to main",
-        "UNKNOWN_ERROR": "An unknown error occurred, we apologize"
+        "UNKNOWN_ERROR": "An unknown error occurred, we apologize",
+        "NO_INTERNET_CONNECTION" : "No Internet connection"
     },
     "MAT_TABLE": {
       "ITEMS_PER_PAGE": "Number of elements per page",

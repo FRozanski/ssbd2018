@@ -1,0 +1,33 @@
+.nav-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  mat-sidenav {
+    width: 275px;
+  }
+
+  mat-sidenav button {
+    width: 100%;
+  }
+
+  app-notifications {
+    position: absolute;
+    right: 30px;
+  }
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-h2 {
+  margin: 10px;
+  text-align: center;
+}
+.example-p {
+  margin: 10px;
+  text-align: center;
+}

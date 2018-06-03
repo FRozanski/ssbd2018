@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
@@ -28,7 +28,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.ArchivalPasswordFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
-import pl.lodz.p.it.ssbd2018.ssbd01.tools.TransactionLogger;
 
 /**
  *
@@ -37,9 +36,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.TransactionLogger;
  * @author michalmalec
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-@Stateful
+@Stateless
 @Interceptors(LoggerInterceptor.class)
-public class AccountManager extends TransactionLogger implements AccountManagerLocal {
+public class AccountManager implements AccountManagerLocal {
 
     private static final String DEFAULT_ACCESS_LEVEL = "user";
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
@@ -261,7 +260,7 @@ public class AccountManager extends TransactionLogger implements AccountManagerL
     private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();
-        veryficationLink = veryficationLink + "/registrationConfirm.xhtml?token=" + veryficationToken;
+        veryficationLink = veryficationLink + "/ng/#/registrationConfirm?token=" + veryficationToken;
         return veryficationLink;
     }    
 }

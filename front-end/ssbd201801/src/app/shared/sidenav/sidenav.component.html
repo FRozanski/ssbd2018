@@ -1,0 +1,54 @@
+<mat-sidenav-container class="nav-container" (backdropClick)="sidenav.close()">
+  <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose (openedChange)='onSidenavOpenedChange()' >
+    <p>
+      <button mat-button mat-raised-button color='primary' (click)="sidenav.close()"> < </button>
+    </p>
+    <h2 *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")' class="example-h2">{{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</h2>
+    <p *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")' class="example-p">{{ "HOME.USER_ROLES" | translate }}: {{ rolesStringified | translate }}</p>
+    <p>{{ displayedRouter }}</p>
+    <p>
+      <button mat-button routerLink='/main'>{{ "SIDE_NAV.MAIN_PAGE" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/register' *ngIf='hasRole("GUEST")'>{{ "SIDE_NAV.REGISTER" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/login' *ngIf='hasRole("GUEST")'>{{ "SIDE_NAV.LOGIN" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/accounts' *ngIf='hasRole("ADMIN") || hasRole("MANAGER")'>{{ "SIDE_NAV.ACCOUNTS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/statistics' *ngIf='hasRole("ADMIN") || hasRole("MANAGER")'>{{ "SIDE_NAV.STATISTICS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button *ngIf='hasRole("USER")' routerLink='/myAccount'>{{ "SIDE_NAV.MY_ACCOUNT" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/changeMyPassword' *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>{{ "SIDE_NAV.CHANGE_MY_PASSWORD" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/register' *ngIf='hasRole("ADMIN")'>{{ "SIDE_NAV.CREATE_ACCOUNT" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button (click)='onLogoutClick()' *ngIf='hasRole("USER")'>{{ "SIDE_NAV.LOGOUT" | translate }}</button>
+    </p>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <p>
+      <button mat-button mat-raised-button color='primary' (click)="sidenav.open()">></button>
+    </p>
+    <app-notifications></app-notifications>
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

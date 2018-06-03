@@ -86,7 +86,7 @@ public class SendMailUtils {
             message.setSubject("Welcome at Co-oper Service");
             message.setSentDate(new Date());
             message.setText("Witaj w gronie kooperantów!!! \n\n"
-                    + "Twoje konto jest już aktywne! Zapraszamy do korzystania z serwisu. \\n\\n" 
+                    + "Twoje konto jest już aktywne! Zapraszamy do korzystania z serwisu. \n\n" 
                     + "Pozdrawiamy! \n"
                     + "KOOPERANT TEAM :D");
             Transport.send(message);
@@ -105,7 +105,7 @@ public class SendMailUtils {
             message.setSubject("Welcome at Co-oper Service");
             message.setSentDate(new Date());
             message.setText("Witaj w gronie kooperantów!!! \n\n"
-                    + "Twoje konto zostało zablokowane. \\n\\n" 
+                    + "Twoje konto zostało zablokowane. \n\n" 
                     + "Pozdrawiamy! \n"
                     + "KOOPERANT TEAM :D");
             Transport.send(message);

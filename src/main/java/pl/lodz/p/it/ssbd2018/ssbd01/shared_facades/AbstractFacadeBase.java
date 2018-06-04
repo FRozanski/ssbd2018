@@ -36,6 +36,7 @@ public abstract class AbstractFacadeBase<T> {
         return getEntityManager().createQuery(cq).getResultList();
     }
 
+    @RolesAllowed("findRange")
     public List<T> findRange(int[] range) {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
@@ -45,6 +46,7 @@ public abstract class AbstractFacadeBase<T> {
         return q.getResultList();
     }
 
+    @RolesAllowed("count")
     public int count() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         javax.persistence.criteria.Root<T> rt = cq.from(entityClass);

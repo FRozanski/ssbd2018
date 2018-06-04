@@ -33,6 +33,7 @@ public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implement
     }
     
     @Override
+    @RolesAllowed("findAccessLevel")
     public AccessLevel find(Object id) throws AppBaseException {
         AccessLevel accessLevel = super.find(id);
         if (accessLevel == null) {

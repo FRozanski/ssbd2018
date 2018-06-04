@@ -1,11 +1,14 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AccountService } from '../../common/account.service';
-import { AccountData } from '../../model/account-data';
-import { Observer } from 'rxjs/Observer';
-import { Observable } from 'rxjs/Observable';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {AccountService} from '../../common/account.service';
+import {AccountData} from '../../model/account-data';
+import {Observer} from 'rxjs/Observer';
+import {Observable} from 'rxjs/Observable';
+import {ConfirmDialogComponent} from '../../../shared/confirm-dialog/confirm-dialog.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-base-account-form',
@@ -13,11 +16,13 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./base-account-form.component.css']
 })
 export class BaseAccountFormComponent implements OnInit {
-  
-  wasFormSent: boolean = false;
+
+  wasFormSent = false;
   idEditToken: number;
   version: number;
   form: FormGroup;
+
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   @Input()
   accountSource: Observable<AccountData>;
@@ -28,7 +33,9 @@ export class BaseAccountFormComponent implements OnInit {
   @Output('onCancelClick')
   onCancelClickEmitter: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(public dialog: MatDialog,
+              private translateService: TranslateService) {
+  }
 
   ngOnInit() {
     this.initializeForm();
@@ -37,74 +44,84 @@ export class BaseAccountFormComponent implements OnInit {
 
   private initializeForm() {
     this.form = new FormGroup({
-      email: new FormControl("", [
+      email: new FormControl('', [
         Validators.required
       ]),
-      name: new FormControl("", [
+      name: new FormControl('', [
         Validators.required
       ]),
-      surname: new FormControl("", [
+      surname: new FormControl('', [
         Validators.required
       ]),
-      phone: new FormControl("", [
+      phone: new FormControl('', [
         Validators.required
       ]),
-      street: new FormControl("", [
+      street: new FormControl('', [
         Validators.required
       ]),
-      streetNumber: new FormControl("", [
+      streetNumber: new FormControl('', [
         Validators.required
       ]),
       flatNumber: new FormControl(''
       ),
-      postalCode: new FormControl("", [
+      postalCode: new FormControl('', [
         Validators.required
       ]),
-      city: new FormControl("", [
+      city: new FormControl('', [
         Validators.required
       ]),
-      country: new FormControl("", [
+      country: new FormControl('', [
         Validators.required
       ])
     });
   }
 
-
   sendForm() {
     this.wasFormSent = true;
 
     if (this.form.valid) {
-      let account: AccountData = <AccountData>this.form.value;
-      account.id = this.idEditToken;
-      account.version = this.version;
-      if (account.flatNumber === '') {
-        account.flatNumber = null;
-      }
-      this.onFormSendEmitter.emit(this.form.value);
+      this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
+      this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
+
+      this.dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+
+          const account: AccountData = <AccountData>this.form.value;
+          account.id = this.idEditToken;
+          account.version = this.version;
+          if (account.flatNumber === '') {
+            account.flatNumber = null;
+          }
+          this.onFormSendEmitter.emit(this.form.value);
+        }
+        this.dialogRef = null;
+      });
     }
   }
 
   loadUserData() {
-    this.accountSource.subscribe((account)=> {
+    this.accountSource.subscribe((account) => {
 
-      if(account.flatNumber == null) account.flatNumber = "";
+      if (account.flatNumber == null) account.flatNumber = '';
 
       this.form.setValue({
-        "city": account.city,
-        "country": account.country,
-        "email": account.email,
-        "name": account.name,
-        "surname": account.surname,
-        "phone": account.phone,
-        "postalCode": account.postalCode,
-        "street": account.street,
-        "streetNumber": account.streetNumber,
-        "flatNumber": account.flatNumber
+        'city': account.city,
+        'country': account.country,
+        'email': account.email,
+        'name': account.name,
+        'surname': account.surname,
+        'phone': account.phone,
+        'postalCode': account.postalCode,
+        'street': account.street,
+        'streetNumber': account.streetNumber,
+        'flatNumber': account.flatNumber
       });
-  
+
       this.idEditToken = account.id;
       this.version = account.version;
-    })
+    });
   }
 
   onReturnClick() {
@@ -116,14 +133,14 @@ export class BaseAccountFormComponent implements OnInit {
       this.form.get(controlName).errors &&
       this.form.get(controlName).errors.required) &&
       ((
-        this.form.get(controlName).dirty ||
-        this.form.get(controlName).touched) ||
+          this.form.get(controlName).dirty ||
+          this.form.get(controlName).touched) ||
         this.wasFormSent
       );
   }
 
   private provideUserDataToForm(account: AccountData) {
-    if (!account.flatNumber) account.flatNumber = "";
+    if (!account.flatNumber) account.flatNumber = '';
   }
 
 }

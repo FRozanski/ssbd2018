@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import {LocationService} from '../common/location.service';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -22,9 +24,11 @@ export class RegisterComponent implements OnInit {
 
   formValidationMessage = '';
 
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
+
   constructor(private accountService: AccountService, private location: Location, private translateService: TranslateService,
               private router: Router,
-              private locationService: LocationService) { }
+              private locationService: LocationService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.locationService.passRouter(
@@ -37,16 +41,27 @@ export class RegisterComponent implements OnInit {
     this.wasFormSent = true;
 
     if (this.form.valid) {
-      const account: AccountData = <AccountData>this.form.value;
-      if (account.flatNumber === '') {
-        account.flatNumber = null;
-      }
-      this.accountService.registerAccount(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.REGISTER'));
-        this.router.navigate(['/main']);
-      },
-        (errorResponse) => {
-          this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+
+      this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
+      this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
+
+      this.dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          const account: AccountData = <AccountData>this.form.value;
+          if (account.flatNumber === '') {
+            account.flatNumber = null;
+          }
+          this.accountService.registerAccount(account).subscribe(() => {
+              alert(this.translateService.instant('SUCCESS.REGISTER'));
+              this.router.navigate(['/main']);
+            },
+            (errorResponse) => {
+              this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+            });
+        }
+        this.dialogRef = null;
       });
     }
   }

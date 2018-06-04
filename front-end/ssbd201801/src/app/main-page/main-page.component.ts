@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LocationService} from '../mok/common/location.service';
 import {TranslateService} from '@ngx-translate/core';
+import {LocationService} from '../mok/common/location.service';
 
 @Component({
   selector: 'app-main-page',

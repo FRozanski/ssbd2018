@@ -14,13 +14,16 @@ import {
   MatCardModule,
   MatSidenavModule,
   MatSortModule,
-  MatPaginatorModule, MatPaginatorIntl} from '@angular/material';
+  MatPaginatorModule,
+  MatPaginatorIntl,
+  MatDialogModule} from '@angular/material';
 import {ErrorHandlerService} from './shared/common/error-handler.service';
 import {RequestInterceptorService} from './shared/common/request-interceptor.service';
 import { ErrorsComponent } from './shared/errors/errors.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
 import { AccountListComponent } from './mok/account-list/account-list.component';
 import { AccountService } from './mok/common/account.service';
 import { RegisterComponent } from './mok/register/register.component';
@@ -160,10 +163,12 @@ declarations: [
     AccountStatisticsComponent,
     LoginComponent,
     NotificationsComponent,
+    ConfirmDialogComponent,
     ErrorsComponent,
     BaseAccountFormComponent
   ],
   imports: [
+    MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
     MatInputModule,
@@ -174,6 +179,7 @@ declarations: [
     MatPaginatorModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
@@ -198,11 +204,8 @@ declarations: [
     NotificationService,
     {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPl},
     ErrorHandlerService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RequestInterceptorService,
-      multi: true,
-    }
-  ]
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true}
+  ],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class AppModule { }

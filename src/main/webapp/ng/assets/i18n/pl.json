@@ -110,10 +110,16 @@
       "ACCOUNT_STATISTICS_PAGE" : "Statystyki kont",
       "CHANGE_OTHERS_PASSWORD_PAGE" : "Zmiana hasła użytkownika",
       "CHANGE_PASSWORD_PAGE" : "Zmiana własnego hasła",
-      "OWN_ACCOUNT_EDIT_PAGE" : "Edycja własnego konta",
+      "OWN_ACCOUNT_EDIT_PAGE" : "Moje konto",
       "REGISTER_PAGE" : "Rejestracja",
       "ADD_ACCOUNT_PAGE" : "Dodawanie nowego użytkownika",
       "REGISTRATION_CONFIRM" : "Aktywacja konta"
+  },
+  "DIALOG" : {
+    "CONFIRM_ACTION" : "Potwierdź operację",
+    "OK" : "Potwierdzam",
+    "CANCEL" : "Anuluj",
+    "ARE_YOU_SURE" : "Czy jesteś pewien?"
   },
   "unknown_error": "Wystąpił nieznany błąd",
   "success": "Operacja została pomyślnie wykonana",

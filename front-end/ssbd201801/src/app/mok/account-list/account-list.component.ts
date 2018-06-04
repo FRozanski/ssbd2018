@@ -1,13 +1,14 @@
-
 import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
-import { AccountService } from '../common/account.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { AccountData } from '../model/account-data';
-import { environment } from '../../../environments/environment';
-import { Router } from '@angular/router';
+import {AccountService} from '../common/account.service';
+import {HttpErrorResponse} from '@angular/common/http';
+import {AccountData} from '../model/account-data';
+import {environment} from '../../../environments/environment';
+import {Router} from '@angular/router';
 import {MatTableDataSource, MatSort, MatPaginator} from '@angular/material';
 import {LocationService} from '../common/location.service';
 import {TranslateService} from '@ngx-translate/core';
+import {AuthUtilService} from '../common/auth-util.service';
+import {SessionService} from '../common/session.service';
 
 @Component({
   selector: 'app-account-list',
@@ -17,14 +18,31 @@ import {TranslateService} from '@ngx-translate/core';
 export class AccountListComponent implements OnInit {
 
   displayedColumns = [
-    'login', 'firstName', 'surname', 'email', 'phone', 'country', 'city', 'street',
-    'streetNumber', 'flatNumber', 'postalCode', 'edit', 'changePassword'
-    ];
+    {def: 'login', showManager: true},
+    {def: 'firstName', showManager: true},
+    {def: 'surname', showManager: true},
+    {def: 'email', showManager: true},
+    {def: 'phone', showManager: true},
+    {def: 'country', showManager: true},
+    {def: 'city', showManager: true},
+    {def: 'street', showManager: true},
+    {def: 'streetNumber', showManager: true},
+    {def: 'flatNumber', showManager: true},
+    {def: 'postalCode', showManager: true},
+    {def: 'edit', showManager: false},
+    {def: 'changePassword', showManager: false},
+  ];
   dataSource;
 
-  constructor (private accountService: AccountService, private router: Router,
-               private locationService: LocationService,
-               private translateService: TranslateService) { }
+  userIdentity: AccountData = {};
+
+  constructor(private accountService: AccountService,
+              private router: Router,
+              private locationService: LocationService,
+              private translateService: TranslateService,
+              private authUtil: AuthUtilService,
+              private sessionService: SessionService) {
+  }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -38,6 +56,14 @@ export class AccountListComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+    this.updateRoles();
+  }
+
+  getDisplayedColumns(): string[] {
+    const isManager = this.hasRole('MANAGER') && !this.hasRole('ADMIN');
+    return this.displayedColumns
+      .filter(cd => !isManager || cd.showManager)
+      .map(cd => cd.def);
   }
 
   applyFilter(filterValue: string) {
@@ -47,12 +73,24 @@ export class AccountListComponent implements OnInit {
   }
 
   onEditClick(account: AccountData) {
-    this.router.navigate(["/accountEdit/" + account.id]);
+    this.router.navigate(['/accountEdit/' + account.id]);
   }
 
 
   onChangePasswordClick(account: AccountData) {
     this.accountService.passId(+account.id);
-    this.router.navigate(["/changeOthersPassword"]);
+    this.router.navigate(['/changeOthersPassword']);
+  }
+
+  updateRoles() {
+    this.sessionService.getMyIdentity().toPromise().then((data) => {
+      this.userIdentity.roles = data.roles;
+    }).catch((data) => {
+      this.userIdentity.roles = this.translateService.instant('GUEST');
+    });
+  }
+
+  hasRole(role: string): boolean {
+    return this.authUtil.hasRole(role, this.userIdentity);
   }
 }

@@ -27,7 +27,7 @@
     </p>
 
     <p>
-      <button mat-button *ngIf='hasRole("USER")' routerLink='/myAccount'>{{ "SIDE_NAV.MY_ACCOUNT" | translate }}</button>
+      <button mat-button routerLink='/myAccount' *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>{{ "SIDE_NAV.MY_ACCOUNT" | translate }}</button>
     </p>
 
     <p>
@@ -39,7 +39,7 @@
     </p>
 
     <p>
-      <button mat-button (click)='onLogoutClick()' *ngIf='hasRole("USER")'>{{ "SIDE_NAV.LOGOUT" | translate }}</button>
+      <button mat-button (click)='onLogoutClick()' *ngIf='hasRole("USER") || hasRole("ADMIN") || hasRole("MANAGER")'>{{ "SIDE_NAV.LOGOUT" | translate }}</button>
     </p>
   </mat-sidenav>
 

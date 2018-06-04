@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -38,6 +39,7 @@ public class AccountAlevelFacade extends AbstractFacadeCreateUpdate<AccountAleve
     }
 
     @Override
+    @RolesAllowed("removeAccountAlevel")
     public void remove(AccountAlevel entity) {
         getEntityManager().remove(getEntityManager().merge(entity));
     }
@@ -47,6 +49,7 @@ public class AccountAlevelFacade extends AbstractFacadeCreateUpdate<AccountAleve
     }
 
     @Override
+    @RolesAllowed("findByAccountAndAccessLevel")
     public AccountAlevel findByAccountAndAccessLevel(Account account, AccessLevel accessLevel) throws AppBaseException {
         try {
             AccountAlevel accountAlevel;

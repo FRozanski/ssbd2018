@@ -5,6 +5,8 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -44,6 +46,7 @@ public class AccessLevelFacade extends AbstractFacadeBase<AccessLevel> implement
     }
 
     @Override
+    @PermitAll
     public AccessLevel findByLevel(String level) throws AppBaseException {
         try {
             AccessLevel accessLevel;

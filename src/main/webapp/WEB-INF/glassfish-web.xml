@@ -197,6 +197,44 @@
     <group-name>manager</group-name>
     <group-name>user</group-name>
   </security-role-mapping>   
+  <!--facades-->
+  <security-role-mapping>
+    <role-name>findAll</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>edit</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findAccount</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findByLogin</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+    <group-name>virtual</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findByAccountAndAccessLevel</role-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>removeAccountAlevel</role-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findArchivalPasswordByAccountId</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,6 +34,7 @@ public class ArchivalPasswordFacade extends AbstractFacadeCreateUpdate<ArchivalP
     }
 
     @Override
+    @RolesAllowed("findArchivalPasswordByAccountId")
     public List<ArchivalPassword> findByAccountId(Long id) {
         TypedQuery<ArchivalPassword> typedQuery = em.createNamedQuery("ArchivalPassword.findByAccountId", ArchivalPassword.class).setParameter("id_account", id);
         return typedQuery.getResultList();

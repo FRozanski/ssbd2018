@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.shared_facades;
 
 import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManager;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
@@ -28,6 +29,7 @@ public abstract class AbstractFacadeBase<T> {
         return getEntityManager().find(entityClass, id);
     }
 
+    @RolesAllowed("findAll")
     public List<T> findAll() {
         javax.persistence.criteria.CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));

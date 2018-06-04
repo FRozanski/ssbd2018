@@ -8,6 +8,7 @@ import { AccountService } from '../../common/account.service';
 import { AccountData } from '../../model/account-data';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from '../../common/notification.service';
+import {LocationService} from '../../common/location.service';
 
 @Component({
   selector: 'app-own-account-edit',
@@ -23,14 +24,19 @@ export class OwnAccountEditComponent implements OnInit {
     private translateService: TranslateService,
     private router: Router,
     private location: Location,
+    private locationService: LocationService,
     private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.OWN_ACCOUNT_EDIT_PAGE'));
+
     this.loadUserData();
   }
 
-  onFormSend(account: AccountData) {   
+  onFormSend(account: AccountData) {
     this.accountService.updateMyAccount(account).subscribe(() => {
       this.notificationService.displayTranslatedNotification('SUCCESS.ACCOUNT_EDIT');
       this.router.navigate(['/main']);
@@ -46,7 +52,7 @@ export class OwnAccountEditComponent implements OnInit {
     this.location.back();
   }
 
-  private loadUserData() {   
+  private loadUserData() {
     this.accountSource = this.accountService.getMyAccountToEdit();
   }
 

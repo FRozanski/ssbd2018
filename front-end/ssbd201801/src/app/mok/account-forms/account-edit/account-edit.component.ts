@@ -8,13 +8,14 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from '../../common/notification.service';
+import {LocationService} from '../../common/location.service';
 
 @Component({
   selector: 'app-account-edit',
   templateUrl: './account-edit.component.html',
   styleUrls: ['./account-edit.component.css']
 })
-export class AccountEditComponent {
+export class AccountEditComponent implements OnInit {
 
   accountSource: Observable<AccountData>;
   userId: number;
@@ -24,14 +25,20 @@ export class AccountEditComponent {
     private translateService: TranslateService,
     private router: Router,
     private location: Location,
+    private locationService: LocationService,
     private notificationService: NotificationService,
     private activatedRoute: ActivatedRoute
-  ) { 
+  ) {
     this.userId = this.activatedRoute.snapshot.params["id"];
     this.loadUserData();
   }
 
   ngOnInit() {
+    this.locationService.passRouter(
+      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
+      this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE') +
+      ' ' + String.fromCharCode(0x2192) + ' ' +
+      this.translateService.instant('LOCATION.ACCOUNT_EDIT_PAGE'));
   }
 
   onFormSend(account: AccountData) {

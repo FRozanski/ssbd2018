@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
 import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -50,6 +51,7 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     }
 
     @Override
+    @RolesAllowed("findAccount")
     public Account find(Object id) throws AppBaseException {
         Account account = super.find(id);
         if (account == null) {
@@ -101,6 +103,7 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     }
 
     @Override
+    @PermitAll
     public Account findByToken(String token) throws AppBaseException {
         try {
             Account account;
@@ -114,6 +117,7 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     }
 
     @Override
+    @RolesAllowed("findByLogin")
     public Account findByLogin(String login) throws AppBaseException {
         try {
             TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByLogin", Account.class).setParameter("login", login);

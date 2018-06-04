@@ -5,6 +5,8 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.shared_facades;
 
+import javax.annotation.security.PermitAll;
+import javax.annotation.security.RolesAllowed;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
@@ -17,11 +19,13 @@ public abstract class AbstractFacadeCreateUpdate<T> extends AbstractFacadeBase<T
         super(entityClass);        
     }
     
+    @PermitAll
     public void create(T entity) throws AppBaseException {
         getEntityManager().persist(entity);
         getEntityManager().flush();
     }
 
+    @RolesAllowed("edit")
     public void edit(T entity) throws AppBaseException {
         getEntityManager().merge(entity);
         getEntityManager().flush();

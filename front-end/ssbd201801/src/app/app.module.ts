@@ -16,7 +16,8 @@ import {
   MatSortModule,
   MatPaginatorModule,
   MatPaginatorIntl,
-  MatDialogModule} from '@angular/material';
+  MatDialogModule,
+  MatSelectModule} from '@angular/material';
 import {ErrorHandlerService} from './shared/common/error-handler.service';
 import {RequestInterceptorService} from './shared/common/request-interceptor.service';
 import { ErrorsComponent } from './shared/errors/errors.component';
@@ -177,6 +178,7 @@ declarations: [
     MatSidenavModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
@@ -189,7 +191,8 @@ declarations: [
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    FormsModule
   ],
   bootstrap: [AppComponent],
   providers: [

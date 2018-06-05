@@ -92,7 +92,8 @@
       "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
       "REGISTER" : "Pomyślnie zarejestrowano konto",
       "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta",
-      "LOGOUT" : "Pomyślnie wylogowano!"
+      "LOGOUT" : "Pomyślnie wylogowano!",
+      "MASSIVE_UPDATE" : "Pomyślnie aktualizowano {{ value }} kont!"
     },
     "ERROR" : {
       "ERROR" : "Błąd",

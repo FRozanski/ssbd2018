@@ -8,7 +8,11 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthUtilService} from '../common/auth-util.service';
 import {SessionService} from '../common/session.service';
 import {LocationService} from '../common/location.service';
-import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
+import { FormControl } from '@angular/forms';
+import { SelectValues, SelectValue } from '../common/mat-table-utils/select-values';
+import { NotificationService } from '../common/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-account-statistics',
@@ -19,8 +23,6 @@ export class AccountStatisticsComponent implements OnInit {
 
   displayedColumns = [
     {def: 'login', showManager: true},
-    {def: 'confirm', showManager: true},
-    {def: 'active', showManager: true},
     {def: 'lastLoginDate', showManager: true},
     {def: 'lastLoginIp', showManager: true},
     {def: 'numberOfLogins', showManager: true},
@@ -28,9 +30,7 @@ export class AccountStatisticsComponent implements OnInit {
     {def: 'numberOfProducts', showManager: true},
     {def: 'confirmAccount', showManager: true},
     {def: 'lockOrUnlockAccount', showManager: true},
-    {def: 'adminAccessLevel', showManager: false},
-    {def: 'managerAccessLevel', showManager: false},
-    {def: 'userAccessLevel', showManager: false},
+    {def: 'accessLevel', showManager: true}
   ];
   dataSource;
 
@@ -39,6 +39,13 @@ export class AccountStatisticsComponent implements OnInit {
   rolesStringified = '';
 
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
+  changedAccounts: Set<AccountData> = new Set<AccountData>();
+  changedRows: Set<number> = new Set<number>();
+
+  readonly avaliableRoles: SelectValue[] = SelectValues.roleSelectValues;
+
+
+  selectValue: any;
 
   constructor (private accountService: AccountService,
                private translateService: TranslateService,
@@ -46,7 +53,9 @@ export class AccountStatisticsComponent implements OnInit {
                private authUtil: AuthUtilService,
                private locationService: LocationService,
                private sessionService: SessionService,
-               public dialog: MatDialog) { }
+               public dialog: MatDialog,
+               private notificationService: NotificationService
+              ) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -60,21 +69,16 @@ export class AccountStatisticsComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
-    this.updateRoles();
+    this.updateRoles(); 
 
   }
-  getDisplayedColumns(): string[] {
-    const isManager = this.hasRole('MANAGER') && !this.hasRole('ADMIN');
-    return this.displayedColumns
-      .filter(cd => !isManager || cd.showManager)
-      .map(cd => cd.def);
+
+  onAccountChange(account: AccountData, rowId: number)
+  {
+    this.changedAccounts.add(account);
+    this.changedRows.add(rowId);
   }
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
 
   onConfirmClick(account: AccountData) {
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -96,51 +100,10 @@ export class AccountStatisticsComponent implements OnInit {
     });
   }
 
-  onLockUnlockClick(account: AccountData) {
-    if (this.isActive(account)) {
-      this.accountService.lockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_LOCK'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
-    } else {
-      this.accountService.unlockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_UNLOCK'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
+  submitAccounts() {
+    for (let i=0; i<this.changedAccounts.size; i++) {
+      this.alterAccountAccessLevel(this.changedAccounts[i])
     }
-  }
-
-  onAddDeleteAdminClick(account: AccountData) {
-    if (!this.isAdmin(account)) {
-      account.accessLevels.push('admin');
-    } else {
-      account.accessLevels.splice(this.adminId(account), 1);
-    }
-    this.alterAccountAccessLevel(account);
-  }
-
-  onAddDeleteManagerClick(account: AccountData) {
-    if (!this.isManager(account)) {
-      account.accessLevels.push('manager');
-    } else {
-      account.accessLevels.splice(this.managerId(account), 1);
-    }
-    this.alterAccountAccessLevel(account);
-  }
-
-  onAddDeleteUserClick(account: AccountData) {
-    if (!this.isUser(account)) {
-      account.accessLevels.push('user');
-    } else {
-      account.accessLevels.splice(this.userId(account), 1);
-    }
-    this.alterAccountAccessLevel(account);
   }
 
   private alterAccountAccessLevel(account: AccountData) {
@@ -151,6 +114,23 @@ export class AccountStatisticsComponent implements OnInit {
         alert(this.translateService.instant(errorResponse.error.message));
         window.location.reload();
       });
+  }
+
+  wasRowChanged(rowId) {
+    return this.changedRows.has(rowId);
+  }
+
+  getDisplayedColumns(): string[] {
+    const isManager = this.hasRole('MANAGER') && !this.hasRole('ADMIN');
+    return this.displayedColumns
+      .filter(cd => !isManager || cd.showManager)
+      .map(cd => cd.def);
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   isConfirm(account: AccountData) {

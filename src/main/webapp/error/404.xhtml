@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
@@ -13,11 +8,12 @@ and open the template in the editor.
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
-    <h:body>
+    <h:body style="background-color: #FAFAFA">
         <h:outputStylesheet library="css" name="error_style.css"  />
         
         <div class="error-container">
-            <h:outputText value="#{msg['exception.not_found']}" />
+            <h1>404</h1>
+            <h5><h:outputText value="#{msg['exception.not_found']}" /></h5>            
         </div>
     </h:body>
 </html>

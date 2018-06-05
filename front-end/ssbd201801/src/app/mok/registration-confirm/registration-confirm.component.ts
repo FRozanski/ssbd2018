@@ -40,11 +40,14 @@ export class RegistrationConfirmComponent implements OnInit {
 
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.confirmationMessage = this.translateService.instant('REGISTER.NO_TOKEN_PROVIDED');
         this.route.queryParams
-          .filter(params => params.token)
+          // .filter(params => params.token)
           .subscribe(params => {
             this.token = params.token;
+            if (this.token === undefined) {
+              this.confirmationMessage = this.translateService.instant('REGISTER.NO_TOKEN_PROVIDED');
+            }
+            console.log("token = " + this.token);
             this.accountService.confirmAccountByToken(this.token)
               .subscribe(() => {
                 this.validationMessage = '';
@@ -52,9 +55,11 @@ export class RegistrationConfirmComponent implements OnInit {
               }, (errorResponse) => {
                 this.confirmationMessage = this.translateService.instant('REGISTER.ACCOUNT_NOT_CONFIRMED');
                 this.validationMessage = this.translateService.instant(errorResponse.error.message);
+                console.log("err1 = " + errorResponse.error.message);
               });
           }, (errorResponse) => {
             this.validationMessage = this.translateService.instant(errorResponse.error.message);
+            console.log("err2 = " + errorResponse.error.message);
           });
       }
       this.dialogRef = null;

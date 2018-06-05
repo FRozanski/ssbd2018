@@ -154,7 +154,7 @@
   <security-role-mapping>
     <role-name>setProductCategory</role-name>
     <group-name>manager</group-name>
-  </security-role-mapping> 
+  </security-role-mapping>
   <!--MOZ-->
   <security-role-mapping>
     <role-name>makeOrder</role-name>
@@ -196,7 +196,7 @@
     <role-name>getAllOrdersByDateAndPrice</role-name>
     <group-name>manager</group-name>
     <group-name>user</group-name>
-  </security-role-mapping>   
+  </security-role-mapping>
   <!--facades-->
   <security-role-mapping>
     <role-name>findAll</role-name>

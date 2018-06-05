@@ -19,10 +19,10 @@ import java.util.ResourceBundle;
  *
  * @author agkan
  */
-public class UTF8Control extends ResourceBundle.Control {
-    private String bundleExtension;
+public class CustomControl extends ResourceBundle.Control {
+    private final String bundleExtension;
 
-    public UTF8Control(String bundleExtension) {
+    public CustomControl(String bundleExtension) {
         this.bundleExtension = bundleExtension;
     }
 

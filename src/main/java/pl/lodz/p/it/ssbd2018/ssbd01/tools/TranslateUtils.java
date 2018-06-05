@@ -17,11 +17,11 @@ public class TranslateUtils extends ResourceBundle {
     
     protected static final String BUNDLE_NAME = "msg.translate";
     protected static final String BUNDLE_EXTENSION = "properties";
-    protected static final Control UTF8_CONTROL = new UTF8Control(BUNDLE_EXTENSION);
+    protected static final Control CUSTOM_CONTROL = new CustomControl(BUNDLE_EXTENSION);
     
     public TranslateUtils() {
         setParent(ResourceBundle.getBundle(BUNDLE_NAME,
-                FacesContext.getCurrentInstance().getViewRoot().getLocale(), UTF8_CONTROL));
+                FacesContext.getCurrentInstance().getViewRoot().getLocale(), CUSTOM_CONTROL));
     }
     
     @Override

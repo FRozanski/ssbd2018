@@ -24,8 +24,8 @@ export class OwnAccountEditComponent implements OnInit {
     private translateService: TranslateService,
     private router: Router,
     private location: Location,
-    private notificationService: NotificationService,
-    private locationService: LocationService
+    private locationService: LocationService,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {

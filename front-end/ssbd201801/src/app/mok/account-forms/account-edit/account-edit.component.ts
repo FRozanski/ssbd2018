@@ -25,9 +25,9 @@ export class AccountEditComponent implements OnInit {
     private translateService: TranslateService,
     private router: Router,
     private location: Location,
+    private locationService: LocationService,
     private notificationService: NotificationService,
-    private activatedRoute: ActivatedRoute,
-    private locationService: LocationService
+    private activatedRoute: ActivatedRoute
   ) {
     this.userId = this.activatedRoute.snapshot.params["id"];
     this.loadUserData();

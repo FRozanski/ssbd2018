@@ -4,15 +4,15 @@ export class SelectValues {
 
     public static readonly roleSelectValues: SelectValue[] = [
         {
-            value: "USER",
+            value: "user",
             displayedValue: "ACCOUNT.USER"
         },
         {
-            value: "MANAGER",
+            value: "manager",
             displayedValue: "ACCOUNT.MANAGER"
         },
         {
-            value: "ADMIN",
+            value: "admin",
             displayedValue: "ACCOUNT.ADMIN"
         }
     ];

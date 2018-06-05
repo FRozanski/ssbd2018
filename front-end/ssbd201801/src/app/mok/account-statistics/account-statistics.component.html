@@ -54,8 +54,8 @@
     <ng-container matColumnDef="accessLevel">
       <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.ACCESS_LEVELS' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element; let rowIndex=index">
-          <mat-select [(ngModel)]='element.roles' placeholder="Roles" (change)='onAccountChange(element, rowIndex)' multiple>
-              <mat-option *ngFor='let role of avaliableRoles' [value]='role.value' >{{ role.displayedValue | translate }} </mat-option>
+          <mat-select [(ngModel)]='element.accessLevels' placeholder="Roles" (change)='onAccountChange(element, rowIndex)' multiple>
+              <mat-option *ngFor='let role of avaliableRoles' [value]='role.value' >{{ role.displayedValue | translate }}</mat-option>
           </mat-select>
       </mat-cell>
     </ng-container>

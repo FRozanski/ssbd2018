@@ -10,6 +10,8 @@ import {SessionService} from '../common/session.service';
 import {LocationService} from '../common/location.service';
 import { FormControl } from '@angular/forms';
 import { SelectValues, SelectValue } from '../common/mat-table-utils/select-values';
+import { NotificationService } from '../common/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-account-statistics',
@@ -35,7 +37,6 @@ export class AccountStatisticsComponent implements OnInit {
   userIdentity: AccountData = {};
   rolesStringified = '';
 
-
   changedAccounts: Set<AccountData> = new Set<AccountData>();
   changedRows: Set<number> = new Set<number>();
 
@@ -49,10 +50,17 @@ export class AccountStatisticsComponent implements OnInit {
                private router: Router,
                private authUtil: AuthUtilService,
                private locationService: LocationService,
-               private sessionService: SessionService) { }
+               private sessionService: SessionService,
+               private notificationService: NotificationService
+              ) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  // temp
+  stringify(t: string) {
+    return JSON.stringify(t);
+  }
 
   ngOnInit() {
     this.locationService.passRouter(
@@ -71,21 +79,31 @@ export class AccountStatisticsComponent implements OnInit {
   {
     this.changedAccounts.add(account);
     this.changedRows.add(rowId);
-    console.log(account);
-    
   }
 
   submitAccounts() {
-    console.log("Changed accounts: ", this.changedAccounts);
-    console.log("Selected rows: ", this.changedRows);
+
+    console.log(this.changedAccounts);
+    
+
+    // for (let i=0; i<this.changedAccounts.size; i++) {
+    //   this.alterAccountAccessLevel(this.changedAccounts[i])
+    // }
+  }
+
+  private alterAccountAccessLevel(account: AccountData) {
+    this.accountService.alterAccountAccessLevel(account).subscribe(() => {
+        alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
+      },
+      (errorResponse) => {
+        alert(this.translateService.instant(errorResponse.error.message));
+        window.location.reload();
+      });
   }
 
   wasRowChanged(rowId) {
     return this.changedRows.has(rowId);
   }
-
-  getSelectValues
-
 
   getDisplayedColumns(): string[] {
     const isManager = this.hasRole('MANAGER') && !this.hasRole('ADMIN');
@@ -98,73 +116,6 @@ export class AccountStatisticsComponent implements OnInit {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-  }
-
-  onConfirmClick(account: AccountData) {
-    this.accountService.confirmAccount(account.id).subscribe(() => {
-      alert(this.translateService.instant('SUCCESS.ACCOUNT_CONFIRM'));
-      window.location.reload();
-    },
-      (errorResponse) => {
-        this.validationMessage = this.translateService.instant(errorResponse.error.message);
-      });
-  }
-
-  onLockUnlockClick(account: AccountData) {
-    if (this.isActive(account)) {
-      this.accountService.lockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_LOCK'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
-    } else {
-      this.accountService.unlockAccount(account.id).subscribe(() => {
-          alert(this.translateService.instant('SUCCESS.ACCOUNT_UNLOCK'));
-          window.location.reload();
-        },
-        (errorResponse) => {
-          this.validationMessage = this.translateService.instant(errorResponse.error.message);
-        });
-    }
-  }
-
-  onAddDeleteAdminClick(account: AccountData) {
-    if (!this.isAdmin(account)) {
-      account.accessLevels.push('admin');
-    } else {
-      account.accessLevels.splice(this.adminId(account), 1);
-    }
-    this.alterAccountAccessLevel(account);
-  }
-
-  onAddDeleteManagerClick(account: AccountData) {
-    if (!this.isManager(account)) {
-      account.accessLevels.push('manager');
-    } else {
-      account.accessLevels.splice(this.managerId(account), 1);
-    }
-    this.alterAccountAccessLevel(account);
-  }
-
-  onAddDeleteUserClick(account: AccountData) {
-    if (!this.isUser(account)) {
-      account.accessLevels.push('user');
-    } else {
-      account.accessLevels.splice(this.userId(account), 1);
-    }
-    this.alterAccountAccessLevel(account);
-  }
-
-  private alterAccountAccessLevel(account: AccountData) {
-    this.accountService.alterAccountAccessLevel(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
-      },
-      (errorResponse) => {
-        alert(this.translateService.instant(errorResponse.error.message));
-        window.location.reload();
-      });
   }
 
   isConfirm(account: AccountData) {

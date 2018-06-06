@@ -44,7 +44,13 @@ export class SidenavComponent implements OnInit {
     });
     this.locationService.currentRouter.subscribe(router => {
       console.log("router = " + router);
-      this.displayedRouter = router;
+      if (router.length > 0) {
+        this.translateService.get(router).subscribe(translation => {
+          console.log("translation = " + translation);
+          this.displayedRouter = translation;
+        });
+      }
+      // this.displayedRouter = router;
     });
     this.updateLoginAndRoles();
   }

@@ -49,6 +49,8 @@ export class SidenavComponent implements OnInit {
             this.displayedRouter = locationTranslation + ': ' + routerTranslation;
           });
         });
+      } else {
+        this.displayedRouter = '';
       }
     });
     this.updateLoginAndRoles();

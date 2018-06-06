@@ -25,7 +25,7 @@ public abstract class AbstractFacadeCreateUpdate<T> extends AbstractFacadeBase<T
         getEntityManager().flush();
     }
 
-    @RolesAllowed("edit")
+    @PermitAll
     public void edit(T entity) throws AppBaseException {
         getEntityManager().merge(entity);
         getEntityManager().flush();

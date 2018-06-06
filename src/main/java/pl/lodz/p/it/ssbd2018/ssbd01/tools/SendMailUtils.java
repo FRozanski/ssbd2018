@@ -3,7 +3,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.tools;
 import java.util.Date;
 import java.util.Properties;
 import javax.ejb.LocalBean;
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author piotrek
  */
-@Stateful
+@Stateless
 @LocalBean
 public class SendMailUtils {
 

@@ -127,6 +127,11 @@
     "app.exception.mok.mail.not_sent": "An email has not been sent",
     "app.exception.mok.mail.wrong_address": "The email address provided is not valid",
 
-    "success": "The operation has been successfully completed."
+    "success": "The operation has been successfully completed.",
 
+    "app.pagination.itemsPerPageLabel": "Number of elements per page",
+    "app.pagination.nextPageLabel": "Next page",
+    "app.pagination.previousPageLabel": "Previous page",
+    "app.pagination.firstPageLabel": "First page",
+    "app.pagination.lastPageLabel": "Last page"
 }

@@ -173,5 +173,9 @@
   "app.exception.mok.account.email_pattern_error": "Podany adres email jest niepoprawny",
   "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig",
 
-  "app.pagination.itemsPerPageLabel": "Liczba elementów na stronie"
+  "app.pagination.itemsPerPageLabel": "Liczba elementów na stronie",
+  "app.pagination.nextPageLabel" : "Następna strona",
+  "app.pagination.previousPageLabel" : "Poprzednia strona",
+  "app.pagination.firstPageLabel" : "Pierwsza strona",
+  "app.pagination.lastPageLabel" : "Ostatnia strona"
 }

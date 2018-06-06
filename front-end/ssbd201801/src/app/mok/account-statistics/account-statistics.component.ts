@@ -63,6 +63,18 @@ export class AccountStatisticsComponent implements OnInit {
       this.translateService.get('app.pagination.itemsPerPageLabel').subscribe(translation => {
         this.paginator._intl.itemsPerPageLabel = translation;
       });
+      this.translateService.get('app.pagination.firstPageLabel').subscribe(translation => {
+        this.paginator._intl.firstPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.previousPageLabel').subscribe(translation => {
+        this.paginator._intl.previousPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.nextPageLabel').subscribe(translation => {
+        this.paginator._intl.nextPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.lastPageLabel').subscribe(translation => {
+        this.paginator._intl.lastPageLabel = translation;
+      });
     });
     this.updateRoles();
 

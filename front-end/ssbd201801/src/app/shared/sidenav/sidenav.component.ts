@@ -19,7 +19,7 @@ import { LocationService } from '../../mok/common/location.service';
 export class SidenavComponent implements OnInit {
 
   userIdentity: AccountData = {};
-  rolesStringified: string = "";
+  rolesStringified = '';
 
   displayedRouter: string;
 
@@ -38,19 +38,18 @@ export class SidenavComponent implements OnInit {
       this.userIdentity = data;
     }, () => {
       this.userIdentity = {
-        login: "Guest",
+        login: 'Guest',
         roles: ['GUEST']
-      }
+      };
     });
     this.locationService.currentRouter.subscribe(router => {
-      console.log("router = " + router);
       if (router.length > 0) {
-        this.translateService.get(router).subscribe(translation => {
-          console.log("translation = " + translation);
-          this.displayedRouter = translation;
+        this.translateService.get(router).subscribe(routerTranslation => {
+          this.translateService.get('LOCATION.YOUR_LOCATION').subscribe(locationTranslation => {
+            this.displayedRouter = locationTranslation + ': ' + routerTranslation;
+          });
         });
       }
-      // this.displayedRouter = router;
     });
     this.updateLoginAndRoles();
   }
@@ -62,7 +61,7 @@ export class SidenavComponent implements OnInit {
   onLogoutClick() {
     this.authService.logout().subscribe(() => {
       this.updateLoginAndRoles();
-      this.notificationService.displayTranslatedNotification("SUCCESS.LOGOUT");
+      this.notificationService.displayTranslatedNotification('SUCCESS.LOGOUT');
       this.router.navigate(['/main']);
     });
   }

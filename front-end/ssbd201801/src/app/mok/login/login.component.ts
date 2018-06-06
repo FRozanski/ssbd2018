@@ -30,10 +30,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter(
-      // this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      // this.translateService.instant(
         'LOCATION.LOGIN_PAGE'
-      // )
     );
     this.form = new FormGroup(
       {

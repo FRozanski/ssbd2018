@@ -1,0 +1,7 @@
+.error-container {
+  margin: 20% auto 0;
+  transform: translateY(-50%);
+  text-align: center;
+  overflow-wrap: break-word;
+  font-family: "Verdana", sans-serif;
+}

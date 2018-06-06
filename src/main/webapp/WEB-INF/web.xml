@@ -41,6 +41,60 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>EditMyAccountConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>EditMyAccount</web-resource-name>
+            <url-pattern>/webresources/account/myAccountToEdit</url-pattern>
+            <url-pattern>/webresources/account/updateMyAccount</url-pattern>
+            <url-pattern>/webresources/account/changeMyPassword</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>EditOtherAccountConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>EditOtherAccount</web-resource-name>
+            <url-pattern>/webresources/account/</url-pattern>
+            <url-pattern>/webresources/account/updateAccount</url-pattern>
+            <url-pattern>/webresources/account/changeOthersPassword</url-pattern>
+            <url-pattern>/webresources/account/alterAccountAccessLevel</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>LockUnlockComfirmOtherAccountConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>LockUnlockOtherAccount</web-resource-name>            
+            <url-pattern>/webresources/account/lockAccount</url-pattern>
+            <url-pattern>/webresources/account/unlockAccount</url-pattern>
+            <url-pattern>/webresources/account/confirmAccount</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+    
     
     <!-- definicja metody logowania -->
     <login-config>

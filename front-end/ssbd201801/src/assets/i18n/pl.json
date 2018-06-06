@@ -166,6 +166,7 @@
   "app.exception.mok.account.veryfication_token.token_not_unique": "Wygenerowany token nie jest unikalny",
   "app.exception.mok.account.veryfication_token.token_already_used": "Podany link aktywacyjny został już wykorzystany",
   "app.exception.mok.account.veryfication_token.not_found": "Podany link aktywacyjny jest niepoprawny",
+  "app.exception.mok.account.veryfication_token.wrong_token": "Token nie został podany lub ma nieodpowiedni format",
   "app.exception.mok.account_alevel": "Nie udało się wykonać działania na poziomie dostępu konta",
   "app.exception.mok.account_alevel.already_exists": "Konto posiada już ten poziom dostępu",
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",

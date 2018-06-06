@@ -122,6 +122,7 @@
     "app.exception.mok.account.veryfication_token.token_not_unique": "The generated token is not unique",
     "app.exception.mok.account.veryfication_token.token_already_used": "The activation link provided has already been used",
     "app.exception.mok.account.veryfication_token.not_found": "The activation link provided is not valid",
+    "app.exception.mok.account.veryfication_token.wrong_token": "The token has not been specified or is not in the right format",
     "app.exception.mok.account_alevel": "Failed to take action at the account access level",
     "app.exception.mok.account_alevel.already_exists": "The account already has this level of access",
     "app.exception.mok.mail.not_sent": "An email has not been sent",

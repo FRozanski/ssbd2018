@@ -52,6 +52,8 @@
         <auth-constraint>
             <description/>
             <role-name>USER</role-name>
+            <role-name>MANAGER</role-name>
+            <role-name>ADMIN</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>
@@ -87,6 +89,23 @@
         <auth-constraint>
             <description/>
             <role-name>MANAGER</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>GetAccesLevelsByAccountConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>GetAccesLevelsByAccount</web-resource-name>            
+            <url-pattern>/webresources/account/allAccessLevel</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+            <role-name>ADMIN</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>

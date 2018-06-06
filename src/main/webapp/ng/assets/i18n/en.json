@@ -145,5 +145,9 @@
   "app.pagination.nextPageLabel": "Next page",
   "app.pagination.previousPageLabel": "Previous page",
   "app.pagination.firstPageLabel": "First page",
-  "app.pagination.lastPageLabel": "Last page"
+  "app.pagination.lastPageLabel": "Last page",
+
+  "json_parsing_exception": "An unknown error occurred",
+  "deserializing_exception": "An unknown error occurred",
+  "no_json_body_exception": "An unknown error occurred"
 }

@@ -29,9 +29,7 @@ export class RegistrationConfirmComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.REGISTRATION_CONFIRM'));
+    this.locationService.passRouter('LOCATION.REGISTRATION_CONFIRM');
 
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
       disableClose: false

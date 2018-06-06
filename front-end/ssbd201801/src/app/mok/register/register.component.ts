@@ -31,9 +31,7 @@ export class RegisterComponent implements OnInit {
               private locationService: LocationService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.REGISTER_PAGE'));
+    this.locationService.passRouter('LOCATION.REGISTER_PAGE');
     this.initializeForm();
   }
 

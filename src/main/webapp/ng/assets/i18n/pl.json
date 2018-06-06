@@ -171,5 +171,7 @@
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
   "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
   "app.exception.mok.account.email_pattern_error": "Podany adres email jest niepoprawny",
-  "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig"
+  "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig",
+
+  "app.pagination.itemsPerPageLabel": "Liczba elementów na stronie"
 }

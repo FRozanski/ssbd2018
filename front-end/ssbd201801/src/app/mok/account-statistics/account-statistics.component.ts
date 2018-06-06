@@ -59,6 +59,10 @@ export class AccountStatisticsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+
+      this.translateService.get('app.pagination.itemsPerPageLabel').subscribe(translation => {
+        this.paginator._intl.itemsPerPageLabel = translation;
+      });
     });
     this.updateRoles();
 

@@ -83,7 +83,6 @@ export class BaseAccountFormComponent implements OnInit {
       this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
         disableClose: false
       });
-      this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
 
       this.dialogRef.afterClosed().subscribe(result => {
         if (result) {

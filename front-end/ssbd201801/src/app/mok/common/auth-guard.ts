@@ -49,7 +49,7 @@ export class AuthGuard implements CanActivate {
     if (can === false) {
       const error = new HttpErrorResponse({
         status: 403,
-        statusText: this.translateService.instant('ERROR.FORBIDDEN'),
+        statusText: 'ERROR.FORBIDDEN',
         url: route.url.toString(),
       });
       this.router.navigate(['/error'], {queryParams: error});

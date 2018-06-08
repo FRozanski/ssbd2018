@@ -13,7 +13,7 @@
 
   <div *ngIf="routeParams.message">
     <h1 *ngIf="routeParams?.status"> {{ "ERROR.ERROR" | translate }} {{ routeParams?.status }}</h1><br/>
-    <h3 *ngIf="routeParams?.message">{{ routeParams?.message }}</h3><br/>
+    <h3 *ngIf="routeParams?.statusText">{{ routeParams?.statusText | translate }}</h3><br/>
 
     <button mat-button mat-raised-button color='primary'
        routerLink="/"

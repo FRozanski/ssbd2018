@@ -25,6 +25,9 @@ export class BaseAccountFormComponent implements OnInit {
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   @Input()
+  formValidationMessage = '';
+
+  @Input()
   accountSource: Observable<AccountData>;
 
   @Output('onFormSend')

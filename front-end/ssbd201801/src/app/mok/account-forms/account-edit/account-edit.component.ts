@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from '../../common/notification.service';
 import {LocationService} from '../../common/location.service';
+import {BaseAccountFormComponent} from '../_base-account-edit/base-account-form.component';
 
 @Component({
   selector: 'app-account-edit',
@@ -19,6 +20,7 @@ export class AccountEditComponent implements OnInit {
 
   accountSource: Observable<AccountData>;
   userId: number;
+  formValidationMessage = '';
 
   constructor(
     private accountService: AccountService,
@@ -47,7 +49,8 @@ export class AccountEditComponent implements OnInit {
       this.router.navigate(['/main']);
     },
       (errorResponse) => {
-        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
+        this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+        // this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         this.loadUserData();
       }
     )

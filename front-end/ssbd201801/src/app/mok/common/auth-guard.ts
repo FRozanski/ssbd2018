@@ -32,10 +32,10 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return this.sessionService.getMyIdentity().map(data => {
       this.userIdentity.roles = data.roles;
-      return this.authUtil.isExpectedRoleInUserRoles(route.data.expectedRole, this.userIdentity.roles);
+      return this.authUtil.isExpectedRoleInUserRoles(route.data.expectedRoles, this.userIdentity.roles);
     }).catch((data) => {
       this.userIdentity.roles = this.translateService.instant('GUEST');
-      return Observable.of(this.authUtil.isExpectedRoleInUserRoles(route.data.expectedRole, this.userIdentity.roles));
+      return Observable.of(this.authUtil.isExpectedRoleInUserRoles(route.data.expectedRoles, this.userIdentity.roles));
     });
   }
 

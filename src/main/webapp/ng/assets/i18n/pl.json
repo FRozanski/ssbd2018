@@ -178,5 +178,9 @@
   "app.pagination.nextPageLabel" : "Następna strona",
   "app.pagination.previousPageLabel" : "Poprzednia strona",
   "app.pagination.firstPageLabel" : "Pierwsza strona",
-  "app.pagination.lastPageLabel" : "Ostatnia strona"
+  "app.pagination.lastPageLabel" : "Ostatnia strona",
+
+  "json_parsing_exception" : "Wystąpił nieznany błąd",
+  "deserializing_exception" : "Wystąpił nieznany błąd",
+  "no_json_body_exception" : "Wystąpił nieznany błąd"
 }

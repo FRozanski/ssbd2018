@@ -99,7 +99,8 @@
       "NOT_FOUND" : "Strony nie znaleziono",
       "GO_BACK_HOME" : "Wróć na główną",
       "UNKNOWN_ERROR" : "Wystąpił nieznany błąd, przepraszamy",
-      "NO_INTERNET_CONNECTION" : "Brak połączenia z Internetem"
+      "NO_INTERNET_CONNECTION" : "Brak połączenia z Internetem",
+      "FORBIDDEN" : "Brak dostępu"
     },
   "LOCATION" : {
       "YOUR_LOCATION" : "Twoja lokalizacja",

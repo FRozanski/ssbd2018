@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
+import java.sql.SQLException;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;

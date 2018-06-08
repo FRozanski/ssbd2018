@@ -34,9 +34,7 @@ export class ChangePasswordComponent implements OnInit {
               private router: Router, public dialog: MatDialog,
               private locationService: LocationService) { }
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.CHANGE_PASSWORD_PAGE'));
+    this.locationService.passRouter('LOCATION.CHANGE_PASSWORD_PAGE');
 
     this.sessionService.getMyIdentity().subscribe((data: AccountData) => {
       this.userIdentity = data;

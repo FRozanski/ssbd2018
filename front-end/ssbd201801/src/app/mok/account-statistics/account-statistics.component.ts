@@ -52,9 +52,7 @@ export class AccountStatisticsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.ACCOUNT_STATISTICS_PAGE'));
+    this.locationService.passRouter('LOCATION.ACCOUNT_STATISTICS_PAGE');
     this.accountService.getAllAccounts().subscribe((data) => {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;

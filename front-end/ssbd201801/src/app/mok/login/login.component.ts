@@ -44,9 +44,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(creds).subscribe((data) => {
       this.notificationService.displayTranslatedNotification('LOGIN.SUCCESS');
       this.router.navigate(['/main']);
-    }, (data) => {
-      this.notificationService.displayTranslatedNotification('LOGIN.FAILURE');
-
+    }, (errorResponse) => {
+      this.notificationService.displayTranslatedNotification(errorResponse.error.message);
     });
   }
 

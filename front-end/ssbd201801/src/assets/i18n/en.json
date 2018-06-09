@@ -63,21 +63,8 @@
     "NOT_FOUND": "Page not found",
     "GO_BACK_HOME": "Return to main",
     "UNKNOWN_ERROR": "An unknown error occurred, we apologize",
-    "NO_INTERNET_CONNECTION": "No Internet connection"
-  },
-  "LOCATION": {
-    "YOUR_LOCATION": "Your location",
-    "MAIN_PAGE": "Home page",
-    "LOGIN_PAGE": "Login",
-    "ACCOUNT_EDIT_PAGE": "Account list → Edit account",
-    "ACCOUNT_LIST_PAGE": "Account list",
-    "ACCOUNT_STATISTICS_PAGE": "Account statistics",
-    "CHANGE_OTHERS_PASSWORD_PAGE": "Account list → Change user password",
-    "CHANGE_PASSWORD_PAGE": "Changing your own password",
-    "OWN_ACCOUNT_EDIT_PAGE": "My account",
-    "REGISTER_PAGE": "Registration",
-    "ADD_ACCOUNT_PAGE": "Adding a new user",
-    "REGISTRATION_CONFIRM": "Account activation"
+    "NO_INTERNET_CONNECTION": "No Internet connection",
+    "FORBIDDEN": "No access"
   },
   "MAT_TABLE": {
     "ITEMS_PER_PAGE": "Number of elements per page",
@@ -101,6 +88,25 @@
     "REGISTER": "Account has been successfully registered",
     "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully"
   },
+  "LOCATION": {
+    "YOUR_LOCATION": "Your location",
+    "MAIN_PAGE": "Home page",
+    "LOGIN_PAGE": "Login",
+    "ACCOUNT_EDIT_PAGE": "Account list → Edit account",
+    "ACCOUNT_LIST_PAGE": "Account list",
+    "ACCOUNT_STATISTICS_PAGE": "Account statistics",
+    "CHANGE_OTHERS_PASSWORD_PAGE": "Account list → Change user password",
+    "CHANGE_PASSWORD_PAGE": "Changing your own password",
+    "OWN_ACCOUNT_EDIT_PAGE": "My account",
+    "REGISTER_PAGE": "Registration",
+    "ADD_ACCOUNT_PAGE": "Adding a new user",
+    "REGISTRATION_CONFIRM": "Account activation"
+  },
+  "app.exception.web.login_error": "Invalid login or password",
+  "app.exception.mok.account.phone_pattern_error": "The phone has been entered in an incorrect format",
+  "app.exception.mok.account.street_number_pattern_error": "The house number was given in an incorrect format",
+  "app.exception.mok.account.flat_number_pattern_error": "The apartment number was given in an incorrect format",
+  "app.exception.mok.account.veryfication_token.wrong_token": "The token has not been specified or is not in the right format",
   "unknown_error": "An unknown error occurred",
   "user_is_not_authorized": "Operation requires authorization",
   "postal_code_length_error": "The zip code provided is not in the right format",
@@ -147,7 +153,6 @@
   "app.pagination.previousPageLabel": "Previous page",
   "app.pagination.firstPageLabel": "First page",
   "app.pagination.lastPageLabel": "Last page",
-
   "json_parsing_exception": "An unknown error occurred",
   "deserializing_exception": "An unknown error occurred",
   "no_json_body_exception": "An unknown error occurred"

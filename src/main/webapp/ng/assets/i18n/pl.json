@@ -15,7 +15,8 @@
         "CHANGE_MY_PASSWORD" : "Zmień hasło",
         "LOGOUT" : "Wyloguj",
         "GUEST" : "Gość",
-        "CREATE_ACCOUNT" : "Utwórz konto"
+        "CREATE_ACCOUNT" : "Utwórz konto",
+        "ACTIVATE_ACCOUNT" : "Aktywuj konto"
     },
     "ACCOUNT" : {
         "CITY" : "Miasto",

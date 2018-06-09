@@ -15,7 +15,8 @@
     "CHANGE_MY_PASSWORD": "Change password",
     "LOGOUT": "Log out",
     "GUEST": "Guest",
-    "CREATE_ACCOUNT": "Create account"
+    "CREATE_ACCOUNT": "Create account",
+    "ACTIVATE_ACCOUNT" : "Activate account"
   },
   "ACCOUNT": {
     "CITY": "CITY",

@@ -75,6 +75,9 @@ export class BaseAccountFormComponent implements OnInit {
       ]),
       country: new FormControl('', [
         Validators.required
+      ]),
+      recaptchaReactive: new FormControl(null, [
+        Validators.required
       ])
     });
   }

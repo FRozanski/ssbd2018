@@ -92,6 +92,9 @@ export class ChangePasswordComponent implements OnInit {
       ]),
       secondPassword: new FormControl('', [
         Validators.required
+      ]),
+      recaptchaReactive: new FormControl(null, [
+        Validators.required
       ])
     });
   }

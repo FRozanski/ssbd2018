@@ -102,6 +102,11 @@
         {{ "FORM.FIELD_REQUIRED" | translate }}
       </div>
 
+      <re-captcha formControlName="recaptchaReactive"></re-captcha>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('recaptchaReactive')">
+        {{ "FORM.RECAPTCHA" | translate }}
+      </div>
+
     </mat-card-content>
   </mat-card>
 

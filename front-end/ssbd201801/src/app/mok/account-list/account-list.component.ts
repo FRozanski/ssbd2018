@@ -48,13 +48,27 @@ export class AccountListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE'));
+    this.locationService.passRouter('LOCATION.ACCOUNT_LIST_PAGE');
     this.accountService.getAllAccounts().subscribe((data) => {
       this.dataSource = new MatTableDataSource<AccountData>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+
+      this.translateService.get('app.pagination.itemsPerPageLabel').subscribe(translation => {
+        this.paginator._intl.itemsPerPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.firstPageLabel').subscribe(translation => {
+        this.paginator._intl.firstPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.previousPageLabel').subscribe(translation => {
+        this.paginator._intl.previousPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.nextPageLabel').subscribe(translation => {
+        this.paginator._intl.nextPageLabel = translation;
+      });
+      this.translateService.get('app.pagination.lastPageLabel').subscribe(translation => {
+        this.paginator._intl.lastPageLabel = translation;
+      });
     });
     this.updateRoles();
   }

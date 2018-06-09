@@ -1,5 +1,6 @@
-<app-base-account-form 
-    [accountSource]='accountSource' 
-    (onFormSend)='onFormSend($event)' 
+<app-base-account-form
+    [accountSource]='accountSource'
+    [formValidationMessage]='formValidationMessage'
+    (onFormSend)='onFormSend($event)'
     (onCancelClick)='onCancelClick()'>
 </app-base-account-form>

@@ -8,7 +8,7 @@ import {AccountData} from '../model/account-data';
 import {SessionService} from '../common/session.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {LocationService} from '../common/location.service';
-import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-change-password',

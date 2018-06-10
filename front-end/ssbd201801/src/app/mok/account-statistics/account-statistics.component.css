@@ -20,6 +20,10 @@
   transition: background-color 1s;
 }
 
+mat-row {
+  transition: background-color 1s;
+}
+
 .filter-form-field {
   display: block;
   width: 95%;

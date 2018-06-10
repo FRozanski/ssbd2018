@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {Router} from '@angular/router';
 import {AccountService} from '../common/account.service';
@@ -13,6 +13,8 @@ import { SelectValues, SelectValue } from '../common/mat-table-utils/select-valu
 import { NotificationService } from '../common/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-account-statistics',
@@ -33,14 +35,40 @@ export class AccountStatisticsComponent implements OnInit {
     {def: 'accessLevel', showManager: true}
   ];
   dataSource;
-
-  validationMessage = '';
   userIdentity: AccountData = {};
   rolesStringified = '';
-
+  filterValue: string = '';
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
   changedAccounts: Set<AccountData> = new Set<AccountData>();
+  accountsConfirmedAndNotSent: Set<number> = new Set<number>();
   changedRows: Set<number> = new Set<number>();
+  private numberOfEditResponses: number = 0;
+
+  private successfullySentAccounts: Set<AccountData> = new Set<AccountData>();
+  private faultlySentAccounts: Set<AccountData> = new Set<AccountData>();
+
+
+  registerResponse() {    
+    this.numberOfEditResponses++;
+    if(this.numberOfEditResponses*3 >= this.changedAccounts.size) {
+      let message: string = this.translateService.instant('SUCCESS.UPDATED_ACCOUNTS');
+      this.successfullySentAccounts.forEach((account: AccountData) => {
+        message += account.login + ", ";
+      });
+      
+      if(this.faultlySentAccounts.size !== 0) message += this.translateService.instant('ERROR.FAILED_ACCOUNTS_UPDATE');
+      this.faultlySentAccounts.forEach((account: AccountData) => {
+        message += account.login + ", ";
+      })
+
+      this.notificationService.displayTranslatedNotification(message);
+      this.changedAccounts.clear();
+      this.changedRows.clear();
+      this.accountsConfirmedAndNotSent.clear();
+    }
+  }
+
+  private submitStatusMessage: string = '';
 
   readonly avaliableRoles: SelectValue[] = SelectValues.roleSelectValues;
 
@@ -54,7 +82,8 @@ export class AccountStatisticsComponent implements OnInit {
                private locationService: LocationService,
                private sessionService: SessionService,
                public dialog: MatDialog,
-               private notificationService: NotificationService
+               private notificationService: NotificationService,
+               private changeDetectorRef: ChangeDetectorRef
               ) { }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -87,49 +116,85 @@ export class AccountStatisticsComponent implements OnInit {
 
   }
 
-  onAccountChange(account: AccountData, rowId: number)
-  {    
-    this.changedAccounts.add(account);
-    this.changedRows.add(rowId); // todo: fix row highliting
+  onAccountConfirmChange(account: AccountData, rowId: number) {
+
+    if(account.confirm) {
+      this.accountsConfirmedAndNotSent.add(account.id);
+      this.onAccountChange(account, rowId);
+    }
+    else {
+      this.accountsConfirmedAndNotSent.delete(account.id);
+      this.changedAccounts.delete(account);
+      this.changedRows.delete(rowId);
+    }
   }
 
-
-  onConfirmClick(account: AccountData) {
-    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      disableClose: false
-    });
-
-    this.dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.accountService.confirmAccount(account.id).subscribe(() => {
-            alert(this.translateService.instant('SUCCESS.ACCOUNT_CONFIRM'));
-            window.location.reload();
-          },
-          (errorResponse) => {
-            this.validationMessage = this.translateService.instant(errorResponse.error.message);
-          });
-      }
-      this.dialogRef = null;
-    });
+  onAccountChange(account: AccountData, rowId: number)
+  { 
+    this.changedAccounts.add(account);
+    this.changedRows.add(rowId); 
   }
 
   submitAccounts() {
     this.changedAccounts.forEach((account: AccountData) => {
-      this.alterAccountAccessLevel(account)
+      this.alterAccountAccessLevel(account);
+      this.changeUserActivationStatus(account);
+      if(this.accountsConfirmedAndNotSent.has(account.id)) {
+        this.changeUserConfirmationStatus(account);
+      }
     })
+
+    this.changedAccounts.clear();
+    this.changedRows.clear();
+    this.accountsConfirmedAndNotSent.clear();
+
+    this.router.navigate(['/statistics']);
   }
 
   private alterAccountAccessLevel(account: AccountData) {
     this.accountService.alterAccountAccessLevel(account).subscribe(() => {
-        this.notificationService.displayTranslatedNotification(/*this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL')*/ 'OK');
+        this.successfullySentAccounts.add(account);
+        this.registerResponse();
       },
-      (errorResponse) => {
-        this.notificationService.displayTranslatedNotification(/*this.translateService.instant(errorResponse.error.message)*/ 'Fail :/');
+      (error: HttpErrorResponse) => {
+        this.faultlySentAccounts.add(account);
+        this.registerResponse();
       });
+  }
+
+  private changeUserConfirmationStatus(account: AccountData) {
+    this.accountService.confirmAccount(account.id).subscribe(() => {
+      this.successfullySentAccounts.add(account);
+      this.registerResponse();
+    }, (error: HttpErrorResponse) => {
+      this.faultlySentAccounts.add(account);
+      this.registerResponse();
+    })
+  }
+
+  private changeUserActivationStatus(account: AccountData) {
+
+    const isAccountLocked: boolean = !account.active;
+    let observable: Observable<any> = null;
+
+    if(isAccountLocked) observable = this.accountService.unlockAccount(account.id);
+    else observable = this.accountService.lockAccount(account.id);
+
+    observable.subscribe(() => {
+      this.successfullySentAccounts.add(account);
+      this.registerResponse();
+    }, (error: HttpErrorResponse) => {
+      this.faultlySentAccounts.add(account);
+      this.registerResponse();
+    })
   }
 
   wasRowChanged(rowId) {
     return this.changedRows.has(rowId);
+  }
+
+  wasSomeUserChanged() {
+    return (this.changedAccounts.size !== 0 || this.changedRows.size != 0);
   }
 
   getDisplayedColumns(): string[] {
@@ -139,108 +204,41 @@ export class AccountStatisticsComponent implements OnInit {
       .map(cd => cd.def);
   }
 
+  onFilterCriteriaChange(filterValue) {  
+
+    if(this.changedAccounts.size !== 0 || this.changedRows.size != 0) {
+      
+      this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
+
+      this.dialogRef.afterClosed().subscribe((userConfirmedOperation: boolean) => {
+        if(userConfirmedOperation) {
+          this.applyFilter(filterValue);
+          this.changedAccounts.clear();
+          this.changedRows.clear();
+        } else {
+          this.filterValue = '';
+        }
+      })
+
+    } else {
+      this.applyFilter(filterValue);
+    }
+  }
+
+  onPaginatorPageChange() {
+    if(this.changedAccounts.size !== 0 || this.changedRows.size != 0) {
+      this.changedAccounts.clear();
+      this.changedRows.clear();
+      this.notificationService.displayTranslatedNotification("ACCOUNT.RESET_DATA_INFO");      
+    }
+  }
+
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-  }
-
-  isConfirm(account: AccountData) {
-    if (account.confirm) { return true; }
-    else { return false; }
-  }
-
-  isActive(account: AccountData) {
-    if (account.active) { return true; }
-    else { return false; }
-  }
-
-  isAdmin(account: AccountData) {
-    for (const level of account.accessLevels) {
-      if (level === 'admin') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  adminId(account: AccountData) {
-    let i = 0;
-    for (const level of account.accessLevels) {
-      if (level === 'admin') {
-        return i;
-      }
-      i++;
-    }
-    return null;
-  }
-
-  managerId(account: AccountData) {
-    let i = 0;
-    for (const level of account.accessLevels) {
-      if (level === 'manager') {
-        return i;
-      }
-      i++;
-    }
-    return null;
-  }
-
-  userId(account: AccountData) {
-    let i = 0;
-    for (const level of account.accessLevels) {
-      if (level === 'user') {
-        return i;
-      }
-      i++;
-    }
-    return null;
-  }
-
-  isManager(account: AccountData) {
-    for (const level of account.accessLevels) {
-      if (level === 'manager') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  isUser(account: AccountData) {
-    for (const level of account.accessLevels) {
-      if (level === 'user') {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  applyAddOrDeleteAdminAccessLevelLabel(account: AccountData) {
-    if (this.isAdmin(account))
-      return this.translateService.instant('ACCOUNT.DELETE_ACCESS_LEVEL');
-    else
-      return this.translateService.instant('ACCOUNT.ADD_ACCESS_LEVEL');
-  }
-
-  applyAddOrDeleteManagerAccessLevelLabel(account: AccountData) {
-    if (this.isManager(account))
-      return this.translateService.instant('ACCOUNT.DELETE_ACCESS_LEVEL');
-    else
-      return this.translateService.instant('ACCOUNT.ADD_ACCESS_LEVEL');
-  }
-
-  applyAddOrDeleteUserAccessLevelLabel(account: AccountData) {
-    if (this.isUser(account))
-      return this.translateService.instant('ACCOUNT.DELETE_ACCESS_LEVEL');
-    else
-      return this.translateService.instant('ACCOUNT.ADD_ACCESS_LEVEL');
-  }
-
-  applyLockOrUnlockAccountLabel(account: AccountData) {
-    if (this.isActive(account))
-      return this.translateService.instant('ACCOUNT.LOCK_ACCOUNT');
-    else
-      return this.translateService.instant('ACCOUNT.UNLOCK_ACCOUNT');
   }
 
   updateRoles() {

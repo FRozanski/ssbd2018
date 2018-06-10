@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-const CurrentLanguage = 'pl';
-const Languages = ['pl','en', 'keys'];
+const Languages = ['pl','en'];
 
 @Component({
   selector: 'app-root',

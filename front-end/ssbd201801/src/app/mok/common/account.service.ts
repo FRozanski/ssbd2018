@@ -84,7 +84,6 @@ export class AccountService {
   }
 
   alterAccountAccessLevel(account: AccountData) {
-    console.log("<in service> Submitting: ", account);
     return this.httpClient.put<AccountData>(this.uri + '/alterAccountAccessLevel',  account);
   }
 

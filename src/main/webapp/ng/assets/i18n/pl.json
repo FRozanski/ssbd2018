@@ -51,7 +51,8 @@
         "LAST_LOGIN_DATE" : "Data ostatniego logowania",
         "LAST_LOGIN_IP" : "IP ostatniego logowania",
         "ACCESS_LEVELS" : "Poziomy dostępu",
-        "ALTER" : "Zmień"
+        "ALTER" : "Zmień",
+        "RESET_DATA_INFO" : "Uprzednio zaznaczone konta nie zostaną zaktualizowane."
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",
@@ -92,7 +93,9 @@
       "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
       "REGISTER" : "Pomyślnie zarejestrowano konto",
       "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta",
-      "LOGOUT" : "Pomyślnie wylogowano!"
+      "LOGOUT" : "Pomyślnie wylogowano!",
+      "MASSIVE_UPDATE" : "Pomyślnie aktualizowano {{ value }} kont!",
+      "UPDATED_ACCOUNTS": "Pomyślnie zaktualizowano konta: "
     },
     "ERROR" : {
       "ERROR" : "Błąd",
@@ -100,7 +103,8 @@
       "GO_BACK_HOME" : "Wróć na główną",
       "UNKNOWN_ERROR" : "Wystąpił nieznany błąd, przepraszamy",
       "NO_INTERNET_CONNECTION" : "Brak połączenia z Internetem",
-      "FORBIDDEN" : "Brak dostępu"
+      "FORBIDDEN" : "Brak dostępu",
+      "FAILED_ACCOUNTS_UPDATE" : "Wystąpiły problemy z aktualizacją następujących kont: "
     },
   "LOCATION" : {
       "YOUR_LOCATION" : "Twoja lokalizacja",

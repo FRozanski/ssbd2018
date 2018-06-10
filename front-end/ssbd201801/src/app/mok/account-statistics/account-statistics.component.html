@@ -1,11 +1,8 @@
 <div class="example-container mat-elevation-z8">
-  <mat-card class='errors-card' *ngIf='validationMessage !== "" ' >
-    <p>{{ validationMessage }} </p>
-  </mat-card>
 
   <div class="example-header">
     <mat-form-field class='filter-form-field'>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
+      <input [(ngModel)]='filterValue' matInput (keyup)="onFilterCriteriaChange($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
     </mat-form-field>
   </div>
 
@@ -44,7 +41,7 @@
     <ng-container matColumnDef="confirmAccount">
       <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
       <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
-        <mat-checkbox (change)='onAccountChange(element, rowIndex)' [(ngModel)]='element.confirm' color='primary'></mat-checkbox>
+        <mat-checkbox (change)='onAccountConfirmChange(element, rowIndex)' [(ngModel)]='element.confirm' color='primary' [disabled]='element.confirm && !this.accountsConfirmedAndNotSent.has(element.id)'></mat-checkbox>
       </mat-cell>
     </ng-container>
 
@@ -71,11 +68,12 @@
   <mat-paginator #paginator
                  [pageSize]="10"
                  [pageSizeOptions]="[5, 10, 20]"
-                 [showFirstLastButtons]="true">
+                 [showFirstLastButtons]="true"
+                 (page)='onPaginatorPageChange()'>
   </mat-paginator>
 
 </div>
 <div class="buttons">
     <button mat-button color='primery'>{{ 'FORM.RETURN' | translate }} </button>
-    <button mat-button mat-raised-button color='primary' (click)='submitAccounts()'>{{ 'FORM.SUBMIT' | translate}}</button>
+    <button mat-button mat-raised-button color='primary' [disabled]='!wasSomeUserChanged()' (click)='submitAccounts()'>{{ 'FORM.SUBMIT' | translate}}</button>
 </div>

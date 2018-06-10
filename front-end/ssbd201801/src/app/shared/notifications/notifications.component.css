@@ -1,6 +1,7 @@
 :host {
     display: block;
     width: 300px;
+    z-index: 100;
 }
 mat-card {  
     background-color: #FFFFCC;

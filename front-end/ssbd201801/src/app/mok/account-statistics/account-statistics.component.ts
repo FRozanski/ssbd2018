@@ -88,9 +88,9 @@ export class AccountStatisticsComponent implements OnInit {
   }
 
   onAccountChange(account: AccountData, rowId: number)
-  {
+  {    
     this.changedAccounts.add(account);
-    this.changedRows.add(rowId);
+    this.changedRows.add(rowId); // todo: fix row highliting
   }
 
 
@@ -114,18 +114,17 @@ export class AccountStatisticsComponent implements OnInit {
   }
 
   submitAccounts() {
-    for (let i=0; i<this.changedAccounts.size; i++) {
-      this.alterAccountAccessLevel(this.changedAccounts[i])
-    }
+    this.changedAccounts.forEach((account: AccountData) => {
+      this.alterAccountAccessLevel(account)
+    })
   }
 
   private alterAccountAccessLevel(account: AccountData) {
     this.accountService.alterAccountAccessLevel(account).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL'));
+        this.notificationService.displayTranslatedNotification(/*this.translateService.instant('SUCCESS.ALTER_ACCOUNT_ACCESS_LEVEL')*/ 'OK');
       },
       (errorResponse) => {
-        alert(this.translateService.instant(errorResponse.error.message));
-        window.location.reload();
+        this.notificationService.displayTranslatedNotification(/*this.translateService.instant(errorResponse.error.message)*/ 'Fail :/');
       });
   }
 

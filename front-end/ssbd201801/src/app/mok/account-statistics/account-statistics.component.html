@@ -1,4 +1,8 @@
 <div class="example-container mat-elevation-z8">
+  <mat-card class='errors-card' *ngIf='validationMessage !== "" ' >
+    <p>{{ validationMessage }} </p>
+  </mat-card>
+
   <div class="example-header">
     <mat-form-field class='filter-form-field'>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">

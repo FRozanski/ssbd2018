@@ -70,7 +70,7 @@ const appRoutes: Routes = [
     component: AccountListComponent,
     data:
       {
-        expectedRole: 'ADMIN'
+        expectedRoles: ['ADMIN', 'MANAGER']
       }
   },
   {
@@ -79,7 +79,7 @@ const appRoutes: Routes = [
     component: AccountStatisticsComponent,
     data:
       {
-        expectedRole: 'ADMIN'
+        expectedRoles: ['ADMIN', 'MANAGER']
       }
   },
   {
@@ -88,7 +88,7 @@ const appRoutes: Routes = [
     component: RegisterComponent,
     data:
       {
-        expectedRole: 'GUEST'
+        expectedRoles: ['GUEST', 'ADMIN']
       }
   },
   {
@@ -97,7 +97,7 @@ const appRoutes: Routes = [
     component: AccountEditComponent,
     data:
     {
-      expectedRole: 'ADMIN'
+      expectedRoles: ['ADMIN']
     }
   },
   {
@@ -105,12 +105,16 @@ const appRoutes: Routes = [
     component: ChangePasswordComponent,
     data:
     {
-      expectedRole: 'USER'
+      expectedRoles: ['USER', 'ADMIN', 'MANAGER']
     }
   },
   {
     path: 'changeOthersPassword',
-    component: ChangeOthersPasswordComponent
+    component: ChangeOthersPasswordComponent,
+    data:
+      {
+        expectedRoles: ['ADMIN']
+      }
   },
   {
     path: 'registrationConfirm',
@@ -121,7 +125,7 @@ const appRoutes: Routes = [
     component: OwnAccountEditComponent,
     data:
     {
-      expectedRole: 'USER'
+      expectedRoles: ['USER', 'ADMIN', 'MANAGER']
     },
     canActivate: [AuthGuard]
   },
@@ -130,7 +134,7 @@ const appRoutes: Routes = [
     component: LoginComponent,
     data:
     {
-      expectedRole: 'GUEST'
+      expectedRoles: ['GUEST']
     },
     canActivate: [AuthGuard]
   },

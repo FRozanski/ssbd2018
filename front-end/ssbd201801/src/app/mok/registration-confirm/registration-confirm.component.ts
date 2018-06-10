@@ -6,6 +6,7 @@ import {AccountService} from '../common/account.service';
 import {LocationService} from '../common/location.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
 import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
+import {NotificationService} from '../common/notification.service';
 
 @Component({
   selector: 'app-registration-confirm',
@@ -14,7 +15,6 @@ import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.c
 })
 export class RegistrationConfirmComponent implements OnInit {
   token: string;
-  validationMessage = '';
   confirmationMessage = '';
 
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
@@ -25,36 +25,35 @@ export class RegistrationConfirmComponent implements OnInit {
     private translateService: TranslateService,
     private locationService: LocationService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.REGISTRATION_CONFIRM'));
+    this.locationService.passRouter('LOCATION.REGISTRATION_CONFIRM');
 
     this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
 
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.confirmationMessage = this.translateService.instant('REGISTER.NO_TOKEN_PROVIDED');
         this.route.queryParams
-          .filter(params => params.token)
           .subscribe(params => {
             this.token = params.token;
+            if (this.token === undefined) {
+              this.confirmationMessage = this.translateService.instant('REGISTER.NO_TOKEN_PROVIDED');
+            }
             this.accountService.confirmAccountByToken(this.token)
               .subscribe(() => {
-                this.validationMessage = '';
-                this.confirmationMessage = this.translateService.instant('REGISTER.ACCOUNT_CONFIRMED');
+                this.notificationService.displayTranslatedNotification('REGISTER.ACCOUNT_CONFIRMED');
+                this.router.navigate(['/main']);
               }, (errorResponse) => {
-                this.confirmationMessage = this.translateService.instant('REGISTER.ACCOUNT_NOT_CONFIRMED');
-                this.validationMessage = this.translateService.instant(errorResponse.error.message);
+                this.notificationService.displayTranslatedNotification('REGISTER.ACCOUNT_NOT_CONFIRMED');
+                this.confirmationMessage = this.translateService.instant(errorResponse.error.message);
               });
           }, (errorResponse) => {
-            this.validationMessage = this.translateService.instant(errorResponse.error.message);
+            this.confirmationMessage = this.translateService.instant(errorResponse.error.message);
           });
       }
       this.dialogRef = null;

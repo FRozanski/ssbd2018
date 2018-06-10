@@ -9,6 +9,7 @@ import { AccountData } from '../../model/account-data';
 import { Observable } from 'rxjs/Observable';
 import { NotificationService } from '../../common/notification.service';
 import {LocationService} from '../../common/location.service';
+import {BaseAccountFormComponent} from '../_base-account-edit/base-account-form.component';
 
 @Component({
   selector: 'app-own-account-edit',
@@ -18,6 +19,7 @@ import {LocationService} from '../../common/location.service';
 export class OwnAccountEditComponent implements OnInit {
 
   accountSource: Observable<AccountData>;
+  formValidationMessage = '';
 
   constructor(
     private accountService: AccountService,
@@ -29,9 +31,7 @@ export class OwnAccountEditComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.OWN_ACCOUNT_EDIT_PAGE'));
+    this.locationService.passRouter('LOCATION.OWN_ACCOUNT_EDIT_PAGE');
     this.loadUserData();
   }
 
@@ -41,7 +41,8 @@ export class OwnAccountEditComponent implements OnInit {
       this.router.navigate(['/main']);
     },
       (errorResponse) => {
-        this.notificationService.displayTranslatedNotification(errorResponse.error.message);
+        this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+        // this.notificationService.displayTranslatedNotification(errorResponse.error.message);
         this.loadUserData();
       }
     )

@@ -43,6 +43,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordNotMatch;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordSameAsArchivalPasswordException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordTooShortException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.WrongTokenException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.AccessLevelMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.AccountMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mapper.PasswordMapper;
@@ -330,6 +331,7 @@ public class AccountRestController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response confirmAccountByToken(@QueryParam("token") String token) {
         try {
+            this.validateToken(token);
             accountManagerLocal.confirmAccountByToken(token);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
@@ -386,6 +388,12 @@ public class AccountRestController {
             throw new UserAlreadyLogoutException("user_already_logout_error");
         }
         return servletRequest.getUserPrincipal().getName();
+    }
+    
+    private void validateToken(String token) throws WrongTokenException {
+        if (token == null || token.length() < 32) {
+            throw new WrongTokenException("wrong_token");
+        }
     }
 
 }

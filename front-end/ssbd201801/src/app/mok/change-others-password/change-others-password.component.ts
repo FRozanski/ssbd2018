@@ -33,11 +33,7 @@ export class ChangeOthersPasswordComponent implements OnInit {
               private locationService: LocationService, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.locationService.passRouter(
-      this.translateService.instant('LOCATION.YOUR_LOCATION') + ': ' +
-      this.translateService.instant('LOCATION.ACCOUNT_LIST_PAGE') +
-      ' ' + String.fromCharCode(0x2192) + ' ' +
-      this.translateService.instant('LOCATION.CHANGE_OTHERS_PASSWORD_PAGE'));
+    this.locationService.passRouter('LOCATION.CHANGE_OTHERS_PASSWORD_PAGE');
     this.accountService.currentId.subscribe(id => this.othersIdDb = id);
 
     this.accountService.getAccountToEdit(this.othersIdDb).subscribe((data: AccountData) => {
@@ -58,7 +54,6 @@ export class ChangeOthersPasswordComponent implements OnInit {
       this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
         disableClose: false
       });
-      this.dialogRef.componentInstance.confirmMessage = this.translateService.instant('DIALOG.ARE_YOU_SURE');
 
       this.dialogRef.afterClosed().subscribe(result => {
         if (result) {

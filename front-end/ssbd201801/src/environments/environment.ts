@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: "http://demo8275523.mockable.io"
+  apiUrl: "http://studapp.it.p.lodz.pl:8401/ssbd01"
 };

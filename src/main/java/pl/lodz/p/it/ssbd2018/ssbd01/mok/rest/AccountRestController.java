@@ -367,7 +367,7 @@ public class AccountRestController {
             throw new PasswordTooShortException("password_to_short");
         }
         if (!account.getFirstPassword().equals(account.getSecondPassword())) {
-            throw new PasswordNotMatch("password_not_match");
+            throw new PasswordNotMatch("password_different_error");
         }                        
     }
 

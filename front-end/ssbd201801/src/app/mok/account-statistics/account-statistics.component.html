@@ -6,7 +6,7 @@
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource" matSort>
+  <mat-table #table [dataSource]="dataSource" matSort >
 
     <ng-container matColumnDef="login">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LOGIN' | translate }} </mat-header-cell>
@@ -41,21 +41,21 @@
     <ng-container matColumnDef="confirmAccount">
       <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
       <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
-        <mat-checkbox (change)='onAccountConfirmChange(element, rowIndex)' [(ngModel)]='element.confirm' color='primary' [disabled]='element.confirm && !this.accountsConfirmedAndNotSent.has(element.id)'></mat-checkbox>
+        <mat-checkbox (click)='onConfirmChange(element, rowIndex)' [(ngModel)]='element.confirm' color='primary' [disabled]='element.confirm'></mat-checkbox>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lockOrUnlockAccount">
       <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.ACTIVE' | translate }} </mat-header-cell>
       <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
-        <mat-checkbox (change)='onAccountChange(element, rowIndex)' [(ngModel)]='element.active' color='primary'></mat-checkbox>
+        <mat-checkbox (change)='onActiveChange(element, rowIndex)' [(ngModel)]='element.active' color='primary'></mat-checkbox>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="accessLevel">
       <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.ACCESS_LEVELS' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element; let rowIndex=index">
-          <mat-select [(ngModel)]='element.accessLevels' placeholder="Roles" (change)='onAccountChange(element, rowIndex)' multiple>
+          <mat-select [(ngModel)]='element.accessLevels' placeholder="Roles" (change)='onAccessLevelChange(element, rowIndex)' multiple>
               <mat-option *ngFor='let role of avaliableRoles' [value]='role.value' >{{ role.displayedValue | translate }}</mat-option>
           </mat-select>
       </mat-cell>

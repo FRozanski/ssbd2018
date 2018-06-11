@@ -102,7 +102,8 @@
       "GO_BACK_HOME" : "Wróć na główną",
       "UNKNOWN_ERROR" : "Wystąpił nieznany błąd, przepraszamy",
       "NO_INTERNET_CONNECTION" : "Brak połączenia z Internetem",
-      "FORBIDDEN" : "Brak dostępu"
+      "FORBIDDEN" : "Brak dostępu",
+      "NEW_PASSWORDS_NOT_MATCH" : "Podane nowe hasła są różne"
     },
   "LOCATION" : {
       "YOUR_LOCATION" : "Twoja lokalizacja",
@@ -152,6 +153,8 @@
   "app.exception.user_unauthorized": "Użytkownik nie jest zalogowany",
   "app.exception.mok.account": "Nie udało się wykonać działania na koncie",
   "app.exception.mok.account.access_level_not_found" : "Poziom dostępu nie został znaleziony",
+  "app.exception.mok.account.name_pattern_error" : "Imię zostało podane w nieodpowiednim formacie",
+  "app.exception.mok.account.surname_pattern_error" : "Nazwisko zostało podane w nieodpowiednim formacie",
   "app.exception.mok.account.login_not_unique": "Podany login nie jest unikalny",
   "app.exception.mok.account.email_not_unique": "Podany email nie jest unikalny",
   "app.exception.mok.account.phone_not_unique": "Podany numer telefonu nie jest unikalny",
@@ -161,7 +164,8 @@
   "app.exception.mok.account.account_was_confirmed": "Konto zostało już potwierdzone",
   "app.exception.mok.account.constraint_error": "Naruszone zostały ograniczenia nałożone na konto",
   "app.exception.mok.account.password_different_error": "Podane hasła są różne",
-  "app.exception.mok.account.password_not_match_error": "Podane hasła są różne",
+  "app.exception.mok.account.password_not_match": "Podane hasła są różne",
+  "app.exception.mok.account.password_not_match_error": "Wprowadzone hasło nie jest prawidłowe",
   "app.exception.mok.account.password_length_error": "Podane hasło jest za krótkie",
   "app.exception.mok.account.password_same_as_archival_error": "Podane hasło nie jest unikalne względem poprzednich haseł",
   "app.exception.mok.account.phone_pattern_error" : "Telefon został podany w niepoprawnym formacie",

@@ -65,21 +65,8 @@
     "GO_BACK_HOME": "Return to main",
     "UNKNOWN_ERROR": "An unknown error occurred, we apologize",
     "NO_INTERNET_CONNECTION": "No Internet connection",
-    "FORBIDDEN": "No access"
-  },
-  "LOCATION": {
-    "YOUR_LOCATION": "Your location",
-    "MAIN_PAGE": "Home page",
-    "LOGIN_PAGE": "Login",
-    "ACCOUNT_EDIT_PAGE": "Account list → Edit account",
-    "ACCOUNT_LIST_PAGE": "Account list",
-    "ACCOUNT_STATISTICS_PAGE": "Account statistics",
-    "CHANGE_OTHERS_PASSWORD_PAGE": "Account list → Change user password",
-    "CHANGE_PASSWORD_PAGE": "Changing your own password",
-    "OWN_ACCOUNT_EDIT_PAGE": "My account",
-    "REGISTER_PAGE": "Registration",
-    "ADD_ACCOUNT_PAGE": "Adding a new user",
-    "REGISTRATION_CONFIRM": "Account activation"
+    "FORBIDDEN": "No access",
+    "NEW_PASSWORDS_NOT_MATCH": "New passwords are different"
   },
   "MAT_TABLE": {
     "ITEMS_PER_PAGE": "Number of elements per page",
@@ -144,6 +131,8 @@
   "app.exception.mok.account.login_not_unique": "The specified login is not unique",
   "app.exception.mok.account.email_not_unique": "The email you entered is not unique",
   "app.exception.mok.account.phone_not_unique": "The phone number provided is not unique",
+  "app.exception.mok.account.name_pattern_error": "The name was given in the wrong format",
+  "app.exception.mok.account.surname_pattern_error": "The last name was given in the wrong format",
   "app.exception.mok.account.account_optimistic_error": "Failed to take action, please try again.",
   "app.exception.mok.account.account_with_no_access_level": "The account must have at least one access level",
   "app.exception.mok.account": "Failed to take action on the account",

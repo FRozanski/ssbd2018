@@ -76,9 +76,9 @@ export class BaseAccountFormComponent implements OnInit {
       country: new FormControl('', [
         Validators.required
       ]),
-      recaptchaReactive: new FormControl(null, [
+      recaptcha: new FormControl(null,
         Validators.required
-      ])
+      )
     });
   }
 
@@ -121,7 +121,8 @@ export class BaseAccountFormComponent implements OnInit {
         'postalCode': account.postalCode,
         'street': account.street,
         'streetNumber': account.streetNumber,
-        'flatNumber': account.flatNumber
+        'flatNumber': account.flatNumber,
+        'recaptcha' : null,
       });
 
       this.idEditToken = account.id;

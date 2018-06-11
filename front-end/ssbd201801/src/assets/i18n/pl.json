@@ -57,7 +57,8 @@
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",
         "SUBMIT" : "Wyślij",
-        "RETURN" : "Powrót"
+        "RETURN" : "Powrót",
+        "RECAPTCHA" : "Udowodnij, że nie jesteś robotem"
     },
     "REGISTER" : {
         "BASIC_DATA" : "Dane podstawowe",

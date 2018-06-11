@@ -44,6 +44,8 @@ import { AuthUtilService } from './mok/common/auth-util.service';
 import { AuthService } from './mok/common/auth.service';
 import { NotificationService } from './mok/common/notification.service';
 import { MatPaginatorIntlPl } from './mok/common/mat-table-utils/mat-paginator-intl-pl';
+import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptcha';
+import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -187,6 +189,8 @@ declarations: [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
+    RecaptchaModule.forRoot(),
+    RecaptchaFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -208,7 +212,13 @@ declarations: [
     NotificationService,
     {provide: MatPaginatorIntl, useClass: MatPaginatorIntlPl},
     ErrorHandlerService,
-    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptorService, multi: true},
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: '6LedI14UAAAAAAvOKoEEisGXDcVdjXk3utDxQtQA',
+      } as RecaptchaSettings,
+    },
   ],
   entryComponents: [ConfirmDialogComponent]
 })

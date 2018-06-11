@@ -43,7 +43,8 @@
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
     "SUBMIT": "SUBMIT",
-    "RETURN": "RETURN"
+    "RETURN": "RETURN",
+    "RECAPTCHA": "Prove that you are not a robot"
   },
   "REGISTER": {
     "BASIC_DATA": "BASIC_DATA",

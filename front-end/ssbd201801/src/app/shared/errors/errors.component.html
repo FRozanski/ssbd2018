@@ -16,8 +16,7 @@
     <h3 *ngIf="routeParams?.statusText">{{ routeParams?.statusText | translate }}</h3><br/>
 
     <button mat-button mat-raised-button color='primary'
-       routerLink="/"
-       *ngIf="routeParams.status === '404'">
+       routerLink="/">
       <h5>{{ "ERROR.GO_BACK_HOME" | translate }}</h5>
     </button>
   </div>

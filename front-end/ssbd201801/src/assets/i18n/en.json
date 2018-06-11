@@ -65,6 +65,20 @@
     "NO_INTERNET_CONNECTION": "No Internet connection",
     "FORBIDDEN": "No access"
   },
+  "LOCATION": {
+    "YOUR_LOCATION": "Your location",
+    "MAIN_PAGE": "Home page",
+    "LOGIN_PAGE": "Login",
+    "ACCOUNT_EDIT_PAGE": "Account list → Edit account",
+    "ACCOUNT_LIST_PAGE": "Account list",
+    "ACCOUNT_STATISTICS_PAGE": "Account statistics",
+    "CHANGE_OTHERS_PASSWORD_PAGE": "Account list → Change user password",
+    "CHANGE_PASSWORD_PAGE": "Changing your own password",
+    "OWN_ACCOUNT_EDIT_PAGE": "My account",
+    "REGISTER_PAGE": "Registration",
+    "ADD_ACCOUNT_PAGE": "Adding a new user",
+    "REGISTRATION_CONFIRM": "Account activation"
+  },
   "MAT_TABLE": {
     "ITEMS_PER_PAGE": "Number of elements per page",
     "NEXT_PAGE": "Next page",

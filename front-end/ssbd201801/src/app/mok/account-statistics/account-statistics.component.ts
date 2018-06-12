@@ -33,7 +33,7 @@ export class AccountStatisticsComponent implements OnInit, AfterViewChecked {
     { def: 'numberOfProducts', showManager: true },
     { def: 'confirmAccount', showManager: true },
     { def: 'lockOrUnlockAccount', showManager: true },
-    { def: 'accessLevel', showManager: true }
+    { def: 'accessLevel', showManager: false }
   ];
 
   dataSource: MatTableDataSource<AccountData>;
@@ -216,10 +216,7 @@ export class AccountStatisticsComponent implements OnInit, AfterViewChecked {
       this.accountsWithChangedActive.size;
 
     if(this.responseCounter === numberOfChangedAccounts) {
-
       this.notificationService.displayTranslatedNotification(this.submitStatusMessage);
-
-      //end
       this.reinitializeStuff();
     }
   }

@@ -40,6 +40,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordDifferentException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordNotMatch;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordSameAsArchivalPasswordException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.PasswordTooShortException;
@@ -367,7 +368,7 @@ public class AccountRestController {
             throw new PasswordTooShortException("password_to_short");
         }
         if (!account.getFirstPassword().equals(account.getSecondPassword())) {
-            throw new PasswordNotMatch("password_different_error");
+            throw new PasswordDifferentException("password_different_error");
         }                        
     }
 

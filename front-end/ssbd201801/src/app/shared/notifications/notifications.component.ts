@@ -9,7 +9,7 @@ import { NotificationService } from '../../mok/common/notification.service';
 })
 export class NotificationsComponent implements OnInit {
 
-  private notificationDisplayTime = 5000;
+  private notificationDisplayTime = 15000;
   isNotificationDisplayed: boolean = false;
   public notification: string;
 

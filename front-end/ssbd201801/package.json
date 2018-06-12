@@ -4,10 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -o",
+    "start": "ng serve -o --env=local",
     "build": "ng build --prod --base-href ./",
     "prod-build": "ng build --prod --base-href ./ --env=prod",
     "dev-build": "ng build --prod --base-href ./ --env=dev",
+    "local-build": "ng build --prod --base-href ./ --env=local",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

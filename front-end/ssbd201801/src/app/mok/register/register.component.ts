@@ -8,7 +8,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import {LocationService} from '../common/location.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 
 @Component({

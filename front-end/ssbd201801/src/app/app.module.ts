@@ -16,7 +16,8 @@ import {
   MatSortModule,
   MatPaginatorModule,
   MatPaginatorIntl,
-  MatDialogModule} from '@angular/material';
+  MatDialogModule,
+  MatSelectModule} from '@angular/material';
 import {ErrorHandlerService} from './shared/common/error-handler.service';
 import {RequestInterceptorService} from './shared/common/request-interceptor.service';
 import { ErrorsComponent } from './shared/errors/errors.component';
@@ -44,6 +45,7 @@ import { AuthUtilService } from './mok/common/auth-util.service';
 import { AuthService } from './mok/common/auth.service';
 import { NotificationService } from './mok/common/notification.service';
 import { MatPaginatorIntlPl } from './mok/common/mat-table-utils/mat-paginator-intl-pl';
+import { Properties } from './shared/constsants';
 import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptcha';
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
 
@@ -71,7 +73,7 @@ const appRoutes: Routes = [
     component: AccountListComponent,
     data:
       {
-        expectedRoles: ['ADMIN', 'MANAGER']
+        expectedRoles: [Properties.AdminRole, Properties.ManagerRole]
       }
   },
   {
@@ -80,7 +82,7 @@ const appRoutes: Routes = [
     component: AccountStatisticsComponent,
     data:
       {
-        expectedRoles: ['ADMIN', 'MANAGER']
+        expectedRoles: [Properties.AdminRole, Properties.ManagerRole]
       }
   },
   {
@@ -89,7 +91,7 @@ const appRoutes: Routes = [
     component: RegisterComponent,
     data:
       {
-        expectedRoles: ['GUEST', 'ADMIN']
+        expectedRoles: [Properties.GuestRole, Properties.AdminRole]
       }
   },
   {
@@ -98,7 +100,7 @@ const appRoutes: Routes = [
     component: AccountEditComponent,
     data:
     {
-      expectedRoles: ['ADMIN']
+      expectedRoles: [Properties.AdminRole]
     }
   },
   {
@@ -106,7 +108,7 @@ const appRoutes: Routes = [
     component: ChangePasswordComponent,
     data:
     {
-      expectedRoles: ['USER', 'ADMIN', 'MANAGER']
+      expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
     }
   },
   {
@@ -114,7 +116,7 @@ const appRoutes: Routes = [
     component: ChangeOthersPasswordComponent,
     data:
       {
-        expectedRoles: ['ADMIN']
+        expectedRoles: [Properties.AdminRole]
       }
   },
   {
@@ -126,7 +128,7 @@ const appRoutes: Routes = [
     component: OwnAccountEditComponent,
     data:
     {
-      expectedRoles: ['USER', 'ADMIN', 'MANAGER']
+      expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
     },
     canActivate: [AuthGuard]
   },
@@ -135,7 +137,7 @@ const appRoutes: Routes = [
     component: LoginComponent,
     data:
     {
-      expectedRoles: ['GUEST']
+      expectedRoles: [Properties.GuestRole]
     },
     canActivate: [AuthGuard]
   },
@@ -183,6 +185,7 @@ declarations: [
     MatSidenavModule,
     MatSortModule,
     MatPaginatorModule,
+    MatSelectModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
@@ -197,7 +200,8 @@ declarations: [
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    FormsModule
   ],
   bootstrap: [AppComponent],
   providers: [

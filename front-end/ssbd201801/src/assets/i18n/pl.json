@@ -52,7 +52,9 @@
         "LAST_LOGIN_DATE" : "Data ostatniego logowania",
         "LAST_LOGIN_IP" : "IP ostatniego logowania",
         "ACCESS_LEVELS" : "Poziomy dostępu",
-        "ALTER" : "Zmień"
+        "ALTER" : "Zmień",
+        "RESET_DATA_INFO" : "Uprzednio zaznaczone konta nie zostaną zaktualizowane.",
+        "CONFIRM_CONFIRM": "Czy na pewno chcesz zatwierdzić to konto?"
     },
     "FORM" : {
         "FIELD_REQUIRED" : "To pole jest wymagane.",
@@ -94,7 +96,19 @@
       "CHANGE_PASSWORD" : "Pomyślnie zmieniono hasło",
       "REGISTER" : "Pomyślnie zarejestrowano konto",
       "ALTER_ACCOUNT_ACCESS_LEVEL" : "Pomyślnie zmieniono poziomy dostępu konta",
-      "LOGOUT" : "Pomyślnie wylogowano!"
+      "LOGOUT" : "Pomyślnie wylogowano!",
+      "MASSIVE_UPDATE" : "Pomyślnie aktualizowano {{ value }} kont!",
+      "UPDATED_ACCOUNTS": "Pomyślnie zaktualizowano konta: ",
+      "ALTERED_AL_FOR_ACCOUNT": "Pomyślnie zaktualizowano poziomy dostępu dla konta ",
+      "FAILED_ALT_AL_FOR_ACCOUNT": "Nie udało się zakutalizować poziomów dostępu dla konta ",
+      "LOCKED": "Zablokowano konto",
+      "FAILED_TO_LOCK": "Nie udało się zablokować konta",
+      "UNLOCKED": "Odblokowano konto",
+      "FAILED_TO_UNLOCK": "Nie udało się odblokować konta",
+      "CONFIRMED": "Udało się zatwierdzić konto",
+      "FAILED_TO_CONFIRM": "Nie udało się zatwierdzić konta"
+
+
     },
     "ERROR" : {
       "ERROR" : "Błąd",
@@ -103,6 +117,7 @@
       "UNKNOWN_ERROR" : "Wystąpił nieznany błąd, przepraszamy",
       "NO_INTERNET_CONNECTION" : "Brak połączenia z Internetem",
       "FORBIDDEN" : "Brak dostępu",
+      "FAILED_ACCOUNTS_UPDATE" : "Wystąpiły problemy z aktualizacją następujących kont: ",
       "NEW_PASSWORDS_NOT_MATCH" : "Podane nowe hasła są różne"
     },
   "LOCATION" : {

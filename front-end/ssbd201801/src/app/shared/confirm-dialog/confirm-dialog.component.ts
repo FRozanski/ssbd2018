@@ -9,6 +9,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class ConfirmDialogComponent {
 
+  public text: string = "";
+
   constructor(
     public dialogRef: MatDialogRef<ConfirmDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any

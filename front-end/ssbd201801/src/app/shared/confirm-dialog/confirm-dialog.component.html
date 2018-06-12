@@ -1,5 +1,7 @@
 <h2 mat-dialog-title>{{ "DIALOG.CONFIRM_ACTION" | translate}}</h2>
-<mat-dialog-content>{{'DIALOG.ARE_YOU_SURE' | translate }}</mat-dialog-content>
+<mat-dialog-content *ngIf='text === ""'>{{'DIALOG.ARE_YOU_SURE' | translate }}</mat-dialog-content>
+<mat-dialog-content *ngIf='text != ""'>{{ text | translate }}</mat-dialog-content>
+
 <mat-dialog-actions>
   <button mat-button (click)="dialogRef.close(true)">{{ "DIALOG.OK" | translate}}</button>
   <button mat-button (click)="dialogRef.close(false)">{{ "DIALOG.CANCEL" | translate}}</button>

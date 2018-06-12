@@ -5,8 +5,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {AccountService} from '../common/account.service';
 import {LocationService} from '../common/location.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
 import {NotificationService} from '../common/notification.service';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-registration-confirm',

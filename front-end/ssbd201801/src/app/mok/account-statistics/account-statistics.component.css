@@ -1,58 +1,63 @@
-.example-container {
+:host {
+  width: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  width: 1200px;
+  align-items: center;
+  width: 1500px;
   margin: 0 auto;
 }
 
-.mat-table {
-  overflow: auto;
-  max-height: 500px;
-}
-
-mat-cell {
-  text-align: center;
-}
-
-mat-header-cell {
-  text-align: center;
-}
-
-.button-cell {
-  flex: 1.5;
-}
-
-.mat-header-cell.mat-sort-header-sorted {
-  color: black;
-  text-align: center;
-  display:flex;
-  justify-content:center;
-}
-
-.example-header {
-  min-height: 64px;
-  padding: 8px 24px 0;
-}
-
-.mat-form-field {
-  font-size: 14px;
+.example-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 100%;
 }
-.example-h2 {
-  margin: 10px;
+
+.highlited-row {
+  background: #eaf2ff;
+  transition: background-color 1s;
 }
 
-.example-section {
-  display: flex;
-  align-content: center;
+mat-row {
+  transition: background-color 1s;
+}
+
+.filter-form-field {
+  display: block;
+  width: 95%;
+  margin: 10px auto;
+}
+
+mat-header-cell,
+mat-cell {
+  display: inline-flex;
+  justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 50px;
 }
 
-.example-margin {
-  margin: 0 10px;
+mat-checkbox {
+  display: block;
+  padding-bottom: 0;
 }
 
-mat-card.errors-card {
-  color: red;
+mat-checkbox /deep/ label {
+  margin: 0;
+}
+
+mat-option /deep/ .mat-pseudo-checkbox-checked {
+  background: #3f51b5;
+}
+
+div.buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+div.buttons > button {
+  margin-left: 10px;
+  margin-top: 10px;
 }

@@ -1,24 +1,16 @@
 <div class="example-container mat-elevation-z8">
-  <mat-card class='errors-card' *ngIf='validationMessage !== "" ' >
-    <p>{{ validationMessage }} </p>
-  </mat-card>
 
   <div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
+    <mat-form-field class='filter-form-field'>
+      <input [(ngModel)]='filterValue' matInput (keyup)="onFilterCriteriaChange($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource" matSort>
+  <mat-table #table [dataSource]="dataSource" matSort >
 
     <ng-container matColumnDef="login">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LOGIN' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.login}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="confirm">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.confirm}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lastLoginDate">
@@ -29,11 +21,6 @@
     <ng-container matColumnDef="lastLoginIp">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.LAST_LOGIN_IP' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.lastLoginIp}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="active">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ACCOUNT.ACTIVE' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.active}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="numberOfLogins">
@@ -52,47 +39,41 @@
     </ng-container>
 
     <ng-container matColumnDef="confirmAccount">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.CONFIRM_ACCOUNT' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button *ngIf='!isConfirm(element)' (click)='onConfirmClick(element)'>{{'ACCOUNT.CONFIRM_ACCOUNT'| translate }}</button>
+      <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.CONFIRM' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
+        <mat-checkbox (click)='onConfirmChange(element, rowIndex)' [(ngModel)]='element.confirm' color='primary' [disabled]='element.confirm'></mat-checkbox>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="lockOrUnlockAccount">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.LOCK_UNLOCK_ACCOUNT' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button (click)='onLockUnlockClick(element)'>{{ applyLockOrUnlockAccountLabel(element) }}</button>
+      <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.ACTIVE' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
+        <mat-checkbox (change)='onActiveChange(element, rowIndex)' [(ngModel)]='element.active' color='primary'></mat-checkbox>
       </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="adminAccessLevel">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.ADMIN' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button (click)="onAddDeleteAdminClick(element)">{{ applyAddOrDeleteAdminAccessLevelLabel(element) }}</button>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="managerAccessLevel">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.MANAGER' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button (click)="onAddDeleteManagerClick(element)">{{ applyAddOrDeleteManagerAccessLevelLabel(element) }}</button>
-      </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="userAccessLevel">
-      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'ACCOUNT.USER' | translate }} </mat-header-cell>
-      <mat-cell class='button-cell' *matCellDef="let element">
-        <button mat-button (click)="onAddDeleteUserClick(element)">{{ applyAddOrDeleteUserAccessLevelLabel(element) }}</button>
+    <ng-container matColumnDef="accessLevel">
+      <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'ACCOUNT.ACCESS_LEVELS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element; let rowIndex=index">
+          <mat-select [(ngModel)]='element.accessLevels' placeholder="Roles" (change)='onAccessLevelChange(element, rowIndex)' multiple>
+              <mat-option *ngFor='let role of avaliableRoles' [value]='role.value' >{{ role.displayedValue | translate }}</mat-option>
+          </mat-select>
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: getDisplayedColumns();"></mat-row>
+    <mat-row *matRowDef="let row; let rowId=index; columns: getDisplayedColumns();" [ngClass]='{ "highlited-row" : wasRowChanged(rowId) }'></mat-row>
   </mat-table>
 
   <mat-paginator #paginator
                  [pageSize]="10"
                  [pageSizeOptions]="[5, 10, 20]"
-                 [showFirstLastButtons]="true">
+                 [showFirstLastButtons]="true"
+                 (page)='onPaginatorPageChange()'>
   </mat-paginator>
+
+</div>
+<div class="buttons">
+    <button mat-button color='primery'>{{ 'FORM.RETURN' | translate }} </button>
+    <button mat-button mat-raised-button color='primary' [disabled]='!wasSomeUserChanged()' (click)='submitAccounts()'>{{ 'FORM.SUBMIT' | translate}}</button>
 </div>

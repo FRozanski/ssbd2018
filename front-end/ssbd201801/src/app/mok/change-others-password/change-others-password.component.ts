@@ -7,7 +7,7 @@ import {Location} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
 import {LocationService} from '../common/location.service';
 import {MatDialog, MatDialogRef} from '@angular/material';
-import {ConfirmDialogComponent} from 'app/shared/confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-change-others-password',

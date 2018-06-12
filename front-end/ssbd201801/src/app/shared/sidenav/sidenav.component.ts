@@ -9,6 +9,7 @@ import { AccountData } from '../../mok/model/account-data';
 import { NotificationService } from '../../mok/common/notification.service';
 import { Route, Router } from '@angular/router';
 import { LocationService } from '../../mok/common/location.service';
+import { Properties } from '../constsants';
 
 
 @Component({
@@ -17,6 +18,12 @@ import { LocationService } from '../../mok/common/location.service';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
+
+  readonly AdminRole: string = Properties.AdminRole;
+  readonly ManagerRole: string = Properties.ManagerRole;
+  readonly UserRole: string = Properties.UserRole;
+  readonly GuestRole: string = Properties.GuestRole;
+  readonly VirtualRole: string = Properties.VirtualRole;
 
   userIdentity: AccountData = {};
   rolesStringified = '';
@@ -38,8 +45,8 @@ export class SidenavComponent implements OnInit {
       this.userIdentity = data;
     }, () => {
       this.userIdentity = {
-        login: 'Guest',
-        roles: ['GUEST']
+        login: this.translateService.instant("GUEST"),
+        roles: [this.GuestRole]
       };
     });
     this.locationService.currentRouter.subscribe(router => {
@@ -75,7 +82,7 @@ export class SidenavComponent implements OnInit {
       this.rolesStringified = JSON.stringify(data.roles);
     }).catch((data) => {
       this.userIdentity.login = this.translateService.instant('GUEST');
-      this.userIdentity.roles = this.translateService.instant('GUEST');
+      this.userIdentity.roles = [this.GuestRole]
       this.rolesStringified = JSON.stringify(this.userIdentity.roles);
     });
   }

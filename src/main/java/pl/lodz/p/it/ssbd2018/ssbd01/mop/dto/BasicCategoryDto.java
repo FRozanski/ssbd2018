@@ -10,8 +10,10 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
  * @author michal
  */
 public class BasicCategoryDto {
+
     private Long id;
     private String categoryName;
+    private boolean active;
 
     /**
      * @return the id
@@ -39,5 +41,19 @@ public class BasicCategoryDto {
      */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

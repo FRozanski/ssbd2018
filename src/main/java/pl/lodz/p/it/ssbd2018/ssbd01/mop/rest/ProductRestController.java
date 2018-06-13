@@ -64,6 +64,25 @@ public class ProductRestController {
         }   
     }
     
+    @GET
+    @Path("activeProducts")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllActiveProductWithActiveCategory() {   
+        try {
+            List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllActiveProducts());
+            return Response.status(Response.Status.OK)
+                .entity(allProductsDto)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }   
+    }
+    
     private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {
         if (servletRequest.getUserPrincipal() == null) {
             throw new UserAlreadyLogoutException("user_already_logout_error");

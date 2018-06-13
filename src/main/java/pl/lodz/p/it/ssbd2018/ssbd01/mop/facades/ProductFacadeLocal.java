@@ -29,6 +29,8 @@ public interface ProductFacadeLocal {
     List<Product> findRange(int[] range);
     
     List<Product> findByOwnerLogin(String login) throws AppBaseException;
+    
+    List<Product> findByActiveProductAndCategory() throws AppBaseException;
 
     int count();
     

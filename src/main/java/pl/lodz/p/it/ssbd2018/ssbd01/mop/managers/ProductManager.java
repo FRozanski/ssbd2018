@@ -7,6 +7,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
 import java.util.List;
 import java.util.logging.Logger;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -46,6 +47,12 @@ public class ProductManager implements ProductManagerLocal{
     @RolesAllowed("getAllProducts")
     public List<Product> getAllProducts() {
         return productFacade.findAll();
+    }
+    
+    @Override
+    @RolesAllowed("getAllActiveProducts")
+    public List<Product> getAllActiveProducts() throws AppBaseException {
+        return productFacade.findByActiveProductAndCategory();
     }
     
     

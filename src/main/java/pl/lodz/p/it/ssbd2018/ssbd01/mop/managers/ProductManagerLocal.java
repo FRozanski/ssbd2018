@@ -32,7 +32,9 @@ public interface ProductManagerLocal {
     
     List<Product> getMyProducts(String login) throws AppBaseException;
     
-    List<Product> getAllProductsContainName(String name);                                           
+    List<Product> getAllProductsContainName(String name);   
+    
+    List<Product> getAllActiveProducts() throws AppBaseException;
                 
     Product getProductFromAccountByName(Account account, String name);                              
     

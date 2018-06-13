@@ -12,7 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Product} 
  * @author fifi
  */
 @Stateless

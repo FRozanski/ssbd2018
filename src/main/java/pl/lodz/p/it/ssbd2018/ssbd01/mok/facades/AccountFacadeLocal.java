@@ -62,7 +62,7 @@ public interface AccountFacadeLocal {
     List<Account> findAll();
 
     /**
-     * Wyciąga z bazy danych obiekty obienty typu {@link Account} z zadanego zakresu 
+     * Wyciąga z bazy danych wszystkie obienty typu {@link Account} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link Account}

@@ -41,7 +41,7 @@ public interface ArchivalPasswordFacadeLocal {
     /**
      * Wyciąga z bazy danych wszystkie obienty typu {@link ArchivalPassword} względem id konta
      * @param id identyfikator konta
-     * @return
+     * @return lista obiektów typu {@link ArchivalPassword}
      */
     List<ArchivalPassword> findByAccountId(Long id);
 

@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  *
  * @author fifi
+ * @author michal
  */
 @Entity
 @Table(name = "product")
@@ -38,8 +39,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description")
     , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
     , @NamedQuery(name = "Product.findByQty", query = "SELECT p FROM Product p WHERE p.qty = :qty")
-    , @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")
-    , @NamedQuery(name = "Product.findByVersion", query = "SELECT p FROM Product p WHERE p.version = :version")})
+    , @NamedQuery(name = "Product.findByActiveProductAndCategory", query = "SELECT p FROM Product p WHERE p.active = :active and p.categoryId.active = :activeCategory")
+    , @NamedQuery(name = "Product.findByVersion", query = "SELECT p FROM Product p WHERE p.version = :version")
+    , @NamedQuery(name = "Product.findByOwnerLogin", query = "SELECT p FROM Product p WHERE p.ownerId.login = :login")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -191,6 +193,20 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
     }
     
 }

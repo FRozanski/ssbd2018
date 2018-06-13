@@ -6,13 +6,21 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
 import java.util.List;
+import java.util.logging.Logger;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -21,8 +29,33 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
+@Interceptors(LoggerInterceptor.class)
 public class ProductManager implements ProductManagerLocal{
-
+    
+    private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
+    
+    @EJB
+    ProductFacadeLocal productFacade;
+    
+    @Override
+    @RolesAllowed("getMyProducts")
+    public List<Product> getMyProducts(String login) throws AppBaseException {
+        return productFacade.findByOwnerLogin(login);
+    }
+    
+    @Override
+    @RolesAllowed("getAllProducts")
+    public List<Product> getAllProducts() {
+        return productFacade.findAll();
+    }
+    
+    @Override
+    @RolesAllowed("getAllActiveProducts")
+    public List<Product> getAllActiveProducts() throws AppBaseException {
+        return productFacade.findByActiveProductAndCategory();
+    }
+    
+    
     @Override
     @RolesAllowed("addProductByAccount")
     public void addProductByAccount(Account account, Product product) {
@@ -48,12 +81,6 @@ public class ProductManager implements ProductManagerLocal{
     }
 
     @Override
-    @RolesAllowed("getAllProducts")
-    public List<Product> getAllProducts() {
-        throw new NotImplementedException();
-    }
-
-    @Override
     @RolesAllowed("getAllProductsContainName")
     public List<Product> getAllProductsContainName(String name) {
         throw new NotImplementedException();
@@ -70,6 +97,5 @@ public class ProductManager implements ProductManagerLocal{
     public void setProductCategory(Product product, Category category) {
         throw new NotImplementedException();
     }
-
     
 }

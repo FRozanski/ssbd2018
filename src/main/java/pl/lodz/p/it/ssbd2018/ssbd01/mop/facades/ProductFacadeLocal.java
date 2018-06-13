@@ -13,6 +13,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 /**
  *
  * @author fifi
+ * @author michalmalec
  */
 @Local
 public interface ProductFacadeLocal {
@@ -26,6 +27,10 @@ public interface ProductFacadeLocal {
     List<Product> findAll();
 
     List<Product> findRange(int[] range);
+    
+    List<Product> findByOwnerLogin(String login) throws AppBaseException;
+    
+    List<Product> findByActiveProductAndCategory() throws AppBaseException;
 
     int count();
     

@@ -10,7 +10,7 @@ import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 
 /**
@@ -28,9 +28,13 @@ public interface ProductManagerLocal {
     
     void setProductState(Product product, boolean active);                                          
             
-    List<Product> getAllProducts();                                                                 
+    List<Product> getAllProducts();
     
-    List<Product> getAllProductsContainName(String name);                                           
+    List<Product> getMyProducts(String login) throws AppBaseException;
+    
+    List<Product> getAllProductsContainName(String name);   
+    
+    List<Product> getAllActiveProducts() throws AppBaseException;
                 
     Product getProductFromAccountByName(Account account, String name);                              
     

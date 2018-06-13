@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.dto;
-
-import java.util.ArrayList;
-import java.util.List;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.dto;
 
 /**
  *
  * @author michal
  */
-public class BasicAccountDto {
+public class OtherPasswordDto extends BasicNewAccountDto {
+    
     private long id;
-    private List<String> accessLevels = new ArrayList<>();
+    private long version;
 
     /**
      * @return the id
@@ -31,16 +29,17 @@ public class BasicAccountDto {
     }
 
     /**
-     * @return the accessLevels
+     * @return the version
      */
-    public List<String> getAccessLevels() {
-        return accessLevels;
+    public long getVersion() {
+        return version;
     }
 
     /**
-     * @param accessLevels the accessLevels to set
+     * @param version the version to set
      */
-    public void setAccessLevels(List<String> accessLevels) {
-        this.accessLevels = accessLevels;
+    public void setVersion(long version) {
+        this.version = version;
     }
+    
 }

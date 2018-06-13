@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.mapper;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.mapper;
 
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import pl.lodz.p.it.ssbd2018.ssbd01.dto.AccessLevelDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.dto.AccessLevelDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccessLevel;
 
 /**

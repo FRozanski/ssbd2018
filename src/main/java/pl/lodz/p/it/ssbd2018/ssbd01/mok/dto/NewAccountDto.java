@@ -3,16 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.dto;
-
-import java.util.ArrayList;
-import java.util.List;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.dto;
 
 /**
  *
  * @author michal
  */
-public class FullAccountDto extends BasicAccountDto {
+public class NewAccountDto extends BasicNewAccountDto {
 
     private String login;
     private String name;
@@ -25,85 +22,21 @@ public class FullAccountDto extends BasicAccountDto {
     private String postalCode;
     private String city;
     private String country;
-    private long numberOfProducts;
-    private long numberOfOrders;
-    private long numberOfLogins;
-    private boolean confirm;
-    private boolean active;
-    private String lastLoginDate;
-    private String lastLoginIp;
-    private List<String> accessLevels = new ArrayList<>();
-
+    
     /**
-     * @return the numberOfProducts
+     * @return the login
      */
-    public long getNumberOfProducts() {
-        return numberOfProducts;
+    public String getLogin() {
+        return login;
     }
 
     /**
-     * @param numberOfProducts the numberOfProducts to set
+     * @param login the login to set
      */
-    public void setNumberOfProducts(long numberOfProducts) {
-        this.numberOfProducts = numberOfProducts;
+    public void setLogin(String login) {
+        this.login = login;
     }
-
-    /**
-     * @return the numberOfOrders
-     */
-    public long getNumberOfOrders() {
-        return numberOfOrders;
-    }
-
-    /**
-     * @param numberOfOrders the numberOfOrders to set
-     */
-    public void setNumberOfOrders(long numberOfOrders) {
-        this.numberOfOrders = numberOfOrders;
-    }
-
-    /**
-     * @return the numberOfLogins
-     */
-    public long getNumberOfLogins() {
-        return numberOfLogins;
-    }
-
-    /**
-     * @param numberOfLogins the numberOfLogins to set
-     */
-    public void setNumberOfLogins(long numberOfLogins) {
-        this.numberOfLogins = numberOfLogins;
-    }
-
-    /**
-     * @return the confirm
-     */
-    public boolean getConfirm() {
-        return isConfirm();
-    }
-
-    /**
-     * @param confirm the confirm to set
-     */
-    public void setConfirm(boolean confirm) {
-        this.confirm = confirm;
-    }
-
-    /**
-     * @return the active
-     */
-    public boolean getActive() {
-        return isActive();
-    }
-
-    /**
-     * @param active the active to set
-     */
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
+    
     /**
      * @return the name
      */
@@ -243,62 +176,4 @@ public class FullAccountDto extends BasicAccountDto {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    /**
-     * @return the confirm
-     */
-    public boolean isConfirm() {
-        return confirm;
-    }
-
-    /**
-     * @return the active
-     */
-    public boolean isActive() {
-        return active;
-    }
-
-    /**
-     * @return the login
-     */
-    public String getLogin() {
-        return login;
-    }
-
-    /**
-     * @param login the login to set
-     */
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    /**
-     * @return the lastLoginDate
-     */
-    public String getLastLoginDate() {
-        return lastLoginDate;
-    }
-
-    /**
-     * @param lastLoginDate the lastLoginDate to set
-     */
-    public void setLastLoginDate(String lastLoginDate) {
-        this.lastLoginDate = lastLoginDate;
-    }
-
-    /**
-     * @return the lastLoginIp
-     */
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    /**
-     * @param lastLoginIp the lastLoginIp to set
-     */
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
-    }
-  
-    
 }

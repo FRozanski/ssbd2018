@@ -127,6 +127,54 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    <!-- MOP -->
+     <security-constraint>
+        <display-name>getAllProducts</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllProducts</web-resource-name>            
+            <url-pattern>/webresources/product/</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getMyProducts</display-name>
+        <web-resource-collection>
+            <web-resource-name>getMyProducts</web-resource-name>            
+            <url-pattern>/webresources/product/myProducts</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getAllActiveProductWithActiveCategory</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllActiveProductWithActiveCategory</web-resource-name>            
+            <url-pattern>/webresources/product/activeProducts</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+            <role-name>MANAGER</role-name>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     
     
     

@@ -17,7 +17,8 @@
     "GUEST": "Gość",
     "CREATE_ACCOUNT": "Utwórz konto",
     "ACTIVATE_ACCOUNT": "Aktywuj konto",
-    "PRODUCTS" : "Produkty"
+    "PRODUCTS" : "Produkty",
+    "MY_PRODUCTS" : "Moje produkty"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -142,7 +143,8 @@
     "REGISTER_PAGE": "Rejestracja",
     "ADD_ACCOUNT_PAGE": "Dodawanie nowego użytkownika",
     "REGISTRATION_CONFIRM": "Aktywacja konta",
-    "PRODUCT_LIST_PAGE": "Lista produktów"
+    "PRODUCT_LIST_PAGE": "Lista produktów",
+    "MY_PRODUCT_LIST_PAGE": "Lista moich produktów"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

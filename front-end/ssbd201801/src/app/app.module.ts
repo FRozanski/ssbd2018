@@ -50,6 +50,7 @@ import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptc
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
 import { ProductListComponent } from './mop/product-list/product-list.component';
 import {ProductService} from './mop/common/product.service';
+import { MyProductListComponent } from './mop/my-product-list/my-product-list.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -76,6 +77,15 @@ const appRoutes: Routes = [
     data:
       {
         expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
+      }
+  },
+  {
+    path: 'myProducts',
+    canActivate: [AuthGuard],
+    component: MyProductListComponent,
+    data:
+      {
+        expectedRoles: [Properties.UserRole]
       }
   },
   {
@@ -185,7 +195,8 @@ declarations: [
     ConfirmDialogComponent,
     ErrorsComponent,
     BaseAccountFormComponent,
-    ProductListComponent
+    ProductListComponent,
+    MyProductListComponent
   ],
   imports: [
     MatDialogModule,

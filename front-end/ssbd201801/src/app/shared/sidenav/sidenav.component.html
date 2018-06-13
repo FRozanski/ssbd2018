@@ -40,7 +40,11 @@
     </p>
 
     <p>
-      <button mat-button routerLink='/products' *ngIf='hasRole(AdminRole) || hasRole(ManagerRole)'>{{ "SIDE_NAV.PRODUCTS" | translate }}</button>
+      <button mat-button routerLink='/products' *ngIf='hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(UserRole)'>{{ "SIDE_NAV.PRODUCTS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/myProducts' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_PRODUCTS" | translate }}</button>
     </p>
 
     <p>

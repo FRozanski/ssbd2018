@@ -28,6 +28,11 @@
       <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="unit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.UNIT' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.unit.unitName}} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="active">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.ACTIVE' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.active}} </mat-cell>
@@ -36,11 +41,6 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.CATEGORY' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.category.categoryName}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="unit">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.UNIT' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.unit.unitName}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="owner">

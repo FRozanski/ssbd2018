@@ -48,6 +48,8 @@ import { MatPaginatorIntlPl } from './mok/common/mat-table-utils/mat-paginator-i
 import { Properties } from './shared/constsants';
 import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptcha';
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
+import { ProductListComponent } from './mop/product-list/product-list.component';
+import {ProductService} from './mop/common/product.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -66,6 +68,15 @@ const appRoutes: Routes = [
   {
     path: 'main',
     component: MainPageComponent
+  },
+  {
+    path: 'products',
+    canActivate: [AuthGuard],
+    component: ProductListComponent,
+    data:
+      {
+        expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
+      }
   },
   {
     path: 'accounts',
@@ -173,7 +184,8 @@ declarations: [
     NotificationsComponent,
     ConfirmDialogComponent,
     ErrorsComponent,
-    BaseAccountFormComponent
+    BaseAccountFormComponent,
+    ProductListComponent
   ],
   imports: [
     MatDialogModule,
@@ -206,6 +218,7 @@ declarations: [
   bootstrap: [AppComponent],
   providers: [
     AccountService,
+    ProductService,
     SessionService,
     LocationService,
     RegistrationConfirmComponent,

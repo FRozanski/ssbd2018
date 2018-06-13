@@ -40,6 +40,16 @@
     "FLAT_NUMBER": "FLAT_NUMBER",
     "CHANGE_OF_PASSWORD": "CHANGE_OF_PASSWORD"
   },
+  "PRODUCT": {
+    "NAME": "Name",
+    "DESCRIPTION": "Description",
+    "PRICE": "Price",
+    "QTY": "Number/Quantity",
+    "ACTIVE": "Active",
+    "CATEGORY": "Category",
+    "UNIT": "Unit",
+    "OWNER": "Owner"
+  },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
     "SUBMIT": "SUBMIT",

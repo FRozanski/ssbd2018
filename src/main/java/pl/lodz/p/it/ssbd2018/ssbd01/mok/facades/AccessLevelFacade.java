@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccessLevelExistsException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeBase;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link AccessLevel} 
  * @author fifi
  */
 @Stateless

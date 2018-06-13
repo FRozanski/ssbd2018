@@ -31,7 +31,7 @@ public abstract class AbstractFacadeCreateUpdate<T> extends AbstractFacadeBase<T
     }
 
     /**
-     * Aktualizacja obiektu w bazie danych
+     * Edycja obiektu w bazie danych
      * @param entity obiekt encji danego typu
      * @throws AppBaseException
      */

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.dto;
+package pl.lodz.p.it.ssbd2018.ssbd01.mok.dto;
 
 
 /**

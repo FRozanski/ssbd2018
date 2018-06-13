@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.lodz.p.it.ssbd2018.ssbd01.dto.LoginDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.dto.LoginDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.*;

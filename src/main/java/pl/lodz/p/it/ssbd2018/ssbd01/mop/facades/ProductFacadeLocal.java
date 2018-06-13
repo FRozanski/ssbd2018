@@ -7,13 +7,13 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 
 import java.util.List;
 import javax.ejb.Local;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
  * @author fifi
+ * @author michalmalec
  */
 @Local
 public interface ProductFacadeLocal {

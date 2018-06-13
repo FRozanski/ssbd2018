@@ -6,15 +6,11 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 
 import java.math.BigDecimal;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
-
 /**
  *
  * @author michal
  */
-public class ProductDto {
+public class BasicProductDto {
     
     private Long id;
     private String name;
@@ -22,7 +18,6 @@ public class ProductDto {
     private BigDecimal price;
     private BigDecimal qty;
     private boolean active;
-    private long version;
     private BasicCategoryDto category;
     private BasicUnitDto unit;
     private BasicProductOwnerDto owner;
@@ -109,20 +104,6 @@ public class ProductDto {
      */
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    /**
-     * @return the version
-     */
-    public long getVersion() {
-        return version;
-    }
-
-    /**
-     * @param version the version to set
-     */
-    public void setVersion(long version) {
-        this.version = version;
     }
 
     /**

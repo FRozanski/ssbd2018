@@ -16,7 +16,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicCategoryDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductOwnerDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicUnitDto;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 
 /**
  *
@@ -27,7 +27,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ProductDto;
 public interface ProductMapper {
     ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
     
-    List<ProductDto> productsToDTO(List<Product> products);
+    List<BasicProductDto> productsToDTO(List<Product> products);
     
     BasicProductOwnerDto ownerToBasicOwnerDTO(Account account);
     BasicCategoryDto categoryToBasicCategoryDTO(Category category);

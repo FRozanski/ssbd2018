@@ -15,14 +15,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.dto.EditableAccountDto;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.mapper.AccountMapper;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
 
@@ -40,7 +37,7 @@ public class ProductRestController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProducts() {
-        List<ProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllProducts());
+        List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllProducts());
         return Response.status(Response.Status.OK)
                 .entity(allProductsDto)
                 .type(MediaType.APPLICATION_JSON)
@@ -54,8 +51,7 @@ public class ProductRestController {
     public Response getMyProducts(@Context HttpServletRequest servletRequest) {   
         try {
             String login = getUserLogin(servletRequest);
-//            String name = productManager.getMyProducts(login).get(0).getName();
-            List<ProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getMyProducts(login));
+            List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getMyProducts(login));
             return Response.status(Response.Status.OK)
                 .entity(allProductsDto)
                 .type(MediaType.APPLICATION_JSON)

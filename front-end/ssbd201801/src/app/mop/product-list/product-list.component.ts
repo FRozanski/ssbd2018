@@ -4,6 +4,7 @@ import {LocationService} from '../../mok/common/location.service';
 import {ProductService} from '../common/product.service';
 import {ProductData} from '../model/product-data';
 import {TranslateService} from '@ngx-translate/core';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-product-list',
@@ -14,6 +15,7 @@ export class ProductListComponent implements OnInit {
 
   displayedColumns = ['name', 'description', 'price', 'qty', 'unit', 'active', 'category', 'owner'];
   dataSource;
+  activeProducts: ProductData[];
 
   constructor(private locationService: LocationService,
               private productService: ProductService,
@@ -24,8 +26,13 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.PRODUCT_LIST_PAGE');
-    this.productService.getAllProducts().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<ProductData>(data);
+    this.productService.getAllProducts().subscribe((products) => {
+      for (const prod of products) {
+        if (prod.active) {
+          this.activeProducts.push(prod);
+        }
+      }
+      this.dataSource = new MatTableDataSource<ProductData>(this.activeProducts);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
 

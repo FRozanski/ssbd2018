@@ -12,7 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeBase;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link OrderStatus} 
  * @author fifi
  */
 @Stateless

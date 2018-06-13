@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {LocationService} from '../../mok/common/location.service';
 import {ProductService} from '../common/product.service';
-import {AccountData} from '../../mok/model/account-data';
 import {ProductData} from '../model/product-data';
 import {TranslateService} from '@ngx-translate/core';
 

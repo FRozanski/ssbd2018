@@ -16,7 +16,8 @@
     "LOGOUT": "Log out",
     "GUEST": "Guest",
     "CREATE_ACCOUNT": "Create account",
-    "ACTIVATE_ACCOUNT" : "Activate account"
+    "ACTIVATE_ACCOUNT" : "Activate account",
+    "PRODUCTS" : "Products"
   },
   "ACCOUNT": {
     "CITY": "CITY",
@@ -112,7 +113,8 @@
     "OWN_ACCOUNT_EDIT_PAGE": "My account",
     "REGISTER_PAGE": "Registration",
     "ADD_ACCOUNT_PAGE": "Adding a new user",
-    "REGISTRATION_CONFIRM": "Account activation"
+    "REGISTRATION_CONFIRM": "Account activation",
+    "PRODUCT_LIST_PAGE": "Product list page"
   },
   "app.exception.web.login_error": "Invalid login or password",
   "app.exception.mok.account.phone_pattern_error": "The phone has been entered in an incorrect format",

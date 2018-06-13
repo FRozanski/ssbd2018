@@ -16,7 +16,8 @@
     "LOGOUT": "Wyloguj",
     "GUEST": "Gość",
     "CREATE_ACCOUNT": "Utwórz konto",
-    "ACTIVATE_ACCOUNT": "Aktywuj konto"
+    "ACTIVATE_ACCOUNT": "Aktywuj konto",
+    "PRODUCTS" : "Produkty"
   },
   "ACCOUNT": {
     "CITY": "Miasto",

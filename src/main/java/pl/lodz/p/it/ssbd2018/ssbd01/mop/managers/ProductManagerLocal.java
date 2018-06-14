@@ -10,6 +10,7 @@ import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 
@@ -41,6 +42,10 @@ public interface ProductManagerLocal {
     void setProductCategory(Product product, Category category);                                    
 
     void addMyNewProduct(Product product) throws AppBaseException;
+
+    Category getCategoryById(Long categoryId) throws AppBaseException;
+
+    Unit getUnitById(Long unitId) throws AppBaseException;
             
            
 }

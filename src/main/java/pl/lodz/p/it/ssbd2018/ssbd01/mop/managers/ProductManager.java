@@ -17,9 +17,12 @@ import javax.interceptor.Interceptors;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -36,6 +39,12 @@ public class ProductManager implements ProductManagerLocal{
     
     @EJB
     ProductFacadeLocal productFacade;
+    
+    @EJB
+    CategoryFacadeLocal categoryFace;
+    
+    @EJB
+    UnitFacadeLocal unitFacade;
     
     @Override
     @RolesAllowed("getMyProducts")
@@ -101,6 +110,16 @@ public class ProductManager implements ProductManagerLocal{
     @Override
     public void addMyNewProduct(Product product) throws AppBaseException {
         productFacade.create(product);
+    }
+
+    @Override
+    public Category getCategoryById(Long categoryId) throws AppBaseException {
+        return categoryFace.find(categoryId);
+    }
+
+    @Override
+    public Unit getUnitById(Long unitId) throws AppBaseException {
+        return unitFacade.find(unitId);
     }
     
 }

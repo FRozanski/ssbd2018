@@ -19,9 +19,9 @@ public class NewProductDto {
     private BigDecimal price;
     private BigDecimal qty;
     private boolean active;
-    private String categoryId;
-    private String unitId;
-    private String ownerId;
+    private Long categoryId;
+    private Long unitId;
+    private Long ownerId;
 
     public Long getId() {
         return id;
@@ -71,29 +71,27 @@ public class NewProductDto {
         this.active = active;
     }
 
-    public String getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(String categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
-    public String getUnitId() {
+    public Long getUnitId() {
         return unitId;
     }
 
-    public void setUnitId(String unitId) {
+    public void setUnitId(Long unitId) {
         this.unitId = unitId;
     }
 
-    public String getOwnerId() {
+    public Long getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(String ownerId) {
+    public void setOwnerId(Long ownerId) {
         this.ownerId = ownerId;
     }
-    
-    
 }

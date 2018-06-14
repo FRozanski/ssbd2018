@@ -9,14 +9,19 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.interceptor.Interceptors;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -25,8 +30,12 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
+@Interceptors(LoggerInterceptor.class)
 public class OrderManager implements OrderManagerLocal{
-
+    
+    @EJB
+    private ShippingMethodFacadeLocal shippingMethodFacade;
+    
     @Override
     @RolesAllowed("makeOrder")
     public void makeOrder(OrderProducts orderProducts) {
@@ -47,8 +56,8 @@ public class OrderManager implements OrderManagerLocal{
 
     @Override
     @RolesAllowed("addShippingMethod")
-    public void addShippingMethod(ShippingMethod shippingMethod) {
-        throw new NotImplementedException();
+    public void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException{
+        shippingMethodFacade.create(shippingMethod);
     }
 
     @Override

@@ -15,6 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -29,7 +30,7 @@ public interface OrderManagerLocal {
     
     void cancelOrder(Order1 order);
     
-    void addShippingMethod(ShippingMethod shippingMethod);
+    void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException;
     
     void setShippingMethodActive(ShippingMethod shippingMethod, boolean active);
     

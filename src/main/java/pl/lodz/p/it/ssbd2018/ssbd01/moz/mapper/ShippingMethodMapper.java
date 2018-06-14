@@ -10,7 +10,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.FullShippingMethodDto;
 
 /**
  *
@@ -21,5 +20,5 @@ public interface ShippingMethodMapper {
     ShippingMethodMapper INSTANCE = Mappers.getMapper(ShippingMethodMapper.class);
     
     List<BasicShippingMethodDto> shippingMethodToBasicDto(List<ShippingMethod> shippingMethods);
-    FullShippingMethodDto shippingMethodToFullDto(ShippingMethod shippingMethod);
+    BasicShippingMethodDto shippingMethodToBasicDto(ShippingMethod shippingMethods);
 }

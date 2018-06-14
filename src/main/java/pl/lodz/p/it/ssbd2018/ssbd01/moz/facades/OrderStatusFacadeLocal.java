@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 public interface OrderStatusFacadeLocal {
     
     /**
-     * Wyciąga z bazy danych obiekt typu {@link OrderStatus} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link OrderStatus} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link OrderStatus}
      * @throws AppBaseException
@@ -26,13 +26,13 @@ public interface OrderStatusFacadeLocal {
     OrderStatus find(Object id) throws AppBaseException;
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderStatus}
+     * Pobiera z bazy danych wszystkie obienty typu {@link OrderStatus}
      * @return lista obiektów typu {@link OrderStatus}
      */
     List<OrderStatus> findAll();
 
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderStatus} z zadanego zakresu 
+     * Pobiera z bazy danych wszystkie obienty typu {@link OrderStatus} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link OrderStatus}

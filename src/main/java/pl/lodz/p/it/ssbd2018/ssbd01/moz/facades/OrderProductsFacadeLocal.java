@@ -32,7 +32,7 @@ public interface OrderProductsFacadeLocal {
     void edit(OrderProducts orderProducts) throws AppBaseException;
     
     /**
-     * Wyciąga z bazy danych obiekt typu {@link OrderProducts} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link OrderProducts} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link OrderProducts}
      * @throws AppBaseException
@@ -40,13 +40,13 @@ public interface OrderProductsFacadeLocal {
     OrderProducts find(Object id) throws AppBaseException;
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderProducts}
+     * Pobiera z bazy danych wszystkie obienty typu {@link OrderProducts}
      * @return lista obiektów typu {@link OrderProducts}
      */
     List<OrderProducts> findAll();
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderProducts} z zadanego zakresu 
+     * Pobiera z bazy danych wszystkie obienty typu {@link OrderProducts} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link OrderProducts}

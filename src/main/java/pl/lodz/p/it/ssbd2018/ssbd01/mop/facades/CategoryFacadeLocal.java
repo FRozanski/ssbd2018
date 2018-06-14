@@ -32,7 +32,7 @@ public interface CategoryFacadeLocal {
     void edit(Category category) throws AppBaseException;
 
     /**
-     * Wyciąga z bazy danych obiekt typu {@link Category} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link Category} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link Category}
      * @throws AppBaseException
@@ -40,13 +40,13 @@ public interface CategoryFacadeLocal {
     Category find(Object id) throws AppBaseException;
 
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link Category}
+     * Pobiera z bazy danych wszystkie obienty typu {@link Category}
      * @return lista obiektów typu {@link Category}
      */
     List<Category> findAll();
 
     /**
-     * Wyciąga z bazy danych obiekty obienty typu {@link Category} z zadanego zakresu 
+     * Pobiera z bazy danych obiekty obienty typu {@link Category} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link Category}

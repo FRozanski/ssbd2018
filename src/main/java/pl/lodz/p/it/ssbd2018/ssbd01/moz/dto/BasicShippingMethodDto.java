@@ -5,23 +5,16 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.dto;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Filip
  */
 public class BasicShippingMethodDto {
-    
-    private Long id;    
+      
     private String name;
-    private Double price;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private BigDecimal price;
 
     public String getName() {
         return name;
@@ -31,11 +24,11 @@ public class BasicShippingMethodDto {
         this.name = name;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }    
 }

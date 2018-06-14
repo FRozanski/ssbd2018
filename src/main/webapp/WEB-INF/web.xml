@@ -175,7 +175,22 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
+    <!-- MOZ -->
+     <security-constraint>
+        <display-name>addShippingMethod</display-name>
+        <web-resource-collection>
+            <web-resource-name>addShippingMethod</web-resource-name>            
+            <url-pattern>/webresources/order/addShippingMethod</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     
     
     <!-- definicja metody logowania -->

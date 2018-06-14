@@ -97,5 +97,10 @@ public class ProductManager implements ProductManagerLocal{
     public void setProductCategory(Product product, Category category) {
         throw new NotImplementedException();
     }
+
+    @Override
+    public void addMyNewProduct(Product product) throws AppBaseException {
+        productFacade.create(product);
+    }
     
 }

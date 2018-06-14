@@ -24,7 +24,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountAlevelExistsException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link AccountAlevel} 
  * @author fifi
  */
 @Stateless

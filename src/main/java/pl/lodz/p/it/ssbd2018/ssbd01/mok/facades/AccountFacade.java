@@ -31,7 +31,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.TokenNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Account} 
  * @author fifi
  * @author agkan
  */

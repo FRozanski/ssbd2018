@@ -11,18 +11,38 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
- *
+ * Interfejs definiujący dozwolone operacje na obiektach typu {@link OrderStatus}
  * @author fifi
  */
 @Local
 public interface OrderStatusFacadeLocal {
-
+    
+    /**
+     * Wyciąga z bazy danych obiekt typu {@link OrderStatus} o podanym id
+     * @param id identyfikator encji
+     * @return Obiekt encji typu {@link OrderStatus}
+     * @throws AppBaseException
+     */
     OrderStatus find(Object id) throws AppBaseException;
-
+    
+    /**
+     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderStatus}
+     * @return lista obiektów typu {@link OrderStatus}
+     */
     List<OrderStatus> findAll();
 
+    /**
+     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderStatus} z zadanego zakresu 
+     * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
+     * Zakresy reprezentują id obiektów
+     * @return lista obiektów typu {@link OrderStatus}
+     */
     List<OrderStatus> findRange(int[] range);
-
+    
+    /**
+     * Zlicza obieky typu {@link OrderStatus} w bazie danych
+     * @return liczba całkowita będąca liczbą obiektów
+     */
     int count();
     
 }

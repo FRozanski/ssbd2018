@@ -19,7 +19,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Product} 
  * @author fifi
  * @author michalmalec
  */

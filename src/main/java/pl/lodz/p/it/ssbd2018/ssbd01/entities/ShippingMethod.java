@@ -128,5 +128,19 @@ public class ShippingMethod implements Serializable {
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod[ id=" + id + " ]";
     }
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
+    }
     
 }

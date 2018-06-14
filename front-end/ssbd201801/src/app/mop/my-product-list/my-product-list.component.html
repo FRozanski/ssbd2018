@@ -13,11 +13,6 @@
       <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.DESCRIPTION' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="price">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.PRICE' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
@@ -41,11 +36,6 @@
     <ng-container matColumnDef="category">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.CATEGORY' | translate }} </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.category.categoryName}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="owner">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.OWNER' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.owner.name}} {{element.owner.surname}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

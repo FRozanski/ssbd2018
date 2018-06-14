@@ -12,7 +12,7 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class MyProductListComponent implements OnInit {
 
-  displayedColumns = ['name', 'description', 'price', 'qty', 'unit', 'active', 'category', 'owner'];
+  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category'];
   dataSource;
 
   constructor(private locationService: LocationService,

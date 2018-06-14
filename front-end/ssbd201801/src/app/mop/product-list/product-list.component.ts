@@ -13,9 +13,8 @@ import {Observable} from 'rxjs/Observable';
 })
 export class ProductListComponent implements OnInit {
 
-  displayedColumns = ['name', 'description', 'price', 'qty', 'unit', 'active', 'category', 'owner'];
+  displayedColumns = ['name', 'price', 'qty', 'unit', 'category'];
   dataSource;
-  activeProducts: ProductData[];
 
   constructor(private locationService: LocationService,
               private productService: ProductService,
@@ -26,13 +25,8 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.PRODUCT_LIST_PAGE');
-    this.productService.getAllProducts().subscribe((products) => {
-      for (const prod of products) {
-        if (prod.active) {
-          this.activeProducts.push(prod);
-        }
-      }
-      this.dataSource = new MatTableDataSource<ProductData>(this.activeProducts);
+    this.productService.getAllActiveProductWithActiveCategory().subscribe((products) => {
+      this.dataSource = new MatTableDataSource<ProductData>(products);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
 

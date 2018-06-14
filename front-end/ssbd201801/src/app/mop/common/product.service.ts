@@ -18,4 +18,8 @@ export class ProductService {
   getMyProducts(): Observable<ProductData[]> {
     return this.httpClient.get<ProductData[]>(this.uri + '/myProducts');
   }
+
+  getAllActiveProductWithActiveCategory(): Observable<ProductData[]> {
+    return this.httpClient.get<ProductData[]>(this.uri + '/activeProducts');
+  }
 }

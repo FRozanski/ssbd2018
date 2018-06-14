@@ -40,6 +40,14 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/products' *ngIf='hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(UserRole)'>{{ "SIDE_NAV.PRODUCTS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/myProducts' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_PRODUCTS" | translate }}</button>
+    </p>
+
+    <p>
       <button mat-button (click)='onLogoutClick()' *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(VirtualRole)'>{{ "SIDE_NAV.LOGOUT" | translate }}</button>
     </p>
   </mat-sidenav>

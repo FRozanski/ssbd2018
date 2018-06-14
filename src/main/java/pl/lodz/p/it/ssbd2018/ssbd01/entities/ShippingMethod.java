@@ -18,9 +18,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_ERROR;
 
 /**
  *
@@ -51,7 +53,7 @@ public class ShippingMethod implements Serializable {
     @Size(min = 1, max = 16)
     @Column(name = "name")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @DecimalMin(value="0.0", message = SHIPPING_METHOD_PRICE_ERROR)
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")

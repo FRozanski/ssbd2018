@@ -15,7 +15,7 @@ import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodNameNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
@@ -48,7 +48,7 @@ public class ShippingMethodFacade extends AbstractFacadeCreateUpdate<ShippingMet
             if (ex.getMessage().contains("shipping_method_unique"))
                 throw new ShippingMethodNameNotUniqueException("shipping_method_unique");            
         } catch (ConstraintViolationException ex) {
-            throw new AccountException("constraint_violation");
+            throw new ShippingMethodException("constraint_violation");
         }                
     }
     

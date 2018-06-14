@@ -7,6 +7,14 @@ package pl.lodz.p.it.ssbd2018.ssbd01.tools;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
 
 /**
  *
@@ -40,6 +48,7 @@ public class ErrorCodes {
     public static final String FLAT_NUMBER_PATTERN_ERROR = "flat_number_pattern_error";
     public static final String CITY_LENGTH_ERROR = "city_length_error";
     public static final String COUNTRY_LENGTH_ERROR = "country_length_error";
+    public static final String SHIPPING_METHOD_PRICE_ERROR = "shipping_method_price_error";
     
     public List<String> getAllErrors() {
         List<String> errors = new ArrayList<>();
@@ -62,7 +71,7 @@ public class ErrorCodes {
         errors.add(FLAT_NUMBER_PATTERN_ERROR);
         errors.add(CITY_LENGTH_ERROR);
         errors.add(COUNTRY_LENGTH_ERROR);
+        errors.add(SHIPPING_METHOD_PRICE_ERROR);
         return errors;
-    }
-    
+    }            
 }

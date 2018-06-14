@@ -12,10 +12,14 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   getAllProducts(): Observable<ProductData[]> {
-    return this.httpClient.get<ProductData[]>(this.uri + '/activeProducts');
+    return this.httpClient.get<ProductData[]>(this.uri);
   }
 
   getMyProducts(): Observable<ProductData[]> {
     return this.httpClient.get<ProductData[]>(this.uri + '/myProducts');
+  }
+
+  getAllActiveProductWithActiveCategory(): Observable<ProductData[]> {
+    return this.httpClient.get<ProductData[]>(this.uri + '/activeProducts');
   }
 }

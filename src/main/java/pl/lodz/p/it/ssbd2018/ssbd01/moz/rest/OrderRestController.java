@@ -30,7 +30,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
- *
+ * Klasa reprezentująca serwis RESTowy, odpowiedzialna za zarządanie zamówieniami i metodami przesyłki
  * @author Filip
  */
 @Path("order")
@@ -39,7 +39,11 @@ public class OrderRestController {
     @EJB
     OrderManagerLocal orderManager;
   
-    
+    /**
+     * Dodawanie nowych metod wysyłki
+     * @param shippingMethodDto obiekt dto metody przesyłki
+     * @return odpowiedź w formacie JSON zawierającego rezultat wykonanej akcji
+     */
     @POST
     @Path("addShippingMethod")
     @Consumes(MediaType.APPLICATION_JSON)

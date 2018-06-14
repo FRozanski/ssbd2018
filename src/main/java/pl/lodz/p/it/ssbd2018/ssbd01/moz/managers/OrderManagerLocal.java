@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
- *
+ * Interfejs manager do zarządzania zamówieniami oraz metodami przysyłki
  * @author fifi
  */
 @Local
@@ -30,6 +30,11 @@ public interface OrderManagerLocal {
     
     void cancelOrder(Order1 order);
     
+    /**
+     * Dodawanie nowych metod wysyłki
+     * @param shippingMethod metoda wysyłki
+     * @throws AppBaseException
+     */
     void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException;
     
     void setShippingMethodActive(ShippingMethod shippingMethod, boolean active);

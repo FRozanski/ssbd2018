@@ -6,7 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
 /**
- *
+ * Klasa wyjątku sygnalizująca naruszenie unikalności nazwy metody przesyłki
  * @author Filip
  */
 public class ShippingMethodNameNotUniqueException extends ShippingMethodException {

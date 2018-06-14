@@ -6,7 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
 /**
- *
+ * Klasa dla wyjątków klasy encyjnej ShippingMethod
  * @author Filip
  */
 public class ShippingMethodException extends MozBaseException {

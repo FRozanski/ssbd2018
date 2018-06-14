@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.mapper.AccountMapperDecorator;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 
 /**
- *
+ * Interfejs służący do mapowania obiektów typu {@link BasicShippingMethodDto} na {@link ShippingMethod}
  * @author Filip
  */
 @Mapper
@@ -23,6 +23,12 @@ public interface ShippingMethodMapper {
     
     ShippingMethodMapper INSTANCE = Mappers.getMapper(ShippingMethodMapper.class);
     
+    /**
+     * Mapowanie obiektów typu {@link BasicShippingMethodDto} na {@link ShippingMethod}
+     * @param shippingMethodDto obiekt dto metody przesyłki
+     * @param shippingMethod obiekt metody przesyłki
+     * @return obiekt typu {@link ShippingMethod}
+     */
     @InheritInverseConfiguration
     ShippingMethod basicShippingMethodDtoToShippingMethod(BasicShippingMethodDto shippingMethodDto, 
             @MappingTarget ShippingMethod shippingMethod);            

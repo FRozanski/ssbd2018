@@ -8,7 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
- *
+ * Klasa bazowa dla wyjątków z modułu MOK
  * @author Filip
  */
 public class MozBaseException extends AppBaseException {

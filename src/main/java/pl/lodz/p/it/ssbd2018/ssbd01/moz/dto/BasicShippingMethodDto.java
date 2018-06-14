@@ -8,7 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.dto;
 import java.math.BigDecimal;
 
 /**
- *
+ * Klasa realizująca wzorzec projektowy DTO - mapowanie surowych danych na obiekty
  * @author Filip
  */
 public class BasicShippingMethodDto {

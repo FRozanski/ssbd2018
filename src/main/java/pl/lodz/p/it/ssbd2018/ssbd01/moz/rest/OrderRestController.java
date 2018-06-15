@@ -22,6 +22,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicOrderStatusDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.ListOrderDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.OrderManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.OrderMapper;
@@ -43,6 +44,18 @@ public class OrderRestController {
         List<ListOrderDto> allOrdersDto = OrderMapper.INSTANCE.orderToFullListDto(orderManager.getAllOrders());
         return Response.status(Response.Status.OK)
                 .entity(allOrdersDto)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
+    }
+    
+    @GET
+    @Path("orderStatus")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllOrderStatus() {
+        List<BasicOrderStatusDto> allOrderStatusDto = OrderMapper.INSTANCE.statusToDto(orderManager.getAllOrderStatus());
+        return Response.status(Response.Status.OK)
+                .entity(allOrderStatusDto)
                 .type(MediaType.APPLICATION_JSON)
                 .build();
     }

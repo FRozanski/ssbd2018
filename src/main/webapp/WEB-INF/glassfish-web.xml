@@ -226,6 +226,12 @@
     <role-name>getAllBySeller</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllOrderStatus</role-name>
+    <group-name>user</group-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  
   <!--facades-->
   <security-role-mapping>
     <role-name>findAll</role-name>

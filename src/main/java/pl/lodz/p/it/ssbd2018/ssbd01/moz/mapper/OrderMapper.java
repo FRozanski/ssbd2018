@@ -29,6 +29,8 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
     
     List<ListOrderDto> orderToFullListDto(List<Order1> orders);
+    List<BasicOrderStatusDto> statusToDto(List<OrderStatus> orderStatus);
+    
     
     SellerDto accountToSellerDto(Account account);
     BuyerDto accountToBuyerDto(Account account);

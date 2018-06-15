@@ -20,6 +20,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.Order1FacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.OrderStatusFacadeLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  *
@@ -31,6 +32,9 @@ public class OrderManager implements OrderManagerLocal{
     
     @EJB
     Order1FacadeLocal orderFacade;
+    
+    @EJB
+    OrderStatusFacadeLocal orderStatus;
     
     
     @Override
@@ -49,6 +53,12 @@ public class OrderManager implements OrderManagerLocal{
     @RolesAllowed("getAllBySeller")
     public List<Order1> getAllBySeller(String login) throws AppBaseException {
         return orderFacade.findBySellerLogin(login);
+    }
+    
+    @Override
+    @RolesAllowed("getAllOrderStatus")
+    public List<OrderStatus> getAllOrderStatus() {
+        return orderStatus.findAll();
     }
 
     @Override

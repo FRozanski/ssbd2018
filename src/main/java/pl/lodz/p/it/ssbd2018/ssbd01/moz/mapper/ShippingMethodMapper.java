@@ -9,7 +9,7 @@ import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicOrderShippingMethodDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 
 /**
  *
@@ -19,6 +19,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicOrderShippingMethodDto;
 public interface ShippingMethodMapper {
     ShippingMethodMapper INSTANCE = Mappers.getMapper(ShippingMethodMapper.class);
     
-    List<BasicOrderShippingMethodDto> shippingMethodToBasicDto(List<ShippingMethod> shippingMethods);
-    BasicOrderShippingMethodDto shippingMethodToBasicDto(ShippingMethod shippingMethods);
+    List<BasicShippingMethodDto> shippingMethodToBasicDto(List<ShippingMethod> shippingMethods);
+    BasicShippingMethodDto shippingMethodToBasicDto(ShippingMethod shippingMethods);
 }

@@ -42,6 +42,8 @@ public interface OrderManagerLocal {
             
     public List<Order1> getAllBySeller(String login) throws AppBaseException;
     
+    List<OrderStatus> getAllOrderStatus();
+    
     List<Order1> getAllOrdersByAccountAsSeller(Account seller);
     
     List<Order1> getAllOrdersByAccountAsBuyer(Account buyer);

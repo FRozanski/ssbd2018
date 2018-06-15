@@ -5,17 +5,16 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.dto;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author michal
  */
-public class BasicShippingMethodDto {
-    private Long id;   
+public class BasicAccountDto {
+      private Long id;
+    private String login;
     private String name;
-    private BigDecimal price; 
-    private boolean active;
+    private String surname;
+    private String email;
 
     /**
      * @return the id
@@ -29,6 +28,20 @@ public class BasicShippingMethodDto {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the login
+     */
+    public String getLogin() {
+        return login;
+    }
+
+    /**
+     * @param login the login to set
+     */
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     /**
@@ -46,30 +59,30 @@ public class BasicShippingMethodDto {
     }
 
     /**
-     * @return the price
+     * @return the surname
      */
-    public BigDecimal getPrice() {
-        return price;
+    public String getSurname() {
+        return surname;
     }
 
     /**
-     * @param price the price to set
+     * @param surname the surname to set
      */
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     /**
-     * @return the active
+     * @return the email
      */
-    public boolean isActive() {
-        return active;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * @param active the active to set
+     * @param email the email to set
      */
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

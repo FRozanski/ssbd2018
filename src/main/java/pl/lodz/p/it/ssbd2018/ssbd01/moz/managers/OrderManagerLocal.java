@@ -15,6 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
  *
@@ -35,11 +36,15 @@ public interface OrderManagerLocal {
     
     void setOrderStatus(Order1 order, OrderStatus orderStatus);
     
-    List<OrderProducts> getAllOrders();
+    List<Order1> getAllOrders();
     
-    List<OrderProducts> getAllOrdersByAccountAsSeller(Account seller);
+    public List<Order1> getAllByBuyer(String login) throws AppBaseException;
+            
+    public List<Order1> getAllBySeller(String login) throws AppBaseException;
     
-    List<OrderProducts> getAllOrdersByAccountAsBuyer(Account buyer);
+    List<Order1> getAllOrdersByAccountAsSeller(Account seller);
     
-    List<OrderProducts> getAllOrdersByDateAndPrice(Date date, BigDecimal price);
+    List<Order1> getAllOrdersByAccountAsBuyer(Account buyer);
+    
+    List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price);
 }

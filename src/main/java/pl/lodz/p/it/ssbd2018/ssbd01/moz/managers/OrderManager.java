@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -17,8 +18,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.Order1FacadeLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  *
  * @author fifi
@@ -26,6 +28,28 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 public class OrderManager implements OrderManagerLocal{
+    
+    @EJB
+    Order1FacadeLocal orderFacade;
+    
+    
+    @Override
+    @RolesAllowed("getAllOrders")
+    public List<Order1> getAllOrders() {
+        return orderFacade.findAll();
+    }
+    
+    @Override
+    @RolesAllowed("getAllByBuyer")
+    public List<Order1> getAllByBuyer(String login) throws AppBaseException {
+        return orderFacade.findByBuyerLogin(login);
+    }
+    
+    @Override
+    @RolesAllowed("getAllBySeller")
+    public List<Order1> getAllBySeller(String login) throws AppBaseException {
+        return orderFacade.findBySellerLogin(login);
+    }
 
     @Override
     @RolesAllowed("makeOrder")
@@ -64,26 +88,20 @@ public class OrderManager implements OrderManagerLocal{
     }
 
     @Override
-    @RolesAllowed("getAllOrders")
-    public List<OrderProducts> getAllOrders() {
-        throw new NotImplementedException();
-    }
-
-    @Override
     @RolesAllowed("getAllOrdersByAccountAsSeller")
-    public List<OrderProducts> getAllOrdersByAccountAsSeller(Account seller) {
+    public List<Order1> getAllOrdersByAccountAsSeller(Account seller) {
         throw new NotImplementedException();
     }
 
     @Override
     @RolesAllowed("getAllOrdersByAccountAsBuyer")
-    public List<OrderProducts> getAllOrdersByAccountAsBuyer(Account buyer) {
+    public List<Order1> getAllOrdersByAccountAsBuyer(Account buyer) {
         throw new NotImplementedException();
     }
 
     @Override
     @RolesAllowed("getAllOrdersByDateAndPrice")
-    public List<OrderProducts> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
+    public List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
         throw new NotImplementedException();
     }        
 }

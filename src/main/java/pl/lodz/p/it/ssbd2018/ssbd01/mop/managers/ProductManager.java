@@ -85,7 +85,7 @@ public class ProductManager implements ProductManagerLocal{
         product.setOwnerId(owner);
         product.setUnitId(unit);
         this.validateConstraints(product);
-//        owner.setNumberOfProducts(owner.getNumberOfProducts() + 1);
+        owner.setNumberOfProducts(owner.getNumberOfProducts() + 1);
         productFacade.create(product);
     }
 

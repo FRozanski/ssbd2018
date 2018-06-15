@@ -14,7 +14,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz.OrderNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;

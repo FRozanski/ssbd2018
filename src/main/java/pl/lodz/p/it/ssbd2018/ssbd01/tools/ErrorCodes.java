@@ -48,7 +48,9 @@ public class ErrorCodes {
     public static final String FLAT_NUMBER_PATTERN_ERROR = "flat_number_pattern_error";
     public static final String CITY_LENGTH_ERROR = "city_length_error";
     public static final String COUNTRY_LENGTH_ERROR = "country_length_error";
-    public static final String SHIPPING_METHOD_PRICE_ERROR = "shipping_method_price_error";
+    public static final String SHIPPING_METHOD_PRICE_TOO_LOW_ERROR = "shipping_method_price_too_low_error";
+    public static final String SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR = "shipping_method_price_too_high_error";
+    public static final String SHIPPING_METHOD_PRICE_PRECISION_ERROR = "shipping_method_price_precision_error";
     public static final String SHIPPING_METHOD_NAME_LENGTH_ERROR = "shipping_method_name_length_error";
     public static final String SHIPPING_METHOD_NAME_PATTERN_ERROR = "shipping_method_name_pattern_error";
     
@@ -73,9 +75,11 @@ public class ErrorCodes {
         errors.add(FLAT_NUMBER_PATTERN_ERROR);
         errors.add(CITY_LENGTH_ERROR);
         errors.add(COUNTRY_LENGTH_ERROR);
-        errors.add(SHIPPING_METHOD_PRICE_ERROR);
+        errors.add(SHIPPING_METHOD_PRICE_TOO_LOW_ERROR);
+        errors.add(SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR);
+        errors.add(SHIPPING_METHOD_PRICE_PRECISION_ERROR);
         errors.add(SHIPPING_METHOD_NAME_LENGTH_ERROR);
-        errors.add(SHIPPING_METHOD_NAME_PATTERN_ERROR);
+        errors.add(SHIPPING_METHOD_NAME_PATTERN_ERROR);        
         return errors;
     }            
 }

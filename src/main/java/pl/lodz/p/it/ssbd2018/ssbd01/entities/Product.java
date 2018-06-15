@@ -28,11 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_DESCRIPTION_LENGTH_ERROR;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_NAME_LENGTH_ERROR;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_NAME_PATTERN_ERROR;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_PRICE_LENGTH_ERROR;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_PRICE_PATTERN_ERROR;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_PRICE_PRECISION_ERROR;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_QTY_LENGTH_ERROR;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_QTY_PATTERN_ERROR;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_QTY_PRECISION_ERROR;
 
 /**
@@ -77,12 +73,12 @@ public class Product implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Digits(integer = 8, fraction = 2, message = PRODUCT_PRICE_PRECISION_ERROR)   
+    @Digits(integer = 6, fraction = 2, message = PRODUCT_PRICE_PRECISION_ERROR)   
     @Column(name = "price")
     private BigDecimal price;
     @Basic(optional = false)
     @NotNull
-    @Digits(integer = 9, fraction = 3, message = PRODUCT_QTY_PRECISION_ERROR)  
+    @Digits(integer = 6, fraction = 3, message = PRODUCT_QTY_PRECISION_ERROR)  
     @Column(name = "qty")
     private BigDecimal qty;
     @Basic(optional = false)

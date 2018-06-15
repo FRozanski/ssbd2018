@@ -22,6 +22,12 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 @Local
 public interface ProductManagerLocal {
     
+    /**
+     * Dodaje produkt przypisany do użytkownika o podanym loginie
+     * @param newProduct            obiekt DTO (ang. Data Transfer Object) nowo tworzonego produktu
+     * @param login                 login użytkownika dodającego nowy produkt
+     * @throws AppBaseException     głóqny wyjątek aplikacji
+     */
     void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException;                                     
     
     void deleteProductByAccount(Account account, Product product);                                  
@@ -42,8 +48,20 @@ public interface ProductManagerLocal {
     
     void setProductCategory(Product product, Category category);    
 
+    /**
+     * Wyszukuje obiekt encji kategorii produktu po zadanym numerze identyfikującym
+     * @param categoryId            numer identyfikujący kategorię produktu
+     * @return                      obiekt encji kategorii produktu
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     Category getCategoryById(Long categoryId) throws AppBaseException;
 
+    /**
+     * Wyszukuje obiekt encji jednostki miary po zadanym numerze identyfikującym
+     * @param unitId                numer identyfikujący jednostkę miary
+     * @return                      obiekt encji jednostki miary
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     Unit getUnitById(Long unitId) throws AppBaseException;
             
            

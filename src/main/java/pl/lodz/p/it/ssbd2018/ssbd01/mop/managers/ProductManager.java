@@ -72,7 +72,12 @@ public class ProductManager implements ProductManagerLocal{
         return productFacade.findByActiveProductAndCategory();
     }
     
-    
+    /**
+     * Dodaje produkt przypisany do użytkownika o podanym loginie
+     * @param newProduct            obiekt DTO (ang. Data Transfer Object) nowo tworzonego produktu
+     * @param login                 login użytkownika dodającego nowy produkt
+     * @throws AppBaseException     głóqny wyjątek aplikacji
+     */
     @Override
     @RolesAllowed("addProductByAccountLogin")
     public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
@@ -125,12 +130,24 @@ public class ProductManager implements ProductManagerLocal{
         throw new NotImplementedException();
     }
 
+    /**
+     * Wyszukuje obiekt encji kategorii produktu po zadanym numerze identyfikującym
+     * @param categoryId            numer identyfikujący kategorię produktu
+     * @return                      obiekt encji kategorii produktu
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     @Override
     @RolesAllowed("getCategoryById")
     public Category getCategoryById(Long categoryId) throws AppBaseException {
         return categoryFace.find(categoryId);
     }
 
+    /**
+     * Wyszukuje obiekt encji jednostki miary po zadanym numerze identyfikującym
+     * @param unitId                numer identyfikujący jednostkę miary
+     * @return                      obiekt encji jednostki miary
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     @Override
     @RolesAllowed("getUnitById")
     public Unit getUnitById(Long unitId) throws AppBaseException {

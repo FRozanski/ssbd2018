@@ -6,13 +6,11 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 
 import java.util.List;
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
@@ -77,6 +75,12 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
         }
     }
 
+    /**
+     * Wyszuke obiekt encji {@link Account} po zadanym loginie
+     * @param login                 login przypisany wyszukiwanemu obiektowi encji
+     * @return                      obiekt encji
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     @Override
     @RolesAllowed("findByLoginForProduct")
     public Account findByLogin(String login) throws AppBaseException {

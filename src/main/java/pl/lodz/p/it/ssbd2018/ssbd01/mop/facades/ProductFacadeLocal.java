@@ -64,6 +64,12 @@ public interface ProductFacadeLocal {
      */
     int count();
 
+    /**
+     * Wyszuke obiekt encji {@link Account} po zadanym loginie
+     * @param login                 login przypisany wyszukiwanemu obiektowi encji
+     * @return                      obiekt encji
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     Account findByLogin(String login) throws AppBaseException;
     
 }

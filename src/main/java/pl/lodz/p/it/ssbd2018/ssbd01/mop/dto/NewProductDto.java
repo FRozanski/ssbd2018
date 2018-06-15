@@ -8,7 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 import java.math.BigDecimal;
 
 /**
- *
+ * Klasa na potrzeby tworzenia obiektów DTO, dedykowana nowym produktom
  * @author agkan
  */
 public class NewProductDto {

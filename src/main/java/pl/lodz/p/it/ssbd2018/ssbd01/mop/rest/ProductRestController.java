@@ -88,6 +88,12 @@ public class ProductRestController {
         }
     }
 
+    /**
+     * Metoda REST API służąca do dodawania nowego produktu przez użytkownika
+     * @param newProduct        obiekt DTO
+     * @param servletRequest    obiekt przechowujący informacje o żądaniu wysłanym przez klienta
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
     @POST
     @Path("addProduct")
     @Consumes(MediaType.APPLICATION_JSON)

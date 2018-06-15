@@ -15,7 +15,6 @@ public class BasicOrderDto {
     private Long id;
     private String orderPlacedDate;
     private BigDecimal totalPrice;
-    private long orderNumber;
     private boolean isClosed;
 
     /**
@@ -59,21 +58,7 @@ public class BasicOrderDto {
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
-
-    /**
-     * @return the orderNumber
-     */
-    public long getOrderNumber() {
-        return orderNumber;
-    }
-
-    /**
-     * @param orderNumber the orderNumber to set
-     */
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
+    
     /**
      * @return the isClosed
      */

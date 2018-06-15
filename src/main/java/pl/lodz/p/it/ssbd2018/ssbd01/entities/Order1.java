@@ -42,7 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id")
     , @NamedQuery(name = "Order1.findByOrderPlacedDate", query = "SELECT o FROM Order1 o WHERE o.orderPlacedDate = :orderPlacedDate")
     , @NamedQuery(name = "Order1.findByTotalPrice", query = "SELECT o FROM Order1 o WHERE o.totalPrice = :totalPrice")
-    , @NamedQuery(name = "Order1.findByOrderNumber", query = "SELECT o FROM Order1 o WHERE o.orderNumber = :orderNumber")
     , @NamedQuery(name = "Order1.findByBuyer", query = "SELECT o FROM Order1 o WHERE o.buyerId.login = :login")
     , @NamedQuery(name = "Order1.findBySeller", query = "SELECT o FROM Order1 o WHERE o.sellerId.login = :login")
     , @NamedQuery(name = "Order1.findByIsClosed", query = "SELECT o FROM Order1 o WHERE o.isClosed = :isClosed")
@@ -67,10 +66,6 @@ public class Order1 implements Serializable {
     @NotNull
     @Column(name = "total_price")
     private BigDecimal totalPrice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "order_number")
-    private long orderNumber;
     @Basic(optional = false)
     @NotNull
     @Column(name = "is_closed")
@@ -98,10 +93,9 @@ public class Order1 implements Serializable {
     public Order1() {
     }
 
-    public Order1(Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isClosed, long version) {
+    public Order1(Date orderPlacedDate, BigDecimal totalPrice, boolean isClosed, long version) {
         this.orderPlacedDate = orderPlacedDate;
         this.totalPrice = totalPrice;
-        this.orderNumber = orderNumber;
         this.isClosed = isClosed;
         this.version = version;
     }
@@ -126,14 +120,6 @@ public class Order1 implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public long getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-    
     public boolean getIsClosed() {
         return isClosed;
     }

@@ -10,7 +10,6 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.dto;
  * @author michal
  */
 public class BasicOrderShippingMethodDto {
-    private Long id;
     private String shippingMethodName;
     private String name;
     private String surname;
@@ -20,20 +19,6 @@ public class BasicOrderShippingMethodDto {
     private String postalCode;
     private String city;
     private String country;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the shippingMethodName

@@ -10,25 +10,10 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.dto;
  * @author michal
  */
 public class BasicAccountDto {
-      private Long id;
     private String login;
     private String name;
     private String surname;
     private String email;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     /**
      * @return the login

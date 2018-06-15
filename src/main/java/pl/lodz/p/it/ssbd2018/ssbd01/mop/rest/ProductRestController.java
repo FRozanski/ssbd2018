@@ -26,6 +26,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
  *
@@ -97,7 +98,8 @@ public class ProductRestController {
         String login = getUserLogin(servletRequest);
         productManager.addProductByAccountLogin(newProduct, login);
         return Response.status(Response.Status.CREATED)
-                .entity(new WebErrorInfo("400", "Super")).type(MediaType.APPLICATION_JSON)
+                .entity(new WebErrorInfo("200", SUCCESS))
+                .type(MediaType.APPLICATION_JSON)
                 .build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)

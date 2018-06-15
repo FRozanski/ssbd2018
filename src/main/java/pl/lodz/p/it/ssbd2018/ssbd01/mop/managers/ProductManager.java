@@ -67,7 +67,7 @@ public class ProductManager implements ProductManagerLocal{
     
     
     @Override
-//    @RolesAllowed("addProductByAccount")
+    @RolesAllowed("addProductByAccountLogin")
     public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
         Product product = new Product();
         NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
@@ -77,6 +77,7 @@ public class ProductManager implements ProductManagerLocal{
         product.setCategoryId(category);
         product.setOwnerId(owner);
         product.setUnitId(unit);
+//        owner.setNumberOfProducts(owner.getNumberOfProducts() + 1);
         productFacade.create(product);
     }
 
@@ -117,16 +118,13 @@ public class ProductManager implements ProductManagerLocal{
     }
 
     @Override
-    public void addMyNewProduct(Product product) throws AppBaseException {
-        productFacade.create(product);
-    }
-
-    @Override
+    @RolesAllowed("getCategoryById")
     public Category getCategoryById(Long categoryId) throws AppBaseException {
         return categoryFace.find(categoryId);
     }
 
     @Override
+    @RolesAllowed("getUnitById")
     public Unit getUnitById(Long unitId) throws AppBaseException {
         return unitFacade.find(unitId);
     }    

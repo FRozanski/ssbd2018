@@ -40,9 +40,7 @@ public interface ProductManagerLocal {
                 
     Product getProductFromAccountByName(Account account, String name);                              
     
-    void setProductCategory(Product product, Category category);                                    
-
-    void addMyNewProduct(Product product) throws AppBaseException;
+    void setProductCategory(Product product, Category category);    
 
     Category getCategoryById(Long categoryId) throws AppBaseException;
 

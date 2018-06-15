@@ -16,7 +16,6 @@ public class BasicOrderDto {
     private String orderPlacedDate;
     private BigDecimal totalPrice;
     private long orderNumber;
-    private boolean isPaid;
     private boolean isClosed;
 
     /**
@@ -73,20 +72,6 @@ public class BasicOrderDto {
      */
     public void setOrderNumber(long orderNumber) {
         this.orderNumber = orderNumber;
-    }
-
-    /**
-     * @return the isPaid
-     */
-    public boolean isIsPaid() {
-        return isPaid;
-    }
-
-    /**
-     * @param isPaid the isPaid to set
-     */
-    public void setIsPaid(boolean isPaid) {
-        this.isPaid = isPaid;
     }
 
     /**

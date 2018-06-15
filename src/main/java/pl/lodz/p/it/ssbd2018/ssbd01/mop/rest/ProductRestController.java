@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -43,9 +45,6 @@ public class ProductRestController {
 
     @EJB
     ProductManagerLocal productManager;
-    
-    @EJB
-    AccountManagerLocal accountManager;
 
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -101,24 +100,14 @@ public class ProductRestController {
     @Path("addProduct")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
     public Response addProduct(NewProductDto newProduct, @Context HttpServletRequest servletRequest) {
         try {
-        Product product = new Product();
-        NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
-        Category category = productManager.getCategoryById(newProduct.getCategoryId());
-        Account owner = accountManager.getAccountById(newProduct.getOwnerId());
-        Unit unit = productManager.getUnitById(newProduct.getUnitId());
-        product.setCategoryId(category);
-//        product.setOwnerId(owner);
-        product.setUnitId(unit);
-//            productManager.addMyNewProduct(product);
+        String login = getUserLogin(servletRequest);
+        productManager.addProductByAccountLogin(newProduct, login);
         return Response.status(Response.Status.CREATED)
-                .entity(product).type(MediaType.APPLICATION_JSON)
+                .entity(new WebErrorInfo("400", "Super")).type(MediaType.APPLICATION_JSON)
                 .build();
-//            return Response.status(Response.Status.OK)
-//                    .entity(new WebErrorInfo("200", SUCCESS))
-//                    .type(MediaType.APPLICATION_JSON)
-//                    .build();
         } catch (AppBaseException ex) {
             return Response.status(Response.Status.BAD_REQUEST)
                     .entity(new WebErrorInfo("400", ex.getCode()))

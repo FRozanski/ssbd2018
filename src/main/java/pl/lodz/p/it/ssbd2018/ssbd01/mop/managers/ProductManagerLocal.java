@@ -12,6 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 
 
 /**
@@ -21,7 +22,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 @Local
 public interface ProductManagerLocal {
     
-    void addProductByAccount(Account account, Product product);                                     
+    void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException;                                     
     
     void deleteProductByAccount(Account account, Product product);                                  
     
@@ -46,6 +47,8 @@ public interface ProductManagerLocal {
     Category getCategoryById(Long categoryId) throws AppBaseException;
 
     Unit getUnitById(Long unitId) throws AppBaseException;
+
+    Account getMyAccountByLogin(String login) throws AppBaseException;
             
            
 }

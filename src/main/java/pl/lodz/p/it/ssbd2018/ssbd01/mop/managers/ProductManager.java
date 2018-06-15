@@ -20,9 +20,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.AccountFacadeLocalMop;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.NewProductMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -46,6 +48,9 @@ public class ProductManager implements ProductManagerLocal{
     @EJB
     UnitFacadeLocal unitFacade;
     
+    @EJB
+    AccountFacadeLocalMop accountFacade;
+    
     @Override
     @RolesAllowed("getMyProducts")
     public List<Product> getMyProducts(String login) throws AppBaseException {
@@ -66,9 +71,17 @@ public class ProductManager implements ProductManagerLocal{
     
     
     @Override
-    @RolesAllowed("addProductByAccount")
-    public void addProductByAccount(Account account, Product product) {
-        throw new NotImplementedException();
+//    @RolesAllowed("addProductByAccount")
+    public void addProductByAccountLogin(pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto newProduct, String login) throws AppBaseException{
+        Product product = new Product();
+        NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
+        Category category = this.getCategoryById(newProduct.getCategoryId());
+        Unit unit = this.getUnitById(newProduct.getUnitId());
+        Account owner = productFacade.findByLogin(login);
+        product.setCategoryId(category);
+        product.setOwnerId(owner);
+        product.setUnitId(unit);
+        productFacade.create(product);
     }
 
     @Override
@@ -120,6 +133,11 @@ public class ProductManager implements ProductManagerLocal{
     @Override
     public Unit getUnitById(Long unitId) throws AppBaseException {
         return unitFacade.find(unitId);
+    }
+
+    @Override
+    public Account getMyAccountByLogin(String login) throws AppBaseException {
+        return accountFacade.findByLogin(login);
     }
     
 }

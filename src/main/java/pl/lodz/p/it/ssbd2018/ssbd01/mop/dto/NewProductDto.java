@@ -13,23 +13,14 @@ import java.math.BigDecimal;
  */
 public class NewProductDto {
     
-    private Long id;
     private String name;
     private String description;
     private BigDecimal price;
     private BigDecimal qty;
-    private boolean active;
     private Long categoryId;
     private Long unitId;
     private Long ownerId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -61,14 +52,6 @@ public class NewProductDto {
 
     public void setQty(BigDecimal qty) {
         this.qty = qty;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
     }
 
     public Long getCategoryId() {

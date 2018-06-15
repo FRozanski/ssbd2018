@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 public interface UnitFacadeLocal {
 
     /**
-     * Wyciąga z bazy danych obiekt typu {@link Unit} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link Unit} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link Unit}
      * @throws AppBaseException
@@ -26,13 +26,13 @@ public interface UnitFacadeLocal {
     Unit find(Object id) throws AppBaseException;
 
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link Unit}
+     * Pobiera z bazy danych wszystkie obienty typu {@link Unit}
      * @return  lista obiektów typu {@link Unit}
      */
     List<Unit> findAll();
 
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link Unit} z zadanego zakresu 
+     * Pobiera z bazy danych wszystkie obienty typu {@link Unit} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link Unit}

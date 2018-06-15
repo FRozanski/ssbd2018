@@ -19,4 +19,12 @@ public interface ShippingMethodManagerLocal {
     
     List<ShippingMethod> getAllMethods();
     
+    /**
+     * Dodawanie nowych metod wysyłki
+     * @param shippingMethod metoda wysyłki
+     * @throws AppBaseException
+     */
+    void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException;
+    
+    void setShippingMethodActive(ShippingMethod shippingMethod, boolean active);
 }

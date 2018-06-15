@@ -14,6 +14,7 @@ import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -30,6 +31,18 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
     @RolesAllowed("getAllMethods")
     public List<ShippingMethod> getAllMethods() {
         return shippingFacade.findAll();
+    }
+    
+    @Override
+    @RolesAllowed("addShippingMethod")
+    public void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException{
+        shippingFacade.create(shippingMethod);
+    }
+    
+    @Override
+    @RolesAllowed("setShippingMethodActive")
+    public void setShippingMethodActive(ShippingMethod shippingMethod, boolean active) {
+        throw new NotImplementedException();
     }
     
 }

@@ -33,7 +33,7 @@ public interface ProductFacadeLocal {
     void edit(Product product) throws AppBaseException;
 
     /**
-     * Wyciąga z bazy danych obiekt typu {@link Product} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link Product} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link Product}
      * @throws AppBaseException
@@ -41,13 +41,13 @@ public interface ProductFacadeLocal {
     Product find(Object id) throws AppBaseException;
 
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link Product}
+     * Pobiera z bazy danych wszystkie obienty typu {@link Product}
      * @return lista obiektów typu {@link Product}
      */
     List<Product> findAll();
 
     /**
-     * Wyciąga z bazy danych obienty typu {@link Product} z zadanego zakresu 
+     * Pobiera z bazy danych obienty typu {@link Product} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * @return lista obiektów typu {@link Product}
      */

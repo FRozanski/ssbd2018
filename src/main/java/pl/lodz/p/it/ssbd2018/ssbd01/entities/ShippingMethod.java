@@ -18,9 +18,19 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.NAME_PATTERN_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_NAME_LENGTH_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_NAME_PATTERN_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_PRECISION_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_TOO_LOW_ERROR;
 
 /**
  *
@@ -48,10 +58,13 @@ public class ShippingMethod implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 16)
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+([ '-][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*", message = SHIPPING_METHOD_NAME_PATTERN_ERROR)
+    @Size(min = 1, max = 16, message = SHIPPING_METHOD_NAME_LENGTH_ERROR)
     @Column(name = "name")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @DecimalMin(value="0.0", message = SHIPPING_METHOD_PRICE_TOO_LOW_ERROR)
+    @DecimalMax(value="999.99", message = SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR)
+    @Digits(integer=3, fraction = 2, message = SHIPPING_METHOD_PRICE_PRECISION_ERROR)
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")

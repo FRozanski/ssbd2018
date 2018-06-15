@@ -15,9 +15,10 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
- *
+ * Interfejs manager do zarządzania zamówieniami
  * @author fifi
  */
 @Local
@@ -27,11 +28,7 @@ public interface OrderManagerLocal {
     
     void makeOrderPayment(Order1 order);
     
-    void cancelOrder(Order1 order);
-    
-    void addShippingMethod(ShippingMethod shippingMethod);
-    
-    void setShippingMethodActive(ShippingMethod shippingMethod, boolean active);
+    void cancelOrder(Order1 order);        
     
     void setOrderStatus(Order1 order, OrderStatus orderStatus);
     

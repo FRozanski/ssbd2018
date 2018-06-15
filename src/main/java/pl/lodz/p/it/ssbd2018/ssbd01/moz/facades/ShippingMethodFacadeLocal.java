@@ -32,7 +32,7 @@ public interface ShippingMethodFacadeLocal {
     void edit(ShippingMethod shippingMethod) throws AppBaseException;
     
     /**
-     * Wyciąga z bazy danych obiekt typu {@link ShippingMethod} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link ShippingMethod} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link ShippingMethod}
      * @throws AppBaseException
@@ -40,13 +40,13 @@ public interface ShippingMethodFacadeLocal {
     ShippingMethod find(Object id) throws AppBaseException;
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link ShippingMethod}
+     * Pobiera z bazy danych wszystkie obienty typu {@link ShippingMethod}
      * @return lista obiektów typu {@link ShippingMethod}
      */
     List<ShippingMethod> findAll();
 
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link ShippingMethod} z zadanego zakresu 
+     * Pobiera z bazy danych wszystkie obienty typu {@link ShippingMethod} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link ShippingMethod}

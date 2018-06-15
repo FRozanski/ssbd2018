@@ -175,7 +175,6 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
     <security-constraint>
         <display-name>getAllShippingMethod</display-name>
         <web-resource-collection>
@@ -185,6 +184,53 @@
         <auth-constraint>
             <description/>
             <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    
+     <!-- MOZ -->
+     <security-constraint>
+        <display-name>getAllOrders</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllOrders</web-resource-name>            
+            <url-pattern>/webresources/order/</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getMyBought</display-name>
+        <web-resource-collection>
+            <web-resource-name>getMyBought</web-resource-name>            
+            <url-pattern>/webresources/order/myBought</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getMySold</display-name>
+        <web-resource-collection>
+            <web-resource-name>getMySold</web-resource-name>            
+            <url-pattern>/webresources/order/mySold</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>

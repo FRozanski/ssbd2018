@@ -22,7 +22,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.OrderManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.ShippingMethodMapper;

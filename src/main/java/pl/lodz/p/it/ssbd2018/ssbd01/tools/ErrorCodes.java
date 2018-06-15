@@ -49,6 +49,8 @@ public class ErrorCodes {
     public static final String CITY_LENGTH_ERROR = "city_length_error";
     public static final String COUNTRY_LENGTH_ERROR = "country_length_error";
     public static final String SHIPPING_METHOD_PRICE_ERROR = "shipping_method_price_error";
+    public static final String SHIPPING_METHOD_NAME_LENGTH_ERROR = "shipping_method_name_length_error";
+    public static final String SHIPPING_METHOD_NAME_PATTERN_ERROR = "shipping_method_name_pattern_error";
     
     public List<String> getAllErrors() {
         List<String> errors = new ArrayList<>();
@@ -72,6 +74,8 @@ public class ErrorCodes {
         errors.add(CITY_LENGTH_ERROR);
         errors.add(COUNTRY_LENGTH_ERROR);
         errors.add(SHIPPING_METHOD_PRICE_ERROR);
+        errors.add(SHIPPING_METHOD_NAME_LENGTH_ERROR);
+        errors.add(SHIPPING_METHOD_NAME_PATTERN_ERROR);
         return errors;
     }            
 }

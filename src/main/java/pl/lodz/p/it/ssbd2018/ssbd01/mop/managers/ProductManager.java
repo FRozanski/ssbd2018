@@ -7,7 +7,6 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
 import java.util.List;
 import java.util.logging.Logger;
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -20,7 +19,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.AccountFacadeLocalMop;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
@@ -48,9 +47,6 @@ public class ProductManager implements ProductManagerLocal{
     @EJB
     UnitFacadeLocal unitFacade;
     
-    @EJB
-    AccountFacadeLocalMop accountFacade;
-    
     @Override
     @RolesAllowed("getMyProducts")
     public List<Product> getMyProducts(String login) throws AppBaseException {
@@ -72,7 +68,7 @@ public class ProductManager implements ProductManagerLocal{
     
     @Override
 //    @RolesAllowed("addProductByAccount")
-    public void addProductByAccountLogin(pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto newProduct, String login) throws AppBaseException{
+    public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
         Product product = new Product();
         NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
         Category category = this.getCategoryById(newProduct.getCategoryId());
@@ -133,11 +129,5 @@ public class ProductManager implements ProductManagerLocal{
     @Override
     public Unit getUnitById(Long unitId) throws AppBaseException {
         return unitFacade.find(unitId);
-    }
-
-    @Override
-    public Account getMyAccountByLogin(String login) throws AppBaseException {
-        return accountFacade.findByLogin(login);
-    }
-    
+    }    
 }

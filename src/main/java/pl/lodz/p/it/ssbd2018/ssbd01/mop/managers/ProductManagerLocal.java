@@ -47,8 +47,6 @@ public interface ProductManagerLocal {
     Category getCategoryById(Long categoryId) throws AppBaseException;
 
     Unit getUnitById(Long unitId) throws AppBaseException;
-
-    Account getMyAccountByLogin(String login) throws AppBaseException;
             
            
 }

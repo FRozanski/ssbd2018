@@ -6,8 +6,6 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.rest;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -20,21 +18,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.NewProductMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
  *

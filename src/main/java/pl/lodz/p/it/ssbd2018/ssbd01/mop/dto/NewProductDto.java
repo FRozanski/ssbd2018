@@ -19,7 +19,6 @@ public class NewProductDto {
     private BigDecimal qty;
     private Long categoryId;
     private Long unitId;
-    private Long ownerId;
 
 
     public String getName() {
@@ -68,13 +67,5 @@ public class NewProductDto {
 
     public void setUnitId(Long unitId) {
         this.unitId = unitId;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
     }
 }

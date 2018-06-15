@@ -25,14 +25,12 @@ public interface NewProductMapper {
     
     @Mappings({
         @Mapping(target = "unitId", ignore = true),
-        @Mapping(target = "ownerId", ignore = true),
         @Mapping(target = "categoryId", ignore = true)})
     NewProductDto productToNewProductDto(Product product);
     
     @InheritInverseConfiguration(name = "productToNewProductDto")
     @Mappings({
         @Mapping(target = "unitId", ignore = true),
-        @Mapping(target = "ownerId", ignore = true),
         @Mapping(target = "categoryId", ignore = true)})
     Product newProductDtoToProduct(NewProductDto newProduct, @MappingTarget Product product);
 }

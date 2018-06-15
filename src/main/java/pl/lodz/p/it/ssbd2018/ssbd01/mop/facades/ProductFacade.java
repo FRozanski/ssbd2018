@@ -12,11 +12,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
@@ -75,7 +78,7 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
     }
 
     @Override
-//    @RolesAllowed("findByLogin")
+    @RolesAllowed("findByLoginForProduct")
     public Account findByLogin(String login) throws AppBaseException {
         try {
             TypedQuery<Account> typedQuery = em.createNamedQuery("Account.findByLogin", Account.class).setParameter("login", login);
@@ -84,4 +87,16 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
             throw new AccountNotFoundException("account_not_found_exception");
         }
     }
+
+    @Override
+    @RolesAllowed("createProduct")
+    public void create(Product product) throws AppBaseException {
+        try {
+            super.create(product);         
+        } catch (ConstraintViolationException ex) {
+            throw new ProductException("constraint_violation");
+        }        
+    }
+    
+    
 }

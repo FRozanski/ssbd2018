@@ -41,6 +41,17 @@ public class ErrorCodes {
     public static final String CITY_LENGTH_ERROR = "city_length_error";
     public static final String COUNTRY_LENGTH_ERROR = "country_length_error";
     
+    public static final String PRODUCT_NAME_PATTERN_ERROR = "product_name_pattern_error";
+    public static final String PRODUCT_NAME_LENGTH_ERROR = "product_name_length_error";
+    public static final String PRODUCT_DESCRIPTION_PATTERN_ERROR = "product_description_pattern_error";
+    public static final String PRODUCT_DESCRIPTION_LENGTH_ERROR = "product_description_length_error";
+    public static final String PRODUCT_PRICE_PATTERN_ERROR = "product_price_pattern_error";
+    public static final String PRODUCT_PRICE_LENGTH_ERROR = "product_price_length_error";
+    public static final String PRODUCT_PRICE_PRECISION_ERROR = "product_price_precision_error";
+    public static final String PRODUCT_QTY_PATTERN_ERROR = "product_qty_pattern_error";
+    public static final String PRODUCT_QTY_LENGTH_ERROR = "product_qty_length_error";
+    public static final String PRODUCT_QTY_PRECISION_ERROR = "product_qty_precision_error";
+    
     public List<String> getAllErrors() {
         List<String> errors = new ArrayList<>();
         errors.add(POSTAL_CODE_LENGTH_ERROR);

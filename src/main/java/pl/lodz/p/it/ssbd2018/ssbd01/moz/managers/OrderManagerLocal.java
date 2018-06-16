@@ -13,8 +13,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**

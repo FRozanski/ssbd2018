@@ -6,13 +6,11 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper;
 
 import java.util.List;
-import org.mapstruct.DecoratedWith;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
-import pl.lodz.p.it.ssbd2018.ssbd01.mok.mapper.AccountMapperDecorator;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 
 /**

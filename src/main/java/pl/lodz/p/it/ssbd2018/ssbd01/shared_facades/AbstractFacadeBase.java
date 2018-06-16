@@ -27,7 +27,7 @@ public abstract class AbstractFacadeBase<T> {
     protected abstract EntityManager getEntityManager();    
     
     /**
-     * Wyciąga z bazy danych obiekt o podanym id
+     * Pobiera z bazy danych obiekt o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji danego typu
      * @throws AppBaseException
@@ -37,7 +37,7 @@ public abstract class AbstractFacadeBase<T> {
     }
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty danego typu
+     * Pobiera z bazy danych wszystkie obienty danego typu
      * @return lista obiektów danego typu
      */
     @RolesAllowed("findAll")
@@ -48,7 +48,7 @@ public abstract class AbstractFacadeBase<T> {
     }
 
     /**
-     * Wyciąga z bazy danych obiekty danego typu z zadanego zakresu 
+     * Pobiera z bazy danych obiekty danego typu z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów danego typu

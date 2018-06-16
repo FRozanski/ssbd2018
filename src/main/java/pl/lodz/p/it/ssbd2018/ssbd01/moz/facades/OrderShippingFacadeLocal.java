@@ -32,7 +32,7 @@ public interface OrderShippingFacadeLocal {
     void edit(OrderShipping orderShipping) throws AppBaseException;
 
     /**
-     * Wyciąga z bazy danych obiekt typu {@link OrderShipping} o podanym id
+     * Pobiera z bazy danych obiekt typu {@link OrderShipping} o podanym id
      * @param id identyfikator encji
      * @return Obiekt encji typu {@link OrderShipping}
      * @throws AppBaseException
@@ -40,13 +40,13 @@ public interface OrderShippingFacadeLocal {
     OrderShipping find(Object id) throws AppBaseException;
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderShipping}
+     * Pobiera z bazy danych wszystkie obienty typu {@link OrderShipping}
      * @return lista obiektów typu {@link OrderShipping}
      */
     List<OrderShipping> findAll();
     
     /**
-     * Wyciąga z bazy danych wszystkie obienty typu {@link OrderShipping} z zadanego zakresu 
+     * Pobiera z bazy danych wszystkie obienty typu {@link OrderShipping} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * Zakresy reprezentują id obiektów
      * @return lista obiektów typu {@link OrderShipping}

@@ -32,6 +32,7 @@ public abstract class AbstractFacadeBase<T> {
      * @return Obiekt encji danego typu
      * @throws AppBaseException
      */
+    @RolesAllowed("find")
     public T find(Object id) throws AppBaseException {
         return getEntityManager().find(entityClass, id);
     }

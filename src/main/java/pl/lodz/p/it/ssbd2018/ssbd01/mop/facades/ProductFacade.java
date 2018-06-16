@@ -48,6 +48,16 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
     }
     
     @Override
+    @RolesAllowed("findProduct")
+    public Product find(Object id) throws AppBaseException {
+        Product product = super.find(id);
+        if (product == null) {
+            throw new ProductNotFoundException("product_not_found_exception");
+        }
+        return product;
+    }
+    
+    @Override
     @RolesAllowed("findProductByOwnerLogin")
     public List<Product> findByOwnerLogin(String login) throws AppBaseException {
         try {

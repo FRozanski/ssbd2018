@@ -34,7 +34,23 @@ public interface ProductManagerLocal {
     
     void updateProduct(Product product);                                                            
     
-    void setProductState(Product product, boolean active);                                          
+    void setProductState(Product product, boolean active);
+    
+    /**
+     * Dezaktywuje produkt o podanym id
+     * @param productId
+     * @param login
+     * @throws AppBaseException     głóqny wyjątek aplikacji
+     */
+    void deactiveProduct(long productId, String login) throws AppBaseException;
+    
+    /**
+     * Aktywuje produkt o podanym id
+     * @param productId
+     * @param login
+     * @throws AppBaseException     głóqny wyjątek aplikacji
+     */
+    void activeProduct(long productId, String login) throws AppBaseException;
             
     List<Product> getAllProducts();
     

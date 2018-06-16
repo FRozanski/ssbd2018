@@ -13,8 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -113,6 +115,56 @@ public class ProductRestController {
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         } 
+    }
+    
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zdezaktywowania produktu o podanym numerze ID.
+     * @param productId
+     * @return status operacji
+     */
+    @PUT
+    @Path("activeProduct")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response activeProduct(@QueryParam("productId") long productId, @Context HttpServletRequest servletRequest) {
+        try {
+            String login = getUserLogin(servletRequest);
+            productManager.activeProduct(productId, login);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu dezaktywowania produktu o podanym numerze ID.
+     * @param productId
+     * @return status operacji
+     */
+    @PUT
+    @Path("deactiveProduct")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deactiveProduct(@QueryParam("productId") long productId, @Context HttpServletRequest servletRequest) {
+        try {
+            String login = getUserLogin(servletRequest);
+            productManager.deactiveProduct(productId, login);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
     }
 
     private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {

@@ -55,7 +55,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.HashUtils;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 
 /**
- *
+ * Klasa definująca operacje możliwe do wykonania w zakresie MOK dostępne dla klienta (przeglądarka).
  * @author dlange
  * @author agkan
  * @author michalmalec
@@ -66,6 +66,10 @@ public class AccountRestController {
     @EJB
     AccountManagerLocal accountManagerLocal;
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania listy kont.
+     * @return lista kont w formacie JSON
+     */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,6 +81,11 @@ public class AccountRestController {
                 .build();
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania konta o podanym numerze ID.
+     * @param accountId
+     * @return dane pobranego konta w formacie JSON
+     */
     @GET
     @Path("{accountId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -97,6 +106,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania danych do edycji własnego konta.
+     * @param servletRequest
+     * @return dane pobranego konta w formacie JSON
+     */
     @GET
     @Path("myAccountToEdit")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -118,6 +132,12 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zaktualizowania danych swojego konta.
+     * @param accountDto
+     * @param servletRequest
+     * @return status operacji
+     */
     @PUT
     @Path("updateMyAccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -141,6 +161,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zaktualizowania danych konta przez administratora.
+     * @param accountDto
+     * @return status operacji 
+     */
     @PUT
     @Path("updateAccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -163,6 +188,10 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania list poziomów dostępu.
+     * @return lista pozmiomów dostępu w formacie JSON
+     */
     @GET
     @Path("allAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -177,6 +206,12 @@ public class AccountRestController {
                 .build();
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu rejestracji nowego użytkownika.
+     * @param newAccount
+     * @param servletContext
+     * @return status operacji
+     */
     @POST
     @Path("registerAccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -200,6 +235,12 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zmiany własnego hasła.
+     * @param passDto
+     * @param servletRequest
+     * @return status operacji
+     */
     @PUT
     @Path("changeMyPassword")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -225,6 +266,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zmiany hasła danego konta przez administratora.
+     * @param passDto
+     * @return status operacji
+     */
     @PUT
     @Path("changeOthersPassword")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -248,6 +294,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zablokowania konta o podanym numerze ID.
+     * @param accountId
+     * @return status operacji
+     */
     @PUT
     @Path("lockAccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -267,6 +318,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu odblokowania konta o podanym numerze ID.
+     * @param accountId
+     * @return status operacji
+     */
     @PUT
     @Path("unlockAccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -286,6 +342,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu zmiany poziomów dostępu dla danego konta.
+     * @param accountDto
+     * @return status operacji
+     */
     @PUT
     @Path("alterAccountAccessLevel")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -307,6 +368,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint dla klienta w celu aktywacji konta o podanym numerze ID przez administratora.
+     * @param accountId
+     * @return status operacji
+     */
     @PUT
     @Path("confirmAccount")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -326,6 +392,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu aktywacji konta poprzez token (link aktywacyjny).
+     * @param token
+     * @return status operacji
+     */
     @PUT
     @Path("confirmAccountByToken")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -346,6 +417,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda walidująca dane podanego konta.
+     * @param account
+     * @throws AppBaseException 
+     */
     private void validateConstraints(Account account) throws AppBaseException {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -363,6 +439,11 @@ public class AccountRestController {
         }
     }
 
+    /**
+     * Metoda walidująca podane hasło.
+     * @param account
+     * @throws AppBaseException 
+     */
     private void validatePassword(BasicNewAccountDto account) throws AppBaseException {
         if (account.getFirstPassword().length() < 8 || account.getSecondPassword().length() < 8) {
             throw new PasswordTooShortException("password_to_short");
@@ -372,18 +453,37 @@ public class AccountRestController {
         }                        
     }
 
+    /**
+     * Metoda weryfikująca identyczność podanych haseł.
+     * @param passDto
+     * @param account
+     * @throws AppBaseException 
+     */
     private void verifyPasswords(MyPasswordDto passDto, Account account) throws AppBaseException {
         if (!account.getPassword().contentEquals(HashUtils.sha256(passDto.getOldPassword()))) {
             throw new PasswordNotMatch("password_not_match_error");
         }
     }
     
+    /**
+     * Metoda weryfikująca brak powtó©zenia się hasła w przeszłości danego konta.
+     * @param account
+     * @param passDto
+     * @throws AppBaseException 
+     */
     private void verifyArchivalPaswords(Account account, BasicNewAccountDto passDto) throws AppBaseException {
         for(ArchivalPassword archivalPassword : accountManagerLocal.getAllArchivalPasswordsByAccount(account.getId()))
             if(archivalPassword.getPassword().contentEquals(HashUtils.sha256(passDto.getFirstPassword())))
                 throw new PasswordSameAsArchivalPasswordException("password_same_as_archival_error");
     }
 
+    /**
+     * Metoda pozwalająca na pobranie loginu użytkownika podłączonego do danej sesji.
+     * @param servletRequest
+     * @return
+     * @throws UserUnauthorized
+     * @throws UserAlreadyLogoutException 
+     */
     private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {
         if (servletRequest.getUserPrincipal() == null) {
             throw new UserAlreadyLogoutException("user_already_logout_error");
@@ -391,6 +491,11 @@ public class AccountRestController {
         return servletRequest.getUserPrincipal().getName();
     }
     
+    /**
+     * Metoda walidująca podany token.
+     * @param token
+     * @throws WrongTokenException 
+     */
     private void validateToken(String token) throws WrongTokenException {
         if (token == null || token.length() < 32) {
             throw new WrongTokenException("wrong_token");

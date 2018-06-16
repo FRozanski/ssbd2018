@@ -12,7 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.AccountAlevel;
 
 /**
- *
+ * KLasa abstrakcyjna umożliwiająca mapowanie obiektów związanych z typem {@link Account}
  * @author michal
  */
 public abstract class AccountMapperDecorator implements AccountMapper {
@@ -23,6 +23,11 @@ public abstract class AccountMapperDecorator implements AccountMapper {
         this.delegate = delegate;
     }
 
+    /**
+     * Metoda umożliwiająca mapowanie listy obiektów typu {@link Account} na listę obiektów typu {@link FullAccountDto}
+     * @param accounts
+     * @return lista obiektów typu {@link FullAccountDto}
+     */
     @Override
     public List<FullAccountDto> accountsToEditableDTO(List<Account> accounts) {
         List<FullAccountDto> dto = delegate.accountsToEditableDTO(accounts);

@@ -18,12 +18,12 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.Order1FacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.OrderStatusFacadeLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link OrderProducts} {@link Order1}
  * @author fifi
@@ -36,6 +36,37 @@ public class OrderManager implements OrderManagerLocal{
     @EJB
     private ShippingMethodFacadeLocal shippingMethodFacade;
     
+    @EJB
+    private Order1FacadeLocal orderFacade;
+    
+    @EJB
+    private OrderStatusFacadeLocal orderStatus;
+    
+    
+    @Override
+    @RolesAllowed("getAllOrders")
+    public List<Order1> getAllOrders() {
+        return orderFacade.findAll();
+    }
+    
+    @Override
+    @RolesAllowed("getAllByBuyer")
+    public List<Order1> getAllByBuyer(String login) throws AppBaseException {
+        return orderFacade.findByBuyerLogin(login);
+    }
+    
+    @Override
+    @RolesAllowed("getAllBySeller")
+    public List<Order1> getAllBySeller(String login) throws AppBaseException {
+        return orderFacade.findBySellerLogin(login);
+    }
+    
+    @Override
+    @RolesAllowed("getAllOrderStatus")
+    public List<OrderStatus> getAllOrderStatus() {
+        return orderStatus.findAll();
+    }
+
     @Override
     @RolesAllowed("makeOrder")
     public void makeOrder(OrderProducts orderProducts) {
@@ -61,26 +92,20 @@ public class OrderManager implements OrderManagerLocal{
     }
 
     @Override
-    @RolesAllowed("getAllOrders")
-    public List<OrderProducts> getAllOrders() {
-        throw new NotImplementedException();
-    }
-
-    @Override
     @RolesAllowed("getAllOrdersByAccountAsSeller")
-    public List<OrderProducts> getAllOrdersByAccountAsSeller(Account seller) {
+    public List<Order1> getAllOrdersByAccountAsSeller(Account seller) {
         throw new NotImplementedException();
     }
 
     @Override
     @RolesAllowed("getAllOrdersByAccountAsBuyer")
-    public List<OrderProducts> getAllOrdersByAccountAsBuyer(Account buyer) {
+    public List<Order1> getAllOrdersByAccountAsBuyer(Account buyer) {
         throw new NotImplementedException();
     }
 
     @Override
     @RolesAllowed("getAllOrdersByDateAndPrice")
-    public List<OrderProducts> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
+    public List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
         throw new NotImplementedException();
     }        
 }

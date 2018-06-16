@@ -52,6 +52,12 @@ public interface Order1FacadeLocal {
      * @return lista obiektów typu {@link Order1}
      */
     List<Order1> findRange(int[] range);
+    
+    
+    List<Order1> findBySellerLogin(String login) throws AppBaseException;
+            
+            
+    List<Order1> findByBuyerLogin(String login) throws AppBaseException;
 
     /**
      * Zlicza obieky typu {@link Order1} w bazie danych

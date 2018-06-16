@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	 version="3.1">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
     <session-config>
         <session-timeout>
             30
@@ -128,7 +128,7 @@
         </user-data-constraint>
     </security-constraint>
     <!-- MOP -->
-     <security-constraint>
+    <security-constraint>
         <display-name>getAllProducts</display-name>
         <web-resource-collection>
             <web-resource-name>getAllProducts</web-resource-name>            
@@ -176,7 +176,7 @@
         </user-data-constraint>
     </security-constraint>
     <!-- MOZ -->
-     <security-constraint>
+    <security-constraint>
         <display-name>addShippingMethod</display-name>
         <web-resource-collection>
             <web-resource-name>addShippingMethod</web-resource-name>            
@@ -206,11 +206,70 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>getAllOrderStatus</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllOrderStatus</web-resource-name>            
+            <url-pattern>/webresources/order/orderStatus</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getAllOrders</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllOrders</web-resource-name>            
+            <url-pattern>/webresources/order</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getMyBought</display-name>
+        <web-resource-collection>
+            <web-resource-name>getMyBought</web-resource-name>            
+            <url-pattern>/webresources/order/myBought</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getMySold</display-name>
+        <web-resource-collection>
+            <web-resource-name>getMySold</web-resource-name>            
+            <url-pattern>/webresources/order/mySold</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     
     
-    
-    
-    
+
     <!-- definicja metody logowania -->
     <login-config>
         <auth-method>FORM</auth-method>

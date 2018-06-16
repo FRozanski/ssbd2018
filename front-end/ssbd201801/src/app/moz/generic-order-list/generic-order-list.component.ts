@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { Order } from '../model/order';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './generic-order-list.component.html',
   styleUrls: ['./generic-order-list.component.css']
 })
-export class GenericOrderListComponent {
+export class GenericOrderListComponent implements OnInit{
 
   @Input()
   dataSource: MatTableDataSource<Order>;
@@ -20,7 +20,8 @@ export class GenericOrderListComponent {
 
   @ViewChild(MatPaginator) 
   paginator: MatPaginator;
-
+  @ViewChild(MatSort) 
+  sort: MatSort;
 
   displayedColumns = [
     'id',
@@ -34,6 +35,11 @@ export class GenericOrderListComponent {
   ];
 
   constructor() {}
+
+  ngOnInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
 
   getDisplayedColumns() {
     return this.displayedColumns

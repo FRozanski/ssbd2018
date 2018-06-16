@@ -18,7 +18,9 @@
     "CREATE_ACCOUNT": "Utwórz konto",
     "ACTIVATE_ACCOUNT": "Aktywuj konto",
     "PRODUCTS" : "Produkty",
-    "MY_PRODUCTS" : "Moje produkty"
+    "MY_PRODUCTS" : "Moje produkty",
+    "MY_ORDERS": "Moje zamówienia",
+    "ALL_ORDERS": "Wszystkie zamówienia"
   },
   "ACCOUNT": {
     "CITY": "Miasto",

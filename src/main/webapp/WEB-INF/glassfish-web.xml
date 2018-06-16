@@ -118,7 +118,15 @@
   </security-role-mapping>
   <!--MOP-->
   <security-role-mapping>
-    <role-name>addProductByAccount</role-name>
+    <role-name>addProductByAccountLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getCategoryById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getUnitById</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
@@ -147,7 +155,7 @@
     <role-name>getMyProducts</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
-   <security-role-mapping>
+  <security-role-mapping>
     <role-name>findProductByOwnerLogin</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
@@ -268,6 +276,14 @@
     <role-name>findAccessLevel</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findByLoginForProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>createProduct</role-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>

@@ -11,7 +11,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
- *
+ * Interfejs manager do zarządzania metodami przesyłki
  * @author michal
  */
 @Local

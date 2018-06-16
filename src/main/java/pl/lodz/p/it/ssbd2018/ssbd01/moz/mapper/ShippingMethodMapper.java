@@ -16,7 +16,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.mapper.AccountMapperDecorator;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 
 /**
- * Interfejs służący do mapowania obiektów typu {@link BasicShippingMethodDto} na {@link ShippingMethod}
+ * Interfejs służący do mapowania obiektów typu {@link BasicShippingMethodDto} oraz {@link ShippingMethod}
  * @author Filip
  */
 @Mapper

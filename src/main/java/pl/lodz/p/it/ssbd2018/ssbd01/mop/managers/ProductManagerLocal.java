@@ -44,25 +44,14 @@ public interface ProductManagerLocal {
     
     List<Product> getAllActiveProducts() throws AppBaseException;
                 
-    Product getProductFromAccountByName(Account account, String name);                              
+    Product getProductFromAccountByName(Account account, String name);       
     
-    void setProductCategory(Product product, Category category);    
-
-    /**
-     * Wyszukuje obiekt encji kategorii produktu po zadanym numerze identyfikującym
-     * @param categoryId            numer identyfikujący kategorię produktu
-     * @return                      obiekt encji kategorii produktu
-     * @throws AppBaseException     główny wyjątek aplikacji
-     */
-    Category getCategoryById(Long categoryId) throws AppBaseException;
-
+    void setProductCategory(Product product, Category category);
     /**
      * Wyszukuje obiekt encji jednostki miary po zadanym numerze identyfikującym
      * @param unitId                numer identyfikujący jednostkę miary
      * @return                      obiekt encji jednostki miary
      * @throws AppBaseException     główny wyjątek aplikacji
      */
-    Unit getUnitById(Long unitId) throws AppBaseException;
-            
-           
+    Unit getUnitById(Long unitId) throws AppBaseException;                       
 }

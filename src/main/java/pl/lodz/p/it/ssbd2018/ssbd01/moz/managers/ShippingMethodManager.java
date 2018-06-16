@@ -17,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- *
+ * Klasa obsługująca zarządzanie obiektami typu {@link ShippingMethod}
  * @author michal
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)

@@ -61,7 +61,7 @@ public class Product implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+([ '-][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*", message = PRODUCT_NAME_PATTERN_ERROR)    
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\s]+", message = PRODUCT_NAME_PATTERN_ERROR)    
     @Size(min = 1, max = 32, message = PRODUCT_NAME_LENGTH_ERROR)
     @Column(name = "name")
     private String name;

@@ -104,7 +104,7 @@ public class ProductRestController {
         String login = getUserLogin(servletRequest);
         productManager.addProductByAccountLogin(newProduct, login);
         return Response.status(Response.Status.CREATED)
-                .entity(new WebErrorInfo("200", SUCCESS))
+                .entity(new WebErrorInfo("201", SUCCESS))
                 .type(MediaType.APPLICATION_JSON)
                 .build();
         } catch (AppBaseException ex) {

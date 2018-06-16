@@ -18,7 +18,9 @@
     "CREATE_ACCOUNT": "Utwórz konto",
     "ACTIVATE_ACCOUNT": "Aktywuj konto",
     "PRODUCTS" : "Produkty",
-    "MY_PRODUCTS" : "Moje produkty"
+    "MY_PRODUCTS" : "Moje produkty",
+    "MY_ORDERS": "Moje zamówienia",
+    "ALL_ORDERS": "Wszystkie zamówienia"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -57,6 +59,18 @@
     "ALTER": "Zmień",
     "RESET_DATA_INFO": "Uprzednio zaznaczone konta nie zostaną zaktualizowane.",
     "CONFIRM_CONFIRM": "Czy na pewno chcesz zatwierdzić to konto?"
+  },
+  "ORDER": {
+    "STATE": "Stan",
+    "DATE": "Data",
+    "STATUS": "Status",
+    "ORDER_NUMBER": "Numer zamówienia",
+    "BUYER": "Kupujący",
+    "SELLER": "Sprzedający",
+    "TOTAL_PRICE": "Całkowita wartość",
+    "OPEN": "Otwarte",
+    "SHIPPING_METHOD": "Sposób dostawy"
+
   },
   "PRODUCT": {
     "NAME": "Nazwa",

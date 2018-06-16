@@ -51,6 +51,12 @@ import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
 import { ProductListComponent } from './mop/product-list/product-list.component';
 import {ProductService} from './mop/common/product.service';
 import { MyProductListComponent } from './mop/my-product-list/my-product-list.component';
+import { GenericOrderListComponent } from './moz/generic-order-list/generic-order-list.component';
+import { AllOrdersListComponent } from './moz/all-orders-list/all-orders-list.component';
+import { OrderService } from './moz/common/order.service';
+import { OwnOrdersComponent } from './moz/own-orders/own-orders.component';
+import { OwnBoughtOrdersComponent } from './moz/own-orders/own-bought-orders/own-bought-orders.component';
+import { OwnSoldOrdersComponent } from './moz/own-orders/own-sold-orders/own-sold-orders.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -96,6 +102,22 @@ const appRoutes: Routes = [
       {
         expectedRoles: [Properties.AdminRole, Properties.ManagerRole]
       }
+  },
+  {
+    path: 'orders',
+    canActivate: [AuthGuard],
+    component: AllOrdersListComponent,
+    data: {
+      expectedRoles: [Properties.AdminRole]
+    }
+  },
+  {
+    path: 'ownOrders',
+    canActivate: [AuthGuard],
+    component: OwnOrdersComponent,
+    data: {
+      expectedRoles: [Properties.UserRole]
+    }
   },
   {
     path: 'statistics',
@@ -196,7 +218,12 @@ declarations: [
     ErrorsComponent,
     BaseAccountFormComponent,
     ProductListComponent,
-    MyProductListComponent
+    MyProductListComponent,
+    GenericOrderListComponent,
+    AllOrdersListComponent,
+    OwnOrdersComponent,
+    OwnBoughtOrdersComponent,
+    OwnSoldOrdersComponent
   ],
   imports: [
     MatDialogModule,
@@ -232,6 +259,7 @@ declarations: [
     ProductService,
     SessionService,
     LocationService,
+    OrderService,
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,

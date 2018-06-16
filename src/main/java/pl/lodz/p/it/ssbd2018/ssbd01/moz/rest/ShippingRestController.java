@@ -30,7 +30,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
- * Klasa reprezentująca serwis RESTowy, odpowiedzialna za zarządanie metodami przesyłki
+ * Klasa REST API, odpowiedzialna za zarządanie metodami przesyłki
  * @author Filip
  */
 @Path("shipping")

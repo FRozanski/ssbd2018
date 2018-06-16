@@ -5,6 +5,8 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,4 +32,9 @@ public class CategoryFacade extends AbstractFacadeCreateUpdate<Category> impleme
         super(Category.class);
     }
     
+    @Override
+    @RolesAllowed("getAllCategories")
+    public List<Category> findAll() {
+        return super.findAll();
+    }    
 }

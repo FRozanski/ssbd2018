@@ -6,7 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 
 /**
- *
+ * Klasa realizująca wzorzec projektowy DTO - mapowanie surowych danych na obiekty typu {@link Category}
  * @author michal
  */
 public class BasicCategoryDto {
@@ -15,44 +15,26 @@ public class BasicCategoryDto {
     private String categoryName;
     private boolean active;
 
-    /**
-     * @return the id
-     */
     public Long getId() {
         return id;
     }
 
-    /**
-     * @param id the id to set
-     */
     public void setId(Long id) {
         this.id = id;
     }
 
-    /**
-     * @return the categoryName
-     */
     public String getCategoryName() {
         return categoryName;
     }
 
-    /**
-     * @param categoryName the categoryName to set
-     */
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
     }
 
-    /**
-     * @return the active
-     */
     public boolean isActive() {
         return active;
     }
 
-    /**
-     * @param active the active to set
-     */
     public void setActive(boolean active) {
         this.active = active;
     }

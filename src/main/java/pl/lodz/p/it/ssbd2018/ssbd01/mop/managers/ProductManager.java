@@ -6,20 +6,31 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.NewProductMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -36,6 +47,15 @@ public class ProductManager implements ProductManagerLocal{
     
     @EJB
     ProductFacadeLocal productFacade;
+    
+    @EJB
+    CategoryFacadeLocal categoryFace;
+    
+    @EJB
+    UnitFacadeLocal unitFacade;
+    
+    @EJB
+    CategoryManagerLocal categoryManager;
     
     @Override
     @RolesAllowed("getMyProducts")
@@ -55,11 +75,20 @@ public class ProductManager implements ProductManagerLocal{
         return productFacade.findByActiveProductAndCategory();
     }
     
-    
     @Override
-    @RolesAllowed("addProductByAccount")
-    public void addProductByAccount(Account account, Product product) {
-        throw new NotImplementedException();
+    @RolesAllowed("addProductByAccountLogin")
+    public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
+        Product product = new Product();
+        NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
+        Category category = categoryManager.getCategoryById(newProduct.getCategoryId());
+        Unit unit = this.getUnitById(newProduct.getUnitId());
+        Account owner = productFacade.findByLogin(login);
+        product.setCategoryId(category);
+        product.setOwnerId(owner);
+        product.setUnitId(unit);
+        this.validateConstraints(product);
+        owner.setNumberOfProducts(owner.getNumberOfProducts() + 1);
+        productFacade.create(product);
     }
 
     @Override
@@ -98,4 +127,26 @@ public class ProductManager implements ProductManagerLocal{
         throw new NotImplementedException();
     }
     
+    @Override
+    @RolesAllowed("getUnitById")
+    public Unit getUnitById(Long unitId) throws AppBaseException {
+        return unitFacade.find(unitId);
+    }
+    
+    private void validateConstraints(Product product) throws AppBaseException {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Product>> constraintViolations = validator.validate(product);
+        List<String> errors = new ErrorCodes().getAllErrors();
+
+        if (constraintViolations.size() > 0) {
+            for (int i = 0; i < errors.size(); i++) {
+                for (ConstraintViolation<Product> temp : constraintViolations) {
+                    if (errors.get(i).equals(temp.getMessage())) {
+                        throw new ConstraintException("constraint_error", errors.get(i));
+                    }
+                }
+            }
+        }
+    }    
 }

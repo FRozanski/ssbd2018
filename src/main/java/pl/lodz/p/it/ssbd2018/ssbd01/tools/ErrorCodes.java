@@ -53,6 +53,11 @@ public class ErrorCodes {
     public static final String SHIPPING_METHOD_PRICE_PRECISION_ERROR = "shipping_method_price_precision_error";
     public static final String SHIPPING_METHOD_NAME_LENGTH_ERROR = "shipping_method_name_length_error";
     public static final String SHIPPING_METHOD_NAME_PATTERN_ERROR = "shipping_method_name_pattern_error";
+    public static final String PRODUCT_NAME_PATTERN_ERROR = "product_name_pattern_error";
+    public static final String PRODUCT_NAME_LENGTH_ERROR = "product_name_length_error";
+    public static final String PRODUCT_DESCRIPTION_LENGTH_ERROR = "product_description_length_error";
+    public static final String PRODUCT_PRICE_PRECISION_ERROR = "product_price_precision_error";
+    public static final String PRODUCT_QTY_PRECISION_ERROR = "product_qty_precision_error";
     
     public List<String> getAllErrors() {
         List<String> errors = new ArrayList<>();
@@ -75,6 +80,11 @@ public class ErrorCodes {
         errors.add(FLAT_NUMBER_PATTERN_ERROR);
         errors.add(CITY_LENGTH_ERROR);
         errors.add(COUNTRY_LENGTH_ERROR);
+        errors.add(PRODUCT_NAME_PATTERN_ERROR);
+        errors.add(PRODUCT_NAME_LENGTH_ERROR);
+        errors.add(PRODUCT_DESCRIPTION_LENGTH_ERROR);
+        errors.add(PRODUCT_PRICE_PRECISION_ERROR);
+        errors.add(PRODUCT_QTY_PRECISION_ERROR);
         errors.add(SHIPPING_METHOD_PRICE_TOO_LOW_ERROR);
         errors.add(SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR);
         errors.add(SHIPPING_METHOD_PRICE_PRECISION_ERROR);

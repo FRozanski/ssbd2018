@@ -21,12 +21,17 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 
 /**
- *
+ * Klasa definiująca operacje możliwe do wykonania w celu pozyskania tożsamości w ramach danej sesji użytkownika.
  * @author michal
  */
 @Path("session")
 public class SessionRestController {
 
+    /**
+     * Metoda udostępniająca endpoint REST w celu pozyskania loginu w danej sesji.
+     * @param servletRequest
+     * @return status operacji
+     */
     @GET
     @Path("myLogin")
     @Produces(MediaType.APPLICATION_JSON)
@@ -49,6 +54,11 @@ public class SessionRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST w celu pozyskania roli posiadanej w danej sesji.
+     * @param servletRequest
+     * @return status operacji
+     */
     @GET
     @Path("myIdentity")
     @Produces(MediaType.APPLICATION_JSON)
@@ -70,6 +80,12 @@ public class SessionRestController {
                     .build();
     }
 
+    /**
+     * Metoda zwracająca login użytkownika danej sesji.
+     * @param servletRequest
+     * @return login typu {@link String}
+     * @throws UserAlreadyLogoutException 
+     */
     protected String getUserLogin(HttpServletRequest servletRequest) throws UserAlreadyLogoutException {
         if (servletRequest.getUserPrincipal() == null) {
             throw new UserAlreadyLogoutException("user_already_logout_error");
@@ -77,6 +93,11 @@ public class SessionRestController {
         return servletRequest.getUserPrincipal().getName();
     }
 
+    /**
+     * Metoda zwracająca listę ról posiadanych przez użytkownika w danej sesji.
+     * @param servletRequest
+     * @return listę ról w danej sesji. 
+     */
     private List<String> getUserRoles(HttpServletRequest servletRequest) {
         List<String> levels = new ArrayList<>();
         if (servletRequest.isUserInRole("ADMIN")) {

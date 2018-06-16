@@ -20,7 +20,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.dto.NewAccountDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
- *
+ * Interfejs umożliwiająca mapowanie obiektów związanych typem {@link Account}.
  * @author michal
  */
 @Mapper
@@ -29,16 +29,44 @@ public interface AccountMapper {
 
     AccountMapper INSTANCE = Mappers.getMapper(AccountMapper.class);
 
+    /**
+     * Metoda umożliwiająca mapowanie listy obiektów typu {@link Account} na listę obiektów typu {@link FullAccountDto}
+     * @param accounts
+     * @return lista obiektów typu {@link FullAccountDto}
+     */
     List<FullAccountDto> accountsToEditableDTO(List<Account> accounts);
 
+    /**
+     * Metoda umożliwiająca mapowanie obiektu typu {@link Account} na obiekt typu {@link EditableAccountDto}
+     * @param account
+     * @return obiekt typu {@link EditableAccountDto}
+     */
     EditableAccountDto accountToEditableDto(Account account);
 
+    /**
+     * Metoda umożliwiająca mapowanie obiektu typu {@link EditableAccountDto} na obiekt typu {@link Account}
+     * @param accountDto
+     * @param account
+     * @return obiekt typu {@link Account}
+     */
     @InheritInverseConfiguration
     Account accountDtoToAccount(EditableAccountDto accountDto, @MappingTarget Account account);
 
+    /**
+     * Metoda umożliwiająca mapowanie obiektu typu {@link BasicAccountDto} na obiekt typu {@link Account}
+     * @param accountDto
+     * @param account
+     * @return obiekt typu {@link Account}
+     */
     @InheritInverseConfiguration
     Account basicAccountDtoToAccount(BasicAccountDto accountDto, @MappingTarget Account account);
     
+    /**
+     * Metoda umożliwiająca mapowanie obiektu typu {@link NewAccountDto} na obiekt typu {@link Account}
+     * @param accountDto
+     * @param account
+     * @return obiekt typu {@link Account}
+     */
     @InheritInverseConfiguration
     @Mapping(source = "firstPassword", target = "password")
     @IterableMapping(dateFormat = "dd.MM.yyyy hh:mm:ss")

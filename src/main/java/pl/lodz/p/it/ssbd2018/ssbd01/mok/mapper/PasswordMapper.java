@@ -14,7 +14,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mok.dto.OtherPasswordDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 
 /**
- *
+ * Interfejs umożliwiający mapowanie haseł (obiektów DTO) na obiekty typu {@link Account}.
  * @author michal
  */
 @Mapper
@@ -22,6 +22,12 @@ public interface PasswordMapper {
 
     PasswordMapper INSTANCE = Mappers.getMapper(PasswordMapper.class);
 
+    /**
+     * Metoda mapująca obiekt typu {@link OtherPasswordDto} na obiekt typu {@link Account}
+     * @param otherPasswordDto
+     * @param account
+     * @return obiekt typu {@link Account}
+     */
     @InheritInverseConfiguration
     @Mapping(source = "firstPassword", target = "password")
     Account newPasswordDtoToAccount(OtherPasswordDto otherPasswordDto, @MappingTarget Account account);

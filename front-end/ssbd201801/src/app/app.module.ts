@@ -57,6 +57,8 @@ import { OrderService } from './moz/common/order.service';
 import { OwnOrdersComponent } from './moz/own-orders/own-orders.component';
 import { OwnBoughtOrdersComponent } from './moz/own-orders/own-bought-orders/own-bought-orders.component';
 import { OwnSoldOrdersComponent } from './moz/own-orders/own-sold-orders/own-sold-orders.component';
+import { ShippingMethodsListComponent } from './moz/shipping-methods-list/shipping-methods-list.component';
+import {ShippingMethodService} from './moz/common/shipping-method.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -185,6 +187,13 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'shippingMethods',
+    component: ShippingMethodsListComponent,
+    data: {
+      expectedRoles: [Properties.ManagerRole]
+    }
+  },
+  {
     path: 'error',
     component: ErrorsComponent
   },
@@ -223,7 +232,8 @@ declarations: [
     AllOrdersListComponent,
     OwnOrdersComponent,
     OwnBoughtOrdersComponent,
-    OwnSoldOrdersComponent
+    OwnSoldOrdersComponent,
+    ShippingMethodsListComponent
   ],
   imports: [
     MatDialogModule,
@@ -260,6 +270,7 @@ declarations: [
     SessionService,
     LocationService,
     OrderService,
+    ShippingMethodService,
     RegistrationConfirmComponent,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,

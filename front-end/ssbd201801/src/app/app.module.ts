@@ -57,6 +57,7 @@ import { OrderService } from './moz/common/order.service';
 import { OwnOrdersComponent } from './moz/own-orders/own-orders.component';
 import { OwnBoughtOrdersComponent } from './moz/own-orders/own-bought-orders/own-bought-orders.component';
 import { OwnSoldOrdersComponent } from './moz/own-orders/own-sold-orders/own-sold-orders.component';
+import { AddProductComponent } from './mop/add-product/add-product.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -223,7 +224,8 @@ declarations: [
     AllOrdersListComponent,
     OwnOrdersComponent,
     OwnBoughtOrdersComponent,
-    OwnSoldOrdersComponent
+    OwnSoldOrdersComponent,
+    AddProductComponent
   ],
   imports: [
     MatDialogModule,

@@ -20,7 +20,8 @@
     "PRODUCTS" : "Produkty",
     "MY_PRODUCTS" : "Moje produkty",
     "MY_ORDERS": "Moje zamówienia",
-    "ALL_ORDERS": "Wszystkie zamówienia"
+    "ALL_ORDERS": "Wszystkie zamówienia",
+    "ALL_CATEGORIES": "Wszystkie kategorie"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -81,6 +82,10 @@
     "CATEGORY": "Kategoria",
     "UNIT": "Jednostka",
     "OWNER": "Właściciel"
+  },
+  "CATEGORY": {
+    "NAME": "Nazwa kategorii",
+    "ACTIVE": "Aktywna"
   },
   "FORM": {
     "FIELD_REQUIRED": "To pole jest wymagane.",

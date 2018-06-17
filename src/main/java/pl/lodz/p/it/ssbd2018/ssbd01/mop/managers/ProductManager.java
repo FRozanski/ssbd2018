@@ -176,6 +176,7 @@ public class ProductManager implements ProductManagerLocal{
     }
 
     @Override
+    @RolesAllowed("getAllUnits")
     public List<Unit> getAllUnits() {
         return unitFacade.findAll();
     }

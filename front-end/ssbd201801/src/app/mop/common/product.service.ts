@@ -23,4 +23,7 @@ export class ProductService {
     return this.httpClient.get<ProductData[]>(this.uri + '/activeProducts');
   }
 
+  addProduct(product: ProductData): Observable<ProductData> {
+    return this.httpClient.post<ProductData>(this.uri + '/addProduct', product);
+  }
 }

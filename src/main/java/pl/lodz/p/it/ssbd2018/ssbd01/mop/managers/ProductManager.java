@@ -24,6 +24,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
@@ -90,6 +91,24 @@ public class ProductManager implements ProductManagerLocal{
         owner.setNumberOfProducts(owner.getNumberOfProducts() + 1);
         productFacade.create(product);
     }
+    
+    @Override
+    @RolesAllowed("activeProduct")
+    public void activeProduct(long productId, String login) throws AppBaseException {
+        Product product = productFacade.find(productId);
+        checkIfUserIsOwner(login, product);
+        product.setActive(true);
+        productFacade.edit(product);
+    }
+    
+    @Override
+    @RolesAllowed("deactiveProduct")
+    public void deactiveProduct(long productId, String login) throws AppBaseException {
+        Product product = productFacade.find(productId);
+        checkIfUserIsOwner(login, product);
+        product.setActive(false);
+        productFacade.edit(product);
+    }
 
     @Override
     @RolesAllowed("deleteProductByAccount")
@@ -148,5 +167,11 @@ public class ProductManager implements ProductManagerLocal{
                 }
             }
         }
-    }    
+    }
+    
+    private void checkIfUserIsOwner(String login, Product product) throws AppBaseException{
+        if(!product.getOwnerId().getLogin().equals(login)) {
+            throw new UserIsNotProductOwner("not_product_owner");
+        }
+    }
 }

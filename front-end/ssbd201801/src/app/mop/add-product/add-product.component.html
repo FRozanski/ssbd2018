@@ -15,7 +15,7 @@
       </div>
 
       <mat-form-field>
-        <mat-select [placeholder]="'PRODUCT.CATEGORY' | translate" formControlName='category' required>
+        <mat-select [placeholder]="'PRODUCT.CATEGORY' | translate" formControlName='category' [(value)]="selectedCategoryId" required>
           <mat-option *ngFor="let category of categories" [value]="category.id">
             {{ category.categoryName }}
           </mat-option>
@@ -47,7 +47,7 @@
       </div>
 
       <mat-form-field>
-        <mat-select [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit' required>
+        <mat-select [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit' [(value)]="selectedUnitId" required>
           <mat-option *ngFor="let unit of units" [value]="unit.id">
             {{ unit.unitName }}
           </mat-option>

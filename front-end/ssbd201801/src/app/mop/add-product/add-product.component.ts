@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../common/product.service';
 import {CategoryService} from '../common/category.service';
 import {UnitService} from '../common/unit.service';
@@ -8,6 +8,10 @@ import {Location} from '@angular/common';
 import {ErrorStateMatcher} from '@angular/material';
 import {CategoryData} from '../model/category-data';
 import {UnitData} from '../model/unit-data';
+import {Router} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {AccountData} from '../../mok/model/account-data';
+import {ProductData} from '../model/product-data';
 
 @Component({
   selector: 'app-add-product',
@@ -24,12 +28,17 @@ export class AddProductComponent implements OnInit {
 
   categories: CategoryData[];
   units: UnitData[];
+  selectedCategoryId: number;
+  selectedUnitId: number;
 
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
               private unitService: UnitService,
               private locationService: LocationService,
-              private location: Location) { }
+              private location: Location,
+              private router: Router,
+              private translateService: TranslateService) {
+  }
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.ADD_PRODUCT');
@@ -81,7 +90,25 @@ export class AddProductComponent implements OnInit {
   }
 
   sendForm() {
+    this.wasFormSent = true;
 
+    if (this.form.valid) {
+      const product: ProductData = <ProductData>this.form.value;
+      product.categoryId = this.selectedCategoryId;
+      product.unitId = this.selectedUnitId;
+      console.log(product.unitId);
+      console.log(product.description);
+      console.log(product.name);
+      console.log(product.price);
+      console.log(product.qty);
+      console.log(product.categoryId);
+      this.productService.addProduct(product).subscribe(() => {
+        alert(this.translateService.instant('SUCCESS.REGISTER'));
+        this.router.navigate(['/main']);
+      }, (errorResponse) => {
+        this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+      });
+    }
   }
 
 }

@@ -16,8 +16,8 @@
 
       <mat-form-field>
         <mat-select [placeholder]="'PRODUCT.CATEGORY' | translate" formControlName='category' required>
-          <mat-option *ngFor="let category of categories" [value]="category.value">
-            {{ category.viewValue }}
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{ category.categoryName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -48,8 +48,8 @@
 
       <mat-form-field>
         <mat-select [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit' required>
-          <mat-option *ngFor="let unit of units" [value]="unit.value">
-            {{ unit.viewValue }}
+          <mat-option *ngFor="let unit of units" [value]="unit.id">
+            {{ unit.unitName }}
           </mat-option>
         </mat-select>
       </mat-form-field>

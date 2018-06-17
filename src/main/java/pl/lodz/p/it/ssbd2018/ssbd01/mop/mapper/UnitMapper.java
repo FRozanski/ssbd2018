@@ -12,12 +12,21 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicUnitDto;
 
 /**
- *
+ * Interfejs komunikujący się z biblioteką mapstruct, odpowiadający za mapowanie obiektów DTO na obiekty encji i odwrotnie, dedykowany jednostkom miar
  * @author agkan
  */
 @Mapper
 public interface UnitMapper {
+
+    /**
+     * Instancja interfejsu {@link UnitMapper}
+     */
     UnitMapper INSTANCE = Mappers.getMapper(UnitMapper.class);
     
+    /**
+     * Mapuje listę obiektów encji klasy {@link Unit} na listę obiektów DTO klasy {@link BasicUnitDto}
+     * @param units     lista obiektów encji
+     * @return          lista obiektów DTO
+     */
     List<BasicUnitDto> unitsToDto(List<Unit> units);
 }

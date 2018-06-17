@@ -18,7 +18,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.UnitMapper;
 
 /**
- *
+ * Klasa REST API, odpowiedzialna za zarządanie jednostkami miary
  * @author agkan
  */
 @Path("unit")
@@ -27,6 +27,10 @@ public class UnitRestController {
     @EJB
     ProductManagerLocal productManager;
     
+    /**
+     * Metoda   REST API służąca do pobierania wszystkich jednostek miar
+     * @return  meta-dane zawierające listę produktów typu {@link BasicUnitDto}
+     */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

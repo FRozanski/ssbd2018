@@ -21,7 +21,8 @@
     "MY_PRODUCTS" : "Moje produkty",
     "MY_ORDERS": "Moje zamówienia",
     "ALL_ORDERS": "Wszystkie zamówienia",
-    "ALL_CATEGORIES": "Wszystkie kategorie"
+    "ALL_CATEGORIES": "Wszystkie kategorie",
+    "ADD_PRODUCT": "Dodaj produkt"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -163,7 +164,8 @@
     "ADD_ACCOUNT_PAGE": "Dodawanie nowego użytkownika",
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
-    "MY_PRODUCT_LIST_PAGE": "Lista moich produktów"
+    "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
+    "ADD_PRODUCT": "Dodaj produkt"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

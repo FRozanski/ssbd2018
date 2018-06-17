@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {ProductService} from '../common/product.service';
+import {CategoryService} from '../common/category.service';
+import {UnitService} from '../common/unit.service';
+import {LocationService} from '../../mok/common/location.service';
 
 @Component({
   selector: 'app-add-product',
@@ -7,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productService: ProductService,
+              private categoryService: CategoryService,
+              private unitService: UnitService,
+              private locationService: LocationService) { }
 
   ngOnInit() {
+    this.locationService.passRouter('LOCATION.ADD_PRODUCT');
   }
 
 }

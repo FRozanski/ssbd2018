@@ -38,6 +38,7 @@ public class ApplicationConfig extends Application {
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mok.rest.SessionRestController.class);
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mop.rest.CategoryRestController.class);
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mop.rest.ProductRestController.class);
+        resources.add(pl.lodz.p.it.ssbd2018.ssbd01.mop.rest.UnitRestController.class);
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.moz.rest.OrderRestController.class);
         resources.add(pl.lodz.p.it.ssbd2018.ssbd01.moz.rest.ShippingRestController.class);
     }

@@ -69,5 +69,11 @@ public interface ProductManagerLocal {
      * @return                      obiekt encji jednostki miary
      * @throws AppBaseException     główny wyjątek aplikacji
      */
-    Unit getUnitById(Long unitId) throws AppBaseException;                       
+    Unit getUnitById(Long unitId) throws AppBaseException;   
+    
+    /**
+     * Pobiera z bazy danych wszystkie jednostki miar
+     * @return lista obiektów klasy {@link Unit}
+     */
+    List<Unit> getAllUnits();
 }

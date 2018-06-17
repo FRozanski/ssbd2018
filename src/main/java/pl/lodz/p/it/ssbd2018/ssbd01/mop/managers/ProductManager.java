@@ -174,4 +174,10 @@ public class ProductManager implements ProductManagerLocal{
             throw new UserIsNotProductOwner("not_product_owner");
         }
     }
+
+    @Override
+    @RolesAllowed("getAllUnits")
+    public List<Unit> getAllUnits() {
+        return unitFacade.findAll();
+    }
 }

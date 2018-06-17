@@ -25,9 +25,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicUnitDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.UnitMapper;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
@@ -165,6 +167,17 @@ public class ProductRestController {
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         }
+    }
+
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllUnits() {
+        List<BasicUnitDto> allUnitsDto = UnitMapper.INSTANCE.unitsToDto(productManager.getAllUnits());
+        return Response.status(Response.Status.OK)
+                .entity(allUnitsDto)
+                .type(MediaType.APPLICATION_JSON)
+                .build();
     }
 
     private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {

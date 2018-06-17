@@ -70,4 +70,6 @@ public interface ProductManagerLocal {
      * @throws AppBaseException     główny wyjątek aplikacji
      */
     Unit getUnitById(Long unitId) throws AppBaseException;                       
+
+    List<Unit> getAllUnits();
 }

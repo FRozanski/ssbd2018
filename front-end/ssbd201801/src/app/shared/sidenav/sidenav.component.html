@@ -53,6 +53,10 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/categories' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ALL_CATEGORIES" | translate }}</button>
+    </p>
+
+    <p>
         <button mat-button routerLink='/ownOrders' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_ORDERS" | translate }}</button>
     </p>
 

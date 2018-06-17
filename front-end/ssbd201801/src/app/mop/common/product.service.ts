@@ -22,4 +22,5 @@ export class ProductService {
   getAllActiveProductWithActiveCategory(): Observable<ProductData[]> {
     return this.httpClient.get<ProductData[]>(this.uri + '/activeProducts');
   }
+
 }

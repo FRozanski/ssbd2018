@@ -57,6 +57,8 @@ import { OrderService } from './moz/common/order.service';
 import { OwnOrdersComponent } from './moz/own-orders/own-orders.component';
 import { OwnBoughtOrdersComponent } from './moz/own-orders/own-bought-orders/own-bought-orders.component';
 import { OwnSoldOrdersComponent } from './moz/own-orders/own-sold-orders/own-sold-orders.component';
+import { CategoryListComponent } from './mop/category-list/category-list.component';
+import { CategoryService } from './mop/common/category.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -185,6 +187,15 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'categories',
+    component: CategoryListComponent,
+    data:
+    {
+      expectedRoles: [Properties.ManagerRole]
+    },
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'error',
     component: ErrorsComponent
   },
@@ -223,7 +234,8 @@ declarations: [
     AllOrdersListComponent,
     OwnOrdersComponent,
     OwnBoughtOrdersComponent,
-    OwnSoldOrdersComponent
+    OwnSoldOrdersComponent,
+    CategoryListComponent
   ],
   imports: [
     MatDialogModule,
@@ -261,6 +273,7 @@ declarations: [
     LocationService,
     OrderService,
     RegistrationConfirmComponent,
+    CategoryService,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     AuthGuard,
     AuthUtilService,

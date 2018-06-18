@@ -7,7 +7,9 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper;
 
 import java.util.List;
 import org.mapstruct.DecoratedWith;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
@@ -17,6 +19,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicCategoryDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductOwnerDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicUnitDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 
 /**
  *
@@ -29,7 +32,11 @@ public interface ProductMapper {
     
     List<BasicProductDto> productsToDTO(List<Product> products);
     
+    EditProductDto fullProductToDto(Product product);
     BasicProductOwnerDto ownerToBasicOwnerDTO(Account account);
     BasicCategoryDto categoryToBasicCategoryDTO(Category category);
     BasicUnitDto unitToBasicUnitDto(Unit unit);
+    
+    @InheritInverseConfiguration
+    Product fullProductToEntity(EditProductDto fullProductDto, @MappingTarget Product product);
 }

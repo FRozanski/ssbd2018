@@ -26,11 +26,13 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.NewProductMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -62,6 +64,14 @@ public class ProductManager implements ProductManagerLocal{
     @RolesAllowed("getMyProducts")
     public List<Product> getMyProducts(String login) throws AppBaseException {
         return productFacade.findByOwnerLogin(login);
+    }
+    
+    @Override
+    @RolesAllowed("getProductByIdAndLogin")
+    public Product getProductByIdAndLogin(String login, Long id) throws AppBaseException {
+        Product product = productFacade.find(id);
+        checkIfUserIsOwner(login, product);
+        return product;
     }
     
     @Override
@@ -107,6 +117,15 @@ public class ProductManager implements ProductManagerLocal{
         Product product = productFacade.find(productId);
         checkIfUserIsOwner(login, product);
         product.setActive(false);
+        productFacade.edit(product);
+    }
+    
+    @Override
+    @RolesAllowed("editProduct")
+    public void editProduct(EditProductDto editProductDto, String login) throws AppBaseException {
+        Product product = productFacade.find(editProductDto.getId());
+        checkIfUserIsOwner(login, product);
+        ProductMapper.INSTANCE.fullProductToEntity(editProductDto, product);
         productFacade.edit(product);
     }
 

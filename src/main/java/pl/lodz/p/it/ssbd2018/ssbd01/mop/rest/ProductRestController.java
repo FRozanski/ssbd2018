@@ -25,6 +25,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
@@ -80,6 +81,58 @@ public class ProductRestController {
             List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllActiveProducts());
             return Response.status(Response.Status.OK)
                     .entity(allProductsDto)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+    
+    /**
+     * Metoda REST API służąca do pobierania produktu do edycji
+     * @param productId         id produktu
+     * @param servletRequest    obiekt przechowujący informacje o żądaniu wysłanym przez klienta
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
+    @GET
+    @Path("productToEdit")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response productToEdit(@QueryParam("productId") long productId, @Context HttpServletRequest servletRequest) {
+        try {
+            String login = getUserLogin(servletRequest);
+            EditProductDto editProductDto = ProductMapper.INSTANCE.fullProductToDto(productManager.getProductByIdAndLogin(login, productId));
+            return Response.status(Response.Status.OK)
+                    .entity(editProductDto)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+    
+    /**
+     * Metoda REST API służąca do edycji produktu przez użytkownika
+     * @param editProductDto    obiekt DTO (produkt)
+     * @param servletRequest    obiekt przechowujący informacje o żądaniu wysłanym przez klienta
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
+    @PUT
+    @Path("editProduct")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response editProduct(EditProductDto editProductDto, @Context HttpServletRequest servletRequest) {
+        try {
+            String login = getUserLogin(servletRequest);
+            productManager.editProduct(editProductDto, login);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         } catch (AppBaseException ex) {

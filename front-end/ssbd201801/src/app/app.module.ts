@@ -51,17 +51,19 @@ import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptc
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
 import {ProductListComponent} from './mop/product-list/product-list.component';
 import {ProductService} from './mop/common/product.service';
-import {MyProductListComponent} from './mop/my-product-list/my-product-list.component';
-import {GenericOrderListComponent} from './moz/generic-order-list/generic-order-list.component';
-import {AllOrdersListComponent} from './moz/all-orders-list/all-orders-list.component';
-import {OrderService} from './moz/common/order.service';
-import {OwnOrdersComponent} from './moz/own-orders/own-orders.component';
-import {OwnBoughtOrdersComponent} from './moz/own-orders/own-bought-orders/own-bought-orders.component';
-import {OwnSoldOrdersComponent} from './moz/own-orders/own-sold-orders/own-sold-orders.component';
 import {AddProductComponent} from './mop/add-product/add-product.component';
-import {CategoryListComponent} from './mop/category-list/category-list.component';
-import {CategoryService} from './mop/common/category.service';
 import {UnitService} from './mop/common/unit.service';
+import { MyProductListComponent } from './mop/my-product-list/my-product-list.component';
+import { GenericOrderListComponent } from './moz/generic-order-list/generic-order-list.component';
+import { AllOrdersListComponent } from './moz/all-orders-list/all-orders-list.component';
+import { OrderService } from './moz/common/order.service';
+import { OwnOrdersComponent } from './moz/own-orders/own-orders.component';
+import { OwnBoughtOrdersComponent } from './moz/own-orders/own-bought-orders/own-bought-orders.component';
+import { OwnSoldOrdersComponent } from './moz/own-orders/own-sold-orders/own-sold-orders.component';
+import { CategoryListComponent } from './mop/category-list/category-list.component';
+import { CategoryService } from './mop/common/category.service';
+import { ShippingMethodsListComponent } from './moz/shipping-methods-list/shipping-methods-list.component';
+import {ShippingMethodService} from './moz/common/shipping-method.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -207,6 +209,13 @@ const appRoutes: Routes = [
       }
   },
   {
+    path: 'shippingMethods',
+    component: ShippingMethodsListComponent,
+    data: {
+      expectedRoles: [Properties.ManagerRole]
+    }
+  },
+  {
     path: 'error',
     component: ErrorsComponent
   },
@@ -247,7 +256,8 @@ const appRoutes: Routes = [
     OwnBoughtOrdersComponent,
     OwnSoldOrdersComponent,
     AddProductComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    ShippingMethodsListComponent
   ],
   imports: [
     MatDialogModule,
@@ -285,6 +295,7 @@ const appRoutes: Routes = [
     UnitService,
     LocationService,
     OrderService,
+    ShippingMethodService,
     RegistrationConfirmComponent,
     CategoryService,
     {provide: LocationStrategy, useClass: HashLocationStrategy},

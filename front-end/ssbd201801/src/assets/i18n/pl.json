@@ -22,7 +22,8 @@
     "MY_ORDERS": "Moje zamówienia",
     "ALL_ORDERS": "Wszystkie zamówienia",
     "ALL_CATEGORIES": "Wszystkie kategorie",
-    "ADD_PRODUCT": "Dodaj produkt"
+    "ADD_PRODUCT": "Dodaj produkt",
+    "SHIPPING_METHODS": "Metody wysyłki"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -73,6 +74,11 @@
     "OPEN": "Otwarte",
     "SHIPPING_METHOD": "Sposób dostawy"
 
+  },
+  "SHIPPING_METHOD": {
+    "NAME" : "Nazwa",
+    "PRICE" : "Koszt",
+    "ACTIVE" : "Aktywna"
   },
   "PRODUCT": {
     "ADD": "Dodaj produkt",
@@ -166,7 +172,8 @@
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
     "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
-    "ADD_PRODUCT": "Dodaj produkt"
+    "ADD_PRODUCT": "Dodaj produkt",
+    "SHIPPING_METHODS": "Lista metod wysyłki"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {Order} from '../model/order';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {ShippingMethod} from '../model/shipping-method';
 
 @Injectable()
 export class ShippingMethodService {
@@ -11,8 +11,8 @@ export class ShippingMethodService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllShippingMethods(): Observable<Order[]> {
-    return this.httpClient.get<Order[]>(this.uri);
+  getAllShippingMethods(): Observable<ShippingMethod[]> {
+    return this.httpClient.get<ShippingMethod[]>(this.uri);
   }
 
 }

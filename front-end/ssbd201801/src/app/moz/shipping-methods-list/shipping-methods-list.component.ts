@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {LocationService} from '../../mok/common/location.service';
 import {ShippingMethodService} from '../common/shipping-method.service';
-import {AccountData} from '../../mok/model/account-data';
 import {TranslateService} from '@ngx-translate/core';
+import {ShippingMethod} from '../model/shipping-method';
 
 @Component({
   selector: 'app-shipping-methods-list',
@@ -25,7 +25,7 @@ export class ShippingMethodsListComponent implements OnInit {
   ngOnInit() {
     this.locationService.passRouter('LOCATION.SHIPPING_METHODS');
     this.shippingMethodService.getAllShippingMethods().subscribe((data) => {
-      this.dataSource = new MatTableDataSource<AccountData>(data);
+      this.dataSource = new MatTableDataSource<ShippingMethod>(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
 

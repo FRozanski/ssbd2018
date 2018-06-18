@@ -6,6 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -72,16 +73,14 @@ public class Product implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "[0-9]{1,6}+(\\.[0-9][0-9]?)?", message = PRODUCT_PRICE_ERROR)  
     @Digits(integer = 6, fraction = 2, message = PRODUCT_PRICE_ERROR)   
     @Column(name = "price")
-    private String price;
+    private BigDecimal price;
     @Basic(optional = false)
     @NotNull
-    @Pattern(regexp = "[0-9]{1,6}+(\\.[0-9][0-9][0-9]?)?", message = PRODUCT_QTY_ERROR)  
     @Digits(integer = 6, fraction = 3, message = PRODUCT_QTY_ERROR)  
     @Column(name = "qty")
-    private String qty;
+    private BigDecimal qty;
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
@@ -104,7 +103,7 @@ public class Product implements Serializable {
     public Product(){        
     }
 
-    public Product(String name, String description, String price, String qty, boolean active, long version) {        
+    public Product(String name, String description, BigDecimal price, BigDecimal qty, boolean active, long version) {        
         this.name = name;
         this.description = description;
         this.price = price;
@@ -133,19 +132,19 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public String getQty() {
+    public BigDecimal getQty() {
         return qty;
     }
 
-    public void setQty(String qty) {
+    public void setQty(BigDecimal qty) {
         this.qty = qty;
     }
 

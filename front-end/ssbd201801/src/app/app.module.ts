@@ -59,6 +59,8 @@ import { OwnBoughtOrdersComponent } from './moz/own-orders/own-bought-orders/own
 import { OwnSoldOrdersComponent } from './moz/own-orders/own-sold-orders/own-sold-orders.component';
 import { CategoryListComponent } from './mop/category-list/category-list.component';
 import { CategoryService } from './mop/common/category.service';
+import { ShippingMethodsListComponent } from './moz/shipping-methods-list/shipping-methods-list.component';
+import {ShippingMethodService} from './moz/common/shipping-method.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -190,10 +192,17 @@ const appRoutes: Routes = [
     path: 'categories',
     component: CategoryListComponent,
     data:
-    {
-      expectedRoles: [Properties.ManagerRole]
-    },
+      {
+        expectedRoles: [Properties.ManagerRole]
+      },
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'shippingMethods',
+    component: ShippingMethodsListComponent,
+    data: {
+      expectedRoles: [Properties.ManagerRole]
+    }
   },
   {
     path: 'error',
@@ -235,7 +244,8 @@ declarations: [
     OwnOrdersComponent,
     OwnBoughtOrdersComponent,
     OwnSoldOrdersComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    ShippingMethodsListComponent
   ],
   imports: [
     MatDialogModule,
@@ -272,6 +282,7 @@ declarations: [
     SessionService,
     LocationService,
     OrderService,
+    ShippingMethodService,
     RegistrationConfirmComponent,
     CategoryService,
     {provide: LocationStrategy, useClass: HashLocationStrategy},

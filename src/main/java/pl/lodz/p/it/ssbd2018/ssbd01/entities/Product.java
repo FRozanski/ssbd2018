@@ -6,7 +6,6 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +27,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_DESCRIPTION_LENGTH_ERROR;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_NAME_LENGTH_ERROR;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_NAME_PATTERN_ERROR;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_PRICE_PRECISION_ERROR;
-import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_QTY_PRECISION_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_PRICE_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_QTY_ERROR;
 
 /**
  *
@@ -73,14 +72,16 @@ public class Product implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
-    @Digits(integer = 6, fraction = 2, message = PRODUCT_PRICE_PRECISION_ERROR)   
+    @Pattern(regexp = "[0-9]{1,6}+(\\.[0-9][0-9]?)?", message = PRODUCT_PRICE_ERROR)  
+    @Digits(integer = 6, fraction = 2, message = PRODUCT_PRICE_ERROR)   
     @Column(name = "price")
-    private BigDecimal price;
+    private String price;
     @Basic(optional = false)
     @NotNull
-    @Digits(integer = 6, fraction = 3, message = PRODUCT_QTY_PRECISION_ERROR)  
+    @Pattern(regexp = "[0-9]{1,6}+(\\.[0-9][0-9][0-9]?)?", message = PRODUCT_QTY_ERROR)  
+    @Digits(integer = 6, fraction = 3, message = PRODUCT_QTY_ERROR)  
     @Column(name = "qty")
-    private BigDecimal qty;
+    private String qty;
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
@@ -103,7 +104,7 @@ public class Product implements Serializable {
     public Product(){        
     }
 
-    public Product(String name, String description, BigDecimal price, BigDecimal qty, boolean active, long version) {        
+    public Product(String name, String description, String price, String qty, boolean active, long version) {        
         this.name = name;
         this.description = description;
         this.price = price;
@@ -132,19 +133,19 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public BigDecimal getQty() {
+    public String getQty() {
         return qty;
     }
 
-    public void setQty(BigDecimal qty) {
+    public void setQty(String qty) {
         this.qty = qty;
     }
 

@@ -1,9 +1,8 @@
 export interface NewProductData {
   name?: string;
   description?: string;
-  price?: number;
-  qty?: number;
-  active?: boolean;
+  price?: string;
+  qty?: string;
   unitId?: number;
   categoryId?: number;
 }

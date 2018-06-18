@@ -103,6 +103,7 @@
     "ACCOUNT_UNLOCK": "Account has been successfully unlocked",
     "CHANGE_PASSWORD": "Password changed successfully",
     "REGISTER": "Account has been successfully registered",
+    "ADD_PRODUCT": "Product successfully added",
     "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully"
   },
   "LOCATION": {

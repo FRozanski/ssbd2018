@@ -134,6 +134,7 @@
     "ACCOUNT_UNLOCK": "Pomyślnie odblokowano konto",
     "CHANGE_PASSWORD": "Pomyślnie zmieniono hasło",
     "REGISTER": "Pomyślnie zarejestrowano konto",
+    "ADD_PRODUCT": "Pomyślnie dodano produkt",
     "ALTER_ACCOUNT_ACCESS_LEVEL": "Pomyślnie zmieniono poziomy dostępu konta",
     "LOGOUT": "Pomyślnie wylogowano!",
     "MASSIVE_UPDATE": "Pomyślnie aktualizowano {{ value }} kont!",

@@ -5,8 +5,6 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 
-import java.math.BigDecimal;
-
 /**
  * Klasa na potrzeby tworzenia obiektów DTO, dedykowana nowym produktom
  * @author agkan
@@ -15,8 +13,8 @@ public class NewProductDto {
     
     private String name;
     private String description;
-    private BigDecimal price;
-    private BigDecimal qty;
+    private String price;
+    private String qty;
     private Long categoryId;
     private Long unitId;
 
@@ -37,22 +35,6 @@ public class NewProductDto {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getQty() {
-        return qty;
-    }
-
-    public void setQty(BigDecimal qty) {
-        this.qty = qty;
-    }
-
     public Long getCategoryId() {
         return categoryId;
     }
@@ -68,4 +50,21 @@ public class NewProductDto {
     public void setUnitId(Long unitId) {
         this.unitId = unitId;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
+    }  
+    
 }

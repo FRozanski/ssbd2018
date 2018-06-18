@@ -45,12 +45,10 @@ export class AddProductComponent implements OnInit {
 
     this.categoryService.getAllCategories().subscribe((categories) => {
       this.categories = categories.map(c => Object.assign({}, c));
-      console.log('categories[0] = ' + categories[0].categoryName);
     });
 
     this.unitService.getAllUnits().subscribe((units) => {
       this.units = units.map(u => Object.assign({}, u));
-      console.log('units[0] = ' + units[0].unitName);
     });
   }
 
@@ -89,21 +87,25 @@ export class AddProductComponent implements OnInit {
 
   sendForm() {
     this.wasFormSent = true;
+    const product: NewProductData = {};
 
     if (this.form.valid) {
-      // const product: NewProductData = <NewProductData>this.form.value;
-      const product: NewProductData = {};
       product.name = this.form.value.name;
       product.description = this.form.value.description;
       product.price = this.form.value.price;
       product.qty = this.form.value.qty;
-      product.active = this.form.value.active;
       product.categoryId = this.selectedCategoryId;
       product.unitId = this.selectedUnitId;
       this.productService.addProduct(product).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.REGISTER'));
+        alert(this.translateService.instant('SUCCESS.ADD_PRODUCT'));
         this.router.navigate(['/main']);
       }, (errorResponse) => {
+        console.log(product.name);
+        console.log(product.description);
+        console.log(product.price);
+        console.log(product.qty);
+        console.log(product.categoryId);
+        console.log(product.unitId);
         this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
       });
     }

@@ -1,11 +1,11 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppComponent} from './app.component';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
-import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from './main-page/main-page.component';
+import {RouterModule, Routes} from '@angular/router';
+import {MainPageComponent} from './main-page/main-page.component';
 import {
   MatTableModule,
   MatCheckboxModule,
@@ -17,39 +17,42 @@ import {
   MatPaginatorModule,
   MatPaginatorIntl,
   MatDialogModule,
-  MatSelectModule} from '@angular/material';
+  MatSelectModule
+} from '@angular/material';
 import {ErrorHandlerService} from './shared/common/error-handler.service';
 import {RequestInterceptorService} from './shared/common/request-interceptor.service';
-import { ErrorsComponent } from './shared/errors/errors.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { ConfirmDialogComponent } from './shared/confirm-dialog/confirm-dialog.component';
-import { AccountListComponent } from './mok/account-list/account-list.component';
-import { AccountService } from './mok/common/account.service';
-import { RegisterComponent } from './mok/register/register.component';
-import { BaseAccountFormComponent } from './mok/account-forms/_base-account-edit/base-account-form.component';
-import { SidenavComponent } from './shared/sidenav/sidenav.component';
-import { AuthGuard } from './mok/common/auth-guard';
-import { AccountStatisticsComponent } from './mok/account-statistics/account-statistics.component';
-import { AccountEditComponent } from './mok/account-forms/account-edit/account-edit.component';
-import { ChangePasswordComponent } from './mok/change-password/change-password.component';
-import { ChangeOthersPasswordComponent } from './mok/change-others-password/change-others-password.component';
-import { RegistrationConfirmComponent } from './mok/registration-confirm/registration-confirm.component';
-import { OwnAccountEditComponent } from './mok/account-forms/own-account-edit/own-account-edit.component';
-import { LoginComponent } from './mok/login/login.component';
-import { NotificationsComponent } from './shared/notifications/notifications.component';
-import { SessionService } from './mok/common/session.service';
-import { LocationService } from './mok/common/location.service';
-import { AuthUtilService } from './mok/common/auth-util.service';
-import { AuthService } from './mok/common/auth.service';
-import { NotificationService } from './mok/common/notification.service';
-import { MatPaginatorIntlPl } from './mok/common/mat-table-utils/mat-paginator-intl-pl';
-import { Properties } from './shared/constsants';
+import {ErrorsComponent} from './shared/errors/errors.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {ConfirmDialogComponent} from './shared/confirm-dialog/confirm-dialog.component';
+import {AccountListComponent} from './mok/account-list/account-list.component';
+import {AccountService} from './mok/common/account.service';
+import {RegisterComponent} from './mok/register/register.component';
+import {BaseAccountFormComponent} from './mok/account-forms/_base-account-edit/base-account-form.component';
+import {SidenavComponent} from './shared/sidenav/sidenav.component';
+import {AuthGuard} from './mok/common/auth-guard';
+import {AccountStatisticsComponent} from './mok/account-statistics/account-statistics.component';
+import {AccountEditComponent} from './mok/account-forms/account-edit/account-edit.component';
+import {ChangePasswordComponent} from './mok/change-password/change-password.component';
+import {ChangeOthersPasswordComponent} from './mok/change-others-password/change-others-password.component';
+import {RegistrationConfirmComponent} from './mok/registration-confirm/registration-confirm.component';
+import {OwnAccountEditComponent} from './mok/account-forms/own-account-edit/own-account-edit.component';
+import {LoginComponent} from './mok/login/login.component';
+import {NotificationsComponent} from './shared/notifications/notifications.component';
+import {SessionService} from './mok/common/session.service';
+import {LocationService} from './mok/common/location.service';
+import {AuthUtilService} from './mok/common/auth-util.service';
+import {AuthService} from './mok/common/auth.service';
+import {NotificationService} from './mok/common/notification.service';
+import {MatPaginatorIntlPl} from './mok/common/mat-table-utils/mat-paginator-intl-pl';
+import {Properties} from './shared/constsants';
 import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaSettings} from 'ng-recaptcha';
 import {RecaptchaFormsModule} from 'ng-recaptcha/forms';
-import { ProductListComponent } from './mop/product-list/product-list.component';
+import {ProductListComponent} from './mop/product-list/product-list.component';
 import {ProductService} from './mop/common/product.service';
+import {AddProductComponent} from './mop/add-product/add-product.component';
+import {UnitService} from './mop/common/unit.service';
 import { MyProductListComponent } from './mop/my-product-list/my-product-list.component';
 import { GenericOrderListComponent } from './moz/generic-order-list/generic-order-list.component';
 import { AllOrdersListComponent } from './moz/all-orders-list/all-orders-list.component';
@@ -146,17 +149,17 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     component: AccountEditComponent,
     data:
-    {
-      expectedRoles: [Properties.AdminRole]
-    }
+      {
+        expectedRoles: [Properties.AdminRole]
+      }
   },
   {
     path: 'changeMyPassword',
     component: ChangePasswordComponent,
     data:
-    {
-      expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
-    }
+      {
+        expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
+      }
   },
   {
     path: 'changeOthersPassword',
@@ -174,18 +177,18 @@ const appRoutes: Routes = [
     path: 'myAccount',
     component: OwnAccountEditComponent,
     data:
-    {
-      expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
-    },
+      {
+        expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
+      },
     canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
     data:
-    {
-      expectedRoles: [Properties.GuestRole]
-    },
+      {
+        expectedRoles: [Properties.GuestRole]
+      },
     canActivate: [AuthGuard]
   },
   {
@@ -196,6 +199,14 @@ const appRoutes: Routes = [
         expectedRoles: [Properties.ManagerRole]
       },
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'addProduct',
+    component: AddProductComponent,
+    data:
+      {
+        expectedRoles: [Properties.UserRole]
+      }
   },
   {
     path: 'shippingMethods',
@@ -220,7 +231,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-declarations: [
+  declarations: [
     AppComponent,
     MainPageComponent,
     AccountListComponent,
@@ -244,6 +255,7 @@ declarations: [
     OwnOrdersComponent,
     OwnBoughtOrdersComponent,
     OwnSoldOrdersComponent,
+    AddProductComponent,
     CategoryListComponent,
     ShippingMethodsListComponent
   ],
@@ -280,6 +292,7 @@ declarations: [
     AccountService,
     ProductService,
     SessionService,
+    UnitService,
     LocationService,
     OrderService,
     ShippingMethodService,
@@ -302,4 +315,5 @@ declarations: [
   ],
   entryComponents: [ConfirmDialogComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

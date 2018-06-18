@@ -159,6 +159,21 @@
         </user-data-constraint>
     </security-constraint>
     <security-constraint>
+        <display-name>getAllUnits</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllCategories</web-resource-name>            
+            <url-pattern>/webresources/unit/</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
         <display-name>getMyProducts</display-name>
         <web-resource-collection>
             <web-resource-name>getMyProducts</web-resource-name>            
@@ -184,6 +199,21 @@
             <role-name>USER</role-name>
             <role-name>MANAGER</role-name>
             <role-name>ADMIN</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>addProduct</display-name>
+        <web-resource-collection>
+            <web-resource-name>addProduct</web-resource-name>            
+            <url-pattern>/webresources/product/addProduct</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>

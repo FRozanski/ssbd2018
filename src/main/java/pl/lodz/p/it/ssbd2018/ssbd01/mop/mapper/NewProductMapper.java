@@ -33,9 +33,7 @@ public interface NewProductMapper {
      */
     @Mappings({
         @Mapping(target = "unitId", ignore = true),
-        @Mapping(target = "categoryId", ignore = true),
-        @Mapping(target = "price", numberFormat = "#.##E0"),
-        @Mapping(target = "qty", numberFormat = "#.###E0")})
+        @Mapping(target = "categoryId", ignore = true)})
     NewProductDto productToNewProductDto(Product product);
     
     /**
@@ -47,9 +45,7 @@ public interface NewProductMapper {
     @InheritInverseConfiguration(name = "productToNewProductDto")
     @Mappings({
         @Mapping(target = "unitId", ignore = true),
-        @Mapping(target = "categoryId", ignore = true),
-        @Mapping(target = "price", numberFormat = "#.##E0"),
-        @Mapping(target = "qty", numberFormat = "#.###E0")
+        @Mapping(target = "categoryId", ignore = true)
         })        
     Product newProductDtoToProduct(NewProductDto newProduct, @MappingTarget Product product);
 }

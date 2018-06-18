@@ -24,7 +24,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;

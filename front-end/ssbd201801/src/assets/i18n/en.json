@@ -19,7 +19,8 @@
     "ACTIVATE_ACCOUNT" : "Activate account",
     "PRODUCTS" : "Products",
     "MY_PRODUCTS" : "My products",
-    "SHIPPING_METHODS": "Shipping methods"
+    "SHIPPING_METHODS": "Shipping methods",
+    "ADD_SHIPPING_METHOD": "Add shipping method"
   },
   "ACCOUNT": {
     "CITY": "CITY",
@@ -121,6 +122,7 @@
     "SHIPPING_METHODS": "Shipping methods"
   },
   "SHIPPING_METHOD": {
+    "ADD_SHIPPING_METHOD":"Add shipping method",
     "NAME": "Name",
     "PRICE": "Cost",
     "ACTIVE": "Active"

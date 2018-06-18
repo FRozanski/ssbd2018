@@ -65,6 +65,10 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/addShippingMethod' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ADD_SHIPPING_METHOD" | translate }}</button>
+    </p>
+
+    <p>
       <button mat-button (click)='onLogoutClick()' *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(VirtualRole)'>{{ "SIDE_NAV.LOGOUT" | translate }}</button>
     </p>
   </mat-sidenav>

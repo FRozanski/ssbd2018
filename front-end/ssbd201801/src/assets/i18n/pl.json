@@ -22,7 +22,8 @@
     "MY_ORDERS": "Moje zamówienia",
     "ALL_ORDERS": "Wszystkie zamówienia",
     "ALL_CATEGORIES": "Wszystkie kategorie",
-    "SHIPPING_METHODS": "Metody wysyłki"
+    "SHIPPING_METHODS": "Metody wysyłki",
+    "ADD_SHIPPING_METHOD": "Dodaj metodę wysyłki"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -75,6 +76,7 @@
 
   },
   "SHIPPING_METHOD": {
+    "ADD_SHIPPING_METHOD":"Dodaj metodę wysyłki",
     "NAME" : "Nazwa",
     "PRICE" : "Koszt",
     "ACTIVE" : "Aktywna"

@@ -27,4 +27,6 @@ public interface ShippingMethodManagerLocal {
     void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException;
     
     void setShippingMethodActive(ShippingMethod shippingMethod, boolean active);
+
+    void activateShippingMethod(long shippingMethodId) throws AppBaseException;
 }

@@ -44,5 +44,13 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
     public void setShippingMethodActive(ShippingMethod shippingMethod, boolean active) {
         throw new NotImplementedException();
     }
+
+    @Override
+//    @RolesAllowed("activateShippingMethod")
+    public void activateShippingMethod(long shippingMethodId) throws AppBaseException {
+        ShippingMethod shippingMethod = shippingFacade.find(shippingMethodId);
+        shippingMethod.setActive(true);
+        shippingFacade.edit(shippingMethod);
+    }
     
 }

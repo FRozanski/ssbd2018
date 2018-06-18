@@ -10,6 +10,8 @@ import {UnitData} from '../model/unit-data';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {NewProductData} from '../model/new-product-data';
+import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
+import {MatDialog, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-add-product',
@@ -29,13 +31,16 @@ export class AddProductComponent implements OnInit {
   selectedCategoryId: number;
   selectedUnitId: number;
 
+  dialogRef: MatDialogRef<ConfirmDialogComponent>;
+
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
               private unitService: UnitService,
               private locationService: LocationService,
               private location: Location,
               private router: Router,
-              private translateService: TranslateService) {
+              private translateService: TranslateService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -90,17 +95,27 @@ export class AddProductComponent implements OnInit {
     const product: NewProductData = {};
 
     if (this.form.valid) {
-      product.name = this.form.value.name;
-      product.description = this.form.value.description;
-      product.price = this.form.value.price;
-      product.qty = this.form.value.qty;
-      product.categoryId = this.selectedCategoryId;
-      product.unitId = this.selectedUnitId;
-      this.productService.addProduct(product).subscribe(() => {
-        alert(this.translateService.instant('SUCCESS.ADD_PRODUCT'));
-        this.router.navigate(['/main']);
-      }, (errorResponse) => {
-        this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+
+      this.dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        disableClose: false
+      });
+
+      this.dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          product.name = this.form.value.name;
+          product.description = this.form.value.description;
+          product.price = this.form.value.price;
+          product.qty = this.form.value.qty;
+          product.categoryId = this.selectedCategoryId;
+          product.unitId = this.selectedUnitId;
+          this.productService.addProduct(product).subscribe(() => {
+            alert(this.translateService.instant('SUCCESS.ADD_PRODUCT'));
+            this.router.navigate(['/main']);
+          }, (errorResponse) => {
+            this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+          });
+        }
+        this.dialogRef = null;
       });
     }
   }

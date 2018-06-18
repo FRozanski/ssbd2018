@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -23,7 +24,9 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductPriceException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
@@ -89,6 +92,7 @@ public class ProductManager implements ProductManagerLocal{
     @Override
     @RolesAllowed("addProductByAccountLogin")
     public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
+        this.validatePriceAndQtyOfNewProduct(newProduct);
         Product product = new Product();
         NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
         Category category = categoryManager.getCategoryById(newProduct.getCategoryId());
@@ -198,5 +202,18 @@ public class ProductManager implements ProductManagerLocal{
     @RolesAllowed("getAllUnits")
     public List<Unit> getAllUnits() {
         return unitFacade.findAll();
+    }
+
+    private void validatePriceAndQtyOfNewProduct(NewProductDto newProduct) throws AppBaseException{
+        try {
+            BigDecimal price = new BigDecimal(newProduct.getPrice());
+        } catch(NumberFormatException e) {
+            throw new ProductPriceException("product_price_exception");
+        }
+        try {
+            BigDecimal qty = new BigDecimal(newProduct.getQty());
+        } catch(NumberFormatException e) {
+            throw new ProductQtyException("product_qty_exception");
+        }
     }
 }

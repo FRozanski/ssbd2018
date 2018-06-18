@@ -22,6 +22,7 @@
     "MY_ORDERS": "Moje zamówienia",
     "ALL_ORDERS": "Wszystkie zamówienia",
     "ALL_CATEGORIES": "Wszystkie kategorie",
+    "ADD_PRODUCT": "Dodaj produkt",
     "SHIPPING_METHODS": "Metody wysyłki"
   },
   "ACCOUNT": {
@@ -80,6 +81,7 @@
     "ACTIVE" : "Aktywna"
   },
   "PRODUCT": {
+    "ADD": "Dodaj produkt",
     "NAME": "Nazwa",
     "DESCRIPTION": "Opis",
     "PRICE": "Cena",
@@ -132,6 +134,7 @@
     "ACCOUNT_UNLOCK": "Pomyślnie odblokowano konto",
     "CHANGE_PASSWORD": "Pomyślnie zmieniono hasło",
     "REGISTER": "Pomyślnie zarejestrowano konto",
+    "ADD_PRODUCT": "Pomyślnie dodano produkt",
     "ALTER_ACCOUNT_ACCESS_LEVEL": "Pomyślnie zmieniono poziomy dostępu konta",
     "LOGOUT": "Pomyślnie wylogowano!",
     "MASSIVE_UPDATE": "Pomyślnie aktualizowano {{ value }} kont!",
@@ -170,6 +173,7 @@
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
     "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
+    "ADD_PRODUCT": "Dodaj produkt",
     "SHIPPING_METHODS": "Lista metod wysyłki"
   },
   "DIALOG": {
@@ -202,6 +206,11 @@
   "flat_number_pattern_error": "Podany numer mieszkania ma nieodpowiedni format",
   "city_length_error": "Podana nazwa miasta ma nieodpowiednią długość",
   "country_length_error": "Podana nazwa kraju ma nieodpowiednią długość",
+  "product_name_pattern_error": "Podana nazwa ma nieodpowiedni format",
+  "product_name_length_error": "Podana nazwa ma nieodpowiednią długość",
+  "product_description_length_error": "Podany opis ma nieodpowiednią długość",
+  "product_price_error": "Podana cena ma nieodpowiedni format",
+  "product_qty_error": "Podana ilość ma nieodpowiedni format",
   "app.exception.web.login_error": "Błędny login lub hasło",
   "app.exception.user_unauthorized": "Użytkownik nie jest zalogowany",
   "app.exception.mok.account": "Nie udało się wykonać działania na koncie",
@@ -236,6 +245,10 @@
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
   "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
   "app.exception.mok.account.email_pattern_error": "Podany adres email jest niepoprawny",
+  "app.exception.mop.product.price_error": "Cena została podana w nieodpowiednim formacie",
+  "app.exception.mop.product.qty_error": "Ilość została podana w nieodpowiednim formacie",
+  "app.exception.mop.product.product_price_error": "Cena została podana w nieodpowiednim formacie, prawidłowy to: maksymalnie sześć cyfr w liczbie całkowitej i dwie w części dziesiętnej",
+  "app.exception.mop.product.product_qty_error": "Ilość została podana w nieodpowiednim formacie, prawidłowy to: maksymalnie sześć cyfr w liczbie całkowitej i trzy w części dziesiętnej",
   "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig",
   "app.pagination.itemsPerPageLabel": "Liczba elementów na stronie",
   "app.pagination.nextPageLabel": "Następna strona",

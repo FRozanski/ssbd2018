@@ -19,6 +19,7 @@
     "ACTIVATE_ACCOUNT" : "Activate account",
     "PRODUCTS" : "Products",
     "MY_PRODUCTS" : "My products",
+    "ADD_PRODUCT": "Add product",
     "SHIPPING_METHODS": "Shipping methods"
   },
   "ACCOUNT": {
@@ -44,6 +45,7 @@
     "CHANGE_OF_PASSWORD": "CHANGE_OF_PASSWORD"
   },
   "PRODUCT": {
+    "ADD": "Add product",
     "NAME": "Name",
     "DESCRIPTION": "Description",
     "PRICE": "Price",
@@ -101,6 +103,7 @@
     "ACCOUNT_UNLOCK": "Account has been successfully unlocked",
     "CHANGE_PASSWORD": "Password changed successfully",
     "REGISTER": "Account has been successfully registered",
+    "ADD_PRODUCT": "Product successfully added",
     "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully"
   },
   "LOCATION": {
@@ -118,6 +121,7 @@
     "REGISTRATION_CONFIRM": "Account activation",
     "PRODUCT_LIST_PAGE": "Product list page",
     "MY_PRODUCT_LIST_PAGE": "My product list page",
+    "ADD_PRODUCT": "Add product",
     "SHIPPING_METHODS": "Shipping methods"
   },
   "SHIPPING_METHOD": {
@@ -149,6 +153,11 @@
   "flat_number_pattern_error": "The apartment number given is in the wrong format",
   "city_length_error": "The city name given is not long enough",
   "country_length_error": "The given country name is not the right length",
+  "product_name_pattern_error": "The given name is not in the right format",
+  "product_name_length_error": "The name you entered has the wrong length",
+  "product_description_length_error": "The description provided is of unsuitable length",
+  "product_price_error": "The price is not in the right format",
+  "product_qty_error": "The specified quantity is not in the right format",
   "app.exception.mok.account.login_not_unique": "The specified login is not unique",
   "app.exception.mok.account.email_not_unique": "The email you entered is not unique",
   "app.exception.mok.account.phone_not_unique": "The phone number provided is not unique",
@@ -172,6 +181,10 @@
   "app.exception.mok.account_alevel.already_exists": "The account already has this level of access",
   "app.exception.mok.mail.not_sent": "An email has not been sent",
   "app.exception.mok.mail.wrong_address": "The email address provided is not valid",
+  "app.exception.mop.product.price_error": "End price in the wrong format",
+  "app.exception.mop.product.qty_error": "The amount of time in the wrong format",
+  "app.exception.mop.product.product_price_error": "The price has been given in the wrong format, the correct one is: maximum six digits in the whole number and two in the decimal part",
+  "app.exception.mop.product.product_qty_error": "The quantity has been given in the wrong format, the correct one is: maximum six digits in the whole number and three in the decimal part",
   "success": "The operation has been successfully completed.",
   "app.pagination.itemsPerPageLabel": "Number of elements per page",
   "app.pagination.nextPageLabel": "Next page",

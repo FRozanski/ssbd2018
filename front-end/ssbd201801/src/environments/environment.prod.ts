@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "/ssbd201801"
+  apiUrl: "/agata"
 };

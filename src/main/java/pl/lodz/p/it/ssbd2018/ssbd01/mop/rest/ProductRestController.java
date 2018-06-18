@@ -167,7 +167,7 @@ public class ProductRestController {
                     .entity(new WebErrorInfo("400", ex.getCode()))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
-        } 
+        }
     }
     
     /**

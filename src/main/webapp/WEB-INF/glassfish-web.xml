@@ -209,6 +209,22 @@
     <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>activateShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactivateShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>setShippingMethodActive</role-name>
     <group-name>manager</group-name>
   </security-role-mapping>

@@ -100,12 +100,6 @@ export class AddProductComponent implements OnInit {
         alert(this.translateService.instant('SUCCESS.ADD_PRODUCT'));
         this.router.navigate(['/main']);
       }, (errorResponse) => {
-        console.log(product.name);
-        console.log(product.description);
-        console.log(product.price);
-        console.log(product.qty);
-        console.log(product.categoryId);
-        console.log(product.unitId);
         this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
       });
     }

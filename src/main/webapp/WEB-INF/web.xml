@@ -191,6 +191,21 @@
         </user-data-constraint>
     </security-constraint>
     <security-constraint>
+        <display-name>addProduct</display-name>
+        <web-resource-collection>
+            <web-resource-name>addProduct</web-resource-name>            
+            <url-pattern>/webresources/product/addProduct</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
         <display-name>activeProduct</display-name>
         <web-resource-collection>
             <web-resource-name>activeProduct</web-resource-name>            

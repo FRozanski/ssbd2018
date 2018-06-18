@@ -32,4 +32,11 @@ public interface ShippingMethodManagerLocal {
      * @throws AppBaseException     główny wyjątek aplikacji
      */
     void activateShippingMethod(long shippingMethodId) throws AppBaseException;
+
+    /**
+     * Dezaktywowanie metody wysyłki
+     * @param shippingMethodId      identyfikator metody wysyłki w bazie danych
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
+    void deactivateShippingMethod(long shippingMethodId) throws AppBaseException;
 }

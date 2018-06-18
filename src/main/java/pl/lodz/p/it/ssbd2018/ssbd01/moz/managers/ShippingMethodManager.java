@@ -13,7 +13,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodWasActivated;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodWasDeactivated;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -49,9 +49,24 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
         shippingFacade.edit(shippingMethod);
     }
 
+    @Override
+    @RolesAllowed("deactivateShippingMethod")
+    public void deactivateShippingMethod(long shippingMethodId) throws AppBaseException {
+        ShippingMethod shippingMethod = shippingFacade.find(shippingMethodId);
+        this.checkIfShippingMethodDeactivated(shippingMethod);
+        shippingMethod.setActive(false);
+        shippingFacade.edit(shippingMethod);
+    }
+
     private void checkIfShippingMethodActivated(ShippingMethod shippingMethod) throws AppBaseException {
         if (shippingMethod.getActive() == true) {
-            throw new ShippingMethodWasActivated("shipping_method_was_activated_exception");
+            throw new ShippingMethodWasDeactivated("shipping_method_was_activated_exception");
+        }
+    }
+
+    private void checkIfShippingMethodDeactivated(ShippingMethod shippingMethod) throws AppBaseException {
+        if (shippingMethod.getActive() == false) {
+            throw new ShippingMethodWasDeactivated("shipping_method_was_deactivated_exception");
         }
     }
     

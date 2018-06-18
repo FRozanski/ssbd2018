@@ -104,6 +104,30 @@ public class ShippingRestController {
         }
     }
     
+    /**
+     * Metoda REST API służąca do aktywacji metody wysyłki
+     * @param shippingMethodId  identyfikator metody wysyłki w bazie danych
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
+    @PUT
+    @Path("deactivate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deactivateShippingMethod(@QueryParam("methodId") long shippingMethodId) {
+        try {
+            shippingManager.deactivateShippingMethod(shippingMethodId);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+    
     private static void validateConstraints(ShippingMethod shippingMethod) throws AppBaseException {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();

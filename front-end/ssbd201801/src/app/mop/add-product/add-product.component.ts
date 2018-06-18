@@ -5,13 +5,11 @@ import {UnitService} from '../common/unit.service';
 import {LocationService} from '../../mok/common/location.service';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {Location} from '@angular/common';
-import {ErrorStateMatcher} from '@angular/material';
 import {CategoryData} from '../model/category-data';
 import {UnitData} from '../model/unit-data';
 import {Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {AccountData} from '../../mok/model/account-data';
-import {ProductData} from '../model/product-data';
+import {NewProductData} from '../model/new-product-data';
 
 @Component({
   selector: 'app-add-product',
@@ -93,15 +91,15 @@ export class AddProductComponent implements OnInit {
     this.wasFormSent = true;
 
     if (this.form.valid) {
-      const product: ProductData = <ProductData>this.form.value;
+      // const product: NewProductData = <NewProductData>this.form.value;
+      const product: NewProductData = {};
+      product.name = this.form.value.name;
+      product.description = this.form.value.description;
+      product.price = this.form.value.price;
+      product.qty = this.form.value.qty;
+      product.active = this.form.value.active;
       product.categoryId = this.selectedCategoryId;
       product.unitId = this.selectedUnitId;
-      console.log(product.unitId);
-      console.log(product.description);
-      console.log(product.name);
-      console.log(product.price);
-      console.log(product.qty);
-      console.log(product.categoryId);
       this.productService.addProduct(product).subscribe(() => {
         alert(this.translateService.instant('SUCCESS.REGISTER'));
         this.router.navigate(['/main']);

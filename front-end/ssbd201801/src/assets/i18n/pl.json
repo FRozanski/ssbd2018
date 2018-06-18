@@ -145,7 +145,8 @@
     "UNLOCKED": "Odblokowano konto",
     "FAILED_TO_UNLOCK": "Nie udało się odblokować konta",
     "CONFIRMED": "Udało się zatwierdzić konto",
-    "FAILED_TO_CONFIRM": "Nie udało się zatwierdzić konta"
+    "FAILED_TO_CONFIRM": "Nie udało się zatwierdzić konta",
+    "ADD_SHIPPING_METHOD": "Pomyślnie dodano metodę wysyłki"
   },
   "ERROR": {
     "ERROR": "Błąd",
@@ -172,7 +173,8 @@
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
     "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
-    "SHIPPING_METHODS": "Lista metod wysyłki"
+    "SHIPPING_METHODS": "Lista metod wysyłki",
+    "ADD_SHIPPING_METHOD_PAGE": "Dodaj metodę wysyłki"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

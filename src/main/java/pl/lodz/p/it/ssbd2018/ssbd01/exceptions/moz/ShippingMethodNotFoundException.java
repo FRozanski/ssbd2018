@@ -6,7 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
 /**
- *
+ * Klasa wyjątku sygnalizująca nie znalezienie żądanej metody wysyłki
  * @author agkan
  */
 public class ShippingMethodNotFoundException extends ShippingMethodException{

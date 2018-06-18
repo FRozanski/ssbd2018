@@ -26,5 +26,10 @@ public interface ShippingMethodManagerLocal {
      */
     void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException;
 
+    /**
+     * Aktywowanie metody wysyłki
+     * @param shippingMethodId      identyfikator metody wysyłki w bazie danych
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
     void activateShippingMethod(long shippingMethodId) throws AppBaseException;
 }

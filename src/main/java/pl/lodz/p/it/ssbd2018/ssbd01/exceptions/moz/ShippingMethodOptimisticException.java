@@ -6,7 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
 /**
- *
+ * Klasa wyjątku sygnalizująca wystąpienie blokady optymistycznej podczas próby edycji metody wysyłki
  * @author agkan
  */
 public class ShippingMethodOptimisticException extends ShippingMethodException {

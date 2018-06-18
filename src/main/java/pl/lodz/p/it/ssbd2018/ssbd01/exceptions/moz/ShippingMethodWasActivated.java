@@ -6,7 +6,7 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
 /**
- *
+ * Klasa wyjątku sygnalizująca, że wybrana metoda wysyłki nie wymaga aktywacji, bo jest już aktywna
  * @author agkan
  */
 public class ShippingMethodWasActivated extends ShippingMethodException {

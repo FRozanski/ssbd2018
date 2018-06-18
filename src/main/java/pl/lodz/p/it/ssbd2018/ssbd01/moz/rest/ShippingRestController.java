@@ -80,6 +80,11 @@ public class ShippingRestController {
         }
     }
     
+    /**
+     * Metoda REST API służąca do aktywacji metody wysyłki
+     * @param shippingMethodId  identyfikator metody wysyłki w bazie danych
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
     @PUT
     @Path("activate")
     @Consumes(MediaType.APPLICATION_JSON)

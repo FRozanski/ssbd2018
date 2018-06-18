@@ -26,7 +26,7 @@ public interface ProductManagerLocal {
      * Dodaje produkt przypisany do użytkownika o podanym loginie
      * @param newProduct            obiekt DTO (ang. Data Transfer Object) nowo tworzonego produktu
      * @param login                 login użytkownika dodającego nowy produkt
-     * @throws AppBaseException     głóqny wyjątek aplikacji
+     * @throws AppBaseException     główny wyjątek aplikacji
      */
     void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException;                                     
     

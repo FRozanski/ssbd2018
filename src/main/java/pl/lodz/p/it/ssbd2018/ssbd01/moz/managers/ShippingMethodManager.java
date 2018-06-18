@@ -41,7 +41,7 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
     }
 
     @Override
-//    @RolesAllowed("activateShippingMethod")
+    @RolesAllowed("activateShippingMethod")
     public void activateShippingMethod(long shippingMethodId) throws AppBaseException {
         ShippingMethod shippingMethod = shippingFacade.find(shippingMethodId);
         this.checkIfShippingMethodActivated(shippingMethod);

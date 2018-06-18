@@ -59,6 +59,7 @@ public class ShippingMethodFacade extends AbstractFacadeCreateUpdate<ShippingMet
     }
 
     @Override
+    @RolesAllowed("findShippingMethod")
     public ShippingMethod find(Object id) throws AppBaseException {
         ShippingMethod shippingMethod = super.find(id);
         if (shippingMethod == null) {
@@ -68,6 +69,7 @@ public class ShippingMethodFacade extends AbstractFacadeCreateUpdate<ShippingMet
     }
 
     @Override
+    @RolesAllowed("editShippingMethod")
     public void edit(ShippingMethod entity) throws AppBaseException {
         try {
             super.edit(entity);

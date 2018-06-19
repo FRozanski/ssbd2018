@@ -116,6 +116,14 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'shippingMethods',
+    canActivate: [AuthGuard],
+    component: ShippingMethodsListComponent,
+    data: {
+      expectedRoles: [Properties.ManagerRole]
+    }
+  },
+  {
     path: 'ownOrders',
     canActivate: [AuthGuard],
     component: OwnOrdersComponent,
@@ -198,7 +206,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'shippingMethods',
+    path: 'changedShippingMethods',
     component: ShippingMethodsListComponent,
     data: {
       expectedRoles: [Properties.ManagerRole]

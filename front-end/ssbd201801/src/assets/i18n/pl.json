@@ -143,7 +143,11 @@
     "UNLOCKED": "Odblokowano konto",
     "FAILED_TO_UNLOCK": "Nie udało się odblokować konta",
     "CONFIRMED": "Udało się zatwierdzić konto",
-    "FAILED_TO_CONFIRM": "Nie udało się zatwierdzić konta"
+    "FAILED_TO_CONFIRM": "Nie udało się zatwierdzić konta",
+    "METHOD_DEACTIVATED" : "Metoda wysyłki została pomyślnie deaktywowana",
+    "FAILED_TO_DEACTIVATE_METHOD" : "Nie udało się dezaktywować metody wysyłki",
+    "METHOD_ACTIVATED" : "Metoda wysyłki została pomyślnie aktywowana",
+    "FAILED_TO_ACTIVATE_METHOD" : "Nie udało się aktywować metody wysyłki"
   },
   "ERROR": {
     "ERROR": "Błąd",

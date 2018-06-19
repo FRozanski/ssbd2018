@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import {ProductData} from '../model/product-data';
 import {HttpClient} from '@angular/common/http';
+import {NewProductData} from '../model/new-product-data';
 
 @Injectable()
 export class ProductService {
@@ -23,4 +24,7 @@ export class ProductService {
     return this.httpClient.get<ProductData[]>(this.uri + '/activeProducts');
   }
 
+  addProduct(product: NewProductData): Observable<NewProductData> {
+    return this.httpClient.post<NewProductData>(this.uri + '/addProduct', product);
+  }
 }

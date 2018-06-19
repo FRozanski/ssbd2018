@@ -144,10 +144,10 @@
     "FAILED_TO_UNLOCK": "Nie udało się odblokować konta",
     "CONFIRMED": "Udało się zatwierdzić konto",
     "FAILED_TO_CONFIRM": "Nie udało się zatwierdzić konta",
-    "METHOD_DEACTIVATED" : "Metoda wysyłki została pomyślnie deaktywowana",
-    "FAILED_TO_DEACTIVATE_METHOD" : "Nie udało się dezaktywować metody wysyłki",
-    "METHOD_ACTIVATED" : "Metoda wysyłki została pomyślnie aktywowana",
-    "FAILED_TO_ACTIVATE_METHOD" : "Nie udało się aktywować metody wysyłki"
+    "METHOD_DEACTIVATED" : "Pomyślnie dezaktywowano metodę",
+    "FAILED_TO_DEACTIVATE_METHOD" : "Nie udało się dezaktywować metody",
+    "METHOD_ACTIVATED" : "Pomyślnie aktywowano metodę",
+    "FAILED_TO_ACTIVATE_METHOD" : "Nie udało się aktywować metody"
   },
   "ERROR": {
     "ERROR": "Błąd",
@@ -240,6 +240,11 @@
   "app.exception.mok.mail.not_sent": "Wiadomość email nie została wysłana",
   "app.exception.mok.mail.wrong_address": "Podany adres email jest niepoprawny",
   "app.exception.mok.account.email_pattern_error": "Podany adres email jest niepoprawny",
+  "app.exception.mop.product": "Nie udało się wykonać działania na produkcie",
+  "app.exception.mop.product.product_name_pattern_error": "Nazwa została podana w nieodpowiednim formacie",
+  "app.exception.mop.product.not_found": "Nie znaleziono produktu",
+  "app.exception.moz.shipping_method": "Nie udało się wykonać działania na metodzie wysyłki",
+  "app.exception.moz.shipping_method.optimistic_error": "Przy próbie edycji metody wysyłki nastąpiła blokada optymistyczna, spróbuj ponownie",
   "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig",
   "app.pagination.itemsPerPageLabel": "Liczba elementów na stronie",
   "app.pagination.nextPageLabel": "Następna strona",

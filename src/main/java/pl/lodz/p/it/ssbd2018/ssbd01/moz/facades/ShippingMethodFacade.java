@@ -74,7 +74,7 @@ public class ShippingMethodFacade extends AbstractFacadeCreateUpdate<ShippingMet
         try {
             super.edit(entity);
         } catch (OptimisticLockException oe) {
-            throw new ShippingMethodOptimisticException("account_optimistic_error");
+            throw new ShippingMethodOptimisticException("shipping_method_optimistic_error");
         } catch (ConstraintViolationException ex) {
             throw new ShippingMethodException("constraint_violation");
         }

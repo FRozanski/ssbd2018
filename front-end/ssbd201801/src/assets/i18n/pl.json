@@ -268,6 +268,7 @@
   "app.exception.mop.product.product_qty_error": "Ilość została podana w nieodpowiednim formacie, prawidłowy to: maksymalnie sześć cyfr w liczbie całkowitej i trzy w części dziesiętnej",
   "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig",
   "app.exception.moz.shipping_method.shipping_method_name_pattern_error": "Nazwa została podana w niewłaściwym formacie",
+  "app.exception.moz.shipping_method.price_format_error": "Cena powinna być podana w formacie liczbowym",
   "app.exception.moz.shipping_method.shipping_method_price_too_high_error": "Została ustawiona zbyt duża cena. Maksymalna to 999.99",
   "app.exception.moz.shipping_method.shipping_method_price_precision_error": "Cena została podana w nieodpowiednim formacie, prawidłowy to: maksymalnie trzy cyfry w liczbie całkowitej i dwie w części dziesiętnej",
   "app.exception.moz.shipping_method.name_not_unique": "Podana nazwa nie jest unikalna",

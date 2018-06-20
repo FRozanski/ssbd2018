@@ -6,14 +6,21 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.managers;
 
 import java.util.List;
+import java.util.Set;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link ShippingMethod}
@@ -35,6 +42,7 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
     @Override
     @RolesAllowed("addShippingMethod")
     public void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException{
+        validateConstraints(shippingMethod);
         shippingFacade.create(shippingMethod);
     }
 
@@ -52,6 +60,23 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
         ShippingMethod shippingMethod = shippingFacade.find(shippingMethodId);
         shippingMethod.setActive(false);
         shippingFacade.edit(shippingMethod);
+    }
+    
+    private static void validateConstraints(ShippingMethod shippingMethod) throws AppBaseException {
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<ShippingMethod>> constraintViolations = validator.validate(shippingMethod);
+        List<String> errors = new ErrorCodes().getAllErrors();
+
+        if (constraintViolations.size() > 0) {
+            for (int i = 0; i < errors.size(); i++) {
+                for (ConstraintViolation<ShippingMethod> temp : constraintViolations) {
+                    if (errors.get(i).equals(temp.getMessage())) {
+                        throw new ConstraintException("constraint_error", errors.get(i));
+                    }
+                }
+            }
+        }
     }
     
 }

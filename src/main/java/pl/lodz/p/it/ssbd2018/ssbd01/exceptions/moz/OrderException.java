@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz;
+package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
 /**
  *

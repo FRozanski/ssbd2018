@@ -193,6 +193,15 @@
   </security-role-mapping>
   <!--MOZ-->
   <security-role-mapping>
+    <role-name>getProductByIdAndLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  
+  <security-role-mapping>
     <role-name>makeOrder</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
@@ -351,6 +360,10 @@
   </security-role-mapping>
   <security-role-mapping>
     <role-name>createProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>

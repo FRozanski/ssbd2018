@@ -29,11 +29,14 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.NewProductMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -68,6 +71,14 @@ public class ProductManager implements ProductManagerLocal{
     }
     
     @Override
+    @RolesAllowed("getProductByIdAndLogin")
+    public Product getProductByIdAndLogin(String login, Long id) throws AppBaseException {
+        Product product = productFacade.find(id);
+        checkIfUserIsOwner(login, product);
+        return product;
+    }
+    
+    @Override
     @RolesAllowed("getAllProducts")
     public List<Product> getAllProducts() {
         return productFacade.findAll();
@@ -82,7 +93,7 @@ public class ProductManager implements ProductManagerLocal{
     @Override
     @RolesAllowed("addProductByAccountLogin")
     public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
-        this.validatePriceAndQtyOfNewProduct(newProduct);
+        this.validatePriceAndQtyOfProduct(newProduct);
         Product product = new Product();
         NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
         Category category = categoryManager.getCategoryById(newProduct.getCategoryId());
@@ -111,6 +122,17 @@ public class ProductManager implements ProductManagerLocal{
         Product product = productFacade.find(productId);
         checkIfUserIsOwner(login, product);
         product.setActive(false);
+        productFacade.edit(product);
+    }
+    
+    @Override
+    @RolesAllowed("editProduct")
+    public void editProduct(EditProductDto editProductDto, String login) throws AppBaseException {
+        Product product = productFacade.find(editProductDto.getId());
+        checkIfUserIsOwner(login, product);
+        this.validatePriceAndQtyOfProduct(editProductDto);
+        ProductMapper.INSTANCE.editableProductToEntity(editProductDto, product);
+        this.validateConstraints(product);
         productFacade.edit(product);
     }
 
@@ -185,14 +207,14 @@ public class ProductManager implements ProductManagerLocal{
         return unitFacade.findAll();
     }
 
-    private void validatePriceAndQtyOfNewProduct(NewProductDto newProduct) throws AppBaseException{
+    private void validatePriceAndQtyOfProduct(BasicProductDto product) throws AppBaseException{
         try {
-            BigDecimal price = new BigDecimal(newProduct.getPrice());
+            BigDecimal price = new BigDecimal(product.getPrice());
         } catch(NumberFormatException e) {
             throw new ProductPriceException("product_price_exception");
         }
         try {
-            BigDecimal qty = new BigDecimal(newProduct.getQty());
+            BigDecimal qty = new BigDecimal(product.getQty());
         } catch(NumberFormatException e) {
             throw new ProductQtyException("product_qty_exception");
         }

@@ -104,7 +104,7 @@ public class ProductRestController {
     public Response productToEdit(@QueryParam("productId") long productId, @Context HttpServletRequest servletRequest) {
         try {
             String login = getUserLogin(servletRequest);
-            EditProductDto editProductDto = ProductMapper.INSTANCE.fullProductToDto(productManager.getProductByIdAndLogin(login, productId));
+            EditProductDto editProductDto = ProductMapper.INSTANCE.editableProductToDto(productManager.getProductByIdAndLogin(login, productId));
             return Response.status(Response.Status.OK)
                     .entity(editProductDto)
                     .type(MediaType.APPLICATION_JSON)

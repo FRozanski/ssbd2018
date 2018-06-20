@@ -34,11 +34,10 @@ public abstract class ProductMapperDecorator implements ProductMapper {
     }
 
     @Override
-    public EditProductDto fullProductToDto(Product product) {
-        EditProductDto dto = delegate.fullProductToDto(product);
-        dto.setUnit(delegate.unitToBasicUnitDto(product.getUnitId()));
-        dto.setOwner(delegate.ownerToBasicOwnerDTO(product.getOwnerId()));
-        dto.setCategory(delegate.categoryToBasicCategoryDTO(product.getCategoryId()));
+    public EditProductDto editableProductToDto(Product product) {
+        EditProductDto dto = delegate.editableProductToDto(product);
+        dto.setUnitName(product.getUnitId().getUnitName());
+        dto.setCategoryName(product.getCategoryId().getCategoryName());
         return dto;
     }
 }

@@ -10,6 +10,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
@@ -19,6 +20,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
@@ -110,6 +112,18 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
         } catch (ConstraintViolationException ex) {
             throw new ProductException("constraint_violation");
         }        
+    }
+    
+    @Override
+    @RolesAllowed("editProduct")
+    public void edit(Product product) throws AppBaseException {
+        try {
+            super.edit(product);
+        } catch (OptimisticLockException oe) {
+            throw new ProductOptimisticException("product_optimistic_exception");
+        } catch (ConstraintViolationException ex) {
+            throw new ProductException("constraint_violation");
+        }
     }
     
     

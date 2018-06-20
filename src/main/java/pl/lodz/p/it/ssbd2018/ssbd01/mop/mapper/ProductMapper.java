@@ -32,11 +32,11 @@ public interface ProductMapper {
     
     List<BasicProductDto> productsToDTO(List<Product> products);
     
-    EditProductDto fullProductToDto(Product product);
+    EditProductDto editableProductToDto(Product product);
     BasicProductOwnerDto ownerToBasicOwnerDTO(Account account);
     BasicCategoryDto categoryToBasicCategoryDTO(Category category);
     BasicUnitDto unitToBasicUnitDto(Unit unit);
     
     @InheritInverseConfiguration
-    Product fullProductToEntity(EditProductDto fullProductDto, @MappingTarget Product product);
+    Product editableProductToEntity(EditProductDto fullProductDto, @MappingTarget Product product);
 }

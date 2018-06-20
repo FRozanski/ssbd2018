@@ -100,7 +100,6 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
         } catch (ConstraintViolationException ex) {
             throw new AccountException("constraint_violation");
         }
-
     }
 
     @Override

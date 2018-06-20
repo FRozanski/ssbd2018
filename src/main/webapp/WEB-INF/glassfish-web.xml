@@ -362,6 +362,10 @@
     <role-name>createProduct</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

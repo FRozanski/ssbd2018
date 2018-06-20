@@ -129,7 +129,8 @@ public class ProductManager implements ProductManagerLocal{
     public void editProduct(EditProductDto editProductDto, String login) throws AppBaseException {
         Product product = productFacade.find(editProductDto.getId());
         checkIfUserIsOwner(login, product);
-        ProductMapper.INSTANCE.fullProductToEntity(editProductDto, product);
+        ProductMapper.INSTANCE.editableProductToEntity(editProductDto, product);
+        this.validateConstraints(product);
         productFacade.edit(product);
     }
 

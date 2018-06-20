@@ -103,8 +103,12 @@
     "ACCOUNT_UNLOCK": "Account has been successfully unlocked",
     "CHANGE_PASSWORD": "Password changed successfully",
     "REGISTER": "Account has been successfully registered",
-    "ADD_PRODUCT": "Product successfully added",
-    "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully"
+    "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully",
+    "METHOD_DEACTIVATED": "Method has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_METHOD": "The method could not be deactivated",
+    "METHOD_ACTIVATED": "Method has been successfully activated",
+    "FAILED_TO_ACTIVATE_METHOD": "Failed to activate the method",
+    "ADD_PRODUCT": "Product successfully added"
   },
   "LOCATION": {
     "YOUR_LOCATION": "Your location",

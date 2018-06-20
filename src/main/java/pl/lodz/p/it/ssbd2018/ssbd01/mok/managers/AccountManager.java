@@ -44,7 +44,7 @@ public class AccountManager implements AccountManagerLocal {
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
     private static final String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
 
-    @EJB
+    @EJB(beanName = "AccountMOK")
     private AccountFacadeLocal accountFacade;
 
     @EJB

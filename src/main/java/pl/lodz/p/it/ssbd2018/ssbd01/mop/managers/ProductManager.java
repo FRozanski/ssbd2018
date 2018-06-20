@@ -52,13 +52,13 @@ public class ProductManager implements ProductManagerLocal{
     
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
     
-    @EJB
+    @EJB(beanName = "ProductMOP")
     ProductFacadeLocal productFacade;
     
     @EJB
     CategoryFacadeLocal categoryFace;
     
-    @EJB
+    @EJB(beanName = "UnitMOP")
     UnitFacadeLocal unitFacade;
     
     @EJB

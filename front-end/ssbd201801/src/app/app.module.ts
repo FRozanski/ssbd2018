@@ -64,6 +64,7 @@ import { CategoryListComponent } from './mop/category-list/category-list.compone
 import { CategoryService } from './mop/common/category.service';
 import { ShippingMethodsListComponent } from './moz/shipping-methods-list/shipping-methods-list.component';
 import {ShippingMethodService} from './moz/common/shipping-method.service';
+import { AddShippingMethodComponent } from './moz/add-shipping-method/add-shipping-method.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -224,6 +225,13 @@ const appRoutes: Routes = [
     }
   },
   {
+    path: 'addShippingMethod',
+    component: AddShippingMethodComponent,
+    data: {
+      expectedRoles: [Properties.ManagerRole]
+    }
+  },
+  {
     path: 'error',
     component: ErrorsComponent
   },
@@ -265,7 +273,8 @@ const appRoutes: Routes = [
     OwnSoldOrdersComponent,
     AddProductComponent,
     CategoryListComponent,
-    ShippingMethodsListComponent
+    ShippingMethodsListComponent,
+    AddShippingMethodComponent
   ],
   imports: [
     MatDialogModule,

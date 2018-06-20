@@ -22,6 +22,8 @@
     "MY_ORDERS": "Moje zamówienia",
     "ALL_ORDERS": "Wszystkie zamówienia",
     "ALL_CATEGORIES": "Wszystkie kategorie",
+    "SHIPPING_METHODS": "Metody wysyłki",
+    "ADD_SHIPPING_METHOD": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
     "SHIPPING_METHODS": "Metody wysyłki"
   },
@@ -76,6 +78,7 @@
 
   },
   "SHIPPING_METHOD": {
+    "ADD_SHIPPING_METHOD":"Dodaj metodę wysyłki",
     "NAME" : "Nazwa",
     "PRICE" : "Koszt",
     "ACTIVE" : "Aktywna"
@@ -150,7 +153,8 @@
     "METHOD_DEACTIVATED" : "Pomyślnie dezaktywowano metodę",
     "FAILED_TO_DEACTIVATE_METHOD" : "Nie udało się dezaktywować metody",
     "METHOD_ACTIVATED" : "Pomyślnie aktywowano metodę",
-    "FAILED_TO_ACTIVATE_METHOD" : "Nie udało się aktywować metody"
+    "FAILED_TO_ACTIVATE_METHOD" : "Nie udało się aktywować metody",
+    "ADD_SHIPPING_METHOD": "Pomyślnie dodano metodę wysyłki"
   },
   "ERROR": {
     "ERROR": "Błąd",
@@ -177,6 +181,8 @@
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
     "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
+    "SHIPPING_METHODS": "Lista metod wysyłki",
+    "ADD_SHIPPING_METHOD_PAGE": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
     "SHIPPING_METHODS": "Lista metod wysyłki"
   },

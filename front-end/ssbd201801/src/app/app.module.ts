@@ -229,7 +229,8 @@ const appRoutes: Routes = [
     component: AddShippingMethodComponent,
     data: {
       expectedRoles: [Properties.ManagerRole]
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'error',

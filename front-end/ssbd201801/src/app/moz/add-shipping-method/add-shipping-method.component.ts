@@ -8,6 +8,7 @@ import { ShippingMethodService } from '../common/shipping-method.service';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShippingMethod } from '../model/shipping-method';
+import { NotificationService } from '../../mok/common/notification.service';
 
 @Component({
   selector: 'app-add-shipping-method',
@@ -26,16 +27,18 @@ export class AddShippingMethodComponent implements OnInit {
 
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
-  constructor(private shippingMethodService: ShippingMethodService,
+  constructor(
+    private shippingMethodService: ShippingMethodService,
     private location: Location,
     public dialog: MatDialog,
     private locationService: LocationService,
     private router: Router,
-    private translateService: TranslateService) { }
+    private translateService: TranslateService,
+    private notificationService: NotificationService
+  ) { }
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.ADD_SHIPPING_METHOD_PAGE');
-
     this.initializeForm();
   }
 
@@ -53,8 +56,8 @@ export class AddShippingMethodComponent implements OnInit {
           this.shippingMethod = <ShippingMethod>this.form.value;
           this.shippingMethod.active = true;
           this.shippingMethodService.addShippingMethod(this.shippingMethod).subscribe(() => {
-            alert(this.translateService.instant('SUCCESS.ADD_SHIPPING_METHOD'));
-              this.router.navigate(['/main']);
+            this.notificationService.displayTranslatedNotification('SUCCESS.ADD_SHIPPING_METHOD');
+            this.router.navigate(['/main']);
           },
           (errorResponse) => {
             console.log(errorResponse.error.message);

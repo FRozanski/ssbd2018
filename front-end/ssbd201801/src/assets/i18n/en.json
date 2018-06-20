@@ -21,8 +21,7 @@
     "MY_PRODUCTS" : "My products",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD": "Add shipping method",
-    "ADD_PRODUCT": "Add product",
-    "SHIPPING_METHODS": "Shipping methods"
+    "ADD_PRODUCT": "Add product"
   },
   "ACCOUNT": {
     "CITY": "CITY",
@@ -130,8 +129,7 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
-    "ADD_PRODUCT": "Add product",
-    "SHIPPING_METHODS": "Shipping methods"
+    "ADD_PRODUCT": "Add product"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Add shipping method",
@@ -195,6 +193,11 @@
   "app.exception.mop.product.qty_error": "The amount of time in the wrong format",
   "app.exception.mop.product.product_price_error": "The price has been given in the wrong format, the correct one is: maximum six digits in the whole number and two in the decimal part",
   "app.exception.mop.product.product_qty_error": "The quantity has been given in the wrong format, the correct one is: maximum six digits in the whole number and three in the decimal part",
+  "app.exception.moz.shipping_method.shipping_method_name_pattern_error": "The name was given in the wrong format",
+  "app.exception.moz.shipping_method.price_format_error": "The price should be given in a numerical format",
+  "app.exception.moz.shipping_method.shipping_method_price_too_high_error": "The price was set too high. The maximum is 999.99",
+  "app.exception.moz.shipping_method.shipping_method_price_precision_error": "The price has been given in the wrong format, the correct one is: maximum three digits in the whole number and two in the decimal part",
+  "app.exception.moz.shipping_method.name_not_unique": "The name provided is not unique",
   "success": "The operation has been successfully completed.",
   "app.pagination.itemsPerPageLabel": "Number of elements per page",
   "app.pagination.nextPageLabel": "Next page",

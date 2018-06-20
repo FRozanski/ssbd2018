@@ -159,6 +159,22 @@
         </user-data-constraint>
     </security-constraint>
     <security-constraint>
+        <display-name>activateDeactivateCategory</display-name>
+        <web-resource-collection>
+            <web-resource-name>activateDeactivateCategory</web-resource-name>            
+            <url-pattern>/webresources/category/activateCategory</url-pattern>
+            <url-pattern>/webresources/category/deactivateCategory</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
         <display-name>getAllUnits</display-name>
         <web-resource-collection>
             <web-resource-name>getAllCategories</web-resource-name>            

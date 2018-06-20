@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class CategoryService {
 
-  private uri: string = environment.apiUrl + '/webresources/category'
+  private uri: string = environment.apiUrl + '/webresources/category';
 
   constructor(private httpClient: HttpClient) { }
 

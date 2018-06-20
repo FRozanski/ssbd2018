@@ -27,7 +27,7 @@ export class CategoryListComponent implements OnInit {
   ngOnInit() {
     this.categoryService.getAllCategories().subscribe((categories: CategoryData[]) => {
       this.dataSource.data = categories;
-    })
+    });
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

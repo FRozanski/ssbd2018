@@ -24,7 +24,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ListProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;
@@ -45,7 +45,7 @@ public class ProductRestController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllProducts() {
-        List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllProducts());
+        List<ListProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllProducts());
         return Response.status(Response.Status.OK)
                 .entity(allProductsDto)
                 .type(MediaType.APPLICATION_JSON)
@@ -59,7 +59,7 @@ public class ProductRestController {
     public Response getMyProducts(@Context HttpServletRequest servletRequest) {
         try {
             String login = getUserLogin(servletRequest);
-            List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getMyProducts(login));
+            List<ListProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getMyProducts(login));
             return Response.status(Response.Status.OK)
                     .entity(allProductsDto)
                     .type(MediaType.APPLICATION_JSON)
@@ -78,7 +78,7 @@ public class ProductRestController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllActiveProductWithActiveCategory() {
         try {
-            List<BasicProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllActiveProducts());
+            List<ListProductDto> allProductsDto = ProductMapper.INSTANCE.productsToDTO(productManager.getAllActiveProducts());
             return Response.status(Response.Status.OK)
                     .entity(allProductsDto)
                     .type(MediaType.APPLICATION_JSON)

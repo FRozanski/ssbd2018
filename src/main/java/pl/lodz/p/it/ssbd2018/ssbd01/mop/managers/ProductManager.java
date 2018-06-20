@@ -29,6 +29,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.CategoryFacadeLocal;
@@ -92,7 +93,7 @@ public class ProductManager implements ProductManagerLocal{
     @Override
     @RolesAllowed("addProductByAccountLogin")
     public void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException{
-        this.validatePriceAndQtyOfNewProduct(newProduct);
+        this.validatePriceAndQtyOfProduct(newProduct);
         Product product = new Product();
         NewProductMapper.INSTANCE.newProductDtoToProduct(newProduct, product);
         Category category = categoryManager.getCategoryById(newProduct.getCategoryId());
@@ -129,6 +130,7 @@ public class ProductManager implements ProductManagerLocal{
     public void editProduct(EditProductDto editProductDto, String login) throws AppBaseException {
         Product product = productFacade.find(editProductDto.getId());
         checkIfUserIsOwner(login, product);
+        this.validatePriceAndQtyOfProduct(editProductDto);
         ProductMapper.INSTANCE.editableProductToEntity(editProductDto, product);
         this.validateConstraints(product);
         productFacade.edit(product);
@@ -205,14 +207,14 @@ public class ProductManager implements ProductManagerLocal{
         return unitFacade.findAll();
     }
 
-    private void validatePriceAndQtyOfNewProduct(NewProductDto newProduct) throws AppBaseException{
+    private void validatePriceAndQtyOfProduct(BasicProductDto product) throws AppBaseException{
         try {
-            BigDecimal price = new BigDecimal(newProduct.getPrice());
+            BigDecimal price = new BigDecimal(product.getPrice());
         } catch(NumberFormatException e) {
             throw new ProductPriceException("product_price_exception");
         }
         try {
-            BigDecimal qty = new BigDecimal(newProduct.getQty());
+            BigDecimal qty = new BigDecimal(product.getQty());
         } catch(NumberFormatException e) {
             throw new ProductQtyException("product_qty_exception");
         }

@@ -7,7 +7,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper;
 
 import java.util.List;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
-import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ListProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 
 /**
@@ -23,8 +23,8 @@ public abstract class ProductMapperDecorator implements ProductMapper {
     }
 
     @Override
-    public List<BasicProductDto> productsToDTO(List<Product> products) {
-        List<BasicProductDto> dto = delegate.productsToDTO(products);
+    public List<ListProductDto> productsToDTO(List<Product> products) {
+        List<ListProductDto> dto = delegate.productsToDTO(products);
         for (int i = 0; i < products.size(); i++) {
             dto.get(i).setUnit(delegate.unitToBasicUnitDto(products.get(i).getUnitId()));
             dto.get(i).setOwner(delegate.ownerToBasicOwnerDTO(products.get(i).getOwnerId()));

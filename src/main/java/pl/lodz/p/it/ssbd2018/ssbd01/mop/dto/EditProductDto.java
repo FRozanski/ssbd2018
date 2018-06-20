@@ -5,19 +5,13 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 
-import java.math.BigDecimal;
-
 /**
  *
  * @author michal
  */
-public class EditProductDto {
+public class EditProductDto extends BasicProductDto {
     
     private Long id;
-    private String name;
-    private String description;
-    private BigDecimal price;
-    private BigDecimal qty;
     private String categoryName;
     private String unitName;
     private long version;
@@ -48,62 +42,6 @@ public class EditProductDto {
      */
     public void setId(Long id) {
         this.id = id;
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * @return the description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * @return the price
-     */
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    /**
-     * @param price the price to set
-     */
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    /**
-     * @return the qty
-     */
-    public BigDecimal getQty() {
-        return qty;
-    }
-
-    /**
-     * @param qty the qty to set
-     */
-    public void setQty(BigDecimal qty) {
-        this.qty = qty;
     }
 
     /**

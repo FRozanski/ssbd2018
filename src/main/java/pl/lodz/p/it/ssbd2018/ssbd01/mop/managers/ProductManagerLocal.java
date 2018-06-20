@@ -30,7 +30,7 @@ public interface ProductManagerLocal {
      */
     void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException;                                     
     
-    void deleteProductByAccount(Account account, Product product);                                  
+    void deleteProductByAccount(long productId, String login) throws AppBaseException;                                  
     
     void updateProduct(Product product);                                                            
     

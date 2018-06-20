@@ -6,6 +6,8 @@
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.rest;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -155,6 +157,32 @@ public class ProductRestController {
         try {
             String login = getUserLogin(servletRequest);
             productManager.deactiveProduct(productId, login);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+    
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu usunięcia produktu o podanym numerze ID.
+     * @param productId
+     * @param servletRequest
+     * @return
+     */
+    @PUT
+    @Path("deleteProduct")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteProduct(@QueryParam("productId") long productId, @Context HttpServletRequest servletRequest) {
+        try {
+            String login = getUserLogin(servletRequest);
+            productManager.deleteProductByAccount(productId, login);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)

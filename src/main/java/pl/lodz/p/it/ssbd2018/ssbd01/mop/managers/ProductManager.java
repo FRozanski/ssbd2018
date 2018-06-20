@@ -116,8 +116,10 @@ public class ProductManager implements ProductManagerLocal{
 
     @Override
     @RolesAllowed("deleteProductByAccount")
-    public void deleteProductByAccount(Account account, Product product) {
-        throw new NotImplementedException();
+    public void deleteProductByAccount(long productId, String login) throws AppBaseException {
+        Product product = productFacade.find(productId);
+        checkIfUserIsOwner(login, product);
+        productFacade.remove(product);
     }
 
     @Override

@@ -191,6 +191,10 @@
     <role-name>deactiveProduct</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deleteProductByAccount</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
   <!--MOZ-->
   <security-role-mapping>
     <role-name>makeOrder</role-name>
@@ -351,6 +355,10 @@
   </security-role-mapping>
   <security-role-mapping>
     <role-name>createProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>removeProduct</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>

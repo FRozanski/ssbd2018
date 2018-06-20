@@ -112,5 +112,13 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
         }        
     }
     
-    
+    /**
+     * Usunięcie produktu
+     * @param entity
+     */
+    @Override
+    @RolesAllowed("removeProduct")
+    public void remove(Product entity) {
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }
 }

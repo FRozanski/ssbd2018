@@ -113,7 +113,17 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
             throw new ProductException("constraint_violation");
         }        
     }
-    
+
+    /**
+     * Usunięcie produktu
+     * @param entity
+     */
+    @Override
+    @RolesAllowed("removeProduct")
+    public void remove(Product entity) {
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }
+
     @Override
     @RolesAllowed("editProduct")
     public void edit(Product product) throws AppBaseException {
@@ -125,6 +135,4 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
             throw new ProductException("constraint_violation");
         }
     }
-    
-    
 }

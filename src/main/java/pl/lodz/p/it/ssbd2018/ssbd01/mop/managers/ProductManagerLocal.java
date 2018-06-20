@@ -12,6 +12,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 
 
@@ -46,7 +47,7 @@ public interface ProductManagerLocal {
      * Dezaktywuje produkt o podanym id
      * @param productId
      * @param login
-     * @throws AppBaseException     głóqny wyjątek aplikacji
+     * @throws AppBaseException     główny wyjątek aplikacji
      */
     void deactiveProduct(long productId, String login) throws AppBaseException;
     
@@ -54,7 +55,7 @@ public interface ProductManagerLocal {
      * Aktywuje produkt o podanym id
      * @param productId
      * @param login
-     * @throws AppBaseException     głóqny wyjątek aplikacji
+     * @throws AppBaseException     główny wyjątek aplikacji
      */
     void activeProduct(long productId, String login) throws AppBaseException;
             
@@ -75,7 +76,23 @@ public interface ProductManagerLocal {
      * @return                      obiekt encji jednostki miary
      * @throws AppBaseException     główny wyjątek aplikacji
      */
-    Unit getUnitById(Long unitId) throws AppBaseException;   
+    Unit getUnitById(Long unitId) throws AppBaseException; 
+    /**
+     * Wyszukuje obiekt encji produktów po zadanym id i ze zgodnym właścicielem
+     * @param login                 login właściciela produktu
+     * @param id                    id produktu
+     * @return                      obiekt encji - produkt
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
+    Product getProductByIdAndLogin(String login, Long id) throws AppBaseException;
+    
+    /**
+     * Wyszukuje obiekt encji produktów po zadanym id, sprawdza właściciela i dokonuje edycji zgodnie z DTO
+     * @param login                 login właściciela produktu
+     * @param editProductDto        dto produktu
+     * @throws AppBaseException     główny wyjątek aplikacji
+     */
+    void editProduct(EditProductDto editProductDto, String login) throws AppBaseException;
     
     /**
      * Pobiera z bazy danych wszystkie jednostki miar

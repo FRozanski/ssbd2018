@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {Order} from '../model/order';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {ShippingMethod} from '../model/shipping-method';
 
 @Injectable()
 export class ShippingMethodService {
@@ -11,8 +11,23 @@ export class ShippingMethodService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllShippingMethods(): Observable<Order[]> {
-    return this.httpClient.get<Order[]>(this.uri);
+  getAllShippingMethods(): Observable<ShippingMethod[]> {
+    return this.httpClient.get<ShippingMethod[]>(this.uri);
   }
 
+  activateShippingMethod(shippingMethodId: number) {
+    const params = new HttpParams()
+      .set('methodId', shippingMethodId.toString());
+    return this.httpClient.put(this.uri + '/activate', null, {params});
+  }
+
+  deactivateShippingMethod(shippingMethodId: number) {
+    const params = new HttpParams()
+      .set('methodId', shippingMethodId.toString());
+    return this.httpClient.put(this.uri + '/deactivate', null, {params});
+  }
+
+  addShippingMethod(shipingMethod: ShippingMethod) {
+    return this.httpClient.post<ShippingMethod>(this.uri + '/addShippingMethod', shipingMethod);
+  }
 }

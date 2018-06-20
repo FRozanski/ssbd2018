@@ -5,36 +5,15 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 
-import java.math.BigDecimal;
 /**
  *
  * @author michal
  */
 public class BasicProductDto {
-    
-    private Long id;
     private String name;
     private String description;
-    private BigDecimal price;
-    private BigDecimal qty;
-    private boolean active;
-    private BasicCategoryDto category;
-    private BasicUnitDto unit;
-    private BasicProductOwnerDto owner;
-
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String price;
+    private String qty;
 
     /**
      * @return the name
@@ -67,85 +46,28 @@ public class BasicProductDto {
     /**
      * @return the price
      */
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
     /**
      * @param price the price to set
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
     /**
      * @return the qty
      */
-    public BigDecimal getQty() {
+    public String getQty() {
         return qty;
     }
 
     /**
      * @param qty the qty to set
      */
-    public void setQty(BigDecimal qty) {
+    public void setQty(String qty) {
         this.qty = qty;
     }
-
-    /**
-     * @return the active
-     */
-    public boolean isActive() {
-        return active;
-    }
-
-    /**
-     * @param active the active to set
-     */
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    /**
-     * @return the category
-     */
-    public BasicCategoryDto getCategory() {
-        return category;
-    }
-
-    /**
-     * @param category the category to set
-     */
-    public void setCategory(BasicCategoryDto category) {
-        this.category = category;
-    }
-
-    /**
-     * @return the unit
-     */
-    public BasicUnitDto getUnit() {
-        return unit;
-    }
-
-    /**
-     * @param unit the unit to set
-     */
-    public void setUnit(BasicUnitDto unit) {
-        this.unit = unit;
-    }
-
-    /**
-     * @return the owner
-     */
-    public BasicProductOwnerDto getOwner() {
-        return owner;
-    }
-
-    /**
-     * @param owner the owner to set
-     */
-    public void setOwner(BasicProductOwnerDto owner) {
-        this.owner = owner;
-    }
-    
 }

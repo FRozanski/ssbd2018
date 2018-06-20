@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz;
+package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 
 /**
  *
  * @author michal
  */
-public class OrderNotFoundException extends OrderException {
+public class ProductOptimisticException extends ProductException {
     
-    public OrderNotFoundException(String message, Throwable cause) {
+    public ProductOptimisticException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public OrderNotFoundException(String message) {
+    public ProductOptimisticException(String message) {
         super(message);
     }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".order_not_found"; 
+        return super.getCode() + ".product_optimistic_exception"; 
     }
 }

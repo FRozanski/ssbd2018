@@ -19,6 +19,8 @@
     "ACTIVATE_ACCOUNT" : "Activate account",
     "PRODUCTS" : "Products",
     "MY_PRODUCTS" : "My products",
+    "SHIPPING_METHODS": "Shipping methods",
+    "ADD_SHIPPING_METHOD": "Add shipping method",
     "ADD_PRODUCT": "Add product",
     "SHIPPING_METHODS": "Shipping methods"
   },
@@ -103,8 +105,13 @@
     "ACCOUNT_UNLOCK": "Account has been successfully unlocked",
     "CHANGE_PASSWORD": "Password changed successfully",
     "REGISTER": "Account has been successfully registered",
+    "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully",
+    "METHOD_DEACTIVATED": "Method has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_METHOD": "The method could not be deactivated",
+    "METHOD_ACTIVATED": "Method has been successfully activated",
+    "FAILED_TO_ACTIVATE_METHOD": "Failed to activate the method",
     "ADD_PRODUCT": "Product successfully added",
-    "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully"
+    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added"
   },
   "LOCATION": {
     "YOUR_LOCATION": "Your location",
@@ -121,10 +128,13 @@
     "REGISTRATION_CONFIRM": "Account activation",
     "PRODUCT_LIST_PAGE": "Product list page",
     "MY_PRODUCT_LIST_PAGE": "My product list page",
+    "SHIPPING_METHODS": "Shipping methods",
+    "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
     "ADD_PRODUCT": "Add product",
     "SHIPPING_METHODS": "Shipping methods"
   },
   "SHIPPING_METHOD": {
+    "ADD_SHIPPING_METHOD":"Add shipping method",
     "NAME": "Name",
     "PRICE": "Cost",
     "ACTIVE": "Active"

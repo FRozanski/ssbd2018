@@ -109,6 +109,10 @@
     "FAILED_TO_DEACTIVATE_METHOD": "The method could not be deactivated",
     "METHOD_ACTIVATED": "Method has been successfully activated",
     "FAILED_TO_ACTIVATE_METHOD": "Failed to activate the method",
+    "PRODUCT_DEACTIVATED": "Product has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_PRODUCT": "The product could not be deactivated",
+    "PRODUCT_ACTIVATED": "Product has been successfully activated",
+    "FAILED_TO_ACTIVATE_PRODUCT": "Failed to activate the product",
     "ADD_PRODUCT": "Product successfully added",
     "ADD_SHIPPING_METHOD": "Shipping method has been successfully added"
   },

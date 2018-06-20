@@ -154,6 +154,10 @@
     "FAILED_TO_DEACTIVATE_METHOD" : "Nie udało się dezaktywować metody",
     "METHOD_ACTIVATED" : "Pomyślnie aktywowano metodę",
     "FAILED_TO_ACTIVATE_METHOD" : "Nie udało się aktywować metody",
+    "PRODUCT_DEACTIVATED" : "Pomyślnie dezaktywowano produkt",
+    "FAILED_TO_DEACTIVATE_PRODUCT" : "Nie udało się dezaktywować produktu",
+    "PRODUCT_ACTIVATED" : "Pomyślnie aktywowano produkt",
+    "FAILED_TO_ACTIVATE_PRODUCT" : "Nie udało się aktywować produktu",
     "ADD_SHIPPING_METHOD": "Pomyślnie dodano metodę wysyłki"
   },
   "ERROR": {

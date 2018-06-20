@@ -30,6 +30,12 @@ public interface ProductManagerLocal {
      */
     void addProductByAccountLogin(NewProductDto newProduct, String login) throws AppBaseException;                                     
     
+    /**
+     * Usunięcie produktu należącego do użytkownika o podanym loginie
+     * @param productId
+     * @param login
+     * @throws AppBaseException
+     */
     void deleteProductByAccount(long productId, String login) throws AppBaseException;                                  
     
     void updateProduct(Product product);                                                            

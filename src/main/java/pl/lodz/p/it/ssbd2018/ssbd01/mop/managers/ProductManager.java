@@ -25,6 +25,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
@@ -118,8 +119,12 @@ public class ProductManager implements ProductManagerLocal{
     @RolesAllowed("deleteProductByAccount")
     public void deleteProductByAccount(long productId, String login) throws AppBaseException {
         Product product = productFacade.find(productId);
-        checkIfUserIsOwner(login, product);
-        productFacade.remove(product);
+        if (product == null) {
+            throw new ProductNotFoundException("product_not_found_exception");
+        } else {
+            checkIfUserIsOwner(login, product);
+            productFacade.remove(product);   
+        }
     }
 
     @Override

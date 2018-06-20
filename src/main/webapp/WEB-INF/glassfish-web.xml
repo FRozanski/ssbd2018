@@ -134,6 +134,14 @@
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>activateCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactivateCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>getUnitById</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
@@ -203,8 +211,7 @@
   <security-role-mapping>
     <role-name>editProduct</role-name>
     <group-name>user</group-name>
-  </security-role-mapping>
-  
+  </security-role-mapping>  
   <security-role-mapping>
     <role-name>makeOrder</role-name>
     <group-name>user</group-name>

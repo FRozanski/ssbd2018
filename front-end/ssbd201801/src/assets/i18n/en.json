@@ -21,8 +21,7 @@
     "MY_PRODUCTS" : "My products",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD": "Add shipping method",
-    "ADD_PRODUCT": "Add product",
-    "SHIPPING_METHODS": "Shipping methods"
+    "ADD_PRODUCT": "Add product"
   },
   "ACCOUNT": {
     "CITY": "CITY",
@@ -130,8 +129,7 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
-    "ADD_PRODUCT": "Add product",
-    "SHIPPING_METHODS": "Shipping methods"
+    "ADD_PRODUCT": "Add product"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Add shipping method",

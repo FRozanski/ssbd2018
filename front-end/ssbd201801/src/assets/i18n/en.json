@@ -110,7 +110,11 @@
     "METHOD_ACTIVATED": "Method has been successfully activated",
     "FAILED_TO_ACTIVATE_METHOD": "Failed to activate the method",
     "ADD_PRODUCT": "Product successfully added",
-    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added"
+    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added",
+    "CATEGORY_DEACTIVATED": "Category has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_CATEGORY": "The category could not be deactivated",
+    "CATEGORY_ACTIVATED": "Category has been successfully activated",
+    "FAILED_TO_ACTIVATE_CATEGORY": "Failed to activate the category"
   },
   "LOCATION": {
     "YOUR_LOCATION": "Your location",
@@ -129,7 +133,8 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
-    "ADD_PRODUCT": "Add product"
+    "ADD_PRODUCT": "Add product",
+    "CATEGORY_LIST_PAGE": "Category list page"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Add shipping method",

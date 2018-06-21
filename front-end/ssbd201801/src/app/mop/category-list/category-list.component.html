@@ -14,8 +14,8 @@
 
     <ng-container matColumnDef="active">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'CATEGORY.ACTIVE' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> 
-          <mat-checkbox [checked]='element.active' [disabled]='true' color='primary'></mat-checkbox>
+      <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
+          <mat-checkbox (change)='onActiveChange(element, rowIndex)' [(ngModel)]='element.active' color='primary'></mat-checkbox>
       </mat-cell>
     </ng-container>
 
@@ -28,4 +28,8 @@
                  [pageSizeOptions]="[5, 10, 20]"
                  [showFirstLastButtons]="true">
   </mat-paginator>
+</div>
+<div class="buttons">
+  <button mat-button color='primery'>{{ 'FORM.RETURN' | translate }} </button>
+  <button mat-button mat-raised-button color='primary' [disabled]="!wasAnyCategoryChanged()" (click)="sumbitCategory()">{{ 'FORM.SUBMIT' | translate}}</button>
 </div>

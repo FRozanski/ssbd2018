@@ -52,6 +52,8 @@ export class ProductEditComponent implements OnInit {
     this.productId = this.activatedRoute.snapshot.params["id"];
     this.initializeForm();
     this.loadProductData();
+    this.form.get('category').disable();
+    this.form.get('unit').disable();
   }
 
   private initializeForm() {

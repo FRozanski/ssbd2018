@@ -15,7 +15,7 @@
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'PRODUCT.CATEGORY' | translate" formControlName='category' required>
+        <input matInput [placeholder]="'PRODUCT.CATEGORY' | translate" formControlName='category'>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('category')">
         {{ "FORM.FIELD_REQUIRED" | translate }}
@@ -43,7 +43,7 @@
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit' required>
+        <input matInput [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit'>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('unit')">
         {{ "FORM.FIELD_REQUIRED" | translate }}

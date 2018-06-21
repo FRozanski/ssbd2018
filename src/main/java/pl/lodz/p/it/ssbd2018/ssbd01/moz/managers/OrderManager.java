@@ -40,7 +40,7 @@ public class OrderManager implements OrderManagerLocal{
     private Order1FacadeLocal orderFacade;
     
     @EJB
-    private OrderStatusFacadeLocal orderStatus;
+    private OrderStatusFacadeLocal orderStatusFacade;
     
     
     @Override
@@ -64,7 +64,7 @@ public class OrderManager implements OrderManagerLocal{
     @Override
     @RolesAllowed("getAllOrderStatus")
     public List<OrderStatus> getAllOrderStatus() {
-        return orderStatus.findAll();
+        return orderStatusFacade.findAll();
     }
 
     @Override
@@ -87,8 +87,9 @@ public class OrderManager implements OrderManagerLocal{
 
     @Override
     @RolesAllowed("setOrderStatus")
-    public void setOrderStatus(Order1 order, OrderStatus orderStatus) {
-        throw new NotImplementedException();
+    public void setOrderStatus(Order1 order, OrderStatus orderStatus) throws AppBaseException {
+        order.setStatusId(orderStatus);
+        orderFacade.edit(order);
     }
 
     @Override
@@ -107,5 +108,17 @@ public class OrderManager implements OrderManagerLocal{
     @RolesAllowed("getAllOrdersByDateAndPrice")
     public List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
         throw new NotImplementedException();
-    }        
+    }
+
+    @Override
+    @RolesAllowed("getOrder1ById")
+    public Order1 getOrder1ById(long id) throws AppBaseException {
+        return this.orderFacade.find(id);
+    }
+
+    @Override
+    @RolesAllowed("getOrderStatusById")
+    public OrderStatus getOrderStatusById(long id) throws AppBaseException {
+        return this.orderStatusFacade.find(id);
+    }
 }

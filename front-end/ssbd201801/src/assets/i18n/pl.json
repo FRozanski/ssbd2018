@@ -172,6 +172,7 @@
   "user_already_login": "Użytkownik jest już zalogowany",
   "user_already_logout": "Użytkownik został wylogowany",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",
+  "user_is_not_a_seller": "Użytkownik nie jest selerem.",
   "no_id_sent": "Nie przesłano identyfikatora",
   "postal_code_length_error": "Podany kod pocztowy ma nieodpowiednią długość",
   "password_length_error": "Podane hasło jest za krótkie",

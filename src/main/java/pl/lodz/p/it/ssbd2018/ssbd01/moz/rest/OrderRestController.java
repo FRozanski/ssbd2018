@@ -10,18 +10,26 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicOrderStatusDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.ListOrderDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.OrderStatusUpdateDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.OrderManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.OrderMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.OrderStatusMapper;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 
 /**
  * Klasa reprezentująca serwis RESTowy, odpowiedzialna za zarządanie
@@ -99,10 +107,45 @@ public class OrderRestController {
         }
     }
 
+    @PUT
+    @Path("updateOrderStatus")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateOrderStatus(OrderStatusUpdateDto orderStatusUpdateDto, @Context HttpServletRequest servletRequest) {
+        try {
+                        
+            Order1 order = orderManager.getOrder1ById(orderStatusUpdateDto.getId());
+            OrderStatus orderStatus = orderManager.getOrderStatusById(orderStatusUpdateDto.getStatus().getId());            
+            checkIfUserIsSeller(order, servletRequest);
+             
+            orderManager.setOrderStatus(order, orderStatus);
+
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", ErrorCodes.SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+            
+        } catch (AppBaseException e) {
+            
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", e.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+            
+        } 
+
+    }
+
     private String getUserLogin(HttpServletRequest servletRequest) throws AppBaseException {
         if (servletRequest.getUserPrincipal() == null) {
             throw new UserAlreadyLogoutException("user_already_logout_error");
         }
         return servletRequest.getUserPrincipal().getName();
+    }
+
+    private void checkIfUserIsSeller(Order1 order, HttpServletRequest servletRequest) throws AppBaseException {
+        if (!orderManager.getAllBySeller(getUserLogin(servletRequest)).contains(order)) {
+            throw new UserUnauthorized("user_is_not_a_seller");
+        }
     }
 }

@@ -17,7 +17,9 @@ import {
   MatPaginatorModule,
   MatPaginatorIntl,
   MatDialogModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDividerModule,
+  MatListModule
 } from '@angular/material';
 import {ErrorHandlerService} from './shared/common/error-handler.service';
 import {RequestInterceptorService} from './shared/common/request-interceptor.service';
@@ -65,6 +67,7 @@ import { CategoryService } from './mop/common/category.service';
 import { ShippingMethodsListComponent } from './moz/shipping-methods-list/shipping-methods-list.component';
 import {ShippingMethodService} from './moz/common/shipping-method.service';
 import { AddShippingMethodComponent } from './moz/add-shipping-method/add-shipping-method.component';
+import {ProductEditComponent} from './mop/product-edit/product-edit.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -218,6 +221,15 @@ const appRoutes: Routes = [
       }
   },
   {
+    path: 'productEdit/:id',
+    canActivate: [AuthGuard],
+    component: ProductEditComponent,
+    data:
+      {
+        expectedRoles: [Properties.UserRole]
+      }
+  },
+  {
     path: 'shippingMethods',
     component: ShippingMethodsListComponent,
     data: {
@@ -275,7 +287,8 @@ const appRoutes: Routes = [
     AddProductComponent,
     CategoryListComponent,
     ShippingMethodsListComponent,
-    AddShippingMethodComponent
+    AddShippingMethodComponent,
+    ProductEditComponent
   ],
   imports: [
     MatDialogModule,
@@ -286,6 +299,8 @@ const appRoutes: Routes = [
     MatCardModule,
     MatSidenavModule,
     MatSortModule,
+    MatDividerModule,
+    MatListModule,
     MatPaginatorModule,
     MatSelectModule,
     BrowserAnimationsModule,

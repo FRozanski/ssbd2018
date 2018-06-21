@@ -5,6 +5,7 @@ import { CategoryService } from '../common/category.service';
 import { LocationService } from '../../mok/common/location.service';
 import { NotificationService } from '../../mok/common/notification.service';
 import { TranslateService } from '@ngx-translate/core';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-category-list',
@@ -24,7 +25,6 @@ export class CategoryListComponent implements OnInit {
   ];
 
   dataSource: MatTableDataSource<CategoryData> = new MatTableDataSource<CategoryData>();
-
   categoriesWithChangedActive: Set<CategoryData> = new Set<CategoryData>();
   changedCategories: Set<CategoryData> = new Set<CategoryData>();
   changedRows: Set<number> = new Set<number>();
@@ -36,12 +36,13 @@ export class CategoryListComponent implements OnInit {
   constructor(private locationService: LocationService,
     private categoryService: CategoryService,
     private notificationService: NotificationService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private location: Location
   ) { }
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.CATEGORY_LIST_PAGE');
-    this.categoryService.getAllCategories().subscribe((categories: CategoryData[]) => {
+    this.categoryService.getAllCategories().subscribe((categories) => {
       this.dataSource.data = categories;
     });
 
@@ -57,7 +58,7 @@ export class CategoryListComponent implements OnInit {
 
   onActiveChange(category: CategoryData, rowId: number) {
     this.onCategoryChange(category, rowId);
-    this.changedRows.add(rowId);
+    this.categoriesWithChangedActive.add(category);
   }
 
   private onCategoryChange(category: CategoryData, rowId: number) {
@@ -65,12 +66,12 @@ export class CategoryListComponent implements OnInit {
     this.changedRows.add(rowId);
   }
 
-  sumbitCategory() {
+  sumbitCategories() {
     this.submitActive();
   }
 
   private handleSubmit(message: string) {
-    this.registerResponse(message);
+    this.response(message);
   }
 
   private reinitializeStuff() {
@@ -83,14 +84,10 @@ export class CategoryListComponent implements OnInit {
     this.submitStatusMessage = '';
   }
 
-  private registerResponse(message: string) {
+  private response(message: string) {
     this.responseCounter++;
-
     this.submitStatusMessage += message + ' | ';
-
-    const numberOfChangedCategories =
-      this.categoriesWithChangedActive.size;
-
+    const numberOfChangedCategories = this.categoriesWithChangedActive.size;
     if (this.responseCounter === numberOfChangedCategories) {
       this.notificationService.displayTranslatedNotification(this.submitStatusMessage);
       this.reinitializeStuff();
@@ -128,4 +125,9 @@ export class CategoryListComponent implements OnInit {
       }
     });
   }
+
+  onReturnClick() {
+    this.location.back();
+  }
+
 }

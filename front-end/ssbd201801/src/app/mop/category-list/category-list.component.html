@@ -30,6 +30,6 @@
   </mat-paginator>
 </div>
 <div class="buttons">
-  <button mat-button color='primery'>{{ 'FORM.RETURN' | translate }} </button>
-  <button mat-button mat-raised-button color='primary' [disabled]="!wasAnyCategoryChanged()" (click)="sumbitCategory()">{{ 'FORM.SUBMIT' | translate}}</button>
+  <button mat-button color='primery'type="button" (click)='onReturnClick()'>{{ 'FORM.RETURN' | translate }} </button>
+  <button mat-button mat-raised-button color='primary' [disabled]="!wasAnyCategoryChanged()" (click)="sumbitCategories()">{{ 'FORM.SUBMIT' | translate}}</button>
 </div>

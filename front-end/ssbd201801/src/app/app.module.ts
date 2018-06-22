@@ -215,7 +215,8 @@ const appRoutes: Routes = [
     data:
       {
         expectedRoles: [Properties.UserRole]
-      }
+      },
+    canActivate: [AuthGuard]
   },
   {
     path: 'shippingMethods',

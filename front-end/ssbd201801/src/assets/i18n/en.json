@@ -55,7 +55,7 @@
     "CATEGORY": "Category",
     "UNIT": "Unit",
     "OWNER": "Owner",
-    "EDIT": "Edit"
+    "EDIT": "Edit product"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
@@ -135,6 +135,7 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
+    "EDIT_PRODUCT_PAGE": "My product list → Edit product",
     "ADD_PRODUCT": "Add product",
     "PRODUCT_EDIT_PAGE": "Edit product"
   },

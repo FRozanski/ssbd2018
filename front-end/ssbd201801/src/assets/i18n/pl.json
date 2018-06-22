@@ -93,7 +93,7 @@
     "CATEGORY": "Kategoria",
     "UNIT": "Jednostka",
     "OWNER": "Właściciel",
-    "EDIT": "Edytuj"
+    "EDIT": "Edytuj produkt"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",
@@ -187,6 +187,7 @@
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
     "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
+    "EDIT_PRODUCT_PAGE": "Lista moich produktów → Edycja produktu",
     "SHIPPING_METHODS": "Lista metod wysyłki",
     "ADD_SHIPPING_METHOD_PAGE": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",

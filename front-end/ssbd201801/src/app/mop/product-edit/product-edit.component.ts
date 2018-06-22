@@ -49,6 +49,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.locationService.passRouter('LOCATION.EDIT_PRODUCT_PAGE');
     this.productId = this.activatedRoute.snapshot.params["id"];
     this.initializeForm();
     this.loadProductData();
@@ -99,9 +100,10 @@ export class ProductEditComponent implements OnInit {
           product.qty = this.form.value.qty;
           this.productService.updateProduct(product).subscribe(() => {
             alert(this.translateService.instant('SUCCESS.EDIT_PRODUCT'));
-            this.router.navigate(['/main']);
+            this.router.navigate(['/myProducts']);
           }, (errorResponse) => {
             this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
+            this.loadProductData();
           });
         }
         this.dialogRef = null;

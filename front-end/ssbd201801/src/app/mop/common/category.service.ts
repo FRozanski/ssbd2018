@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.local';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { CategoryData } from '../model/category-data';
 import {Observable} from 'rxjs/Observable';
 
@@ -13,6 +13,18 @@ export class CategoryService {
 
   getAllCategories(): Observable<CategoryData[]> {
     return this.httpClient.get<CategoryData[]>(this.uri);
+  }
+
+  activateCategory(categoryId: number) {
+    const params = new HttpParams()
+      .set('categoryId', categoryId.toString());
+    return this.httpClient.put(this.uri + '/activateCategory', null, {params});
+  }
+
+  deactivateCategory(categoryId: number) {
+    const params = new HttpParams()
+      .set('categoryId', categoryId.toString());
+    return this.httpClient.put(this.uri + '/deactivateCategory', null, {params});
   }
 
 }

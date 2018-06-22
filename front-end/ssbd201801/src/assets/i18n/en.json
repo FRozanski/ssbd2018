@@ -116,6 +116,10 @@
     "FAILED_TO_ACTIVATE_PRODUCT": "Failed to activate the product",
     "ADD_PRODUCT": "Product successfully added",
     "ADD_SHIPPING_METHOD": "Shipping method has been successfully added",
+    "CATEGORY_DEACTIVATED": "Category has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_CATEGORY": "The category could not be deactivated",
+    "CATEGORY_ACTIVATED": "Category has been successfully activated",
+    "FAILED_TO_ACTIVATE_CATEGORY": "Failed to activate the category",
     "EDIT_PRODUCT": "Product has been successfully edited"
   },
   "LOCATION": {
@@ -135,8 +139,9 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
-    "EDIT_PRODUCT_PAGE": "My product list → Edit product",
     "ADD_PRODUCT": "Add product",
+    "CATEGORY_LIST_PAGE": "Category list page",
+    "EDIT_PRODUCT_PAGE": "My product list → Edit product",
     "PRODUCT_EDIT_PAGE": "Edit product"
   },
   "SHIPPING_METHOD": {

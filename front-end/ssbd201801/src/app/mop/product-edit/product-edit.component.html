@@ -43,7 +43,11 @@
       </div>
 
       <mat-form-field>
-        <input matInput [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit'>
+        <mat-select [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit' [(value)]="selectedUnitId" required>
+          <mat-option *ngFor="let unit of units" [value]="unit.id">
+            {{ unit.unitName }}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
       <div class="errors-space" *ngIf="isRequiredSatisfied('unit')">
         {{ "FORM.FIELD_REQUIRED" | translate }}

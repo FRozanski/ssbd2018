@@ -7,4 +7,5 @@ export interface EditProductData {
   price?: string;
   qty?: string;
   version?: number;
+  idUnit?: number;
 }

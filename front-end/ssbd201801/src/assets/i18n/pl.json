@@ -92,7 +92,8 @@
     "ACTIVE": "Aktywny",
     "CATEGORY": "Kategoria",
     "UNIT": "Jednostka",
-    "OWNER": "Właściciel"
+    "OWNER": "Właściciel",
+    "EDIT": "Edytuj produkt"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",
@@ -158,7 +159,8 @@
     "FAILED_TO_DEACTIVATE_PRODUCT" : "Nie udało się dezaktywować produktu",
     "PRODUCT_ACTIVATED" : "Pomyślnie aktywowano produkt",
     "FAILED_TO_ACTIVATE_PRODUCT" : "Nie udało się aktywować produktu",
-    "ADD_SHIPPING_METHOD": "Pomyślnie dodano metodę wysyłki"
+    "ADD_SHIPPING_METHOD": "Pomyślnie dodano metodę wysyłki",
+    "EDIT_PRODUCT": "Pomyślnie edytowano produkt"
   },
   "ERROR": {
     "ERROR": "Błąd",
@@ -185,10 +187,12 @@
     "REGISTRATION_CONFIRM": "Aktywacja konta",
     "PRODUCT_LIST_PAGE": "Lista produktów",
     "MY_PRODUCT_LIST_PAGE": "Lista moich produktów",
+    "EDIT_PRODUCT_PAGE": "Lista moich produktów → Edycja produktu",
     "SHIPPING_METHODS": "Lista metod wysyłki",
     "ADD_SHIPPING_METHOD_PAGE": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
-    "SHIPPING_METHODS": "Lista metod wysyłki"
+    "SHIPPING_METHODS": "Lista metod wysyłki",
+    "PRODUCT_EDIT_PAGE": "Edytuj produkt"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

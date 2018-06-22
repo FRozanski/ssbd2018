@@ -54,7 +54,8 @@
     "ACTIVE": "Active",
     "CATEGORY": "Category",
     "UNIT": "Unit",
-    "OWNER": "Owner"
+    "OWNER": "Owner",
+    "EDIT": "Edit product"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
@@ -114,7 +115,8 @@
     "PRODUCT_ACTIVATED": "Product has been successfully activated",
     "FAILED_TO_ACTIVATE_PRODUCT": "Failed to activate the product",
     "ADD_PRODUCT": "Product successfully added",
-    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added"
+    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added",
+    "EDIT_PRODUCT": "Product has been successfully edited"
   },
   "LOCATION": {
     "YOUR_LOCATION": "Your location",
@@ -133,7 +135,9 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
-    "ADD_PRODUCT": "Add product"
+    "EDIT_PRODUCT_PAGE": "My product list → Edit product",
+    "ADD_PRODUCT": "Add product",
+    "PRODUCT_EDIT_PAGE": "Edit product"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Add shipping method",

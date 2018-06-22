@@ -6,6 +6,8 @@ import {ProductService} from '../common/product.service';
 import {TranslateService} from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import {NotificationService} from '../../mok/common/notification.service';
+import {AccountData} from '../../mok/model/account-data';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-product-list',
@@ -14,7 +16,7 @@ import {NotificationService} from '../../mok/common/notification.service';
 })
 export class MyProductListComponent implements OnInit {
 
-  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category'];
+  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category', 'edit'];
   dataSource;
   myProductListWithChangedActive: Set<ProductData> = new Set<ProductData>();
   changedProductMethod: Set<ProductData> = new Set<ProductData>();
@@ -29,6 +31,7 @@ export class MyProductListComponent implements OnInit {
               private productService: ProductService,
               private translateService: TranslateService,
               private location: Location,
+              private router: Router,
               private notificationService: NotificationService) { }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -68,6 +71,10 @@ export class MyProductListComponent implements OnInit {
   onActiveChange(product: ProductData, rowId: number) {
     this.onProductMethodChange(product, rowId);
     this.myProductListWithChangedActive.add(product);
+  }
+
+  onEditClick(product: ProductData) {
+    this.router.navigate(['/productEdit/' + product.id]);
   }
 
   onReturnClick() {

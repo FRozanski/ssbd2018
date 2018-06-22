@@ -1,0 +1,60 @@
+<form [formGroup]='form'>
+  <mat-card class='errors-card' *ngIf='formValidationMessage !== "" '>
+    <p>{{ formValidationMessage }} </p>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>{{ "PRODUCT.EDIT" | translate }}</mat-card-title>
+    <mat-card-content>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'PRODUCT.NAME' | translate" formControlName='name' required>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('name')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'PRODUCT.CATEGORY' | translate" formControlName='category'>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('category')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'PRODUCT.DESCRIPTION' | translate" formControlName='description' required>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('description')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'PRODUCT.PRICE' | translate" formControlName='price' required>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('price')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'PRODUCT.QTY' | translate" formControlName='qty' required>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('qty')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'PRODUCT.UNIT' | translate" formControlName='unit'>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('unit')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+  <div class="buttons">
+    <button mat-button color='primary' type="button" (click)='onReturnClick()'>{{ "FORM.RETURN" | translate }}</button>
+    <button mat-button mat-raised-button color='primary' (click)='sendForm()'>{{ "FORM.SUBMIT" | translate }}</button>
+  </div>
+
+</form>

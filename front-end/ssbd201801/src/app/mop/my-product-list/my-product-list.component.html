@@ -40,6 +40,13 @@
       <mat-cell *matCellDef="let element"> {{element.category.categoryName}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="edit">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'PRODUCT.EDIT' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)='onEditClick(element)'>{{'PRODUCT.EDIT'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

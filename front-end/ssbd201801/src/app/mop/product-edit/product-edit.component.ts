@@ -130,7 +130,7 @@ export class ProductEditComponent implements OnInit {
         'qty': product.qty,
         'unit': product.unitName,
       });
-      this.selectedUnitId = product.idUnit
+      this.selectedUnitId = product.idUnit;
       this.productId = product.id;
       this.version = product.version;
     });

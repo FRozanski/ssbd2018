@@ -37,7 +37,7 @@ public interface ShippingMethodMapper {
 
     List<BasicShippingMethodDto> shippingMethodToBasicDto(List<ShippingMethod> shippingMethods);
     
-    @Mappings({@Mapping(target = "createdBy", ignore = true)})
+    @Mappings({@Mapping(target = "createdByLogin", ignore = true)})
     BasicShippingMethodDto shippingMethodToBasicDto(ShippingMethod shippingMethods);
     
 }

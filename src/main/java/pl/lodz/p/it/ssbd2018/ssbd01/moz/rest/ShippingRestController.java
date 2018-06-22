@@ -73,7 +73,7 @@ public class ShippingRestController {
             validateShippingMethodPrice(shippingMethodDto);
             ShippingMethod shippingMethod = new ShippingMethod();
             ShippingMethodMapper.INSTANCE.basicShippingMethodDtoToShippingMethod(shippingMethodDto, shippingMethod);
-            Account createdBy = accountManager.getAccountById(shippingMethodDto.getCreatedBy());
+            Account createdBy = accountManager.getMyAccountByLogin(shippingMethodDto.getCreatedByLogin());
             shippingMethod.setCreatedBy(createdBy);
             shippingMethod.setActive(true);
             shippingManager.addShippingMethod(shippingMethod);

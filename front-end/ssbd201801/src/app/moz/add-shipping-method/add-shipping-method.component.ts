@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ShippingMethod } from '../model/shipping-method';
 import { NotificationService } from '../../mok/common/notification.service';
+import { SessionService } from '../../mok/common/session.service';
+import { AccountData } from '../../mok/model/account-data';
 
 @Component({
   selector: 'app-add-shipping-method',
@@ -34,7 +36,8 @@ export class AddShippingMethodComponent implements OnInit {
     private locationService: LocationService,
     private router: Router,
     private translateService: TranslateService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private sessionService: SessionService
   ) { }
 
   ngOnInit() {
@@ -54,6 +57,11 @@ export class AddShippingMethodComponent implements OnInit {
       this.dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.shippingMethod = <ShippingMethod>this.form.value;
+          this.shippingMethod.createdByLogin = 'admin';
+          this.sessionService.getMyLogin().subscribe((data: AccountData) => {
+            this.shippingMethod.createdByLogin = 'client';
+            this.shippingMethod.createdByLogin = data.login;
+          });
           this.shippingMethod.active = true;
           this.shippingMethodService.addShippingMethod(this.shippingMethod).subscribe(() => {
             this.notificationService.displayTranslatedNotification('SUCCESS.ADD_SHIPPING_METHOD');

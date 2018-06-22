@@ -3,4 +3,5 @@ export interface ShippingMethod {
   active?: boolean;
   name?: string;
   price?: string;
+  createdByLogin?: string;
 }

@@ -206,6 +206,7 @@
   "app.exception.mop.product.qty_error": "The amount of time in the wrong format",
   "app.exception.mop.product.product_price_error": "The price has been given in the wrong format, the correct one is: maximum six digits in the whole number and two in the decimal part",
   "app.exception.mop.product.product_qty_error": "The quantity has been given in the wrong format, the correct one is: maximum six digits in the whole number and three in the decimal part",
+  "app.exception.mop.unit.not_found": "Chosen unit does not exists",
   "app.exception.moz.shipping_method.shipping_method_name_pattern_error": "The name was given in the wrong format",
   "app.exception.moz.shipping_method.price_format_error": "The price should be given in a numerical format",
   "app.exception.moz.shipping_method.shipping_method_price_too_high_error": "The price was set too high. The maximum is 999.99",

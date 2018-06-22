@@ -16,6 +16,7 @@ public class BasicShippingMethodDto {
     private String name;
     private String price;
     private boolean active;
+    private Long createdBy;
 
     public Long getId() {
         return id;
@@ -47,5 +48,13 @@ public class BasicShippingMethodDto {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+    
+    public Long getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(Long createdBy) {
+        this.createdBy = createdBy;
     }
 }

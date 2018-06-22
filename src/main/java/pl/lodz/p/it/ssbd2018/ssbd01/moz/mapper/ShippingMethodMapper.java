@@ -8,7 +8,9 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper;
 import java.util.List;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
@@ -29,12 +31,13 @@ public interface ShippingMethodMapper {
      * @return obiekt typu {@link ShippingMethod}
      */
     @InheritInverseConfiguration
+    @Mappings({@Mapping(target = "createdBy", ignore = true)})   
     ShippingMethod basicShippingMethodDtoToShippingMethod(BasicShippingMethodDto shippingMethodDto, 
             @MappingTarget ShippingMethod shippingMethod);            
 
-       
     List<BasicShippingMethodDto> shippingMethodToBasicDto(List<ShippingMethod> shippingMethods);
     
+    @Mappings({@Mapping(target = "createdBy", ignore = true)})
     BasicShippingMethodDto shippingMethodToBasicDto(ShippingMethod shippingMethods);
     
 }

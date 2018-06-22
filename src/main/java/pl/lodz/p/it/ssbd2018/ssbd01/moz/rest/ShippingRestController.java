@@ -22,11 +22,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodPriceException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.ShippingMethodManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.ShippingMethodMapper;
@@ -42,6 +44,9 @@ public class ShippingRestController {
     
     @EJB
     ShippingMethodManagerLocal shippingManager;
+    
+    @EJB
+    AccountManagerLocal accountManager;
     
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -68,6 +73,8 @@ public class ShippingRestController {
             validateShippingMethodPrice(shippingMethodDto);
             ShippingMethod shippingMethod = new ShippingMethod();
             ShippingMethodMapper.INSTANCE.basicShippingMethodDtoToShippingMethod(shippingMethodDto, shippingMethod);
+            Account createdBy = accountManager.getAccountById(shippingMethodDto.getCreatedBy());
+            shippingMethod.setCreatedBy(createdBy);
             shippingMethod.setActive(true);
             shippingManager.addShippingMethod(shippingMethod);
             return Response.status(Response.Status.OK)

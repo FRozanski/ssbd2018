@@ -105,6 +105,7 @@
   <security-role-mapping>
     <role-name>getAccountById</role-name>
     <group-name>admin</group-name>
+    <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>saveMyAccountAfterEdit</role-name>

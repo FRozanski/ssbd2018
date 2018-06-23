@@ -14,6 +14,9 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+
+import pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz.OrderNotFoundException;
+import pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz.OrderStatusNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
@@ -113,12 +116,23 @@ public class OrderManager implements OrderManagerLocal{
     @Override
     @RolesAllowed("getOrder1ById")
     public Order1 getOrder1ById(long id) throws AppBaseException {
-        return this.orderFacade.find(id);
+        Order1 order = this.orderFacade.find(id);
+        if (order == null) {
+            throw new OrderNotFoundException("order_not_found");
+        } 
+        return order;
     }
 
     @Override
     @RolesAllowed("getOrderStatusById")
     public OrderStatus getOrderStatusById(long id) throws AppBaseException {
-        return this.orderStatusFacade.find(id);
+
+        OrderStatus orderStatus = this.orderStatusFacade.find(id);
+
+        if (orderStatus == null) {
+            throw new OrderStatusNotFoundException("order_status_not_found");
+        }
+
+        return orderStatus;
     }
 }

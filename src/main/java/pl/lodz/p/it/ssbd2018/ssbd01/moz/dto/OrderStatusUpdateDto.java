@@ -9,15 +9,25 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.dto;
  *
  * @author dlange
  */
-public class OrderStatusUpdateDto extends BasicOrderDto {
+public class OrderStatusUpdateDto  {
     
-    private BasicOrderStatusDto status;
-    
-    public BasicOrderStatusDto getStatus() {
-        return status;
+    private long orderId;
+    private long statusId;
+
+    public void setOrderId(long value) {
+        this.orderId = value;
     }
 
-    public void setStatus(BasicOrderStatusDto status) {
-        this.status = status;
+    public long getOrderId() {
+        return this.orderId;
     }
+
+    public void setStatusId(long value) {
+        this.statusId = value;
+    }
+
+    public long getStatusId() {
+        return this.statusId;
+    }
+
 }

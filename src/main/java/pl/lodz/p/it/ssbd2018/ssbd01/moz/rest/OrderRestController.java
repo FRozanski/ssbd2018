@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
+
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
@@ -28,7 +28,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.ListOrderDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.OrderStatusUpdateDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.OrderManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.OrderMapper;
-import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.OrderStatusMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 
 /**
@@ -114,8 +113,9 @@ public class OrderRestController {
     public Response updateOrderStatus(OrderStatusUpdateDto orderStatusUpdateDto, @Context HttpServletRequest servletRequest) {
         try {
                         
-            Order1 order = orderManager.getOrder1ById(orderStatusUpdateDto.getId());
-            OrderStatus orderStatus = orderManager.getOrderStatusById(orderStatusUpdateDto.getStatus().getId());            
+            Order1 order = orderManager.getOrder1ById(orderStatusUpdateDto.getOrderId());
+            OrderStatus orderStatus = orderManager.getOrderStatusById(orderStatusUpdateDto.getStatusId());
+
             checkIfUserIsSeller(order, servletRequest);
              
             orderManager.setOrderStatus(order, orderStatus);

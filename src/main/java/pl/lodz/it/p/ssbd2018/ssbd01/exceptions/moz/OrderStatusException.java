@@ -7,20 +7,21 @@ package pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz;
 
 /**
  *
- * @author michal
+ * @author dlange
  */
-public class OrderNotFoundException extends OrderException {
+public class OrderStatusException extends MozBaseException {
     
-    public OrderNotFoundException(String message, Throwable cause) {
+    public OrderStatusException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public OrderNotFoundException(String message) {
+    public OrderStatusException(String message) {
         super(message);
-    }
+    }    
+
 
     @Override
     public String getCode() {
-        return super.getCode() + ".order_not_found"; 
+        return super.getCode() + ".orderStatus"; 
     }
 }

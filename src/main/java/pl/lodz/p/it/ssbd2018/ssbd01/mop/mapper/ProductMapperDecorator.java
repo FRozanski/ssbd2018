@@ -38,6 +38,7 @@ public abstract class ProductMapperDecorator implements ProductMapper {
         EditProductDto dto = delegate.editableProductToDto(product);
         dto.setUnitName(product.getUnitId().getUnitName());
         dto.setCategoryName(product.getCategoryId().getCategoryName());
+        dto.setIdUnit(product.getUnitId().getId());
         return dto;
     }
 }

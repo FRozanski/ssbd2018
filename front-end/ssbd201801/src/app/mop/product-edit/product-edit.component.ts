@@ -12,6 +12,8 @@ import {LocationService} from '../../mok/common/location.service';
 import {NewProductData} from '../model/new-product-data';
 import {ConfirmDialogComponent} from '../../shared/confirm-dialog/confirm-dialog.component';
 import {MatDialog, MatDialogRef} from '@angular/material';
+import {UnitData} from '../model/unit-data';
+import {UnitService} from '../common/unit.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -23,7 +25,9 @@ export class ProductEditComponent implements OnInit {
   form: FormGroup;
   productId: number;
   version: number;
+  units: UnitData[];
   wasFormSent = false;
+  selectedUnitId: number;
 
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
@@ -42,6 +46,7 @@ export class ProductEditComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private productService: ProductService,
               private locationService: LocationService,
+              private unitService: UnitService,
               private location: Location,
               private router: Router,
               private activatedRoute: ActivatedRoute,
@@ -51,10 +56,12 @@ export class ProductEditComponent implements OnInit {
   ngOnInit() {
     this.locationService.passRouter('LOCATION.EDIT_PRODUCT_PAGE');
     this.productId = this.activatedRoute.snapshot.params["id"];
+    this.unitService.getAllUnits().subscribe((units) => {
+      this.units = units.map(u => Object.assign({}, u));
+    });
     this.initializeForm();
     this.loadProductData();
     this.form.get('category').disable();
-    this.form.get('unit').disable();
   }
 
   private initializeForm() {
@@ -98,6 +105,7 @@ export class ProductEditComponent implements OnInit {
           product.description = this.form.value.description;
           product.price = this.form.value.price;
           product.qty = this.form.value.qty;
+          product.idUnit = this.selectedUnitId;
           this.productService.updateProduct(product).subscribe(() => {
             alert(this.translateService.instant('SUCCESS.EDIT_PRODUCT'));
             this.router.navigate(['/myProducts']);
@@ -114,7 +122,6 @@ export class ProductEditComponent implements OnInit {
   loadProductData() {
     this.productSource = this.productService.getProductToEdit(this.productId);
     this.productSource.subscribe((product) => {
-
       this.form.setValue({
         'name': product.name,
         'category': product.categoryName,
@@ -123,7 +130,7 @@ export class ProductEditComponent implements OnInit {
         'qty': product.qty,
         'unit': product.unitName,
       });
-
+      this.selectedUnitId = product.idUnit;
       this.productId = product.id;
       this.version = product.version;
     });

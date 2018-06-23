@@ -278,6 +278,8 @@
   "app.exception.mop.product.qty_error": "Ilość została podana w nieodpowiednim formacie",
   "app.exception.mop.product.product_price_error": "Cena została podana w nieodpowiednim formacie, prawidłowy to: maksymalnie sześć cyfr w liczbie całkowitej i dwie w części dziesiętnej",
   "app.exception.mop.product.product_qty_error": "Ilość została podana w nieodpowiednim formacie, prawidłowy to: maksymalnie sześć cyfr w liczbie całkowitej i trzy w części dziesiętnej",
+  "app.exception.mop.unit.not_found": "Wybrana jednostka nie istnieje",
+  "app.exception.mop.product.product_optimistic_exception": "Dane uległy zmianie przed wysłaniem formularza",
   "test.test": "app.exception.mok.account.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheigount.email_pattern_errorwrituheig",
   "app.exception.moz.shipping_method.shipping_method_name_pattern_error": "Nazwa została podana w niewłaściwym formacie",
   "app.exception.moz.shipping_method.price_format_error": "Cena powinna być podana w formacie liczbowym",

@@ -106,6 +106,13 @@ public class OrderRestController {
         }
     }
 
+    /**
+     * Metoda umożliwiająca edycję stanu zamówienia.
+     * @param orderStatusUpdateDto typu {@Link OrderStatusUpdateDto}
+     * @param servletRequest typu {@Link HttpServletRequest} 
+     * @throws AppBaseException 
+     */
+    
     @PUT
     @Path("updateOrderStatus")
     @Consumes(MediaType.APPLICATION_JSON)

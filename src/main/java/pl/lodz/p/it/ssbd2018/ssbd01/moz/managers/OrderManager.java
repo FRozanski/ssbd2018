@@ -30,6 +30,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link OrderProducts} {@link Order1}
  * @author fifi
+ * @author dlange
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
@@ -113,6 +114,13 @@ public class OrderManager implements OrderManagerLocal{
         throw new NotImplementedException();
     }
 
+
+    /**
+     * Metoda używana do pobrania zamówienia ze źródła danych na podstawie jego id 
+     * @param id typu long
+     * @throws AppBaseException 
+     * @throws OrderNotFoundException
+     */
     @Override
     @RolesAllowed("getOrder1ById")
     public Order1 getOrder1ById(long id) throws AppBaseException {
@@ -123,6 +131,13 @@ public class OrderManager implements OrderManagerLocal{
         return order;
     }
 
+    
+    /**
+     * Metoda używana do pobrania statusu zamówienia ze źródła danych na podstawie jego id 
+     * @param id typu long
+     * @throws AppBaseException 
+     * @throws OrderStatusNotFoundException
+     */
     @Override
     @RolesAllowed("getOrderStatusById")
     public OrderStatus getOrderStatusById(long id) throws AppBaseException {

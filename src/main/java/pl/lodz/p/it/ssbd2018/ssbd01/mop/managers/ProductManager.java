@@ -28,6 +28,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UserIsNotProductOwner;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.managers.AccountManager;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
@@ -63,6 +64,9 @@ public class ProductManager implements ProductManagerLocal{
     
     @EJB
     CategoryManagerLocal categoryManager;
+    
+    @EJB(beanName = "AccountMOP")
+    AccountFacadeLocal accountFacade;
     
     @Override
     @RolesAllowed("getMyProducts")
@@ -144,7 +148,11 @@ public class ProductManager implements ProductManagerLocal{
     public void deleteProductByAccount(long productId, String login) throws AppBaseException {
         Product product = productFacade.find(productId);
         checkIfUserIsOwner(login, product);
+        Account account = accountFacade.findByLogin(login);
+        long newProdNum = account.getNumberOfProducts() - 1;
         productFacade.remove(product);
+        account.setNumberOfProducts(newProdNum);
+        accountFacade.edit(account);
     }
 
     @Override

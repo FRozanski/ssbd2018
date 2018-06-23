@@ -48,4 +48,10 @@ export class ProductService {
       .set('productId', productId.toString());
     return this.httpClient.put(this.uri + '/deactiveProduct', null, {params});
   }
+
+  deleteProduct(id: number) {
+    const params = new HttpParams().set('productId', id.toString());
+    return this.httpClient.delete(this.uri + '/deleteProduct', {params: params});
+
+  }
 }

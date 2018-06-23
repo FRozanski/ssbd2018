@@ -6,7 +6,6 @@ import {ProductService} from '../common/product.service';
 import {TranslateService} from '@ngx-translate/core';
 import { Location } from '@angular/common';
 import {NotificationService} from '../../mok/common/notification.service';
-import {AccountData} from '../../mok/model/account-data';
 import {Router} from '@angular/router';
 
 @Component({
@@ -16,7 +15,8 @@ import {Router} from '@angular/router';
 })
 export class MyProductListComponent implements OnInit {
 
-  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category', 'edit'];
+  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category', 'edit', 'deleteProduct'];
+
   dataSource;
   myProductListWithChangedActive: Set<ProductData> = new Set<ProductData>();
   changedProductMethod: Set<ProductData> = new Set<ProductData>();
@@ -39,6 +39,20 @@ export class MyProductListComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.MY_PRODUCT_LIST_PAGE');
+    this.updateProducts();
+  }
+
+  onDeleteProductClick(element: ProductData) {
+    console.log(element.id);
+    this.productService.deleteProduct(element.id).subscribe((response) => {
+      this.updateProducts();
+      this.notificationService.displayTranslatedNotification('PRODUCT.DEL_RESPONSE');
+    }, (error) => {
+      this.notificationService.displayTranslatedNotification(error.response.message);
+    });
+  }
+
+  updateProducts() {
     this.productService.getMyProducts().subscribe((data) => {
       this.dataSource = new MatTableDataSource<ProductData>(data);
       this.dataSource.sort = this.sort;
@@ -149,5 +163,4 @@ export class MyProductListComponent implements OnInit {
       }
     });
   }
-
 }

@@ -93,7 +93,9 @@
     "CATEGORY": "Kategoria",
     "UNIT": "Jednostka",
     "OWNER": "Właściciel",
-    "EDIT": "Edytuj produkt"
+    "EDIT": "Edytuj produkt",
+    "DELETE_PRODUCT" : "Usuń produkt",
+    "DEL_RESPONSE" : "Wybrany produkt został usunięty"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",

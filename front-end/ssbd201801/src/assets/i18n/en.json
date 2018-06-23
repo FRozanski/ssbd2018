@@ -55,7 +55,9 @@
     "CATEGORY": "Category",
     "UNIT": "Unit",
     "OWNER": "Owner",
-    "EDIT": "Edit product"
+    "EDIT": "Edit product",
+    "DELETE_PRODUCT" : "Delete product",
+    "DEL_RESPONSE" : "Selected product deleted"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",

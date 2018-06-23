@@ -57,7 +57,8 @@
     "OWNER": "Owner",
     "EDIT": "Edit product",
     "DELETE_PRODUCT" : "Delete product",
-    "DEL_RESPONSE" : "Selected product deleted"
+    "DEL_RESPONSE" : "Selected product deleted",
+    "CONFIRM_CONFIRM" : "Are you really, really sure to delete that product?"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",

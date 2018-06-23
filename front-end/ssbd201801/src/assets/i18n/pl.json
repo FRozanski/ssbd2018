@@ -95,7 +95,8 @@
     "OWNER": "Właściciel",
     "EDIT": "Edytuj produkt",
     "DELETE_PRODUCT" : "Usuń produkt",
-    "DEL_RESPONSE" : "Wybrany produkt został usunięty"
+    "DEL_RESPONSE" : "Wybrany produkt został usunięty",
+    "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",

@@ -8,20 +8,19 @@ package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 /**
  *
  * @author piotrek
- * @author michal
  */
-public class UnitNotFoundException extends UnitException {
+public class ProductNotEnougthException extends ProductException {
     
-    public UnitNotFoundException(String message, Throwable cause) {
+    public ProductNotEnougthException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public UnitNotFoundException(String message) {
+    public ProductNotEnougthException(String message) {
         super(message);
     }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".not_found"; 
+        return super.getCode() + ".product_qty_not_enougth"; 
     }
 }

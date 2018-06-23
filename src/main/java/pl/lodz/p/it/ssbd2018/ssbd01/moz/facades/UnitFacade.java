@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
+package pl.lodz.p.it.ssbd2018.ssbd01.moz.facades;
 
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -11,35 +11,37 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UnitNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeBase;
 
 /**
  * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Unit} 
  * @author fifi
  */
-@Stateless(name = "UnitMOP")
+@Stateless(name = "UnitMOZ")
 public class UnitFacade extends AbstractFacadeBase<Unit> implements UnitFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mopDS")
+    @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;
 
     @Override
     protected EntityManager getEntityManager() {
         return em;
     }
-    
-    @Override
-    @RolesAllowed("findProduct")
-    public Unit find(Object id) throws AppBaseException {
-        Unit product = super.find(id);
-        if (product == null) {
-            throw new UnitNotFoundException("unit_not_found_exception");
-        }
-        return product;
-    }
 
     public UnitFacade() {
         super(Unit.class);
-    }    
+    }
+    
+    @Override
+    @RolesAllowed("findUnit")
+    public Unit find(Object id) throws AppBaseException {
+        Unit unit = super.find(id);
+        if (unit == null) {
+            throw new UnitNotFoundException("unit_not_found");
+        }
+        return unit;
+    }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
+package pl.lodz.p.it.ssbd2018.ssbd01.moz.facades;
 
 import java.util.List;
 import javax.annotation.security.RolesAllowed;
@@ -21,17 +21,19 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductOptimisticException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
  * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Product} 
  * @author fifi
  * @author michalmalec
+ * @author piotrek
  */
-@Stateless(name = "ProductMOP")
+@Stateless(name = "ProductMOZ")
 public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implements ProductFacadeLocal {
 
-    @PersistenceContext(unitName = "ssbd01mopDS")
+    @PersistenceContext(unitName = "ssbd01mozDS")
     private EntityManager em;
 
     @Override

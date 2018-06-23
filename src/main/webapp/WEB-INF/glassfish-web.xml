@@ -243,6 +243,7 @@
   <security-role-mapping>
     <role-name>findShippingMethod</role-name>
     <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>setShippingMethodActive</role-name>
@@ -291,6 +292,11 @@
     <group-name>user</group-name>
     <group-name>manager</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findUnit</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  
   <!--facades-->
   <security-role-mapping>
     <role-name>findAll</role-name>

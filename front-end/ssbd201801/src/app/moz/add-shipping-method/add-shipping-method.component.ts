@@ -27,6 +27,8 @@ export class AddShippingMethodComponent implements OnInit {
 
   shippingMethod: ShippingMethod = {};
 
+  login = '';
+
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(
@@ -42,6 +44,9 @@ export class AddShippingMethodComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.ADD_SHIPPING_METHOD_PAGE');
+    this.sessionService.getMyLogin().subscribe((data: AccountData) => {
+      this.login = data.login;
+    });
     this.initializeForm();
   }
 
@@ -57,11 +62,7 @@ export class AddShippingMethodComponent implements OnInit {
       this.dialogRef.afterClosed().subscribe(result => {
         if (result) {
           this.shippingMethod = <ShippingMethod>this.form.value;
-          this.shippingMethod.createdByLogin = 'admin';
-          this.sessionService.getMyLogin().subscribe((data: AccountData) => {
-            this.shippingMethod.createdByLogin = 'client';
-            this.shippingMethod.createdByLogin = data.login;
-          });
+          this.shippingMethod.createdByLogin = this.login;
           this.shippingMethod.active = true;
           this.shippingMethodService.addShippingMethod(this.shippingMethod).subscribe(() => {
             this.notificationService.displayTranslatedNotification('SUCCESS.ADD_SHIPPING_METHOD');

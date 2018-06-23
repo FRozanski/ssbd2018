@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.UnitNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeBase;
 
@@ -39,7 +40,7 @@ public class UnitFacade extends AbstractFacadeBase<Unit> implements UnitFacadeLo
     public Unit find(Object id) throws AppBaseException {
         Unit unit = super.find(id);
         if (unit == null) {
-            throw new ProductNotFoundException("unit_not_found");
+            throw new UnitNotFoundException("unit_not_found");
         }
         return unit;
     }

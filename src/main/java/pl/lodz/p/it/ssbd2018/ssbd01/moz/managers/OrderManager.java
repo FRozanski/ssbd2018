@@ -26,8 +26,10 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotEnougthException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyFormatException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
@@ -148,18 +150,13 @@ public class OrderManager implements OrderManagerLocal{
         orderProducts.setOrderId(order1);
         orderProductsFacade.create(orderProducts);
         
-        System.out.println("Przed edycją");
-        System.out.println(BigDecimal.valueOf(newQty).setScale(3, RoundingMode.HALF_UP).toString());
-        
         product.setQty(BigDecimal.valueOf(newQty).setScale(3, RoundingMode.HALF_UP));
         productFacade.edit(product);
-        
-        System.out.println("Po edycji");
     }
     
     private void checkIfMatchesDouble(String numberStr) throws AppBaseException{
         if(!numberStr.matches("^[0-9]+(\\.[0-9]+)?$")) {
-            throw new OrderQtyException("qty_format_error");
+            throw new OrderQtyFormatException("qty_format_error");
         }
     }
     
@@ -171,7 +168,7 @@ public class OrderManager implements OrderManagerLocal{
     
     private void checkIfNotBelowZero(Double number) throws AppBaseException{
         if (number < 0.0) {
-            throw new ProductQtyException("product_qty_not_enougth");
+            throw new ProductNotEnougthException("product_qty_not_enougth");
         }
     }
 

@@ -96,7 +96,12 @@
     "EDIT": "Edytuj produkt",
     "DELETE_PRODUCT" : "Usuń produkt",
     "DEL_RESPONSE" : "Wybrany produkt został usunięty",
-    "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?"
+    "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?",
+    "BUY_CONFIRM" : "Czy jesteś pewien że chcesz kupić ten produkt?",
+    "BUY_NOTE" : "Zakupiłeś wybrany produkt",
+    "SHIPMENT" : "Metoda wysyłki",
+    "QTY_TO_BUY" : "Ilość do zamówienia",
+    "BUY" : "KUP"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",

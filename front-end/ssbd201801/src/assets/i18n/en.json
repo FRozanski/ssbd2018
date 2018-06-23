@@ -58,7 +58,12 @@
     "EDIT": "Edit product",
     "DELETE_PRODUCT" : "Delete product",
     "DEL_RESPONSE" : "Selected product deleted",
-    "CONFIRM_CONFIRM" : "Are you really, really sure to delete that product?"
+    "CONFIRM_CONFIRM" : "Are you really, really sure to delete that product?",
+    "BUY_CONFIRM" : "Are you sure you want to buy this product?",
+    "BUY_NOTE" : "You've bought selected product",
+    "SHIPMENT" : "Shipping method",
+    "QTY_TO_BUY" : "Quantity to order",
+    "BUY" : "Buy"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",

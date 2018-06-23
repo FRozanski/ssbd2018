@@ -33,6 +33,31 @@
       <mat-cell *matCellDef="let element"> {{element.category.categoryName}} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="shippment">
+      <mat-header-cell class='button-cell' *matHeaderCellDef> {{ 'PRODUCT.SHIPMENT' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-select placeholder='Shipment' [(value)]="selectedMethod" (change)='onShippingMethodChange($event)' >
+          <mat-option *ngFor='let shipment of availableShipments' [value]='shipment.id' >{{ shipment.name | translate }}</mat-option>
+        </mat-select>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="qtyToBuy">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PRODUCT.QTY_TO_BUY' | translate }}</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input (change)='onQtyToBuyChange(element, $event)' matInput>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="buy">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'PRODUCT.BUY' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)='onBuyProductClick(element)'>{{'PRODUCT.BUY'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>

@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Order } from '../model/order';
 import { Observable } from 'rxjs/Observable';
+import {OrderData} from '../../mop/model/order-data';
 
 @Injectable()
 export class OrderService {
@@ -23,6 +24,8 @@ export class OrderService {
     return this.httpClient.get<Order[]>(this.uri + '/mySold');
   }
 
-
+  makeOrder(order: OrderData) {
+    return this.httpClient.post<OrderData>(this.uri + '/makeOrder', order);
+  }
 }
 

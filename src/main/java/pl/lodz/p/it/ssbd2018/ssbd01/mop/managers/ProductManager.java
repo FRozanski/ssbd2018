@@ -102,6 +102,7 @@ public class ProductManager implements ProductManagerLocal{
         product.setCategoryId(category);
         product.setOwnerId(owner);
         product.setUnitId(unit);
+        product.setActive(true);
         this.validateConstraints(product);
         owner.setNumberOfProducts(owner.getNumberOfProducts() + 1);
         productFacade.create(product);
@@ -133,6 +134,8 @@ public class ProductManager implements ProductManagerLocal{
         this.validatePriceAndQtyOfProduct(editProductDto);
         ProductMapper.INSTANCE.editableProductToEntity(editProductDto, product);
         this.validateConstraints(product);
+        Unit unit = this.unitFacade.find(editProductDto.getIdUnit());
+        product.setUnitId(unit);
         productFacade.edit(product);
     }
 

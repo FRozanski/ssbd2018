@@ -14,6 +14,7 @@ public class EditProductDto extends BasicProductDto {
     private Long id;
     private String categoryName;
     private String unitName;
+    private long idUnit;
     private long version;
 
     /**
@@ -70,6 +71,20 @@ public class EditProductDto extends BasicProductDto {
      */
     public void setUnitName(String unitName) {
         this.unitName = unitName;
+    }
+
+    /**
+     * @return the unitId
+     */
+    public long getIdUnit() {
+        return idUnit;
+    }
+
+    /**
+     * @param idUnit the unitId to set
+     */
+    public void setIdUnit(long idUnit) {
+        this.idUnit = idUnit;
     }
     
 }

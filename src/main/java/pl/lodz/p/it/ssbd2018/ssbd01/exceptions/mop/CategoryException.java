@@ -7,21 +7,20 @@ package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 
 /**
  *
- * @author piotrek
- * @author michal
+ * @author Filip
  */
-public class UnitNotFoundException extends UnitException {
+public class CategoryException extends MopBaseException {
     
-    public UnitNotFoundException(String message, Throwable cause) {
+    public CategoryException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public UnitNotFoundException(String message) {
+    public CategoryException(String message) {
         super(message);
     }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".not_found"; 
+        return super.getCode() + ".category"; 
     }
 }

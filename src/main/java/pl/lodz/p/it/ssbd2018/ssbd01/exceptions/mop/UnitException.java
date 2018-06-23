@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 /**
  *
  * @author piotrek
+ * @author michal
  */
 public class UnitException extends MopBaseException {
     

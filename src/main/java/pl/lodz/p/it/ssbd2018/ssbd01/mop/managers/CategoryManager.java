@@ -40,4 +40,21 @@ public class CategoryManager implements CategoryManagerLocal{
     public Category getCategoryById(Long categoryId) throws AppBaseException {
         return categoryFacade.find(categoryId);
     }        
+    
+    @Override
+    @RolesAllowed("activateCategory")
+    public void activateCategory(long categoryId) throws AppBaseException {
+        Category category = categoryFacade.find(categoryId);
+        category.setActive(true);
+        categoryFacade.edit(category);
+    }
+    
+    @Override
+    @RolesAllowed("deactivateCategory")
+    public void deactivateCategory(long categoryId) throws AppBaseException {
+        Category category = categoryFacade.find(categoryId);
+        category.setActive(false);
+        categoryFacade.edit(category);
+    }
+    
 }

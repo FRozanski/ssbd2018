@@ -106,7 +106,7 @@ export class ShippingMethodsListComponent implements OnInit {
   }
 
   wasAnyShippingMEthodChanged() {
-    return (this.changedShippingMethods.size !== 0 || this.changedRows.size != 0);
+    return (this.changedShippingMethods.size !== 0 || this.changedRows.size !== 0);
   }
 
   private submitActive() {

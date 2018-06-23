@@ -54,7 +54,8 @@
     "ACTIVE": "Active",
     "CATEGORY": "Category",
     "UNIT": "Unit",
-    "OWNER": "Owner"
+    "OWNER": "Owner",
+    "EDIT": "Edit product"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
@@ -109,8 +110,17 @@
     "FAILED_TO_DEACTIVATE_METHOD": "The method could not be deactivated",
     "METHOD_ACTIVATED": "Method has been successfully activated",
     "FAILED_TO_ACTIVATE_METHOD": "Failed to activate the method",
+    "PRODUCT_DEACTIVATED": "Product has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_PRODUCT": "The product could not be deactivated",
+    "PRODUCT_ACTIVATED": "Product has been successfully activated",
+    "FAILED_TO_ACTIVATE_PRODUCT": "Failed to activate the product",
     "ADD_PRODUCT": "Product successfully added",
-    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added"
+    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added",
+    "CATEGORY_DEACTIVATED": "Category has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_CATEGORY": "The category could not be deactivated",
+    "CATEGORY_ACTIVATED": "Category has been successfully activated",
+    "FAILED_TO_ACTIVATE_CATEGORY": "Failed to activate the category",
+    "EDIT_PRODUCT": "Product has been successfully edited"
   },
   "LOCATION": {
     "YOUR_LOCATION": "Your location",
@@ -129,7 +139,10 @@
     "MY_PRODUCT_LIST_PAGE": "My product list page",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
-    "ADD_PRODUCT": "Add product"
+    "ADD_PRODUCT": "Add product",
+    "CATEGORY_LIST_PAGE": "Category list page",
+    "EDIT_PRODUCT_PAGE": "My product list → Edit product",
+    "PRODUCT_EDIT_PAGE": "Edit product"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Add shipping method",
@@ -193,6 +206,7 @@
   "app.exception.mop.product.qty_error": "The amount of time in the wrong format",
   "app.exception.mop.product.product_price_error": "The price has been given in the wrong format, the correct one is: maximum six digits in the whole number and two in the decimal part",
   "app.exception.mop.product.product_qty_error": "The quantity has been given in the wrong format, the correct one is: maximum six digits in the whole number and three in the decimal part",
+  "app.exception.mop.unit.not_found": "Chosen unit does not exists",
   "app.exception.moz.shipping_method.shipping_method_name_pattern_error": "The name was given in the wrong format",
   "app.exception.moz.shipping_method.price_format_error": "The price should be given in a numerical format",
   "app.exception.moz.shipping_method.shipping_method_price_too_high_error": "The price was set too high. The maximum is 999.99",

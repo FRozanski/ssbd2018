@@ -4,6 +4,10 @@ import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {LocationService} from '../../mok/common/location.service';
 import {ProductService} from '../common/product.service';
 import {TranslateService} from '@ngx-translate/core';
+import { Location } from '@angular/common';
+import {NotificationService} from '../../mok/common/notification.service';
+import {AccountData} from '../../mok/model/account-data';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-product-list',
@@ -12,12 +16,23 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class MyProductListComponent implements OnInit {
 
-  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category'];
+  displayedColumns = ['name', 'price', 'qty', 'unit', 'active', 'category', 'edit'];
   dataSource;
+  myProductListWithChangedActive: Set<ProductData> = new Set<ProductData>();
+  changedProductMethod: Set<ProductData> = new Set<ProductData>();
+  changedRows: Set<number> = new Set<number>();
+  private successfullySentProductMethod: Set<string> = new Set<string>();
+  private faultySentProductMethod: Set<string> = new Set<string>();
+
+  private responseCounter = 0;
+  private submitStatusMessage = '';
 
   constructor(private locationService: LocationService,
               private productService: ProductService,
-              private translateService: TranslateService) { }
+              private translateService: TranslateService,
+              private location: Location,
+              private router: Router,
+              private notificationService: NotificationService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -51,6 +66,88 @@ export class MyProductListComponent implements OnInit {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  onActiveChange(product: ProductData, rowId: number) {
+    this.onProductMethodChange(product, rowId);
+    this.myProductListWithChangedActive.add(product);
+  }
+
+  onEditClick(product: ProductData) {
+    this.router.navigate(['/productEdit/' + product.id]);
+  }
+
+  onReturnClick() {
+    this.location.back();
+  }
+
+  private onProductMethodChange(product: ProductData, rowId: number) {
+    this.changedProductMethod.add(product);
+    this.changedRows.add(rowId);
+  }
+
+  submitProductMethod() {
+    this.submitActive();
+  }
+
+  private handleSubmit(message: string) {
+    this.registerResponse(message);
+  }
+
+  private reinitializeStuff() {
+    this.responseCounter = 0;
+    this.myProductListWithChangedActive.clear();
+    this.changedRows.clear();
+    this.changedProductMethod.clear();
+    this.successfullySentProductMethod.clear();
+    this.faultySentProductMethod.clear();
+    this.submitStatusMessage = '';
+  }
+
+  private registerResponse(message: string) {
+    this.responseCounter++;
+
+    this.submitStatusMessage += message + ' | ';
+
+    const numberOfChangedShippingMethods =
+      this.myProductListWithChangedActive.size;
+
+    if (this.responseCounter === numberOfChangedShippingMethods) {
+      this.notificationService.displayTranslatedNotification(this.submitStatusMessage);
+      this.reinitializeStuff();
+    }
+  }
+
+  wasAnyProductMethodChanged() {
+    return (this.changedProductMethod.size !== 0 || this.changedRows.size !== 0);
+  }
+
+  private submitActive() {
+    this.myProductListWithChangedActive.forEach((product: ProductData) => {
+      const isDeactivated: boolean = !product.active;
+
+      if (isDeactivated) {
+        this.productService.deactivateProduct(product.id).subscribe(
+          () => {
+            const succMessage = this.translateService.instant('SUCCESS.PRODUCT_DEACTIVATED');
+            this.handleSubmit(succMessage + ' ' + product.name);
+          },
+          () => {
+            const failMessage = this.translateService.instant('SUCCESS.FAILED_TO_DEACTIVATE_PRODUCT');
+            this.handleSubmit(failMessage + ' ' + product.name);
+          });
+      } else {
+        this.productService.activateProduct(product.id).subscribe(
+          () => {
+            const succMessage = this.translateService.instant('SUCCESS.PRODUCT_ACTIVATED');
+            this.handleSubmit(succMessage + ' ' + product.name);
+          },
+          () => {
+            const failMessage = this.translateService.instant('SUCCESS.FAILED_TO_ACTIVATE_PRODUCT');
+            this.handleSubmit(failMessage + ' ' + product.name);
+          });
+      }
+    });
   }
 
 }

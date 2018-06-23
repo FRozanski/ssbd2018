@@ -150,6 +150,9 @@ public class ProductManager implements ProductManagerLocal{
         checkIfUserIsOwner(login, product);
         Account account = accountFacade.findByLogin(login);
         long newProdNum = account.getNumberOfProducts() - 1;
+        if (newProdNum <= 0) {
+            newProdNum = 0;
+        }
         productFacade.remove(product);
         account.setNumberOfProducts(newProdNum);
         accountFacade.edit(account);

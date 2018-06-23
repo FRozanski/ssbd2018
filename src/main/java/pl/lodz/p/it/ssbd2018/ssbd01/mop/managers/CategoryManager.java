@@ -56,5 +56,15 @@ public class CategoryManager implements CategoryManagerLocal{
         category.setActive(false);
         categoryFacade.edit(category);
     }
+
+    /**
+     * Metoda służąca do dodawania nowych kategorii produktów do bazy danych.
+     * @param category 
+     */
+    @Override
+    @RolesAllowed("addCategory")
+	public void addCategory(Category category) throws AppBaseException {
+		categoryFacade.create(category);
+	}
     
 }

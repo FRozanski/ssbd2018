@@ -93,7 +93,7 @@ export class ProductListComponent implements OnInit {
         this.orderService.makeOrder(this.orderData).subscribe((response) => {
           this.notificationService.displayTranslatedNotification('PRODUCT.BUY_NOTE');
         }, (error) => {
-          this.notificationService.displayTranslatedNotification(error.response.message);
+          this.notificationService.displayTranslatedNotification(error.error.message);
         });
       }
     });

@@ -101,7 +101,8 @@
     "BUY_NOTE" : "Zakupiłeś wybrany produkt",
     "SHIPMENT" : "Metoda wysyłki",
     "QTY_TO_BUY" : "Ilość do zamówienia",
-    "BUY" : "KUP"
+    "BUY" : "KUP",
+    "SHIP" : "Wybierz"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",
@@ -301,5 +302,11 @@
   "app.pagination.lastPageLabel": "Ostatnia strona",
   "json_parsing_exception": "Wystąpił nieznany błąd",
   "deserializing_exception": "Wystąpił nieznany błąd",
-  "no_json_body_exception": "Wystąpił nieznany błąd"
+  "no_json_body_exception": "Wystąpił nieznany błąd",
+  "app.exception.moz.order.order_qty_null_exception": "Podaj ilość produktu jaką zamierzasz kupić.",
+  "app.exception.moz.shipping_method.not_found": "Nie wybrano sposobu dostawy. Będzie działać lepiej jak wybierzesz ;)",
+  "app.exception.moz.order.qty_format_error": "Zły format podanej liczby. Akceptowany format to np. 1.2 lub 3 ",
+  "app.exception.mop.product.product_qty_not_enougth": "Sprzedający nie dysponuje podaną ilością produktu",
+  "app.exception.moz.order.qty_error": "Jak nie chcesz kupić to proszę nie wpisuj 0 lub mniej",
+  "app.exception.moz.order.qty_too_low": "Podana ilość jest zbyt niska"
 }

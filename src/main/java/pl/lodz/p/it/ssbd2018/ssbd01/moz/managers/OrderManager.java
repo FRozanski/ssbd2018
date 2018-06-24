@@ -31,6 +31,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderNullQuantityException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyFormatException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyTooLowException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
@@ -107,11 +108,12 @@ public class OrderManager implements OrderManagerLocal{
         Product product = productFacade.find(productId);
         Unit unit = unitFacade.find(product.getUnitId().getId());
         
-        checIfNotNull(quantity);
+        checkIfNotNull(quantity);
         checkIfMatchesDouble(quantity);
         
         Double qty = Double.parseDouble(quantity);
-        checkIfNotBelowZero(qty);
+        checkIfNotBelowOrEqZero(qty);
+        checkIfNotTooLow(qty);
         
         Account account = accountFacade.findByLogin(login);
         ShippingMethod shippingMethod = shippingMethodFacade.find(shippingId);
@@ -160,9 +162,16 @@ public class OrderManager implements OrderManagerLocal{
         accountFacade.edit(account);
     }
     
-    private void checIfNotNull(String quantity) throws AppBaseException {
+    private void checkIfNotNull(String quantity) throws AppBaseException {
         if (quantity == null) {
             throw  new OrderNullQuantityException("qty_null_passed");
+        }
+    }
+    
+    private void checkIfNotTooLow(Double quantity) throws AppBaseException {
+        BigDecimal scaledQty = BigDecimal.valueOf(quantity).setScale(3, RoundingMode.HALF_UP);
+        if (scaledQty.doubleValue() <= 0.000) {
+            throw new OrderQtyTooLowException("qty_too_low");
         }
     }
     

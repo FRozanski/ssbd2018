@@ -100,7 +100,8 @@
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",
-    "ACTIVE": "Aktywna"
+    "ACTIVE": "Aktywna",
+    "ADD_SUCCESS": "Udało się dodać nową kategorię!"
   },
   "FORM": {
     "FIELD_REQUIRED": "To pole jest wymagane.",

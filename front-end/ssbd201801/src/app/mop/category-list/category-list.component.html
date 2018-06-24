@@ -28,8 +28,13 @@
                  [pageSizeOptions]="[5, 10, 20]"
                  [showFirstLastButtons]="true">
   </mat-paginator>
+
+  <mat-form-field class='new-category-field'>
+    <input matInput placeholder="Nowa kategoria" [(ngModel)]='newCategory'>
+  </mat-form-field>
+
 </div>
 <div class="buttons">
   <button mat-button color='primery'type="button" (click)='onReturnClick()'>{{ 'FORM.RETURN' | translate }} </button>
-  <button mat-button mat-raised-button color='primary' [disabled]="!wasAnyCategoryChanged()" (click)="sumbitCategories()">{{ 'FORM.SUBMIT' | translate}}</button>
+  <button mat-button mat-raised-button color='primary' [disabled]="!wasFormChanged()" (click)="sumbitCategories()">{{ 'FORM.SUBMIT' | translate}}</button>
 </div>

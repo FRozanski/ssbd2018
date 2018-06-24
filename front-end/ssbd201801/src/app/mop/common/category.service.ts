@@ -27,4 +27,8 @@ export class CategoryService {
     return this.httpClient.put(this.uri + '/deactivateCategory', null, {params});
   }
 
+  addCategory(newCategory: CategoryData) {
+    return this.httpClient.put(this.uri + '/addCategory', newCategory);
+  }
+
 }

@@ -20,6 +20,8 @@ export class CategoryListComponent implements OnInit {
   @ViewChild(MatSort)
   sort: MatSort;
 
+  newCategory: string = '';
+
   readonly displayedColumns = [
     'categoryName', 'active'
   ];
@@ -61,13 +63,14 @@ export class CategoryListComponent implements OnInit {
     this.categoriesWithChangedActive.add(category);
   }
 
+  sumbitCategories() {
+    this.submitActive();
+    this.submitNewCategory();
+  }
+
   private onCategoryChange(category: CategoryData, rowId: number) {
     this.changedCategories.add(category);
     this.changedRows.add(rowId);
-  }
-
-  sumbitCategories() {
-    this.submitActive();
   }
 
   private handleSubmit(message: string) {
@@ -94,8 +97,12 @@ export class CategoryListComponent implements OnInit {
     }
   }
 
-  wasAnyCategoryChanged() {
+  private wasAnyCategoryChanged() {
     return (this.changedCategories.size !== 0 || this.changedRows.size != 0);
+  }
+
+  private wasCategorynameChanged() {
+    return this.newCategory.length !== 0;
   }
 
   private submitActive() {
@@ -126,8 +133,20 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
+  private submitNewCategory() {
+    this.categoryService.addCategory({ categoryName: this.newCategory }).subscribe(() => {
+      this.notificationService.displayTranslatedNotification('CATEGORY.ADD_SUCCESS');
+    }, (errorResponse) => {
+      this.notificationService.displayTranslatedNotification(errorResponse.error.message);
+    });
+  }
+
   onReturnClick() {
     this.location.back();
+  }
+
+  wasFormChanged(): boolean {
+    return this.wasAnyCategoryChanged() || this.wasCategorynameChanged();
   }
 
 }

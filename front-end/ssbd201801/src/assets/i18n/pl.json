@@ -297,5 +297,7 @@
   "app.pagination.lastPageLabel": "Ostatnia strona",
   "json_parsing_exception": "Wystąpił nieznany błąd",
   "deserializing_exception": "Wystąpił nieznany błąd",
-  "no_json_body_exception": "Wystąpił nieznany błąd"
+  "no_json_body_exception": "Wystąpił nieznany błąd",
+  "app.exception.mop.category.category_unique_name": "Kategoria o podanej nazwie już istnieje!",
+  "app.exception.mop.category.category_name_length" : "Nazwa tej kategorii jest zbyt długa."
 }

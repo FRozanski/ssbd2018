@@ -16,7 +16,7 @@ export class NotificationsComponent implements OnInit {
   constructor(private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.notificationService.displayNotificationEmitter.subscribe((notification) => {
+    this.notificationService.notificationEmitter.subscribe((notification) => {
       this.notification = notification;
       this.isNotificationDisplayed = true;
 

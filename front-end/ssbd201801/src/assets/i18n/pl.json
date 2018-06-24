@@ -69,8 +69,8 @@
     "SELLER": "Sprzedający",
     "TOTAL_PRICE": "Całkowita wartość",
     "OPEN": "Otwarte",
-    "SHIPPING_METHOD": "Sposób dostawy"
-
+    "SHIPPING_METHOD": "Sposób dostawy",
+    "STATUS_UPDATE_SUCCESS": "Zmiana statusu zamówienia powiodła się."
   },
   "PRODUCT": {
     "NAME": "Nazwa",
@@ -233,5 +233,7 @@
   "app.pagination.lastPageLabel": "Ostatnia strona",
   "json_parsing_exception": "Wystąpił nieznany błąd",
   "deserializing_exception": "Wystąpił nieznany błąd",
-  "no_json_body_exception": "Wystąpił nieznany błąd"
+  "no_json_body_exception": "Wystąpił nieznany błąd",
+  "order_status_not_found": "Nie znaleziono statusu zamówienia.",
+  "order_not_found": "Nie znaleziono zamówienia."
 }

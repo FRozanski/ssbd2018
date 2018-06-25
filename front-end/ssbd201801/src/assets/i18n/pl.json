@@ -106,7 +106,8 @@
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",
-    "ACTIVE": "Aktywna"
+    "ACTIVE": "Aktywna",
+    "ADD_SUCCESS": "Udało się dodać nową kategorię!"
   },
   "FORM": {
     "FIELD_REQUIRED": "To pole jest wymagane.",
@@ -304,6 +305,8 @@
   "json_parsing_exception": "Wystąpił nieznany błąd",
   "deserializing_exception": "Wystąpił nieznany błąd",
   "no_json_body_exception": "Wystąpił nieznany błąd",
+  "app.exception.mop.category.category_unique_name": "Kategoria o podanej nazwie już istnieje!",
+  "app.exception.mop.category.category_name_length" : "Nazwa tej kategorii jest zbyt długa.",
   "app.exception.moz.order.order_qty_null_exception": "Podaj ilość produktu jaką zamierzasz kupić.",
   "app.exception.moz.shipping_method.not_found": "Nie wybrano sposobu dostawy. Będzie działać lepiej jak wybierzesz ;)",
   "app.exception.moz.order.qty_format_error": "Zły format podanej liczby. Akceptowany format to np. 1.2 lub 3 ",

@@ -20,6 +20,8 @@ export class CategoryListComponent implements OnInit {
   @ViewChild(MatSort)
   sort: MatSort;
 
+  newCategoryName: string = '';
+
   readonly displayedColumns = [
     'categoryName', 'active'
   ];
@@ -42,12 +44,16 @@ export class CategoryListComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.CATEGORY_LIST_PAGE');
-    this.categoryService.getAllCategories().subscribe((categories) => {
-      this.dataSource.data = categories;
-    });
+    this.reloadData();
 
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  reloadData() {
+    this.categoryService.getAllCategories().subscribe((categories) => {
+      this.dataSource.data = categories;
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -61,13 +67,20 @@ export class CategoryListComponent implements OnInit {
     this.categoriesWithChangedActive.add(category);
   }
 
+  sumbitCategories() {
+    if (this.wasAnyCategoryChanged()) {
+      this.submitActiveStateOfCategories();
+    }
+    if (this.wasCategoryNameChanged()) {
+      this.submitNewCategory();
+    }
+
+    this.reloadData();
+  }
+
   private onCategoryChange(category: CategoryData, rowId: number) {
     this.changedCategories.add(category);
     this.changedRows.add(rowId);
-  }
-
-  sumbitCategories() {
-    this.submitActive();
   }
 
   private handleSubmit(message: string) {
@@ -82,6 +95,7 @@ export class CategoryListComponent implements OnInit {
     this.successfullySentCategories.clear();
     this.faultySentCategories.clear();
     this.submitStatusMessage = '';
+    this.newCategoryName = '';
   }
 
   private response(message: string) {
@@ -94,11 +108,15 @@ export class CategoryListComponent implements OnInit {
     }
   }
 
-  wasAnyCategoryChanged() {
+  private wasAnyCategoryChanged() {
     return (this.changedCategories.size !== 0 || this.changedRows.size != 0);
   }
 
-  private submitActive() {
+  private wasCategoryNameChanged() {
+    return this.newCategoryName.length !== 0;
+  }
+
+  private submitActiveStateOfCategories() {
     this.categoriesWithChangedActive.forEach((category: CategoryData) => {
       const isDeactivated: boolean = !category.active;
 
@@ -126,8 +144,24 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
+  private submitNewCategory() {
+    this.categoryService.addCategory({ categoryName: this.newCategoryName }).subscribe(() => {
+      this.notificationService.displayTranslatedNotification('CATEGORY.ADD_SUCCESS');
+      this.reloadData();
+      this.reinitializeStuff();
+    }, (errorResponse) => {
+      this.notificationService.displayTranslatedNotification(errorResponse.error.message);
+      this.reloadData();
+      this.reinitializeStuff();
+    });
+  }
+
   onReturnClick() {
     this.location.back();
+  }
+
+  wasFormChanged(): boolean {
+    return this.wasAnyCategoryChanged() || this.wasCategoryNameChanged();
   }
 
 }

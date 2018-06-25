@@ -26,7 +26,7 @@ export class OrderService {
   getOrdersSoldByUser(): Observable<Order[]> {
     return this.httpClient.get<Order[]>(this.uri + '/mySold');
   }
-  
+
   makeOrder(order: OrderData) {
     return this.httpClient.post<OrderData>(this.uri + '/makeOrder', order);
   }

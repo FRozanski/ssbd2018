@@ -12,4 +12,6 @@ export interface ProductData {
   category?: CategoryData;
   unit?: UnitData;
   owner?: OwnerData;
+  unitId?: number;
+  categoryId?: number;
 }

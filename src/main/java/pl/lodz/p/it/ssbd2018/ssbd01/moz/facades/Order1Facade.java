@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz.OrderNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
@@ -34,6 +34,16 @@ public class Order1Facade extends AbstractFacadeCreateUpdate<Order1> implements 
 
     public Order1Facade() {
         super(Order1.class);
+    }
+    
+    @Override
+    @RolesAllowed("getOrder1ById")
+    public Order1 find(Object id) throws AppBaseException {
+        Order1 order = super.find(id);
+        if (order == null) {
+            throw new OrderNotFoundException("order_not_found");
+        }
+        return order;
     }
     
     @Override

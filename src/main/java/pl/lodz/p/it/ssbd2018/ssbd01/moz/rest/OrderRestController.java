@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -26,9 +27,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicOrderStatusDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.ListOrderDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.OrderStatusUpdateDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
+import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.MakeOrderDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.OrderManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.OrderMapper;
-import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
  * Klasa reprezentująca serwis RESTowy, odpowiedzialna za zarządanie
@@ -96,6 +99,26 @@ public class OrderRestController {
             List<ListOrderDto> allOrdersDto = OrderMapper.INSTANCE.orderToFullListDto(orderManager.getAllBySeller(login));
             return Response.status(Response.Status.OK)
                     .entity(allOrdersDto)
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+    
+    @POST
+    @Path("makeOrder")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response makeOrder(MakeOrderDto orderDto, @Context HttpServletRequest servletRequest) {
+        try {
+            String login = getUserLogin(servletRequest);
+            orderManager.makeOrder(orderDto.getProductId(), orderDto.getQty(), orderDto.getShippingId(), login);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
                     .build();
         } catch (AppBaseException ex) {

@@ -3,24 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz;
+package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 
 /**
  *
+ * @author piotrek
  * @author michal
  */
-public class OrderNotFoundException extends OrderException {
+public class UnitNotFoundException extends UnitException {
     
-    public OrderNotFoundException(String message, Throwable cause) {
+    public UnitNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public OrderNotFoundException(String message) {
+    public UnitNotFoundException(String message) {
         super(message);
-    }
+    }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".order_not_found"; 
+        return super.getCode() + ".not_found"; 
     }
 }

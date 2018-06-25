@@ -5,6 +5,7 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.rest;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
@@ -15,14 +16,17 @@ import javax.validation.ValidatorFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.ShippingMethodManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.ShippingMethodMapper;
@@ -59,12 +63,12 @@ public class ShippingRestController {
     @Path("addShippingMethod")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addShippingMethod(BasicShippingMethodDto shippingMethodDto) {
+    public Response addShippingMethod(BasicShippingMethodDto shippingMethodDto) {        
         try {
+            validateShippingMethodPrice(shippingMethodDto);
             ShippingMethod shippingMethod = new ShippingMethod();
             ShippingMethodMapper.INSTANCE.basicShippingMethodDtoToShippingMethod(shippingMethodDto, shippingMethod);
             shippingMethod.setActive(true);
-            validateConstraints(shippingMethod);
             shippingManager.addShippingMethod(shippingMethod);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
@@ -78,20 +82,59 @@ public class ShippingRestController {
         }
     }
     
-    private static void validateConstraints(ShippingMethod shippingMethod) throws AppBaseException {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<ShippingMethod>> constraintViolations = validator.validate(shippingMethod);
-        List<String> errors = new ErrorCodes().getAllErrors();
-
-        if (constraintViolations.size() > 0) {
-            for (int i = 0; i < errors.size(); i++) {
-                for (ConstraintViolation<ShippingMethod> temp : constraintViolations) {
-                    if (errors.get(i).equals(temp.getMessage())) {
-                        throw new ConstraintException("constraint_error", errors.get(i));
-                    }
-                }
-            }
+    /**
+     * Metoda REST API służąca do aktywacji metody wysyłki
+     * @param shippingMethodId  identyfikator metody wysyłki w bazie danych
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
+    @PUT
+    @Path("activate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response activateShippingMethod(@QueryParam("methodId") long shippingMethodId) {
+        try {
+            shippingManager.activateShippingMethod(shippingMethodId);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+    
+    /**
+     * Metoda REST API służąca do aktywacji metody wysyłki
+     * @param shippingMethodId  identyfikator metody wysyłki w bazie danych
+     * @return                  meta-dane informujące o sukcesie lub niepowodzeniu wykonania metody
+     */
+    @PUT
+    @Path("deactivate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deactivateShippingMethod(@QueryParam("methodId") long shippingMethodId) {
+        try {
+            shippingManager.deactivateShippingMethod(shippingMethodId);
+            return Response.status(Response.Status.OK)
+                    .entity(new WebErrorInfo("200", SUCCESS))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }        
+    
+    private void validateShippingMethodPrice(BasicShippingMethodDto dto) throws AppBaseException {
+        try {
+            BigDecimal price = new BigDecimal(dto.getPrice());
+        } catch(NumberFormatException e) {
+            throw new ShippingMethodPriceException("shipping_method_price_exception");
         }
     }
 }

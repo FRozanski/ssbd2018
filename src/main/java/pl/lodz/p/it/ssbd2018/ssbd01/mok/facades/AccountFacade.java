@@ -35,7 +35,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
  * @author fifi
  * @author agkan
  */
-@Stateless
+@Stateless(name = "AccountMOK")
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implements AccountFacadeLocal {
 
@@ -100,7 +100,6 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
         } catch (ConstraintViolationException ex) {
             throw new AccountException("constraint_violation");
         }
-
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class BasicShippingMethodDto {
     private Long id;
     private String name;
-    private BigDecimal price;
+    private String price;
     private boolean active;
 
     public Long getId() {
@@ -33,11 +33,11 @@ public class BasicShippingMethodDto {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

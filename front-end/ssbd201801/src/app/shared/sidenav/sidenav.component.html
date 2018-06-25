@@ -49,11 +49,27 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/addProduct' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.ADD_PRODUCT" | translate }}</button>
+    </p>
+
+    <p>
       <button mat-button routerLink='/orders' *ngIf='hasRole(AdminRole)'>{{ "SIDE_NAV.ALL_ORDERS" | translate }}</button>
     </p>
 
     <p>
+      <button mat-button routerLink='/categories' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ALL_CATEGORIES" | translate }}</button>
+    </p>
+
+    <p>
         <button mat-button routerLink='/ownOrders' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_ORDERS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/shippingMethods' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.SHIPPING_METHODS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/addShippingMethod' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ADD_SHIPPING_METHOD" | translate }}</button>
     </p>
 
     <p>

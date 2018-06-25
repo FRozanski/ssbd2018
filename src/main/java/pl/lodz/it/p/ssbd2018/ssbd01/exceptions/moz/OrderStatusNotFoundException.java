@@ -5,6 +5,8 @@
  */
 package pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz;
 
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.MozBaseException;
+
 /**
  *
  * @author dlange

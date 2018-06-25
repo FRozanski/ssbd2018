@@ -122,13 +122,25 @@
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>getAllUnits</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>getAllCategories</role-name>
     <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>getCategoryById</role-name>
     <group-name>user</group-name>
-  </security-role-mapping>  
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>activateCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactivateCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
   <security-role-mapping>
     <role-name>getUnitById</role-name>
     <group-name>user</group-name>
@@ -187,8 +199,23 @@
     <role-name>deactiveProduct</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
-  
+  <security-role-mapping>
+    <role-name>deleteProductByAccount</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>addCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
   <!--MOZ-->
+  <security-role-mapping>
+    <role-name>getProductByIdAndLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>  
   <security-role-mapping>
     <role-name>makeOrder</role-name>
     <group-name>user</group-name>
@@ -204,6 +231,23 @@
   <security-role-mapping>
     <role-name>addShippingMethod</role-name>
     <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>activateShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactivateShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findShippingMethod</role-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>setShippingMethodActive</role-name>
@@ -235,15 +279,15 @@
     <group-name>manager</group-name>
     <group-name>user</group-name>
   </security-role-mapping>
-   <security-role-mapping>
+  <security-role-mapping>
     <role-name>getAllOrders</role-name>
     <group-name>manager</group-name>
   </security-role-mapping>
-   <security-role-mapping>
+  <security-role-mapping>
     <role-name>getAllByBuyer</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
-   <security-role-mapping>
+  <security-role-mapping>
     <role-name>getAllBySeller</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
@@ -258,6 +302,10 @@
   </security-role-mapping>
   <security-role-mapping>
     <role-name>getOrderStatusById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+    <security-role-mapping>
+    <role-name>findUnit</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
   
@@ -343,6 +391,19 @@
     <role-name>createProduct</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>removeProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">

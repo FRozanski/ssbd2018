@@ -3,24 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pl.lodz.it.p.ssbd2018.ssbd01.exceptions.moz;
+package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 
 /**
  *
+ * @author piotrek
  * @author michal
  */
-public class OrderException extends MozBaseException {
+public class UnitException extends MopBaseException {
     
-    public OrderException(String message, Throwable cause) {
+    public UnitException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public OrderException(String message) {
+    public UnitException(String message) {
         super(message);
     }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".order"; 
+        return super.getCode() + ".unit"; 
     }
 }

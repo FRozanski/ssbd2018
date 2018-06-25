@@ -37,6 +37,16 @@ public class Order1Facade extends AbstractFacadeCreateUpdate<Order1> implements 
     }
     
     @Override
+    @RolesAllowed("getOrder1ById")
+    public Order1 find(Object id) throws AppBaseException {
+        Order1 order = super.find(id);
+        if (order == null) {
+            throw new OrderNotFoundException("order_not_found");
+        }
+        return order;
+    }
+    
+    @Override
     @RolesAllowed("findOrderByBuyerLogin")
     public List<Order1> findByBuyerLogin(String login) throws AppBaseException {
         try {

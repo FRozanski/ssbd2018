@@ -74,8 +74,8 @@
     "SELLER": "Sprzedający",
     "TOTAL_PRICE": "Całkowita wartość",
     "OPEN": "Otwarte",
-    "SHIPPING_METHOD": "Sposób dostawy"
-
+    "SHIPPING_METHOD": "Sposób dostawy",
+    "STATUS_UPDATE_SUCCESS": "Zmiana statusu zamówienia powiodła się."
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Dodaj metodę wysyłki",
@@ -219,6 +219,7 @@
   "user_already_login": "Użytkownik jest już zalogowany",
   "user_already_logout": "Użytkownik został wylogowany",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",
+  "user_is_not_a_seller": "Użytkownik nie jest sprzedawcą.",
   "no_id_sent": "Nie przesłano identyfikatora",
   "postal_code_length_error": "Podany kod pocztowy ma nieodpowiednią długość",
   "password_length_error": "Podane hasło jest za krótkie",
@@ -308,5 +309,7 @@
   "app.exception.moz.order.qty_format_error": "Zły format podanej liczby. Akceptowany format to np. 1.2 lub 3 ",
   "app.exception.mop.product.product_qty_not_enougth": "Sprzedający nie dysponuje podaną ilością produktu",
   "app.exception.moz.order.qty_error": "Jak nie chcesz kupić to proszę nie wpisuj 0 lub mniej",
-  "app.exception.moz.order.qty_too_low": "Podana ilość jest zbyt niska"
+  "app.exception.moz.order.qty_too_low": "Podana ilość jest zbyt niska",
+  "order_status_not_found": "Nie znaleziono statusu zamówienia.",
+  "order_not_found": "Nie znaleziono zamówienia."
 }

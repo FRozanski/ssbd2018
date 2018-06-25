@@ -12,10 +12,10 @@ import java.math.BigDecimal;
  * @author michal
  */
 public class BasicOrderDto {
-    private Long id;
-    private String orderPlacedDate;
-    private BigDecimal totalPrice;
-    private boolean isClosed;
+    protected Long id;
+    protected String orderPlacedDate;
+    protected BigDecimal totalPrice;
+    protected boolean isClosed;
 
     /**
      * @return the id

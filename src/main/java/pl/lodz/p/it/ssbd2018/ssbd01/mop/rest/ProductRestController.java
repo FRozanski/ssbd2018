@@ -26,6 +26,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ListProductDto;
+import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicCategoryDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.managers.ProductManagerLocal;

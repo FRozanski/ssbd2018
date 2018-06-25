@@ -203,6 +203,10 @@
     <role-name>deleteProductByAccount</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>addCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
   <!--MOZ-->
   <security-role-mapping>
     <role-name>getProductByIdAndLogin</role-name>
@@ -293,6 +297,14 @@
     <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>getOrder1ById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getOrderStatusById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+    <security-role-mapping>
     <role-name>findUnit</role-name>
     <group-name>user</group-name>
   </security-role-mapping>

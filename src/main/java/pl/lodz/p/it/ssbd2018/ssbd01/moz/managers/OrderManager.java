@@ -17,6 +17,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.interceptor.Interceptors;
+
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
@@ -27,7 +28,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotEnougthException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderNullQuantityException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyFormatException;
@@ -45,6 +45,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link OrderProducts} {@link Order1}
  * @author fifi
+ * @author dlange
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
@@ -58,7 +59,7 @@ public class OrderManager implements OrderManagerLocal{
     private Order1FacadeLocal orderFacade;
     
     @EJB
-    private OrderStatusFacadeLocal orderStatus;
+    private OrderStatusFacadeLocal orderStatusFacade;
     
     @EJB(beanName = "ProductMOZ")
     private ProductFacadeLocal productFacade;
@@ -74,9 +75,6 @@ public class OrderManager implements OrderManagerLocal{
     
     @EJB
     private OrderShippingFacadeLocal orderShippingFacade;
-    
-    @EJB
-    private OrderStatusFacadeLocal orderStatusFacade;
     
     @Override
     @RolesAllowed("getAllOrders")
@@ -99,7 +97,7 @@ public class OrderManager implements OrderManagerLocal{
     @Override
     @RolesAllowed("getAllOrderStatus")
     public List<OrderStatus> getAllOrderStatus() {
-        return orderStatus.findAll();
+        return orderStatusFacade.findAll();
     }
 
     @Override
@@ -207,8 +205,9 @@ public class OrderManager implements OrderManagerLocal{
 
     @Override
     @RolesAllowed("setOrderStatus")
-    public void setOrderStatus(Order1 order, OrderStatus orderStatus) {
-        throw new NotImplementedException();
+    public void setOrderStatus(Order1 order, OrderStatus orderStatus) throws AppBaseException {
+        order.setStatusId(orderStatus);
+        orderFacade.edit(order);
     }
 
     @Override
@@ -227,6 +226,34 @@ public class OrderManager implements OrderManagerLocal{
     @RolesAllowed("getAllOrdersByDateAndPrice")
     public List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
         throw new NotImplementedException();
+    }
+
+
+    /**
+     * Metoda używana do pobrania zamówienia ze źródła danych na podstawie jego id 
+     * @param id typu long
+     * @return type Order1
+     * @throws AppBaseException 
+     */
+    @Override
+    @RolesAllowed("getOrder1ById")
+    public Order1 getOrder1ById(long id) throws AppBaseException {
+        Order1 order = this.orderFacade.find(id); 
+        return order;
+    }
+
+    
+    /**
+     * Metoda używana do pobrania statusu zamówienia ze źródła danych na podstawie jego id 
+     * @param id typu long
+     * @return type OrderStatus
+     * @throws AppBaseException 
+     */
+    @Override
+    @RolesAllowed("getOrderStatusById")
+    public OrderStatus getOrderStatusById(long id) throws AppBaseException {
+        OrderStatus orderStatus = this.orderStatusFacade.find(id);
+        return orderStatus;
     }
     
     private Date generateCurrentDate() {

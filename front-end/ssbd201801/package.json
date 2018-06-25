@@ -8,7 +8,6 @@
     "build": "ng build --prod --base-href ./",
     "prod-build": "ng build --prod --base-href ./ --env=prod",
     "dev-build": "ng build --prod --base-href ./ --env=dev",
-    "local-build": "ng build --prod --base-href ./ --env=local",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

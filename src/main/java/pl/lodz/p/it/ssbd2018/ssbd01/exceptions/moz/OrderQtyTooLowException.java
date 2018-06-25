@@ -5,24 +5,22 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz;
 
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderException;
-
 /**
  *
- * @author michal
+ * @author piotrek
  */
-public class OrderNotFoundException extends OrderException {
+public class OrderQtyTooLowException extends OrderException {
     
-    public OrderNotFoundException(String message, Throwable cause) {
+    public OrderQtyTooLowException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public OrderNotFoundException(String message) {
+    public OrderQtyTooLowException(String message) {
         super(message);
-    }
+    }    
 
     @Override
     public String getCode() {
-        return super.getCode() + ".order_not_found"; 
+        return super.getCode() + ".qty_too_low"; 
     }
 }

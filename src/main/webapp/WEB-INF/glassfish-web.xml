@@ -297,6 +297,14 @@
     <group-name>manager</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>getOrder1ById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getOrderStatusById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+    <security-role-mapping>
     <role-name>findUnit</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
@@ -306,6 +314,7 @@
     <role-name>findAll</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>edit</role-name>

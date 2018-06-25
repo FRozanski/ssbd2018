@@ -34,7 +34,19 @@
 
     <ng-container matColumnDef="status">
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.STATUS' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.status.name}} </mat-cell>
+      <mat-cell *matCellDef="let element">
+         <ng-container *ngIf='isStatusEditable'>
+           <mat-form-field>
+             <mat-select (change)='onStatusChange(element, $event)' [value]='element.status.id'>
+               <mat-option *ngFor='let option of statusSelectOptions' [value]='option.id'> {{ option.name }} </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </ng-container>
+         <ng-container *ngIf='!isStatusEditable'>
+            {{element.status.name}} 
+         </ng-container>
+         
+      </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="isClosed">

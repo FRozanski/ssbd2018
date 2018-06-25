@@ -57,8 +57,14 @@
     "OWNER": "Owner",
     "EDIT": "Edit product",
     "DELETE_PRODUCT" : "Delete product",
-    "DEL_RESPONSE" : "Selected product deleted",
-    "CONFIRM_CONFIRM" : "Are you really, really sure to delete that product?"
+    "DEL_RESPONSE": "Selected product deleted",
+    "CONFIRM_CONFIRM": "Are you really, really sure to delete that product?",
+    "BUY_CONFIRM": "Are you sure you want to buy this product?",
+    "BUY_NOTE": "You've bought selected product",
+    "SHIPMENT": "Shipping method",
+    "QTY_TO_BUY": "Quantity to order",
+    "BUY": "Buy",
+    "SHIP": "Choose"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
@@ -223,5 +229,11 @@
   "app.pagination.lastPageLabel": "Last page",
   "json_parsing_exception": "An unknown error occurred",
   "deserializing_exception": "An unknown error occurred",
-  "no_json_body_exception": "An unknown error occurred"
+  "no_json_body_exception": "An unknown error occurred",
+  "app.exception.moz.order.order_qty_null_exception": "Enter the amount of product you intend to buy.",
+  "app.exception.moz.shipping_method.not_found": "Delivery method wasn't selected. It will work better when you choose one ;)",
+  "app.exception.moz.order.qty_format_error": "Bad format of the given number. The accepted format is eg. 1.2 or 3 ",
+  "app.exception.mop.product.product_qty_not_enougth": "The seller does not have the given amount of product",
+  "app.exception.moz.order.qty_error": "If you do not want to buy, do not enter 0 or less",
+  "app.exception.moz.order.qty_too_low": "Entered amount is too low"
 }

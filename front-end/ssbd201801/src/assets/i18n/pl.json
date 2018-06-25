@@ -96,7 +96,13 @@
     "EDIT": "Edytuj produkt",
     "DELETE_PRODUCT" : "Usuń produkt",
     "DEL_RESPONSE" : "Wybrany produkt został usunięty",
-    "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?"
+    "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?",
+    "BUY_CONFIRM" : "Czy jesteś pewien że chcesz kupić ten produkt?",
+    "BUY_NOTE" : "Zakupiłeś wybrany produkt",
+    "SHIPMENT" : "Metoda wysyłki",
+    "QTY_TO_BUY" : "Ilość do zamówienia",
+    "BUY" : "KUP",
+    "SHIP" : "Wybierz"
   },
   "CATEGORY": {
     "NAME": "Nazwa kategorii",
@@ -213,7 +219,7 @@
   "user_already_login": "Użytkownik jest już zalogowany",
   "user_already_logout": "Użytkownik został wylogowany",
   "user_is_not_authorized": "Operacja wymaga autoryzacji",
-  "user_is_not_a_seller": "Użytkownik nie jest selerem.",
+  "user_is_not_a_seller": "Użytkownik nie jest sprzedawcą.",
   "no_id_sent": "Nie przesłano identyfikatora",
   "postal_code_length_error": "Podany kod pocztowy ma nieodpowiednią długość",
   "password_length_error": "Podane hasło jest za krótkie",
@@ -298,6 +304,12 @@
   "json_parsing_exception": "Wystąpił nieznany błąd",
   "deserializing_exception": "Wystąpił nieznany błąd",
   "no_json_body_exception": "Wystąpił nieznany błąd",
+  "app.exception.moz.order.order_qty_null_exception": "Podaj ilość produktu jaką zamierzasz kupić.",
+  "app.exception.moz.shipping_method.not_found": "Nie wybrano sposobu dostawy. Będzie działać lepiej jak wybierzesz ;)",
+  "app.exception.moz.order.qty_format_error": "Zły format podanej liczby. Akceptowany format to np. 1.2 lub 3 ",
+  "app.exception.mop.product.product_qty_not_enougth": "Sprzedający nie dysponuje podaną ilością produktu",
+  "app.exception.moz.order.qty_error": "Jak nie chcesz kupić to proszę nie wpisuj 0 lub mniej",
+  "app.exception.moz.order.qty_too_low": "Podana ilość jest zbyt niska",
   "order_status_not_found": "Nie znaleziono statusu zamówienia.",
   "order_not_found": "Nie znaleziono zamówienia."
 }

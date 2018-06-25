@@ -28,8 +28,10 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Unit;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotEnougthException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderNullQuantityException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyFormatException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.OrderQtyTooLowException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.ProductFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.facades.UnitFacadeLocal;
@@ -104,10 +106,12 @@ public class OrderManager implements OrderManagerLocal{
         Product product = productFacade.find(productId);
         Unit unit = unitFacade.find(product.getUnitId().getId());
         
+        checkIfNotNull(quantity);
         checkIfMatchesDouble(quantity);
         
         Double qty = Double.parseDouble(quantity);
-        checkIfNotBelowZero(qty);
+        checkIfNotBelowOrEqZero(qty);
+        checkIfNotTooLow(qty);
         
         Account account = accountFacade.findByLogin(login);
         ShippingMethod shippingMethod = shippingMethodFacade.find(shippingId);
@@ -119,7 +123,7 @@ public class OrderManager implements OrderManagerLocal{
         Order1 order1 = new Order1();
         OrderShipping orderShipping = new OrderShipping();
         OrderProducts orderProducts = new OrderProducts();
-        Double totalPrice = product.getPrice().doubleValue() * qty;
+        Double totalPrice = product.getPrice().doubleValue() * qty + shippingMethod.getPrice().doubleValue();
         
         orderShipping.setName(account.getName());
         orderShipping.setSurname(account.getSurname());
@@ -150,6 +154,23 @@ public class OrderManager implements OrderManagerLocal{
         
         product.setQty(BigDecimal.valueOf(newQty).setScale(3, RoundingMode.HALF_UP));
         productFacade.edit(product);
+        
+        long newNumOfOrders = account.getNumberOfOrders() + 1;
+        account.setNumberOfOrders(newNumOfOrders);
+        accountFacade.edit(account);
+    }
+    
+    private void checkIfNotNull(String quantity) throws AppBaseException {
+        if (quantity == null) {
+            throw  new OrderNullQuantityException("qty_null_passed");
+        }
+    }
+    
+    private void checkIfNotTooLow(Double quantity) throws AppBaseException {
+        BigDecimal scaledQty = BigDecimal.valueOf(quantity).setScale(3, RoundingMode.HALF_UP);
+        if (scaledQty.doubleValue() <= 0.000) {
+            throw new OrderQtyTooLowException("qty_too_low");
+        }
     }
     
     private void checkIfMatchesDouble(String numberStr) throws AppBaseException{

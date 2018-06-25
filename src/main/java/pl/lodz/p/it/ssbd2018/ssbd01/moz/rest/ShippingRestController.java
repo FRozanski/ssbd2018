@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 import javax.ejb.EJB;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -20,13 +21,16 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodPriceException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.ShippingMethodManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.ShippingMethodMapper;
@@ -63,13 +67,14 @@ public class ShippingRestController {
     @Path("addShippingMethod")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addShippingMethod(BasicShippingMethodDto shippingMethodDto) {        
+    public Response addShippingMethod(BasicShippingMethodDto shippingMethodDto, @Context HttpServletRequest servletRequest) {        
         try {
+            String login = getUserLogin(servletRequest);
             validateShippingMethodPrice(shippingMethodDto);
             ShippingMethod shippingMethod = new ShippingMethod();
             ShippingMethodMapper.INSTANCE.basicShippingMethodDtoToShippingMethod(shippingMethodDto, shippingMethod);
             shippingMethod.setActive(true);
-            shippingManager.addShippingMethod(shippingMethod);
+            shippingManager.addShippingMethod(shippingMethod, login);
             return Response.status(Response.Status.OK)
                     .entity(new WebErrorInfo("200", SUCCESS))
                     .type(MediaType.APPLICATION_JSON)
@@ -136,5 +141,12 @@ public class ShippingRestController {
         } catch(NumberFormatException e) {
             throw new ShippingMethodPriceException("shipping_method_price_exception");
         }
+    }
+    
+    private String getUserLogin(HttpServletRequest servletRequest) throws UserUnauthorized, UserAlreadyLogoutException {
+        if (servletRequest.getUserPrincipal() == null) {
+            throw new UserAlreadyLogoutException("user_already_logout_error");
+        }
+        return servletRequest.getUserPrincipal().getName();
     }
 }

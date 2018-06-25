@@ -24,7 +24,7 @@ public interface ShippingMethodManagerLocal {
      * @param shippingMethod metoda wysyłki
      * @throws AppBaseException
      */
-    void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException;
+    void addShippingMethod(ShippingMethod shippingMethod, String login) throws AppBaseException;
 
     /**
      * Aktywowanie metody wysyłki

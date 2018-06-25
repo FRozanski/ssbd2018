@@ -16,9 +16,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
+import pl.lodz.p.it.ssbd2018.ssbd01.mok.facades.AccountFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.ShippingMethodFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 
@@ -33,6 +35,9 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
     @EJB
     ShippingMethodFacadeLocal shippingFacade;
     
+    @EJB(beanName = "AccountMOZ")
+    private AccountFacadeLocal accountFacade;
+    
     @Override
     @RolesAllowed("getAllMethods")
     public List<ShippingMethod> getAllMethods() {
@@ -41,7 +46,9 @@ public class ShippingMethodManager implements ShippingMethodManagerLocal {
     
     @Override
     @RolesAllowed("addShippingMethod")
-    public void addShippingMethod(ShippingMethod shippingMethod) throws AppBaseException{
+    public void addShippingMethod(ShippingMethod shippingMethod, String login) throws AppBaseException{
+        Account account = accountFacade.findByLogin(login);
+        shippingMethod.setCreatedBy(account);
         validateConstraints(shippingMethod);
         shippingFacade.create(shippingMethod);
     }

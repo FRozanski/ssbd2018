@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -72,7 +74,10 @@ public class ShippingMethod implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
-    private boolean active;
+    private boolean active;    
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Account createdBy;
     @Basic(optional = false)
     @NotNull
     @Version
@@ -82,10 +87,11 @@ public class ShippingMethod implements Serializable {
     public ShippingMethod(){        
     }
 
-    public ShippingMethod(String name, BigDecimal price, boolean active, long version) {
+    public ShippingMethod(String name, BigDecimal price, boolean active, Account createdBy, long version) {
         this.name = name;
         this.price = price;
         this.active = active;
+        this.createdBy = createdBy;
         this.version = version;
     }
 
@@ -116,7 +122,15 @@ public class ShippingMethod implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-
+    
+    public Account getCreatedBy() {
+        return createdBy;
+    }
+    
+    public void setCreatedBy(Account createdBy) {
+        this.createdBy = createdBy;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

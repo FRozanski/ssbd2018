@@ -30,7 +30,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
 
 /**
- *
+ * Klasa definiująca dozwolone operacje na obiektach typu {@link Account}
  * @author piotrek
  * @author agkan
  * @author michalmalec

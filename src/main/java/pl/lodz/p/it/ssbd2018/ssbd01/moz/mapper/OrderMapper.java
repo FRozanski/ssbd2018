@@ -20,7 +20,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.ListOrderDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.SellerDto;
 
 /**
- *
+ * Interfejs służący do mapowania obiektów typu {@link Order1} oraz {@link OrderStatus}
  * @author michal
  */
 @Mapper

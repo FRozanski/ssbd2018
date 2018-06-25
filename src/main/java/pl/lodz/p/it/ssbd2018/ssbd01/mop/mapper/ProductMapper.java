@@ -22,7 +22,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.ListProductDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.EditProductDto;
 
 /**
- *
+ * Interfejs mapujący produkt
  * @author michal
  */
 @Mapper

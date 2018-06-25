@@ -46,6 +46,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * Klasa obsługująca zarządzanie obiektami typu {@link OrderProducts} {@link Order1}
  * @author fifi
  * @author dlange
+ * @author piotrek
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless

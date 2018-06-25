@@ -46,6 +46,10 @@ public class OrderRestController {
     @EJB
     OrderManagerLocal orderManager;
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania wszystkich zamówień.
+     * @return listę zamówień w formacie JSON
+     */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -57,6 +61,10 @@ public class OrderRestController {
                 .build();
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania wszystkich dostępnych statusów zamówień.
+     * @return listę statusów zamówień w formacie JSON
+     */
     @GET
     @Path("orderStatus")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -69,6 +77,11 @@ public class OrderRestController {
                 .build();
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania zamówień jako kupujący.
+     * @param servletRequest
+     * @return listę zamówień w formacie JSON
+     */
     @GET
     @Path("myBought")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,6 +102,11 @@ public class OrderRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania zamówień jako sprzedający.
+     * @param servletRequest
+     * @return listę zamówień w formacie JSON
+     */
     @GET
     @Path("mySold")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -109,6 +127,12 @@ public class OrderRestController {
         }
     }
     
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu wykonania zamówienia produktu.
+     * @param orderDto
+     * @param servletRequest
+     * @return status operacji
+     */
     @POST
     @Path("makeOrder")
     @Consumes(MediaType.APPLICATION_JSON)

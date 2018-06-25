@@ -34,7 +34,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
- *
+ * Klasa definująca operacje możliwe do wykonania w zakresie MOP dostępne dla klienta (przeglądarka).
  * @author michal
  */
 @Path("product")
@@ -43,6 +43,10 @@ public class ProductRestController {
     @EJB
     ProductManagerLocal productManager;
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania listy wszystkich produktów.
+     * @return lista produktów w formacie JSON
+     */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -54,6 +58,11 @@ public class ProductRestController {
                 .build();
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania listy produktów danego użytkownika.
+     * @param servletRequest
+     * @return lista produktów w formacie JSON
+     */
     @GET
     @Path("myProducts")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -74,6 +83,10 @@ public class ProductRestController {
         }
     }
 
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania aktywnych produktów w aktywnych kategoriach.
+     * @return lista produktów w formacie JSON
+     */
     @GET
     @Path("activeProducts")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -226,7 +239,7 @@ public class ProductRestController {
      * Metoda udostępniająca endpoint REST dla klienta w celu usunięcia produktu o podanym numerze ID.
      * @param productId
      * @param servletRequest
-     * @return
+     * @return status operacji
      */
     @DELETE
     @Path("deleteProduct")

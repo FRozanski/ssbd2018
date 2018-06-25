@@ -3,7 +3,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.tools;
 import java.security.MessageDigest;
 
 /**
- *
+ * Klasa umożliwiająca hashowanie haseł.
  * @author piotrek
  */
 public class HashUtils {

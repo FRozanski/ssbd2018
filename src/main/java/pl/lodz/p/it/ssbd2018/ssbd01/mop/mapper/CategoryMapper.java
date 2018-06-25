@@ -14,10 +14,13 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicCategoryDto;
 /**
  * Interfejs służący do mapowania obiektów typu {@link BasicCategoryDto} oraz {@link Category}
  * @author Filip
+ * @author dlange
  */
 @Mapper
 public interface CategoryMapper {
     CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
     
     List<BasicCategoryDto> categoriesToDTO(List<Category> categories);
+
+    Category DtoToCategory(BasicCategoryDto categoryDto);
 }

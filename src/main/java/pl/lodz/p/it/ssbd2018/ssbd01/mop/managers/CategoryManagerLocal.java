@@ -45,4 +45,11 @@ public interface CategoryManagerLocal {
      * @throws AppBaseException główny wyjątek aplikacji
      */
     public void deactivateCategory(long categoryId) throws AppBaseException;
+
+    /**
+     * Tworzy nowy obiekt kategorii produktów i umieszcza go w bazie danych
+     * @param category typu {@Link Category}
+     * @throws AppBaseException główny wyjątek aplikacji
+     */
+    public void addCategory(Category category) throws AppBaseException ;
 }

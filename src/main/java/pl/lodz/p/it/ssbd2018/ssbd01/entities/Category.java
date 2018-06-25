@@ -21,6 +21,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
+
 /**
  *
  * @author fifi
@@ -46,7 +48,7 @@ public class Category implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 16)
+    @Size(min = 1, max = 16, message = ErrorCodes.CATEGORY_LENGTH_ERROR)
     @Column(name = "category_name")
     private String categoryName;
     @Basic(optional = false)

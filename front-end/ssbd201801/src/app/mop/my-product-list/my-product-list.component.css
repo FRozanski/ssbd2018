@@ -40,3 +40,14 @@ mat-header-cell {
   font-size: 14px;
   width: 100%;
 }
+
+div.buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+div.buttons > button {
+  margin-left: 10px;
+  margin-top: 10px;
+}

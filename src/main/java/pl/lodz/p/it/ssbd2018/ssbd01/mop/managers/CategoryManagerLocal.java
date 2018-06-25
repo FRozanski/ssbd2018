@@ -31,4 +31,18 @@ public interface CategoryManagerLocal {
      * @throws AppBaseException     główny wyjątek aplikacji
      */
     Category getCategoryById(Long categoryId) throws AppBaseException;
+    
+    /**
+     * Aktywuje obiekt encji kategorii produktu po zadanym numerze identyfikującym
+     * @param categoryId numer identyfikujący kategorię produktu
+     * @throws AppBaseException główny wyjątek aplikacji
+     */
+    public void activateCategory(long categoryId) throws AppBaseException;
+    
+    /**
+     * Deaktywuje obiekt encji kategorii produktu po zadanym numerze identyfikującym
+     * @param categoryId numer identyfikujący kategorię produktu
+     * @throws AppBaseException główny wyjątek aplikacji
+     */
+    public void deactivateCategory(long categoryId) throws AppBaseException;
 }

@@ -72,4 +72,10 @@ public interface ProductFacadeLocal {
      */
     Account findByLogin(String login) throws AppBaseException;
     
+    /**
+     * Usunięcie produktu
+     * @param entity
+     * @throws AppBaseException
+     */
+    public void remove(Product entity) throws AppBaseException;
 }

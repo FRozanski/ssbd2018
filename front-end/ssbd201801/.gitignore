@@ -44,3 +44,5 @@ src/environments/environment.dev.ts
 
 # development files
 /ssbd201801/front-end/ssbd201801/src/environments/environment.dev.ts
+/ssbd201801/front-end/ssbd201801/src/environments/environment.local.ts
+/src/environments/environment.local.ts

@@ -10,6 +10,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
@@ -19,6 +20,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.AccountNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
@@ -26,7 +28,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
  * @author fifi
  * @author michalmalec
  */
-@Stateless
+@Stateless(name = "ProductMOP")
 public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implements ProductFacadeLocal {
 
     @PersistenceContext(unitName = "ssbd01mopDS")
@@ -111,6 +113,26 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
             throw new ProductException("constraint_violation");
         }        
     }
-    
-    
+
+    /**
+     * Usunięcie produktu
+     * @param entity
+     */
+    @Override
+    @RolesAllowed("removeProduct")
+    public void remove(Product entity) {
+        getEntityManager().remove(getEntityManager().merge(entity));
+    }
+
+    @Override
+    @RolesAllowed("editProduct")
+    public void edit(Product product) throws AppBaseException {
+        try {
+            super.edit(product);
+        } catch (OptimisticLockException oe) {
+            throw new ProductOptimisticException("product_optimistic_exception");
+        } catch (ConstraintViolationException ex) {
+            throw new ProductException("constraint_violation");
+        }
+    }
 }

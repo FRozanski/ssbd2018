@@ -18,7 +18,10 @@
     "CREATE_ACCOUNT": "Create account",
     "ACTIVATE_ACCOUNT" : "Activate account",
     "PRODUCTS" : "Products",
-    "MY_PRODUCTS" : "My products"
+    "MY_PRODUCTS" : "My products",
+    "SHIPPING_METHODS": "Shipping methods",
+    "ADD_SHIPPING_METHOD": "Add shipping method",
+    "ADD_PRODUCT": "Add product"
   },
   "ACCOUNT": {
     "CITY": "CITY",
@@ -43,6 +46,7 @@
     "CHANGE_OF_PASSWORD": "CHANGE_OF_PASSWORD"
   },
   "PRODUCT": {
+    "ADD": "Add product",
     "NAME": "Name",
     "DESCRIPTION": "Description",
     "PRICE": "Price",
@@ -50,7 +54,11 @@
     "ACTIVE": "Active",
     "CATEGORY": "Category",
     "UNIT": "Unit",
-    "OWNER": "Owner"
+    "OWNER": "Owner",
+    "EDIT": "Edit product",
+    "DELETE_PRODUCT" : "Delete product",
+    "DEL_RESPONSE" : "Selected product deleted",
+    "CONFIRM_CONFIRM" : "Are you really, really sure to delete that product?"
   },
   "FORM": {
     "FIELD_REQUIRED": "FIELD_REQUIRED",
@@ -100,7 +108,22 @@
     "ACCOUNT_UNLOCK": "Account has been successfully unlocked",
     "CHANGE_PASSWORD": "Password changed successfully",
     "REGISTER": "Account has been successfully registered",
-    "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully"
+    "ALTER_ACCOUNT_ACCESS_LEVEL": "Account access levels have been changed successfully",
+    "METHOD_DEACTIVATED": "Method has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_METHOD": "The method could not be deactivated",
+    "METHOD_ACTIVATED": "Method has been successfully activated",
+    "FAILED_TO_ACTIVATE_METHOD": "Failed to activate the method",
+    "PRODUCT_DEACTIVATED": "Product has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_PRODUCT": "The product could not be deactivated",
+    "PRODUCT_ACTIVATED": "Product has been successfully activated",
+    "FAILED_TO_ACTIVATE_PRODUCT": "Failed to activate the product",
+    "ADD_PRODUCT": "Product successfully added",
+    "ADD_SHIPPING_METHOD": "Shipping method has been successfully added",
+    "CATEGORY_DEACTIVATED": "Category has been deactivated successfully",
+    "FAILED_TO_DEACTIVATE_CATEGORY": "The category could not be deactivated",
+    "CATEGORY_ACTIVATED": "Category has been successfully activated",
+    "FAILED_TO_ACTIVATE_CATEGORY": "Failed to activate the category",
+    "EDIT_PRODUCT": "Product has been successfully edited"
   },
   "LOCATION": {
     "YOUR_LOCATION": "Your location",
@@ -116,7 +139,19 @@
     "ADD_ACCOUNT_PAGE": "Adding a new user",
     "REGISTRATION_CONFIRM": "Account activation",
     "PRODUCT_LIST_PAGE": "Product list page",
-    "MY_PRODUCT_LIST_PAGE": "My product list page"
+    "MY_PRODUCT_LIST_PAGE": "My product list page",
+    "SHIPPING_METHODS": "Shipping methods",
+    "ADD_SHIPPING_METHOD_PAGE": "Add shipping method page",
+    "ADD_PRODUCT": "Add product",
+    "CATEGORY_LIST_PAGE": "Category list page",
+    "EDIT_PRODUCT_PAGE": "My product list → Edit product",
+    "PRODUCT_EDIT_PAGE": "Edit product"
+  },
+  "SHIPPING_METHOD": {
+    "ADD_SHIPPING_METHOD":"Add shipping method",
+    "NAME": "Name",
+    "PRICE": "Cost",
+    "ACTIVE": "Active"
   },
   "app.exception.web.login_error": "Invalid login or password",
   "app.exception.mok.account.phone_pattern_error": "The phone has been entered in an incorrect format",
@@ -142,6 +177,11 @@
   "flat_number_pattern_error": "The apartment number given is in the wrong format",
   "city_length_error": "The city name given is not long enough",
   "country_length_error": "The given country name is not the right length",
+  "product_name_pattern_error": "The given name is not in the right format",
+  "product_name_length_error": "The name you entered has the wrong length",
+  "product_description_length_error": "The description provided is of unsuitable length",
+  "product_price_error": "The price is not in the right format",
+  "product_qty_error": "The specified quantity is not in the right format",
   "app.exception.mok.account.login_not_unique": "The specified login is not unique",
   "app.exception.mok.account.email_not_unique": "The email you entered is not unique",
   "app.exception.mok.account.phone_not_unique": "The phone number provided is not unique",
@@ -165,6 +205,16 @@
   "app.exception.mok.account_alevel.already_exists": "The account already has this level of access",
   "app.exception.mok.mail.not_sent": "An email has not been sent",
   "app.exception.mok.mail.wrong_address": "The email address provided is not valid",
+  "app.exception.mop.product.price_error": "End price in the wrong format",
+  "app.exception.mop.product.qty_error": "The amount of time in the wrong format",
+  "app.exception.mop.product.product_price_error": "The price has been given in the wrong format, the correct one is: maximum six digits in the whole number and two in the decimal part",
+  "app.exception.mop.product.product_qty_error": "The quantity has been given in the wrong format, the correct one is: maximum six digits in the whole number and three in the decimal part",
+  "app.exception.mop.unit.not_found": "Chosen unit does not exists",
+  "app.exception.moz.shipping_method.shipping_method_name_pattern_error": "The name was given in the wrong format",
+  "app.exception.moz.shipping_method.price_format_error": "The price should be given in a numerical format",
+  "app.exception.moz.shipping_method.shipping_method_price_too_high_error": "The price was set too high. The maximum is 999.99",
+  "app.exception.moz.shipping_method.shipping_method_price_precision_error": "The price has been given in the wrong format, the correct one is: maximum three digits in the whole number and two in the decimal part",
+  "app.exception.moz.shipping_method.name_not_unique": "The name provided is not unique",
   "success": "The operation has been successfully completed.",
   "app.pagination.itemsPerPageLabel": "Number of elements per page",
   "app.pagination.nextPageLabel": "Next page",

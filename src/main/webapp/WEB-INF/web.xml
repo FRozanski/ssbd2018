@@ -159,10 +159,71 @@
         </user-data-constraint>
     </security-constraint>
     <security-constraint>
+        <display-name>activateDeactivateCategory</display-name>
+        <web-resource-collection>
+            <web-resource-name>activateDeactivateCategory</web-resource-name>            
+            <url-pattern>/webresources/category/activateCategory</url-pattern>
+            <url-pattern>/webresources/category/deactivateCategory</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getAllUnits</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllCategories</web-resource-name>            
+            <url-pattern>/webresources/unit/</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
         <display-name>getMyProducts</display-name>
         <web-resource-collection>
             <web-resource-name>getMyProducts</web-resource-name>            
             <url-pattern>/webresources/product/myProducts</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>   
+    <security-constraint>
+        <display-name>productToEdit</display-name>
+        <web-resource-collection>
+            <web-resource-name>productToEdit</web-resource-name>            
+            <url-pattern>/webresources/product/productToEdit</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>editProduct</display-name>
+        <web-resource-collection>
+            <web-resource-name>editProduct</web-resource-name>            
+            <url-pattern>/webresources/product/editProduct</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -184,6 +245,21 @@
             <role-name>USER</role-name>
             <role-name>MANAGER</role-name>
             <role-name>ADMIN</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>addProduct</display-name>
+        <web-resource-collection>
+            <web-resource-name>addProduct</web-resource-name>            
+            <url-pattern>/webresources/product/addProduct</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>
@@ -220,12 +296,27 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    <security-constraint>
+        <display-name>deleteProduct</display-name>
+        <web-resource-collection>
+            <web-resource-name>deleteProduct</web-resource-name>            
+            <url-pattern>/webresources/product/deleteProduct</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
     <!-- MOZ -->
     <security-constraint>
         <display-name>addShippingMethod</display-name>
         <web-resource-collection>
             <web-resource-name>addShippingMethod</web-resource-name>            
-            <url-pattern>/webresources/order/addShippingMethod</url-pattern>
+            <url-pattern>/webresources/shipping/addShippingMethod</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -241,6 +332,21 @@
         <web-resource-collection>
             <web-resource-name>getAllShippingMethod</web-resource-name>            
             <url-pattern>/webresources/shipping</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>MANAGER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint> 
+    <security-constraint>
+        <display-name>addShippingMethod</display-name>
+        <web-resource-collection>
+            <web-resource-name>getAllShippingMethod</web-resource-name>            
+            <url-pattern>/webresources/shipping/activate</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>
@@ -332,6 +438,21 @@
         <web-resource-collection>
             <web-resource-name>getOrder1</web-resource-name>            
             <url-pattern>/webresources/order/updateOrderStatus</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>makeOrder</display-name>
+        <web-resource-collection>
+            <web-resource-name>makeOrder</web-resource-name>            
+            <url-pattern>/webresources/order/makeOrder</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <description/>

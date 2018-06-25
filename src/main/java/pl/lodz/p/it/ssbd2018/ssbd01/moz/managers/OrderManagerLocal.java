@@ -22,7 +22,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 @Local
 public interface OrderManagerLocal {    
     
-    void makeOrder(OrderProducts orderProducts);
+    public void makeOrder(long productId, String qty, long shippingId, String login) throws AppBaseException;
     
     void makeOrderPayment(Order1 order);
     

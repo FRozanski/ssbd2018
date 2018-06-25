@@ -19,7 +19,7 @@ public class OrderNotFoundException extends OrderException {
 
     public OrderNotFoundException(String message) {
         super(message);
-    }    
+    }
 
     @Override
     public String getCode() {

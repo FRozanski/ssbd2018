@@ -28,7 +28,11 @@ public interface OrderManagerLocal {
     
     void cancelOrder(Order1 order);        
     
-    void setOrderStatus(Order1 order, OrderStatus orderStatus);
+    void setOrderStatus(Order1 order, OrderStatus orderStatus) throws AppBaseException;
+     
+    public Order1 getOrder1ById(long id) throws AppBaseException;
+    
+    public OrderStatus getOrderStatusById(long id) throws AppBaseException;
     
     List<Order1> getAllOrders();
     

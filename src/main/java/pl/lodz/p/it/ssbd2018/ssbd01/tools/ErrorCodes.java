@@ -7,17 +7,9 @@ package pl.lodz.p.it.ssbd2018.ssbd01.tools;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.ConstraintException;
 
 /**
- *
+ * Klasa zawierająca kody błędów.
  * @author michal
  */
 public class ErrorCodes {

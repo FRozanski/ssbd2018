@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import javax.faces.context.FacesContext;
 
 /**
- *
+ * Klasa umożliwiająca tłumaczenie komunikatów.
  * @author agkan
  */
 public class TranslateUtils extends ResourceBundle {

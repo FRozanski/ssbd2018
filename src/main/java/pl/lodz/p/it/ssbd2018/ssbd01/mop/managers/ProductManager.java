@@ -43,7 +43,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- *
+ * Klasa obsługująca zarządzanie obiektami typu {@link Product}
  * @author fifi
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)

@@ -17,7 +17,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.NewProductDto;
 
 
 /**
- *
+ * Interfejs manager do zarządzania produktami
  * @author fifi
  */
 @Local

@@ -47,6 +47,10 @@ public class ShippingRestController {
     @EJB
     ShippingMethodManagerLocal shippingManager;
     
+    /**
+     * Metoda udostępniająca endpoint REST dla klienta w celu pobrania wszystkich metod wysyłki.
+     * @return
+     */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

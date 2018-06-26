@@ -5,13 +5,9 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.moz.managers;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Account;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Order1;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderProducts;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.OrderStatus;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
@@ -30,11 +26,7 @@ public interface OrderManagerLocal {
      * @param login
      * @throws AppBaseException
      */
-    public void makeOrder(long productId, String qty, long shippingId, String login) throws AppBaseException;
-    
-    void makeOrderPayment(Order1 order);
-    
-    void cancelOrder(Order1 order);        
+    public void makeOrder(long productId, String qty, long shippingId, String login) throws AppBaseException;      
     
     /**
      * Metoda umożliwiająca zmianę statusu zamówienia.
@@ -60,6 +52,10 @@ public interface OrderManagerLocal {
      */
     public OrderStatus getOrderStatusById(long id) throws AppBaseException;
     
+    /**
+     * Metoda umożliwiająca pobranie wszystkich zamówień.
+     * @return type List
+     */
     List<Order1> getAllOrders();
     
     /**
@@ -80,9 +76,4 @@ public interface OrderManagerLocal {
     
     List<OrderStatus> getAllOrderStatus();
     
-    List<Order1> getAllOrdersByAccountAsSeller(Account seller);
-    
-    List<Order1> getAllOrdersByAccountAsBuyer(Account buyer);
-    
-    List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price);
 }

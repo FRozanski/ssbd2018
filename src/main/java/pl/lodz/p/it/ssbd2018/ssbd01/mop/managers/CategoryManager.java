@@ -19,28 +19,29 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link Category}
+ *
  * @author Filip
  */
 @TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 @Stateless
 @Interceptors(LoggerInterceptor.class)
-public class CategoryManager implements CategoryManagerLocal{
-    
+public class CategoryManager implements CategoryManagerLocal {
+
     @EJB
     CategoryFacadeLocal categoryFacade;
-    
+
     @Override
     @RolesAllowed("getAllCategories")
     public List<Category> getAllCategories() {
         return categoryFacade.findAll();
     }
-    
+
     @Override
     @RolesAllowed("getCategoryById")
     public Category getCategoryById(Long categoryId) throws AppBaseException {
         return categoryFacade.find(categoryId);
-    }        
-    
+    }
+
     @Override
     @RolesAllowed("activateCategory")
     public void activateCategory(long categoryId) throws AppBaseException {
@@ -48,7 +49,7 @@ public class CategoryManager implements CategoryManagerLocal{
         category.setActive(true);
         categoryFacade.edit(category);
     }
-    
+
     @Override
     @RolesAllowed("deactivateCategory")
     public void deactivateCategory(long categoryId) throws AppBaseException {
@@ -57,22 +58,17 @@ public class CategoryManager implements CategoryManagerLocal{
         categoryFacade.edit(category);
     }
 
-    /**
-     * Metoda służąca do dodawania nowych kategorii produktów do bazy danych.
-     * @param category 
-     * @throws AppBaseException 
-     */
     @Override
     @RolesAllowed("addCategory")
-	public void addCategory(Category category) throws AppBaseException {
-                category.setActive(true);
-		categoryFacade.create(category);
-	}
+    public void addCategory(Category category) throws AppBaseException {
+        category.setActive(true);
+        categoryFacade.create(category);
+    }
 
     @Override
     @RolesAllowed("getActiveCategories")
-    public List<Category> getActiveCategories()throws AppBaseException {
+    public List<Category> getActiveCategories() throws AppBaseException {
         return categoryFacade.findAllActive();
     }
-    
+
 }

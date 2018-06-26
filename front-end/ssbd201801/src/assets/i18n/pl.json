@@ -25,7 +25,7 @@
     "SHIPPING_METHODS": "Metody wysyłki",
     "ADD_SHIPPING_METHOD": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
-    "SHIPPING_METHODS": "Metody wysyłki"
+    "MAKE_ORDER": "Zamów produkt"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -99,8 +99,8 @@
     "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?",
     "BUY_CONFIRM" : "Czy jesteś pewien że chcesz kupić ten produkt?",
     "BUY_NOTE" : "Zakupiłeś wybrany produkt",
-    "SHIPMENT" : "Metoda wysyłki",
-    "QTY_TO_BUY" : "Ilość do zamówienia",
+    "SHIPMENT" : "Metoda wysyłki*",
+    "QTY_TO_BUY" : "Ilość do zamówienia*",
     "BUY" : "KUP",
     "SHIP" : "Wybierz"
   },

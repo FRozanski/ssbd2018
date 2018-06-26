@@ -68,6 +68,7 @@ import { ShippingMethodsListComponent } from './moz/shipping-methods-list/shippi
 import {ShippingMethodService} from './moz/common/shipping-method.service';
 import { AddShippingMethodComponent } from './moz/add-shipping-method/add-shipping-method.component';
 import {ProductEditComponent} from './mop/product-edit/product-edit.component';
+import {MakeOrderComponent} from './moz/make-order/make-order.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -94,6 +95,15 @@ const appRoutes: Routes = [
     data:
       {
         expectedRoles: [Properties.UserRole, Properties.AdminRole, Properties.ManagerRole]
+      }
+  },
+  {
+    path: 'makeOrder',
+    canActivate: [AuthGuard],
+    component: MakeOrderComponent,
+    data:
+      {
+        expectedRoles: [Properties.UserRole]
       }
   },
   {
@@ -289,7 +299,8 @@ const appRoutes: Routes = [
     CategoryListComponent,
     ShippingMethodsListComponent,
     AddShippingMethodComponent,
-    ProductEditComponent
+    ProductEditComponent,
+    MakeOrderComponent
   ],
   imports: [
     MatDialogModule,

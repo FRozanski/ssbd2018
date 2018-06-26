@@ -18,12 +18,9 @@ import {OrderService} from '../../moz/common/order.service';
 })
 export class ProductListComponent implements OnInit {
 
-  displayedColumns = ['name', 'price', 'qty', 'unit', 'category', 'shippment', 'qtyToBuy', 'buy'];
+  displayedColumns = ['name', 'price', 'qty', 'unit', 'category'];
   dataSource;
 
-  selectedMethod: ShippingMethod = {};
-  orderData: OrderData = {};
-  availableShipments: ShippingMethod[] = [];
   dialogRef: MatDialogRef<ConfirmDialogComponent>;
 
   constructor(private locationService: LocationService,
@@ -31,8 +28,7 @@ export class ProductListComponent implements OnInit {
               private orderService: OrderService,
               private shippingMethodService: ShippingMethodService,
               public dialog: MatDialog,
-              private translateService: TranslateService,
-              private notificationService: NotificationService) {
+              private translateService: TranslateService) {
   }
 
   @ViewChild(MatSort) sort: MatSort;
@@ -40,6 +36,10 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit() {
     this.locationService.passRouter('LOCATION.PRODUCT_LIST_PAGE');
+    this.updateProducts();
+  }
+
+  updateProducts() {
     this.productService.getAllActiveProductWithActiveCategory().subscribe((products) => {
       this.dataSource = new MatTableDataSource<ProductData>(products);
       this.dataSource.sort = this.sort;
@@ -61,41 +61,11 @@ export class ProductListComponent implements OnInit {
         this.paginator._intl.lastPageLabel = translation;
       });
     });
-
-    this.shippingMethodService.getAllShippingMethods().subscribe((data: ShippingMethod[]) => {
-      this.availableShipments = data;
-    });
-    this.selectedMethod = this.availableShipments[0];
   }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
-  }
-
-  onShippingMethodChange(event) {
-    this.orderData.shippingId = event.value;
-  }
-
-  onQtyToBuyChange(product: ProductData, event) {
-    this.orderData.productId = product.id;
-    this.orderData.qty = event.target.value;
-  }
-
-  onBuyProductClick(product: ProductData) {
-    this.dialogRef = this.dialog.open(ConfirmDialogComponent, {disableClose: true});
-    this.dialogRef.componentInstance.text = this.translateService.instant('PRODUCT.BUY_CONFIRM');
-
-    this.dialogRef.afterClosed().subscribe((userAccepted: boolean) => {
-      if (userAccepted) {
-        this.orderData.productId = product.id;
-        this.orderService.makeOrder(this.orderData).subscribe((response) => {
-          this.notificationService.displayTranslatedNotification('PRODUCT.BUY_NOTE');
-        }, (error) => {
-          this.notificationService.displayTranslatedNotification(error.error.message);
-        });
-      }
-    });
   }
 }

@@ -21,7 +21,8 @@
     "MY_PRODUCTS" : "My products",
     "SHIPPING_METHODS": "Shipping methods",
     "ADD_SHIPPING_METHOD": "Add shipping method",
-    "ADD_PRODUCT": "Add product"
+    "ADD_PRODUCT": "Add product",
+    "MAKE_ORDER": "Order product"
   },
   "ACCOUNT": {
     "CITY": "CITY",
@@ -61,8 +62,8 @@
     "CONFIRM_CONFIRM": "Are you really, really sure to delete that product?",
     "BUY_CONFIRM": "Are you sure you want to buy this product?",
     "BUY_NOTE": "You've bought selected product",
-    "SHIPMENT": "Shipping method",
-    "QTY_TO_BUY": "Quantity to order",
+    "SHIPMENT": "Shipping method*",
+    "QTY_TO_BUY": "Quantity to order*",
     "BUY": "Buy",
     "SHIP": "Choose"
   },

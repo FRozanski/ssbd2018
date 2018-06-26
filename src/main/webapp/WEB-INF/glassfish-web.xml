@@ -128,6 +128,7 @@
   <security-role-mapping>
     <role-name>getAllCategories</role-name>
     <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>getCategoryById</role-name>
@@ -421,7 +422,7 @@
   </security-role-mapping>
   <security-role-mapping>
     <role-name>getOrder1ById</role-name>
-    <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>getOrderStatusById</role-name>

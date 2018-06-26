@@ -2,7 +2,8 @@
   <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose (openedChange)='onSidenavOpenedChange()'>
     <p>
       <button mat-button mat-raised-button color='primary' (click)="sidenav.close()">
-        < </button>
+        <i class="demo-icon icon-menu"></i> 
+      </button>
     </p>
     <h2 *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(VirtualRole)' class="example-h2">{{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</h2>
     <p *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole)' class="example-p">{{ "HOME.USER_ROLES" | translate }}: {{ rolesStringified | translate }}</p>
@@ -79,7 +80,9 @@
 
   <mat-sidenav-content>
     <p>
-      <button mat-button mat-raised-button color='primary' (click)="sidenav.open()">></button>
+      <button mat-button mat-raised-button color='primary' (click)="sidenav.open()">
+        <i class="demo-icon icon-menu"></i> 
+      </button>
     </p>
     <app-notifications></app-notifications>
 

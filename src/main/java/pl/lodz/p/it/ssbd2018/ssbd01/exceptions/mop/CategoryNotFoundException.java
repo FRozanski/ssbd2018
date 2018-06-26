@@ -8,6 +8,7 @@ package pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop;
 /**
  *
  * @author agkan
+ * Klasa wyjątku wykorzystywana gdy dana kategoria nie została znaleziona w bazie danych
  */
 public class CategoryNotFoundException  extends CategoryException {
     

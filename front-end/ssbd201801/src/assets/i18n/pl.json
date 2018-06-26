@@ -75,7 +75,9 @@
     "TOTAL_PRICE": "Całkowita wartość",
     "OPEN": "Otwarte",
     "SHIPPING_METHOD": "Sposób dostawy",
-    "STATUS_UPDATE_SUCCESS": "Zmiana statusu zamówienia powiodła się."
+    "STATUS_UPDATE_SUCCESS": "Zmiana statusu zamówienia powiodła się.",
+    "BOUGHT_BY_YOURSELF": "Kupione przez Ciebie",
+    "SOLD_BY_YOURSELF": "Sprzedane przez Ciebie"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Dodaj metodę wysyłki",
@@ -206,7 +208,9 @@
     "ADD_SHIPPING_METHOD_PAGE": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
     "CATEGORY_LIST_PAGE": "Lista kategorii",
-    "PRODUCT_EDIT_PAGE": "Edytuj produkt"
+    "PRODUCT_EDIT_PAGE": "Edytuj produkt",
+    "MY_ORDERS": "Moje zamówienia",
+    "ALL_ORDERS": "Wszystkie zamówienia"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from '../../mok/common/location.service';
 
 @Component({
   selector: 'app-own-orders',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OwnOrdersComponent implements OnInit {
 
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit() {
+    this.locationService.passRouter('LOCATION.MY_ORDERS');
   }
 
 }

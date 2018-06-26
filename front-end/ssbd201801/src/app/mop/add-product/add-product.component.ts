@@ -48,7 +48,7 @@ export class AddProductComponent implements OnInit {
 
     this.initializeForm();
 
-    this.categoryService.getAllCategories().subscribe((categories) => {
+    this.categoryService.getActiveCategories().subscribe((categories) => {
       this.categories = categories.map(c => Object.assign({}, c));
     });
 

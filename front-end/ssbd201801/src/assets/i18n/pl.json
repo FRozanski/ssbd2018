@@ -25,7 +25,7 @@
     "SHIPPING_METHODS": "Metody wysyłki",
     "ADD_SHIPPING_METHOD": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
-    "SHIPPING_METHODS": "Metody wysyłki"
+    "MAKE_ORDER": "Zamów produkt"
   },
   "ACCOUNT": {
     "CITY": "Miasto",
@@ -75,7 +75,9 @@
     "TOTAL_PRICE": "Całkowita wartość",
     "OPEN": "Otwarte",
     "SHIPPING_METHOD": "Sposób dostawy",
-    "STATUS_UPDATE_SUCCESS": "Zmiana statusu zamówienia powiodła się."
+    "STATUS_UPDATE_SUCCESS": "Zmiana statusu zamówienia powiodła się.",
+    "BOUGHT_BY_YOURSELF": "Kupione przez Ciebie",
+    "SOLD_BY_YOURSELF": "Sprzedane przez Ciebie"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Dodaj metodę wysyłki",
@@ -99,8 +101,8 @@
     "CONFIRM_CONFIRM" : "Czy jesteś pewien pewności że chcesz usunąć ten produkt?",
     "BUY_CONFIRM" : "Czy jesteś pewien że chcesz kupić ten produkt?",
     "BUY_NOTE" : "Zakupiłeś wybrany produkt",
-    "SHIPMENT" : "Metoda wysyłki",
-    "QTY_TO_BUY" : "Ilość do zamówienia",
+    "SHIPMENT" : "Metoda wysyłki*",
+    "QTY_TO_BUY" : "Ilość do zamówienia*",
     "BUY" : "KUP",
     "SHIP" : "Wybierz"
   },
@@ -206,7 +208,10 @@
     "ADD_SHIPPING_METHOD_PAGE": "Dodaj metodę wysyłki",
     "ADD_PRODUCT": "Dodaj produkt",
     "CATEGORY_LIST_PAGE": "Lista kategorii",
-    "PRODUCT_EDIT_PAGE": "Edytuj produkt"
+    "PRODUCT_EDIT_PAGE": "Edytuj produkt",
+    "MY_ORDERS": "Moje zamówienia",
+    "ALL_ORDERS": "Wszystkie zamówienia",
+    "MAKE_ORDER": "Zamów produkt"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",
@@ -313,6 +318,8 @@
   "app.exception.mop.product.product_qty_not_enougth": "Sprzedający nie dysponuje podaną ilością produktu",
   "app.exception.moz.order.qty_error": "Jak nie chcesz kupić to proszę nie wpisuj 0 lub mniej",
   "app.exception.moz.order.qty_too_low": "Podana ilość jest zbyt niska",
+  "app.exception.mop.category.not_found": "Kategoria nie została znaleziona",
   "order_status_not_found": "Nie znaleziono statusu zamówienia.",
+  "app.exception.web.null_password_or_username_error" : "Nie podano hasła lub nazwy użytkownika",
   "order_not_found": "Nie znaleziono zamówienia."
 }

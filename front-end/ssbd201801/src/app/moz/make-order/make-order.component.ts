@@ -39,7 +39,7 @@ export class MakeOrderComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngOnInit() {
-    this.locationService.passRouter('LOCATION.PRODUCT_LIST_PAGE');
+    this.locationService.passRouter('LOCATION.MAKE_ORDER');
     this.updateProducts();
   }
 

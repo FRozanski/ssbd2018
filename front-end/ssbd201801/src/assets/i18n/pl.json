@@ -210,7 +210,8 @@
     "CATEGORY_LIST_PAGE": "Lista kategorii",
     "PRODUCT_EDIT_PAGE": "Edytuj produkt",
     "MY_ORDERS": "Moje zamówienia",
-    "ALL_ORDERS": "Wszystkie zamówienia"
+    "ALL_ORDERS": "Wszystkie zamówienia",
+    "MAKE_ORDER": "Zamów produkt"
   },
   "DIALOG": {
     "CONFIRM_ACTION": "Potwierdź operację",

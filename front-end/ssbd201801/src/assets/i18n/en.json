@@ -152,7 +152,8 @@
     "ADD_PRODUCT": "Add product",
     "CATEGORY_LIST_PAGE": "Category list page",
     "EDIT_PRODUCT_PAGE": "My product list → Edit product",
-    "PRODUCT_EDIT_PAGE": "Edit product"
+    "PRODUCT_EDIT_PAGE": "Edit product",
+    "MAKE_ORDER": "Order product"
   },
   "SHIPPING_METHOD": {
     "ADD_SHIPPING_METHOD":"Add shipping method",

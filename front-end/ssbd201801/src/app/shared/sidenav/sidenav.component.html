@@ -46,6 +46,10 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/makeOrder' *ngIf='hasRole(UserRole)'>{{"SIDE_NAV.MAKE_ORDER" | translate }}</button>
+    </p>
+
+    <p>
       <button mat-button routerLink='/myProducts' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_PRODUCTS" | translate }}</button>
     </p>
 

@@ -152,6 +152,7 @@
         <auth-constraint>
             <description/>
             <role-name>MANAGER</role-name>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>
@@ -183,6 +184,7 @@
         <auth-constraint>
             <description/>
             <role-name>MANAGER</role-name>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>

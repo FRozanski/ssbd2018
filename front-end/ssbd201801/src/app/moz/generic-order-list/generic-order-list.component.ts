@@ -33,10 +33,10 @@ export class GenericOrderListComponent implements OnInit{
   @Output()
   statusChange: EventEmitter<OrderAndStatus> = new EventEmitter<OrderAndStatus>();
 
-  @ViewChild(MatPaginator) 
+  @ViewChild(MatPaginator)
   paginator: MatPaginator;
 
-  @ViewChild(MatSort) 
+  @ViewChild(MatSort)
   sort: MatSort;
 
   displayedColumns = [
@@ -46,7 +46,6 @@ export class GenericOrderListComponent implements OnInit{
     'buyerLogin',
     'sellerLogin',
     'status',
-    'isClosed',
     'shippingMethod'
   ];
 
@@ -66,7 +65,7 @@ export class GenericOrderListComponent implements OnInit{
       } else {
         throw new Error("You have to provide statusSelectOptionsSource via @Input()!");
       }
-    } 
+    }
 
   }
 

@@ -43,17 +43,9 @@
            </mat-form-field>
          </ng-container>
          <ng-container *ngIf='!isStatusEditable'>
-            {{element.status.name}} 
+            {{element.status.name}}
          </ng-container>
-         
-      </mat-cell>
-    </ng-container>
 
-    <ng-container matColumnDef="isClosed">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.STATE' | translate }} </mat-header-cell>
-      <mat-cell *matCellDef="let element"> 
-          <span *ngIf='element.isClosed'> {{ 'ORDER.CLOSED' | translate }} </span>  
-          <span *ngIf='!element.isClosed'> {{ 'ORDER.OPEN' | translate }} </span>  
       </mat-cell>
     </ng-container>
 

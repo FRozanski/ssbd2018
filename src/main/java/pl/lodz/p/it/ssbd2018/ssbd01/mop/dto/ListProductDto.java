@@ -5,7 +5,6 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.dto;
 
-import java.math.BigDecimal;
 /**
  *
  * @author michal

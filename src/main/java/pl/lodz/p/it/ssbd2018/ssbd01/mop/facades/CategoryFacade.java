@@ -16,13 +16,11 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryUniqueNameException;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.ProductNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**

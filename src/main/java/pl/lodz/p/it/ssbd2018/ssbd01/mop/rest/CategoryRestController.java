@@ -25,7 +25,6 @@ import javax.ws.rs.core.Response;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryNameLengthException;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.BasicCategoryDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.dto.CategoryNameDto;

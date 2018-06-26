@@ -40,7 +40,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.NewProductMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.mop.mapper.ProductMapper;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link Product}
@@ -158,36 +157,6 @@ public class ProductManager implements ProductManagerLocal{
         accountFacade.edit(account);
     }
 
-    @Override
-    @RolesAllowed("updateProduct")
-    public void updateProduct(Product product) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("setProductState")
-    public void setProductState(Product product, boolean active) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("getAllProductsContainName")
-    public List<Product> getAllProductsContainName(String name) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("getProductFromAccountByName")
-    public Product getProductFromAccountByName(Account account, String name) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("setProductCategory")
-    public void setProductCategory(Product product, Category category) {
-        throw new NotImplementedException();
-    }
-    
     @Override
     @RolesAllowed("getUnitById")
     public Unit getUnitById(Long unitId) throws AppBaseException {

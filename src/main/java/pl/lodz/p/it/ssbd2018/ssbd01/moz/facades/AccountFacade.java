@@ -80,7 +80,7 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     }
 
     @Override
-    @PermitAll
+    @RolesAllowed("editAccount")
     public void edit(Account account) throws AppBaseException {
         try {
             super.edit(account);

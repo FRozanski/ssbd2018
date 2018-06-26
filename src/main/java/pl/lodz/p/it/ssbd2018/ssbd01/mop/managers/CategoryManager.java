@@ -64,7 +64,7 @@ public class CategoryManager implements CategoryManagerLocal{
     @Override
     @RolesAllowed("addCategory")
 	public void addCategory(Category category) throws AppBaseException {
-		categoryFacade.create(category);
+            categoryFacade.create(category);
 	}
     
 }

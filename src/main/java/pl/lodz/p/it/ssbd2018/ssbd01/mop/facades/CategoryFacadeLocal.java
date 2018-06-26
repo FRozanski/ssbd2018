@@ -58,5 +58,12 @@ public interface CategoryFacadeLocal {
      * @return liczba całkowita będąca liczbą obiektów
      */
     int count();
+
+    /**
+     * Pobiera z bazy danych obiekty typu {@link Category} oznaczone jako aktywne
+     * @return lista obiektów typu {@link Category}
+     * @throws AppBaseException główny wyjątek aplikacji
+     */
+    List<Category> findAllActive() throws AppBaseException;
     
 }

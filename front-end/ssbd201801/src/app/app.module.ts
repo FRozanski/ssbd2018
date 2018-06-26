@@ -69,6 +69,8 @@ import {ShippingMethodService} from './moz/common/shipping-method.service';
 import { AddShippingMethodComponent } from './moz/add-shipping-method/add-shipping-method.component';
 import {ProductEditComponent} from './mop/product-edit/product-edit.component';
 import {MakeOrderComponent} from './moz/make-order/make-order.component';
+import { CdkScrollable } from '@angular/cdk/overlay';
+import { ScrollDispatchModule, ScrollDispatcher } from '@angular/cdk/scrolling';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -318,6 +320,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
+    ScrollDispatchModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
@@ -337,6 +340,7 @@ const appRoutes: Routes = [
     AccountService,
     ProductService,
     SessionService,
+    ScrollDispatcher,
     UnitService,
     LocationService,
     OrderService,

@@ -121,7 +121,7 @@ const appRoutes: Routes = [
     canActivate: [AuthGuard],
     component: AllOrdersListComponent,
     data: {
-      expectedRoles: [Properties.AdminRole]
+      expectedRoles: [Properties.ManagerRole]
     }
   },
   {

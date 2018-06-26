@@ -60,7 +60,6 @@ export class AddShippingMethodComponent implements OnInit {
             this.router.navigate(['/main']);
           },
           (errorResponse) => {
-            console.log(errorResponse.error.message);
               this.formValidationMessage = this.translateService.instant(errorResponse.error.message);
             });
         }

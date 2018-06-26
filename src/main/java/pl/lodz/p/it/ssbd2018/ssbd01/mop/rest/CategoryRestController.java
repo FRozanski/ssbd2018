@@ -37,7 +37,7 @@ import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**
  * Klasa REST API, odpowiedzialna za zarządanie kategoriami produktów
- * 
+ *
  * @author Filip
  */
 @Path("category")
@@ -48,8 +48,8 @@ public class CategoryRestController {
 
     /**
      * Metoda REST API służąca do pobierania wszystkich kategorii produktów
-     * 
-     * @return JSON zawierający listę produktów typu {@link BasicCategoryDto}
+     *
+     * @return JSON zawierający listę kategorii typu {@link BasicCategoryDto}
      */
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
@@ -61,9 +61,31 @@ public class CategoryRestController {
     }
 
     /**
-     * Metoda REST API służąca do aktywowania kategorii produktów podanym numerze
-     * ID.
-     * 
+     * Metoda REST API służąca do pobierania aktywnych kategorii produktów
+     *
+     * @return JSON zawierający listę kategorii typu {@link BasicCategoryDto}
+     */
+    @GET
+    @Path("active")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getActiveCategories() {
+        try {
+            List<BasicCategoryDto> activeCategoriesDto = CategoryMapper.INSTANCE
+                    .categoriesToDTO(categoryManager.getActiveCategories());
+            return Response.status(Response.Status.OK).entity(activeCategoriesDto).type(MediaType.APPLICATION_JSON).build();
+        } catch (AppBaseException ex) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(new WebErrorInfo("400", ex.getCode()))
+                    .type(MediaType.APPLICATION_JSON)
+                    .build();
+        }
+    }
+
+    /**
+     * Metoda REST API służąca do aktywowania kategorii produktów podanym
+     * numerze ID.
+     *
      * @param categoryId identyfikator obiektu
      * @return status operacji
      */
@@ -83,9 +105,9 @@ public class CategoryRestController {
     }
 
     /**
-     * Metoda REST API służąca do deaktywowania kategorii produktów podanym numerze
-     * ID.
-     * 
+     * Metoda REST API służąca do deaktywowania kategorii produktów podanym
+     * numerze ID.
+     *
      * @param categoryId identyfikator obiektu
      * @return status operacji
      */
@@ -106,7 +128,7 @@ public class CategoryRestController {
 
     /**
      * Metoda REST API służąca do dodawania nowych kategorii produktów
-     * 
+     *
      * @param categoryNameDto
      * @return status operacji
      */
@@ -136,9 +158,9 @@ public class CategoryRestController {
     }
 
     /**
-     * Metoda Rpomocnicza, służy do walidacji nazwy kategorii produktów przy pomocy
-     * BeanValidation.
-     * 
+     * Metoda Rpomocnicza, służy do walidacji nazwy kategorii produktów przy
+     * pomocy BeanValidation.
+     *
      * @param category
      */
     private void validateCategoryNameLength(Category category) throws CategoryNameLengthException {

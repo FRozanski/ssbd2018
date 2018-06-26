@@ -317,6 +317,8 @@
   "app.exception.mop.product.product_qty_not_enougth": "Sprzedający nie dysponuje podaną ilością produktu",
   "app.exception.moz.order.qty_error": "Jak nie chcesz kupić to proszę nie wpisuj 0 lub mniej",
   "app.exception.moz.order.qty_too_low": "Podana ilość jest zbyt niska",
+  "app.exception.mop.category.not_found": "Kategoria nie została znaleziona",
   "order_status_not_found": "Nie znaleziono statusu zamówienia.",
+  "app.exception.web.null_password_or_username_error" : "Nie podano hasła lub nazwy użytkownika",
   "order_not_found": "Nie znaleziono zamówienia."
 }

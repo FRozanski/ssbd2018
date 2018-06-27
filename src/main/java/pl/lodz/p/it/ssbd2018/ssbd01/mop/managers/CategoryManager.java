@@ -61,7 +61,6 @@ public class CategoryManager implements CategoryManagerLocal {
     @Override
     @RolesAllowed("addCategory")
     public void addCategory(Category category) throws AppBaseException {
-        category.setActive(true);
         categoryFacade.create(category);
     }
 
@@ -70,5 +69,4 @@ public class CategoryManager implements CategoryManagerLocal {
     public List<Category> getActiveCategories() throws AppBaseException {
         return categoryFacade.findAllActive();
     }
-
 }

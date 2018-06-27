@@ -30,7 +30,7 @@ public class UnitFacade extends AbstractFacadeBase<Unit> implements UnitFacadeLo
     }
     
     @Override
-    @RolesAllowed("findProduct")
+    @RolesAllowed("findUnit")
     public Unit find(Object id) throws AppBaseException {
         Unit product = super.find(id);
         if (product == null) {

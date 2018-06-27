@@ -61,14 +61,6 @@ public class CategoryFacade extends AbstractFacadeCreateUpdate<Category> impleme
         }
     }
 
-
-    /**
-     * Metoda służąca do dodawania nowych kategorii produktów do bazy danych
-     * @param category
-     * @return status operacji
-     * @throws AppBaseException
-     * @throws CategoryUniqueNameException
-     */
     @Override
     @RolesAllowed("addCategory")
     public void create(Category category) throws AppBaseException {

@@ -87,12 +87,6 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
         }
     }
 
-    /**
-     * Wyszuke obiekt encji {@link Account} po zadanym loginie
-     * @param login                 login przypisany wyszukiwanemu obiektowi encji
-     * @return                      obiekt encji
-     * @throws AppBaseException     główny wyjątek aplikacji
-     */
     @Override
     @RolesAllowed("findByLoginForProduct")
     public Account findByLogin(String login) throws AppBaseException {
@@ -114,10 +108,6 @@ public class ProductFacade extends AbstractFacadeCreateUpdate<Product> implement
         }        
     }
 
-    /**
-     * Usunięcie produktu
-     * @param entity
-     */
     @Override
     @RolesAllowed("removeProduct")
     public void remove(Product entity) {

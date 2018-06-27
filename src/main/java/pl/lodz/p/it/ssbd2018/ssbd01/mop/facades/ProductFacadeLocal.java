@@ -48,14 +48,26 @@ public interface ProductFacadeLocal {
     List<Product> findAll();
 
     /**
-     * Pobiera z bazy danych obienty typu {@link Product} z zadanego zakresu 
+     * Pobiera z bazy danych obiekty typu {@link Product} z zadanego zakresu 
      * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
      * @return lista obiektów typu {@link Product}
      */
     List<Product> findRange(int[] range);
     
+    /**
+     * Pobiera z bazy danych obiekty typu {@link Product} zadanego właściciela
+     * @param login login właściciela
+     * @return lista obiektów typu {@link Product}
+     * @throws AppBaseException
+     */
     List<Product> findByOwnerLogin(String login) throws AppBaseException;
     
+    /**
+     * Pobiera z bazy danych obiekty typu {@link Product}, które są aktywne
+     * oraz mają aktywną kategorię
+     * @return lista obiektów typu {@link Product}
+     * @throws AppBaseException
+     */
     List<Product> findByActiveProductAndCategory() throws AppBaseException;
 
     /**

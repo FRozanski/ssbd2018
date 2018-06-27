@@ -35,21 +35,21 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author fifi
  */
 @Entity
-@Table(name = "order")
+@Table(name = "public.order")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
     , @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id")
     , @NamedQuery(name = "Order1.findByOrderPlacedDate", query = "SELECT o FROM Order1 o WHERE o.orderPlacedDate = :orderPlacedDate")
     , @NamedQuery(name = "Order1.findByTotalPrice", query = "SELECT o FROM Order1 o WHERE o.totalPrice = :totalPrice")
-    , @NamedQuery(name = "Order1.findByOrderNumber", query = "SELECT o FROM Order1 o WHERE o.orderNumber = :orderNumber")
-    , @NamedQuery(name = "Order1.findByIsPaid", query = "SELECT o FROM Order1 o WHERE o.isPaid = :isPaid")
+    , @NamedQuery(name = "Order1.findByBuyer", query = "SELECT o FROM Order1 o WHERE o.buyerId.login = :login")
+    , @NamedQuery(name = "Order1.findBySeller", query = "SELECT o FROM Order1 o WHERE o.sellerId.login = :login")
     , @NamedQuery(name = "Order1.findByIsClosed", query = "SELECT o FROM Order1 o WHERE o.isClosed = :isClosed")
     , @NamedQuery(name = "Order1.findByVersion", query = "SELECT o FROM Order1 o WHERE o.version = :version")})
 public class Order1 implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @SequenceGenerator(name="ID_ORDER_SEQUENCE" ,sequenceName = "order_id_seq", allocationSize=1, initialValue=1)
+    @SequenceGenerator(name = "ID_ORDER_SEQUENCE", sequenceName = "order_id_seq", allocationSize = 1, initialValue = 4)
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDER_SEQUENCE")
     @Basic(optional = false)
@@ -66,14 +66,6 @@ public class Order1 implements Serializable {
     @NotNull
     @Column(name = "total_price")
     private BigDecimal totalPrice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "order_number")
-    private long orderNumber;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "is_paid")
-    private boolean isPaid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "is_closed")
@@ -97,16 +89,13 @@ public class Order1 implements Serializable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private OrderStatus statusId;
-    
-    public Order1(){        
+
+    public Order1() {
     }
 
-    public Order1(Date orderPlacedDate, BigDecimal totalPrice, long orderNumber, boolean isPaid, boolean isClosed, long version) {
-        this.id = id;
+    public Order1(Date orderPlacedDate, BigDecimal totalPrice, boolean isClosed, long version) {
         this.orderPlacedDate = orderPlacedDate;
         this.totalPrice = totalPrice;
-        this.orderNumber = orderNumber;
-        this.isPaid = isPaid;
         this.isClosed = isClosed;
         this.version = version;
     }
@@ -129,22 +118,6 @@ public class Order1 implements Serializable {
 
     public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
-    }
-
-    public long getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public boolean getIsPaid() {
-        return isPaid;
-    }
-
-    public void setIsPaid(boolean isPaid) {
-        this.isPaid = isPaid;
     }
 
     public boolean getIsClosed() {
@@ -220,5 +193,19 @@ public class Order1 implements Serializable {
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.Order1[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
 }

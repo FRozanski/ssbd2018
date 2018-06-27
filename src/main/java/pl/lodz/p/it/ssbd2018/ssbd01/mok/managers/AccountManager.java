@@ -30,7 +30,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.tools.LoggerInterceptor;
 import pl.lodz.p.it.ssbd2018.ssbd01.tools.SendMailUtils;
 
 /**
- *
+ * Klasa definiująca dozwolone operacje na obiektach typu {@link Account}
  * @author piotrek
  * @author agkan
  * @author michalmalec
@@ -44,7 +44,7 @@ public class AccountManager implements AccountManagerLocal {
     private static final Logger loger = Logger.getLogger(AccountManager.class.getName());
     private static final String DEFAULT_URL = "http://studapp.it.p.lodz.pl:8001";
 
-    @EJB
+    @EJB(beanName = "AccountMOK")
     private AccountFacadeLocal accountFacade;
 
     @EJB
@@ -211,6 +211,12 @@ public class AccountManager implements AccountManagerLocal {
         }
     }
 
+    /**
+     * Metoda wykorzystywana przez metodę {@link #alterAccountAccessLevel(pl.lodz.p.it.ssbd2018.ssbd01.entities.Account, java.util.List)} w celu dodanie poziomu dostępu.
+     * @param account typu {@link Account}
+     * @param accessLevel typu {@link AccessLevel}
+     * @throws AppBaseException 
+     */
     @RolesAllowed("addAccessLevelToAccount")
     private void addAccessLevelToAccount(Account account, AccessLevel accessLevel) throws AppBaseException {
         AccountAlevel accountAlevel = new AccountAlevel();
@@ -219,6 +225,12 @@ public class AccountManager implements AccountManagerLocal {
         accountAlevelFacade.create(accountAlevel);
     }
 
+    /**
+     * Metoda wykorzystywana przez metodę {@link #alterAccountAccessLevel(pl.lodz.p.it.ssbd2018.ssbd01.entities.Account, java.util.List)} w celu odebrania poziomu dostępu. 
+     * @param account typu {@link Account}
+     * @param accessLevel typu {@link AccessLevel}
+     * @throws AppBaseException 
+     */
     @RolesAllowed("dismissAccessLevelFromAccount")
     private void dismissAccessLevelFromAccount(Account account, AccessLevel accessLevel) throws AppBaseException {
         AccountAlevel level = accountAlevelFacade.
@@ -233,11 +245,20 @@ public class AccountManager implements AccountManagerLocal {
         return archivalPasswordFacade.findByAccountId(accountId);
     }
     
+    /**
+     * Metoda zwracająca aktualną datę.
+     * @return nowo utworzony obiekt typu {@link Date}
+     */
     private Date generateCurrentDate() {
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Warsaw"));
         return new Date(calendar.getTime().getTime());
     }
 
+    /**
+     * Metoda sprawdzająca ważność tokenu dla danego konta.
+     * @param account typu {@link Account}
+     * @throws AppBaseException 
+     */
     private void checkVerificationToken(Account account) throws AppBaseException {
         Date now = Calendar.getInstance().getTime();
         if (now.after(account.getExpiryDate())) {
@@ -247,16 +268,32 @@ public class AccountManager implements AccountManagerLocal {
         }
     }
 
+    /**
+     * Metoda sprawdzająca czy dane konto zostało już aktywowane.
+     * @param account typu {@link Account}
+     * @throws AppBaseException 
+     */
     private void checkIfAccountConfirmed(Account account) throws AppBaseException {
         if (account.getConfirm() == true) {
             throw new AccountWasConfirmed("account_was_confirmed_exception");
         }
     }
 
+    /**
+     * Metoda pozwalająca wysłać mail z linkiem aktywacyjnym.
+     * @param mail adres typu {@link String}
+     * @param veryficationLink typu {@link String}
+     */
     private void sendMailWithVeryficationLink(String mail, String veryficationLink) {
         mailSender.sendVerificationEmail(mail, veryficationLink);
     }
 
+    /**
+     * Metoda tworząca dla danego konta link aktywacyjny.
+     * @param account
+     * @param servletContext
+     * @return link aktywacyjny typu {@link String}
+     */
     private String createVeryficationLink(Account account, ServletContext servletContext) {
         String veryficationToken = account.getToken();
         String veryficationLink = DEFAULT_URL + servletContext.getContextPath();

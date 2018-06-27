@@ -1,0 +1,32 @@
+<form [formGroup]='form'>
+  <mat-card class='errors-card' *ngIf='formValidationMessage !== "" ' >
+    <p>{{ formValidationMessage }} </p>
+  </mat-card>
+
+  <mat-card>
+    <mat-card-title>{{ "SHIPPING_METHOD.ADD_SHIPPING_METHOD" | translate }}</mat-card-title>
+    <mat-card-content>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'SHIPPING_METHOD.NAME' | translate" formControlName='name' required>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('name')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+      <mat-form-field>
+        <input matInput [placeholder]="'SHIPPING_METHOD.PRICE' | translate" formControlName='price' required>
+      </mat-form-field>
+      <div class="errors-space" *ngIf="isRequiredSatisfied('price')">
+        {{ "FORM.FIELD_REQUIRED" | translate }}
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+  <div class="buttons">
+    <button mat-button color='primary' type="button" (click)='onReturnClick()'>{{ "FORM.RETURN" | translate }}</button>
+    <button mat-button mat-raised-button color='primary' (click)='sendForm()'>{{ "FORM.SUBMIT" | translate }}</button>
+  </div>
+
+</form>

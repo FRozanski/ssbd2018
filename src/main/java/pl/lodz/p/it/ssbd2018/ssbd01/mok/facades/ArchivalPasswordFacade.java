@@ -15,7 +15,7 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ArchivalPassword;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link ArchivalPassword} 
  * @author michal
  */
 @Stateless

@@ -13,14 +13,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.NAME_PATTERN_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_NAME_LENGTH_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_NAME_PATTERN_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_PRECISION_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SHIPPING_METHOD_PRICE_TOO_LOW_ERROR;
 
 /**
  *
@@ -48,10 +60,13 @@ public class ShippingMethod implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 16)
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+([ '-][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*", message = SHIPPING_METHOD_NAME_PATTERN_ERROR)
+    @Size(min = 1, max = 16, message = SHIPPING_METHOD_NAME_LENGTH_ERROR)
     @Column(name = "name")
     private String name;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @DecimalMin(value="0.0", message = SHIPPING_METHOD_PRICE_TOO_LOW_ERROR)
+    @DecimalMax(value="999.99", message = SHIPPING_METHOD_PRICE_TOO_HIGH_ERROR)
+    @Digits(integer=3, fraction = 2, message = SHIPPING_METHOD_PRICE_PRECISION_ERROR)
     @Basic(optional = false)
     @NotNull
     @Column(name = "price")
@@ -59,7 +74,10 @@ public class ShippingMethod implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "active")
-    private boolean active;
+    private boolean active;    
+    @JoinColumn(name = "created_by", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Account createdBy;
     @Basic(optional = false)
     @NotNull
     @Version
@@ -69,10 +87,11 @@ public class ShippingMethod implements Serializable {
     public ShippingMethod(){        
     }
 
-    public ShippingMethod(String name, BigDecimal price, boolean active, long version) {
+    public ShippingMethod(String name, BigDecimal price, boolean active, Account createdBy, long version) {
         this.name = name;
         this.price = price;
         this.active = active;
+        this.createdBy = createdBy;
         this.version = version;
     }
 
@@ -103,7 +122,15 @@ public class ShippingMethod implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
-
+    
+    public Account getCreatedBy() {
+        return createdBy;
+    }
+    
+    public void setCreatedBy(Account createdBy) {
+        this.createdBy = createdBy;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -127,6 +154,20 @@ public class ShippingMethod implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.moz.entity.ShippingMethod[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
     }
     
 }

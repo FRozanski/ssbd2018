@@ -39,7 +39,8 @@ import javax.xml.bind.annotation.XmlTransient;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.*;
 
 /**
- *
+ * Klasa encyjna tabeli account. 
+ * Klasa zawiera również tabele "user_data", "veryfication_token" korzystając z mechanizmu secondary teble.
  * @author fifi
  * @author agkan
  */

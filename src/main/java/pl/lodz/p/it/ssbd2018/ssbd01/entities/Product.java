@@ -20,13 +20,21 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_DESCRIPTION_LENGTH_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_NAME_LENGTH_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_NAME_PATTERN_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_PRICE_ERROR;
+import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.PRODUCT_QTY_ERROR;
 
 /**
  *
  * @author fifi
+ * @author michal
  */
 @Entity
 @Table(name = "product")
@@ -38,8 +46,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description")
     , @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price")
     , @NamedQuery(name = "Product.findByQty", query = "SELECT p FROM Product p WHERE p.qty = :qty")
-    , @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")
-    , @NamedQuery(name = "Product.findByVersion", query = "SELECT p FROM Product p WHERE p.version = :version")})
+    , @NamedQuery(name = "Product.findByActiveProductAndCategory", query = "SELECT p FROM Product p WHERE p.active = :active and p.categoryId.active = :activeCategory")
+    , @NamedQuery(name = "Product.findByVersion", query = "SELECT p FROM Product p WHERE p.version = :version")
+    , @NamedQuery(name = "Product.findByOwnerLogin", query = "SELECT p FROM Product p WHERE p.ownerId.login = :login")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,21 +61,24 @@ public class Product implements Serializable {
     private Long id;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 32)
+    @Pattern(regexp = "[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\\s]+", message = PRODUCT_NAME_PATTERN_ERROR)    
+    @Size(min = 1, max = 32, message = PRODUCT_NAME_LENGTH_ERROR)
     @Column(name = "name")
     private String name;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 800)
+    @Size(min = 1, max = 800, message = PRODUCT_DESCRIPTION_LENGTH_ERROR)
     @Column(name = "description")
     private String description;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
+    @Digits(integer = 6, fraction = 2, message = PRODUCT_PRICE_ERROR)   
     @Column(name = "price")
     private BigDecimal price;
     @Basic(optional = false)
     @NotNull
+    @Digits(integer = 6, fraction = 3, message = PRODUCT_QTY_ERROR)  
     @Column(name = "qty")
     private BigDecimal qty;
     @Basic(optional = false)
@@ -191,6 +203,20 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "pl.lodz.p.it.ssbd2018.ssbd01.mop.entity.Product[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the version
+     */
+    public long getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(long version) {
+        this.version = version;
     }
     
 }

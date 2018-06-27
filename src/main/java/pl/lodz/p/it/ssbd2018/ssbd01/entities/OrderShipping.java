@@ -11,10 +11,13 @@ import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -45,7 +48,9 @@ import javax.xml.bind.annotation.XmlTransient;
 public class OrderShipping implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @SequenceGenerator(name = "ID_ORDER_SHIPPING_SEQUENCE", sequenceName = "order_shipping_id_seq", allocationSize = 1, initialValue = 1)
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ID_ORDER_SHIPPING_SEQUENCE")
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")

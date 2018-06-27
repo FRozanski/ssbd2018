@@ -11,22 +11,52 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
- *
+ * Interfejs definiujący dozwolone operacje na obiektach typu {@link ShippingMethod}
  * @author fifi
  */
 @Local
 public interface ShippingMethodFacadeLocal {
-
+    
+    /**
+     * Dodanie obiektu do bazy danych
+     * @param shippingMethod obiekt encji
+     * @throws AppBaseException
+     */
     void create(ShippingMethod shippingMethod) throws AppBaseException;
-
+    
+    /**
+     * Edycja obiektu w bazie danych
+     * @param shippingMethod obiekt encji
+     * @throws AppBaseException
+     */
     void edit(ShippingMethod shippingMethod) throws AppBaseException;
-
+    
+    /**
+     * Pobiera z bazy danych obiekt typu {@link ShippingMethod} o podanym id
+     * @param id identyfikator encji
+     * @return Obiekt encji typu {@link ShippingMethod}
+     * @throws AppBaseException
+     */
     ShippingMethod find(Object id) throws AppBaseException;
-
+    
+    /**
+     * Pobiera z bazy danych wszystkie obienty typu {@link ShippingMethod}
+     * @return lista obiektów typu {@link ShippingMethod}
+     */
     List<ShippingMethod> findAll();
 
+    /**
+     * Pobiera z bazy danych wszystkie obienty typu {@link ShippingMethod} z zadanego zakresu 
+     * @param range dwuelementowa tablica liczb całkowitych zawierająca w sobie zakresy wyszukiwania.
+     * Zakresy reprezentują id obiektów
+     * @return lista obiektów typu {@link ShippingMethod}
+     */
     List<ShippingMethod> findRange(int[] range);
-
+    
+    /**
+     * Zlicza obieky typu {@link ShippingMethod} w bazie danych
+     * @return liczba całkowita będąca liczbą obiektów
+     */
     int count();
     
 }

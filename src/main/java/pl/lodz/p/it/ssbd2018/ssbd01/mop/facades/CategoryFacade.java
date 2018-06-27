@@ -5,15 +5,28 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mop.facades;
 
+import java.util.List;
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryNotFoundException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryOptimisticException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryUniqueNameException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Category} 
  * @author fifi
+ * @author dlange
  */
 @Stateless
 public class CategoryFacade extends AbstractFacadeCreateUpdate<Category> implements CategoryFacadeLocal {
@@ -30,4 +43,47 @@ public class CategoryFacade extends AbstractFacadeCreateUpdate<Category> impleme
         super(Category.class);
     }
     
+    @Override
+    @RolesAllowed("getAllCategories")
+    public List<Category> findAll() {
+        return super.findAll();
+    }    
+    
+    @Override
+    @RolesAllowed("editCategory")
+    public void edit(Category category) throws AppBaseException {
+        try {
+            super.edit(category);
+        } catch (OptimisticLockException oe) {
+            throw new CategoryOptimisticException("category_optimistic_exception");
+        } catch (ConstraintViolationException ex) {
+            throw new CategoryException("constraint_violation");
+        }
+    }
+
+    @Override
+    @RolesAllowed("addCategory")
+    public void create(Category category) throws AppBaseException {
+        try {
+            super.create(category);
+        } catch (PersistenceException pe) {
+            if (pe.getMessage().contains("category_name_unique")) {
+                throw new CategoryUniqueNameException("category_name_unique");
+            }
+        }
+    }
+
+    @Override
+    @RolesAllowed("findAllActive")
+    public List<Category> findAllActive() throws AppBaseException {
+        try {
+            TypedQuery<Category> typedQuery = em.createNamedQuery("Category.findByActive", Category.class).setParameter("active", true);
+            if (typedQuery.getResultList().isEmpty()) {
+                throw new NoResultException();
+            }
+            return typedQuery.getResultList();
+        } catch (NoResultException ex) {
+            throw new CategoryNotFoundException("product_not_found_exception");
+        }
+    }
 }

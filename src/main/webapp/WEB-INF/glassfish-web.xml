@@ -118,7 +118,40 @@
   </security-role-mapping>
   <!--MOP-->
   <security-role-mapping>
-    <role-name>addProductByAccount</role-name>
+    <role-name>addProductByAccountLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findAllActive</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getActiveCategories</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllUnits</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllCategories</role-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getCategoryById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>activateCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactivateCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getUnitById</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
@@ -135,8 +168,20 @@
   </security-role-mapping>
   <security-role-mapping>
     <role-name>getAllProducts</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllActiveProducts</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getMyProducts</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findProductByOwnerLogin</role-name>
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
@@ -155,7 +200,31 @@
     <role-name>setProductCategory</role-name>
     <group-name>manager</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>activeProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactiveProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deleteProductByAccount</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>addCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
   <!--MOZ-->
+  <security-role-mapping>
+    <role-name>getProductByIdAndLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
   <security-role-mapping>
     <role-name>makeOrder</role-name>
     <group-name>user</group-name>
@@ -171,6 +240,23 @@
   <security-role-mapping>
     <role-name>addShippingMethod</role-name>
     <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>activateShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>deactivateShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editShippingMethod</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findShippingMethod</role-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>setShippingMethodActive</role-name>
@@ -197,11 +283,46 @@
     <group-name>manager</group-name>
     <group-name>user</group-name>
   </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllMethods</role-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllOrders</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllByBuyer</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllBySeller</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getAllOrderStatus</role-name>
+    <group-name>user</group-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getOrder1ById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getOrderStatusById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findUnit</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
   <!--facades-->
   <security-role-mapping>
     <role-name>findAll</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
     <role-name>edit</role-name>
@@ -248,9 +369,71 @@
     <group-name>user</group-name>
   </security-role-mapping>
   <security-role-mapping>
+    <role-name>findProduct</role-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>find</role-name>
+    <group-name>admin</group-name>
+    <group-name>manager</group-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
     <role-name>findAccessLevel</role-name>
     <group-name>admin</group-name>
     <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findOrderByBuyerLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findByLoginForProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findOrderBySellerLogin</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>createProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>removeProduct</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>editAccount</role-name>
+    <group-name>user</group-name>
+    <group-name>manager</group-name>
+    <group-name>admin</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>addCategory</role-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>findUnit</role-name>
+    <group-name>user</group-name>
+    <group-name>manager</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getOrder1ById</role-name>
+    <group-name>user</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>getOrderStatusById</role-name>
+    <group-name>user</group-name>
   </security-role-mapping>
   <class-loader delegate="true"/>
   <jsp-config>

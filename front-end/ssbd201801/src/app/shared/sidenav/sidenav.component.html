@@ -1,7 +1,9 @@
 <mat-sidenav-container class="nav-container" (backdropClick)="sidenav.close()">
-  <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose (openedChange)='onSidenavOpenedChange()' >
+  <mat-sidenav #sidenav (keydown.escape)="sidenav.close()" disableClose (openedChange)='onSidenavOpenedChange()'>
     <p>
-      <button mat-button mat-raised-button color='primary' (click)="sidenav.close()"> < </button>
+      <button mat-button mat-raised-button color='primary' (click)="sidenav.close()">
+        <i class="demo-icon icon-menu"></i>
+      </button>
     </p>
     <h2 *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(VirtualRole)' class="example-h2">{{ "HOME.WELCOME" | translate }}, {{ userIdentity.login }}</h2>
     <p *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole)' class="example-p">{{ "HOME.USER_ROLES" | translate }}: {{ rolesStringified | translate }}</p>
@@ -40,13 +42,51 @@
     </p>
 
     <p>
+      <button mat-button routerLink='/products' *ngIf='hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(UserRole)'>{{ "SIDE_NAV.PRODUCTS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/makeOrder' *ngIf='hasRole(UserRole)'>{{"SIDE_NAV.MAKE_ORDER" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/myProducts' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_PRODUCTS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/addProduct' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.ADD_PRODUCT" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/orders' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ALL_ORDERS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/categories' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ALL_CATEGORIES" | translate }}</button>
+    </p>
+
+    <p>
+        <button mat-button routerLink='/ownOrders' *ngIf='hasRole(UserRole)'>{{ "SIDE_NAV.MY_ORDERS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/shippingMethods' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.SHIPPING_METHODS" | translate }}</button>
+    </p>
+
+    <p>
+      <button mat-button routerLink='/addShippingMethod' *ngIf='hasRole(ManagerRole)'>{{ "SIDE_NAV.ADD_SHIPPING_METHOD" | translate }}</button>
+    </p>
+
+    <p>
       <button mat-button (click)='onLogoutClick()' *ngIf='hasRole(UserRole) || hasRole(AdminRole) || hasRole(ManagerRole) || hasRole(VirtualRole)'>{{ "SIDE_NAV.LOGOUT" | translate }}</button>
     </p>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <p>
-      <button mat-button mat-raised-button color='primary' (click)="sidenav.open()">></button>
+      <button mat-button mat-raised-button color='primary' (click)="sidenav.open()">
+        <i class="demo-icon icon-menu"></i>
+      </button>
     </p>
     <app-notifications></app-notifications>
 

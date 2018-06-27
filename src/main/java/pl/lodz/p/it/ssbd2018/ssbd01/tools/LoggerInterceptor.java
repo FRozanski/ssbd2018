@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
+ * Klasa zapewniająca zapis zdarzeń w dzienniku zdarzeń.
  * @author piotrek
  */
 @Interceptor
@@ -21,6 +21,12 @@ public class LoggerInterceptor {
     
     private static final Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
+    /**
+     * Metoda wykonująca się podczas wywołań metod podlegających subskrypcji.
+     * @param context
+     * @return
+     * @throws Exception
+     */
     @AroundInvoke
     public Object logMethodInvocation(InvocationContext context) throws Exception {
         

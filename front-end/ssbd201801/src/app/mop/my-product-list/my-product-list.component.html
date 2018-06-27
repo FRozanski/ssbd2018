@@ -1,0 +1,70 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.NAME' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.PRICE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.price}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="qty">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.QTY' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.qty}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="unit">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.UNIT' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.unit.unitName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="active">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.ACTIVE' | translate }}</mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element; let rowIndex=index">
+        <mat-checkbox (change)='onActiveChange(element, rowIndex)' [(ngModel)]='element.active' color='primary'></mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PRODUCT.CATEGORY' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.category.categoryName}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'PRODUCT.EDIT' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)='onEditClick(element)'>{{'PRODUCT.EDIT'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="deleteProduct">
+      <mat-header-cell class='button-cell' *matHeaderCellDef>{{ 'PRODUCT.DELETE_PRODUCT' | translate }} </mat-header-cell>
+      <mat-cell class='button-cell' *matCellDef="let element">
+        <button mat-button (click)='onDeleteProductClick(element)'>{{'PRODUCT.DELETE_PRODUCT'| translate }}</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>
+<div class="buttons">
+  <button mat-button color='primary' type="button" (click)='onReturnClick()'>{{ "FORM.RETURN" | translate }}</button>
+  <button mat-button mat-raised-button color='primary' [disabled]="!wasAnyProductMethodChanged()" (click)="submitProductMethod()">{{ 'FORM.SUBMIT' | translate}}</button>
+</div>

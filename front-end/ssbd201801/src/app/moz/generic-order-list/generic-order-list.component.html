@@ -1,0 +1,63 @@
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'MAT_TABLE.FILTER' | translate }}">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.ORDER_NUMBER' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="orderPlacedDate">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.DATE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.orderPlacedDate}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalPrice">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.TOTAL_PRICE' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.totalPrice}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="buyerLogin">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.BUYER' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.buyer.login}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="sellerLogin">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.SELLER' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.seller.login}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.STATUS' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+         <ng-container *ngIf='isStatusEditable'>
+           <mat-form-field>
+             <mat-select (change)='onStatusChange(element, $event)' [value]='element.status.id'>
+               <mat-option *ngFor='let option of statusSelectOptions' [value]='option.id'> {{ option.name }} </mat-option>
+             </mat-select>
+           </mat-form-field>
+         </ng-container>
+         <ng-container *ngIf='!isStatusEditable'>
+            {{element.status.name}}
+         </ng-container>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="shippingMethod">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ORDER.SHIPPING_METHOD' | translate }} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.shipping.shippingMethodName}} </mat-cell>
+      </ng-container>
+
+    <mat-header-row *matHeaderRowDef="getDisplayedColumns()"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: getDisplayedColumns();"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]" [showFirstLastButtons]="true">
+  </mat-paginator>
+</div>

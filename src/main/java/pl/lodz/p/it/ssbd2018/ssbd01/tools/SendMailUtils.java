@@ -14,7 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
- *
+ * Klasa umożliwiająca wysyłanie wiadomości e-mail.
  * @author piotrek
  */
 @Stateless
@@ -56,6 +56,11 @@ public class SendMailUtils {
         return session;
     }
 
+    /**
+     * Metoda umożliwiająca wysłanie wiadomości z linkiem aktywacyjnym.
+     * @param to
+     * @param activationLink
+     */
     public void sendVerificationEmail(String to, String activationLink) {
         
         MimeMessage message = new MimeMessage(initializeEmailSettings());
@@ -76,6 +81,10 @@ public class SendMailUtils {
         }
     }
     
+    /**
+     * Metoda wysyłająca wiadomość e-mail po aktywacji konta.
+     * @param to
+     */
     public void sendMailAfterActivation(String to) {
         
      MimeMessage message = new MimeMessage(initializeEmailSettings());
@@ -95,6 +104,10 @@ public class SendMailUtils {
         }   
     }
     
+    /**
+     * Metoda wysyłająca wiadomość e-mail po blokadzie konta.
+     * @param to
+     */
     public void sendMailAfterAccountLock(String to) {
         
      MimeMessage message = new MimeMessage(initializeEmailSettings());

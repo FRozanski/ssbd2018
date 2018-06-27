@@ -5,7 +5,6 @@
  */
 package pl.lodz.p.it.ssbd2018.ssbd01.mok.facades;
 
-import java.sql.SQLException;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
@@ -31,11 +30,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mok.TokenNotUniqueException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
 
 /**
- *
+ * Klasa zapewnia możliwość operowania na obiektach encji typu {@link Account} 
  * @author fifi
  * @author agkan
  */
-@Stateless
+@Stateless(name = "AccountMOK")
 @TransactionAttribute(TransactionAttributeType.MANDATORY)
 public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implements AccountFacadeLocal {
 
@@ -83,7 +82,7 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
     }
 
     @Override
-    @PermitAll
+    @RolesAllowed("editAccount")
     public void edit(Account account) throws AppBaseException {
         try {
             super.edit(account);
@@ -100,7 +99,6 @@ public class AccountFacade extends AbstractFacadeCreateUpdate<Account> implement
         } catch (ConstraintViolationException ex) {
             throw new AccountException("constraint_violation");
         }
-
     }
 
     @Override

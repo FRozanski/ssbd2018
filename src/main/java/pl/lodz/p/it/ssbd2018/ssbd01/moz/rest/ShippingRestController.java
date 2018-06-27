@@ -7,13 +7,8 @@ package pl.lodz.p.it.ssbd2018.ssbd01.moz.rest;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -28,13 +23,11 @@ import pl.lodz.p.it.ssbd2018.ssbd01.entities.ShippingMethod;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.UserUnauthorized;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.WebErrorInfo;
-import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ConstraintException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.moz.ShippingMethodPriceException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.web.UserAlreadyLogoutException;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.dto.BasicShippingMethodDto;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.managers.ShippingMethodManagerLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.mapper.ShippingMethodMapper;
-import pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes;
 import static pl.lodz.p.it.ssbd2018.ssbd01.tools.ErrorCodes.SUCCESS;
 
 /**

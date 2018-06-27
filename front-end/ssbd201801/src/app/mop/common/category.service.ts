@@ -15,6 +15,10 @@ export class CategoryService {
     return this.httpClient.get<CategoryData[]>(this.uri);
   }
 
+  getActiveCategories(): Observable<CategoryData[]> {
+    return this.httpClient.get<CategoryData[]>(this.uri + '/active');
+  }
+
   activateCategory(categoryId: number) {
     const params = new HttpParams()
       .set('categoryId', categoryId.toString());

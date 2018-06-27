@@ -152,6 +152,22 @@
         <auth-constraint>
             <description/>
             <role-name>MANAGER</role-name>
+            <role-name>USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <description/>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>getActiveCategories</display-name>
+        <web-resource-collection>
+            <web-resource-name>getActiveCategories</web-resource-name>            
+            <url-pattern>/webresources/category/active</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>
@@ -183,6 +199,7 @@
         <auth-constraint>
             <description/>
             <role-name>MANAGER</role-name>
+            <role-name>USER</role-name>
         </auth-constraint>
         <user-data-constraint>
             <description/>

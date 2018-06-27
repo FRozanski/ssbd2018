@@ -41,7 +41,6 @@ import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.Order1FacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.OrderProductsFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.OrderShippingFacadeLocal;
 import pl.lodz.p.it.ssbd2018.ssbd01.moz.facades.OrderStatusFacadeLocal;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 /**
  * Klasa obsługująca zarządzanie obiektami typu {@link OrderProducts} {@link Order1}
  * @author fifi
@@ -193,43 +192,12 @@ public class OrderManager implements OrderManagerLocal{
     }
 
     @Override
-    @RolesAllowed("makeOrderPayment")
-    public void makeOrderPayment(Order1 order) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("cancelOrder")
-    public void cancelOrder(Order1 order) {
-        throw new NotImplementedException();
-    }        
-
-    @Override
     @RolesAllowed("setOrderStatus")
     public void setOrderStatus(Order1 order, OrderStatus orderStatus) throws AppBaseException {
         order.setStatusId(orderStatus);
         orderFacade.edit(order);
     }
-
-    @Override
-    @RolesAllowed("getAllOrdersByAccountAsSeller")
-    public List<Order1> getAllOrdersByAccountAsSeller(Account seller) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("getAllOrdersByAccountAsBuyer")
-    public List<Order1> getAllOrdersByAccountAsBuyer(Account buyer) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    @RolesAllowed("getAllOrdersByDateAndPrice")
-    public List<Order1> getAllOrdersByDateAndPrice(Date date, BigDecimal price) {
-        throw new NotImplementedException();
-    }
-
-
+    
     /**
      * Metoda używana do pobrania zamówienia ze źródła danych na podstawie jego id 
      * @param id typu long
@@ -242,7 +210,6 @@ public class OrderManager implements OrderManagerLocal{
         Order1 order = this.orderFacade.find(id); 
         return order;
     }
-
     
     /**
      * Metoda używana do pobrania statusu zamówienia ze źródła danych na podstawie jego id 

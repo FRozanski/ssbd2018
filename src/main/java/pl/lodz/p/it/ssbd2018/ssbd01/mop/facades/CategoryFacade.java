@@ -9,13 +9,16 @@ import java.util.List;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryException;
+import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryNotFoundException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryOptimisticException;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.mop.CategoryUniqueNameException;
 import pl.lodz.p.it.ssbd2018.ssbd01.shared_facades.AbstractFacadeCreateUpdate;
@@ -75,6 +78,20 @@ public class CategoryFacade extends AbstractFacadeCreateUpdate<Category> impleme
             if (pe.getMessage().contains("category_name_unique")) {
                 throw new CategoryUniqueNameException("category_name_unique");
             }
+        }
+    }
+
+    @Override
+    @RolesAllowed("findAllActive")
+    public List<Category> findAllActive() throws AppBaseException {
+        try {
+            TypedQuery<Category> typedQuery = em.createNamedQuery("Category.findByActive", Category.class).setParameter("active", true);
+            if (typedQuery.getResultList().isEmpty()) {
+                throw new NoResultException();
+            }
+            return typedQuery.getResultList();
+        } catch (NoResultException ex) {
+            throw new CategoryNotFoundException("product_not_found_exception");
         }
     }
 }

@@ -8,7 +8,6 @@ package pl.lodz.p.it.ssbd2018.ssbd01.mop.managers;
 import java.util.List;
 import javax.ejb.Local;
 import pl.lodz.p.it.ssbd2018.ssbd01.entities.Category;
-import pl.lodz.p.it.ssbd2018.ssbd01.entities.Product;
 import pl.lodz.p.it.ssbd2018.ssbd01.exceptions.AppBaseException;
 
 /**
@@ -52,4 +51,11 @@ public interface CategoryManagerLocal {
      * @throws AppBaseException główny wyjątek aplikacji
      */
     public void addCategory(Category category) throws AppBaseException ;
+
+    /**
+     * Pobiera z bazy aktywne kategorie produktów
+     * @return lista obiektów typu {@link Category}
+     * @throws AppBaseException główny wyjątek aplikacji
+     */
+    List<Category> getActiveCategories() throws AppBaseException;
 }
